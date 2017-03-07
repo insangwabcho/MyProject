@@ -43,7 +43,7 @@ public class GuGuServer extends JFrame {
    * Create the frame.
    */
   public GuGuServer() throws Exception {
-    setTitle("구구단서버");
+    setTitle("구구단서버/server");
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setBounds(100, 100, 200, 70);
     contentPane = new JPanel();
