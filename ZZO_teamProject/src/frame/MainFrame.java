@@ -19,6 +19,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -123,9 +124,7 @@ public class MainFrame extends JFrame {
               if (e.getValueIsAdjusting()) {
                 tfEa.isEnabled();
                 ArrayList items = orderpageDao.optionList(list_1.getSelectedValue() + "");
-                System.out.println(list_1.getSelectedValue() + "");
                 list_2 = new JList(items.toArray());
-                System.out.println(items.size());
                 scrollPane_2.setViewportView(list_2);
               }
             }
@@ -263,36 +262,32 @@ public class MainFrame extends JFrame {
     lblNewLabel_5.setBounds(182, 165, 19, 16);
     option2Panel.add(lblNewLabel_5);
 
-    JButton btnNewButton_1 = new JButton("장바구니에 담기");
-    btnNewButton_1.addActionListener(new ActionListener() {
+    JButton btnSave = new JButton("장바구니에 담기");
+    btnSave.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
+        if (tfEa.getText().length() == 0) {
+          JOptionPane.showMessageDialog(MainFrame.this, "수량을 선택하지 않으셨습니다");
+          return;
+        }
+
+        String ea = tfEa.getText().replaceAll("[^0-9]", "");
         ArrayList<String> items = new ArrayList<>();
         Vector item = new Vector<>();
         items.add(cboMenu.getSelectedItem() + "");
         items.add(list_1.getSelectedValue() + "");
         items.add(list_2.getSelectedValue() + "");
 
-        item = orderpageDao.cartAdd(items, tfEa.getText());
+        item = orderpageDao.cartAdd(items, ea);
         refreshTable(item);
       }
     });
-    btnNewButton_1.setBounds(53, 191, 117, 29);
-    option2Panel.add(btnNewButton_1);
+    btnSave.setBounds(53, 191, 117, 29);
+    option2Panel.add(btnSave);
 
   }
 
   public void refreshTable(Vector item) {
     DefaultTableModel model = new DefaultTableModel(data, col);
-    table = new JTable(model) {
-      @Override
-      public boolean isCellSelected(int row, int column) {
-        return false;
-      }
-
-      @Override
-      public boolean isCellEditable(int row, int column) {
-        return false;
-      }
-    };
+    table = new JTable(model);
   }
 }

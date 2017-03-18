@@ -114,20 +114,25 @@ public class OrderpageDAO {
     ResultSet rs = null;
 
     try {
-      String sql = "select name, price from ? where company=? and name=?";
+      String sql = "SELECT * FROM cpu WHERE company = ? AND name = ?";
       conn = DB.getConn();
       pstmt = conn.prepareStatement(sql);
-      pstmt.setString(1, list.get(0));
-      pstmt.setString(2, list.get(1).toLowerCase());
-      pstmt.setString(3, list.get(2));
+
+      pstmt.setString(1, list.get(0).toLowerCase());
+      //pstmt.setString(2, list.get(1).toLowerCase());
+      pstmt.setString(2, list.get(2));
+
       rs = pstmt.executeQuery();
 
       while (rs.next()) {
         Vector row = new Vector<>();
+        String name = rs.getString("name");
+        int pri = rs.getInt("pri");
         row.add(list.get(0));
-        row.add(rs.getString("name"));
+        row.add(name);
         row.add(ea);
-        row.add(rs.getInt("price"));
+        row.add(pri);
+        System.out.println(name + " " + pri);
       }
     } catch (Exception e) {
       e.printStackTrace();
