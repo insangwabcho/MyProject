@@ -131,12 +131,30 @@ public class OrderpageDAO {
     Connection conn = null;
     PreparedStatement pstmt = null;
     ResultSet rs = null;
+
+    String one = "";
+    switch (list.get(0)) {
+    case "메인보드":
+      one = "main";
+      break;
+    case "그래픽카드":
+      one = "vga";
+      break;
+    case "메모리카드":
+      one = "ram";
+      break;
+    default:
+      one = list.get(0);
+      break;
+    }
+
     try {
 
       String company = list.get(1).toUpperCase();
+
       StringBuilder sqll = new StringBuilder();
       String sql1 = "select name, price from ";
-      String sql2 = list.get(0) + " where company='" + company + "' and serial=" + list.get(2);
+      String sql2 = one + " where company='" + company + "' and serial=" + list.get(2);
       sqll.append(sql1);
       sqll.append(sql2);
 
