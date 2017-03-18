@@ -75,7 +75,6 @@ public class MainFrame extends JFrame {
   }
 
   public MainFrame(String username) {
-
     usname = username;
 
     panelBg = new ImageIcon(MainFrame.class.getResource("/mainFrame/img/panelBg.jpeg"));
@@ -301,7 +300,7 @@ public class MainFrame extends JFrame {
     JButton btnSave = new JButton("장바구니에 담기");
     btnSave.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        if (lblEa.getText().length() == 0) {
+        if (lblEa.getText().equals("0")) {
           JOptionPane.showMessageDialog(MainFrame.this, "수량을 선택하지 않으셨습니다");
           return;
         }
