@@ -46,6 +46,8 @@ public class MainFrame extends JFrame {
   private JScrollPane scrollPane_2;
   private JTable table;
   private Vector data, col;
+  private JLabel lblTotalPirce;
+  private DefaultTableModel model;
 
   /**
    * Launch the application.
@@ -190,17 +192,38 @@ public class MainFrame extends JFrame {
     scrollPane_1.setBounds(6, 63, 394, 229);
     boxpanel.add(scrollPane_1);
 
-    refreshTable(data);
-    table.setFont(new Font("consolas", Font.PLAIN, 15));
+    model = new DefaultTableModel(data, col);
+    table = new JTable(model);
+    table.setFont(new Font("consolas", Font.PLAIN, 12));
     scrollPane_1.setViewportView(table);
 
-    JButton btnNewButton = new JButton("완료");
-    btnNewButton.setBounds(279, 303, 108, 29);
-    boxpanel.add(btnNewButton);
+    JButton btnOk = new JButton("완료");
+    btnOk.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+      }
+    });
+    btnOk.setBounds(279, 303, 108, 29);
+    boxpanel.add(btnOk);
 
     JButton button = new JButton("초기화");
+    button.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        data = new Vector<>();
+        model = new DefaultTableModel(data, col);
+        table.setModel(model);
+        lblTotalPirce.setText("");
+      }
+    });
     button.setBounds(159, 304, 108, 29);
     boxpanel.add(button);
+
+    JLabel lblNewLabel_3 = new JLabel("총 금액");
+    lblNewLabel_3.setBounds(6, 308, 37, 16);
+    boxpanel.add(lblNewLabel_3);
+
+    lblTotalPirce = new JLabel("");
+    lblTotalPirce.setBounds(51, 308, 96, 16);
+    boxpanel.add(lblTotalPirce);
 
     JPanel optionPanel = new JPanel() {
       @Override
@@ -269,15 +292,13 @@ public class MainFrame extends JFrame {
           JOptionPane.showMessageDialog(MainFrame.this, "수량을 선택하지 않으셨습니다");
           return;
         }
-
         String ea = tfEa.getText().replaceAll("[^0-9]", "");
         ArrayList<String> items = new ArrayList<>();
-        Vector item = new Vector<>();
         items.add(cboMenu.getSelectedItem() + "");
         items.add(list_1.getSelectedValue() + "");
         items.add(list_2.getSelectedValue() + "");
 
-        item = orderpageDao.cartAdd(items, ea);
+        Vector item = orderpageDao.cartAdd(items, ea);
         refreshTable(item);
       }
     });
@@ -287,7 +308,29 @@ public class MainFrame extends JFrame {
   }
 
   public void refreshTable(Vector item) {
-    DefaultTableModel model = new DefaultTableModel(data, col);
-    table = new JTable(model);
+    String result = item.toString();
+    result = result.replaceAll("\\[", "");
+    result = result.replaceAll("\\]", "");
+    String[] arr = result.split(",");
+
+    Vector t = new Vector<>();
+    for (int i = 0; i < arr.length; i++) {
+      arr[i] = arr[i].trim();
+      t.add(arr[i]);
+    }
+
+    model.addRow(t);
+    table.setModel(model);
+    lblTotalChange();
+  }
+
+  public void lblTotalChange() {
+    int modelCount = table.getRowCount();
+    int result = 0;
+    for (int i = 0; i < modelCount; i++) {
+      result += Integer.parseInt(table.getValueAt(i, 3) + "");
+    }
+
+    lblTotalPirce.setText(result + " 원");
   }
 }

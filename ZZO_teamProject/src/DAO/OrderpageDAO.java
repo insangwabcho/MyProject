@@ -112,27 +112,32 @@ public class OrderpageDAO {
     Connection conn = null;
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-
     try {
-      String sql = "SELECT * FROM cpu WHERE company = ? AND name = ?";
+
+      StringBuilder sqll = new StringBuilder();
+      String sql1 = "select name, price from ";
+      String sql2 = list.get(0) + " where company=? and name=?";
+      sqll.append(sql1);
+      sqll.append(sql2);
+
+      String sql = sqll.toString();
       conn = DB.getConn();
       pstmt = conn.prepareStatement(sql);
-
-      pstmt.setString(1, list.get(0).toLowerCase());
-      //pstmt.setString(2, list.get(1).toLowerCase());
+      // 제조사명을 가져오는데 대문자로 가져오기때문에 소문자로 변
+      String company = list.get(1).toLowerCase();
+      pstmt.setString(1, company);
       pstmt.setString(2, list.get(2));
 
       rs = pstmt.executeQuery();
 
-      while (rs.next()) {
+      if (rs.next()) {
         Vector row = new Vector<>();
-        String name = rs.getString("name");
-        int pri = rs.getInt("pri");
         row.add(list.get(0));
-        row.add(name);
+        row.add(rs.getString("name"));
         row.add(ea);
-        row.add(pri);
-        System.out.println(name + " " + pri);
+        row.add(rs.getInt("price") * Integer.parseInt(ea));
+
+        items.add(row);
       }
     } catch (Exception e) {
       e.printStackTrace();
