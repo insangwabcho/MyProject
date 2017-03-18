@@ -23,7 +23,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
@@ -41,13 +40,17 @@ public class MainFrame extends JFrame {
   private OrderpageDAO orderpageDao;
   private JList list_1;
   private JScrollPane scrollPane;
-  private JTextField tfEa;
   private JList list_2;
   private JScrollPane scrollPane_2;
   private JTable table;
   private Vector data, col;
   private JLabel lblTotalPirce;
   private DefaultTableModel model;
+  private JLabel lblOptionTitle;
+  private JComboBox cboMenu;
+  private String username;
+  private JLabel lblEa;
+  private int eaNum;
 
   /**
    * Launch the application.
@@ -69,6 +72,9 @@ public class MainFrame extends JFrame {
    * Create the frame.
    */
   public MainFrame() {
+
+    username = "조인상";
+
     panelBg = new ImageIcon(MainFrame.class.getResource("/mainFrame/img/panelBg.jpeg"));
     orderpageDao = new OrderpageDAO();
     col = new Vector<>();
@@ -114,20 +120,19 @@ public class MainFrame extends JFrame {
     contentPane.add(selectPanel);
     selectPanel.setLayout(null);
 
-    JComboBox cboMenu = new JComboBox();
+    cboMenu = new JComboBox();
     cboMenu.addItemListener(new ItemListener() {
       public void itemStateChanged(ItemEvent e) {
         if (e.getStateChange() == ItemEvent.SELECTED) {
-
           ArrayList list = orderpageDao.prodList(e.getItem() + "");
           list_1 = new JList(list.toArray());
           list_1.addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent e) {
               if (e.getValueIsAdjusting()) {
-                tfEa.isEnabled();
-                ArrayList items = orderpageDao.optionList(list_1.getSelectedValue() + "");
+                ArrayList items = orderpageDao.optionList(cboMenu.getSelectedItem() + "", list_1.getSelectedValue() + "");
                 list_2 = new JList(items.toArray());
                 scrollPane_2.setViewportView(list_2);
+                lblOptionTitle.setText(cboMenu.getSelectedItem() + " " + list_1.getSelectedValue());
               }
             }
           });
@@ -156,7 +161,7 @@ public class MainFrame extends JFrame {
       }
     };
     //detailPanel.setBackground(colMenu);
-    detailPanel.setBounds(418, 6, 576, 616);
+    detailPanel.setBounds(418, 276, 576, 346);
     contentPane.add(detailPanel);
 
     JLabel lblNewLabel = new JLabel("제품 상세페이지");
@@ -176,7 +181,7 @@ public class MainFrame extends JFrame {
     contentPane.add(boxpanel);
     boxpanel.setLayout(null);
 
-    lblUserStat = new JLabel("조인상님! 어서오세요!");
+    lblUserStat = new JLabel(username + " 님! 어서오세요!");
     lblUserStat.setFont(new Font("consolas", Font.BOLD, 20));
     lblUserStat.setHorizontalAlignment(SwingConstants.CENTER);
     lblUserStat.setBounds(6, 6, 394, 30);
@@ -193,13 +198,21 @@ public class MainFrame extends JFrame {
     boxpanel.add(scrollPane_1);
 
     model = new DefaultTableModel(data, col);
-    table = new JTable(model);
+    table = new JTable(model) {
+      @Override
+      public boolean isCellEditable(int row, int column) {
+        return false;
+      }
+    };
     table.setFont(new Font("consolas", Font.PLAIN, 12));
     scrollPane_1.setViewportView(table);
 
     JButton btnOk = new JButton("완료");
     btnOk.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
+        OrderFrame f = new OrderFrame(1, username, model, lblTotalPirce.getText());
+        f.setVisible(true);
+
       }
     });
     btnOk.setBounds(279, 303, 108, 29);
@@ -235,13 +248,13 @@ public class MainFrame extends JFrame {
       }
     };
     //optionPanel.setBackground(colMenu);
-    optionPanel.setBounds(179, 6, 233, 266);
+    optionPanel.setBounds(179, 6, 815, 266);
     contentPane.add(optionPanel);
     optionPanel.setLayout(null);
 
     JLabel lblNewLabel_2 = new JLabel("상세 옵션 선택");
     lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
-    lblNewLabel_2.setBounds(6, 6, 221, 16);
+    lblNewLabel_2.setBounds(6, 6, 803, 16);
     optionPanel.add(lblNewLabel_2);
 
     JPanel option2Panel = new JPanel() {
@@ -254,17 +267,17 @@ public class MainFrame extends JFrame {
       }
     };
 
-    option2Panel.setBounds(6, 34, 221, 226);
+    option2Panel.setBounds(6, 34, 803, 226);
     optionPanel.add(option2Panel);
     option2Panel.setLayout(null);
 
-    JLabel lblOptionTitle = new JLabel("Intel CPU");
+    lblOptionTitle = new JLabel("");
     lblOptionTitle.setHorizontalAlignment(SwingConstants.CENTER);
-    lblOptionTitle.setBounds(6, 6, 209, 16);
+    lblOptionTitle.setBounds(6, 6, 803, 16);
     option2Panel.add(lblOptionTitle);
 
     scrollPane_2 = new JScrollPane();
-    scrollPane_2.setBounds(6, 34, 209, 119);
+    scrollPane_2.setBounds(6, 34, 791, 119);
     option2Panel.add(scrollPane_2);
 
     list_2 = new JList();
@@ -272,38 +285,85 @@ public class MainFrame extends JFrame {
 
     JLabel lblNewLabel_4 = new JLabel("주문하실 갯수 : ");
     lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
-    lblNewLabel_4.setBounds(26, 165, 92, 16);
+    lblNewLabel_4.setBounds(550, 165, 92, 16);
     option2Panel.add(lblNewLabel_4);
 
-    tfEa = new JTextField();
-    tfEa.setHorizontalAlignment(SwingConstants.RIGHT);
-    tfEa.setBounds(130, 160, 50, 26);
-    option2Panel.add(tfEa);
-    tfEa.setColumns(2);
-
     JLabel lblNewLabel_5 = new JLabel("ea");
-    lblNewLabel_5.setBounds(182, 165, 19, 16);
+    lblNewLabel_5.setBounds(692, 165, 19, 16);
     option2Panel.add(lblNewLabel_5);
 
     JButton btnSave = new JButton("장바구니에 담기");
     btnSave.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        if (tfEa.getText().length() == 0) {
+        if (lblEa.getText().length() == 0) {
           JOptionPane.showMessageDialog(MainFrame.this, "수량을 선택하지 않으셨습니다");
           return;
         }
-        String ea = tfEa.getText().replaceAll("[^0-9]", "");
+        String ea = lblEa.getText().replaceAll("[^0-9]", "");
         ArrayList<String> items = new ArrayList<>();
         items.add(cboMenu.getSelectedItem() + "");
         items.add(list_1.getSelectedValue() + "");
-        items.add(list_2.getSelectedValue() + "");
+
+        int start = (list_2.getSelectedValue() + "").indexOf(":") + 1;
+        int end = (list_2.getSelectedValue() + "").indexOf(",");
+        System.out.println((list_2.getSelectedValue() + "").substring(start, end).trim());
+        items.add((list_2.getSelectedValue() + "").substring(start, end).trim());
 
         Vector item = orderpageDao.cartAdd(items, ea);
         refreshTable(item);
       }
     });
-    btnSave.setBounds(53, 191, 117, 29);
+    btnSave.setBounds(582, 191, 117, 29);
     option2Panel.add(btnSave);
+
+    JButton btnEaPlus = new JButton("▲");
+    btnEaPlus.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        if (list_2.isSelectionEmpty()) {
+          JOptionPane.showMessageDialog(MainFrame.this, "상세페이지의 모델을 먼저 선택해주세요");
+          return;
+        }
+        String selectModel = list_2.getSelectedValue() + "";
+        int a = selectModel.indexOf("재고수량 : ");
+        selectModel = selectModel.substring(a);
+        selectModel = selectModel.replaceAll("[^0-9]", "");
+        if (Integer.parseInt(selectModel) > eaNum) {
+          eaNum++;
+          lblEa.setText(eaNum + "");
+          return;
+        }
+        else
+          JOptionPane.showMessageDialog(MainFrame.this, "재고수량 보다 많이 선택하실수 없습니다.");
+      }
+    });
+    btnEaPlus.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
+    btnEaPlus.setBounds(723, 154, 15, 15);
+    option2Panel.add(btnEaPlus);
+
+    JButton btnEaMinus = new JButton("▼");
+    btnEaMinus.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        if (list_2.isSelectionEmpty()) {
+          JOptionPane.showMessageDialog(MainFrame.this, "상세페이지의 모델을 먼저 선택해주세요");
+          return;
+        }
+        if (eaNum == 0) {
+          JOptionPane.showMessageDialog(MainFrame.this, "0개 이하로 선택하실수 없습니다");
+          return;
+        }
+        else
+          eaNum--;
+        lblEa.setText(eaNum + "");
+      }
+    });
+    btnEaMinus.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
+    btnEaMinus.setBounds(723, 178, 15, 15);
+    option2Panel.add(btnEaMinus);
+
+    lblEa = new JLabel("0");
+    lblEa.setHorizontalAlignment(SwingConstants.RIGHT);
+    lblEa.setBounds(644, 165, 36, 16);
+    option2Panel.add(lblEa);
 
   }
 

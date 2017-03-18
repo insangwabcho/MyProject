@@ -16,28 +16,32 @@ public class OrderpageDAO {
     Connection conn = null;
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-
+    String kortoeng;
     switch (company) {
     case "메인보드":
-      company = "main";
+      kortoeng = "main";
       break;
     case "그래픽카드":
-      company = "vga";
+      kortoeng = "vga";
       break;
     case "메모리카드":
-      company = "ram";
+      kortoeng = "ram";
       break;
+    default:
+      kortoeng = company;
     }
+    kortoeng = kortoeng.toUpperCase();
 
     try {
-      String sql = "select distinct company from " + company;
+      String sql = "select distinct company from " + kortoeng;
       conn = DB.getConn();
       pstmt = conn.prepareStatement(sql);
       rs = pstmt.executeQuery();
 
       while (rs.next()) {
-
-        items.add(rs.getString("company").toUpperCase());
+        String comp = rs.getString("company");
+        System.out.println(comp);
+        items.add(comp);
       }
     } catch (Exception e) {
       e.printStackTrace();
@@ -65,21 +69,36 @@ public class OrderpageDAO {
     return items;
   }
 
-  public ArrayList optionList(String company) {
+  public ArrayList optionList(String company, String tablename) {
     ArrayList items = new ArrayList<>();
     Connection conn = null;
     PreparedStatement pstmt = null;
     ResultSet rs = null;
+    String kortoeng;
+
+    switch (company) {
+    case "메인보드":
+      kortoeng = "main";
+      break;
+    case "그래픽카드":
+      kortoeng = "vga";
+      break;
+    case "메모리카드":
+      kortoeng = "ram";
+      break;
+    default:
+      kortoeng = company;
+    }
 
     try {
-      String sql = "select name, generation, ea, price, img from cpu where company=?";
+      String sql = "select '제품번호 : '||serial||', 모델명 : '||name||' , 가격 : '||price||'원 , 재고수량 : '||ea||'ea' detail from " + kortoeng + " where company=?";
       conn = DB.getConn();
       pstmt = conn.prepareStatement(sql);
-      pstmt.setString(1, company.toLowerCase());
+      pstmt.setString(1, tablename.toUpperCase());
       rs = pstmt.executeQuery();
 
       while (rs.next()) {
-        items.add(rs.getString("name"));
+        items.add(rs.getString("detail"));
       }
     } catch (Exception e) {
       e.printStackTrace();
@@ -114,19 +133,20 @@ public class OrderpageDAO {
     ResultSet rs = null;
     try {
 
+      String company = list.get(1).toUpperCase();
       StringBuilder sqll = new StringBuilder();
       String sql1 = "select name, price from ";
-      String sql2 = list.get(0) + " where company=? and name=?";
+      String sql2 = list.get(0) + " where company='" + company + "' and serial=" + list.get(2);
       sqll.append(sql1);
       sqll.append(sql2);
 
       String sql = sqll.toString();
+      System.out.println(sql);
       conn = DB.getConn();
       pstmt = conn.prepareStatement(sql);
-      // 제조사명을 가져오는데 대문자로 가져오기때문에 소문자로 변
-      String company = list.get(1).toLowerCase();
-      pstmt.setString(1, company);
-      pstmt.setString(2, list.get(2));
+      // 제조사명을 가져오는데 대문자로 가져오기때문에 소문자로 변경
+      //pstmt.setString(1, company);
+      //pstmt.setString(2, list.get(2));
 
       rs = pstmt.executeQuery();
 
