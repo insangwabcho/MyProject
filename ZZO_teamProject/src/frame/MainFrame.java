@@ -168,6 +168,9 @@ public class MainFrame extends JFrame {
     contentPane.add(detailPanel);
 
     JLabel lblNewLabel = new JLabel("제품 상세페이지");
+
+    String a = "/Users/insangjo/git/MyProject/ZZO_teamProject/bin/mainFrame/img/programIcon.ico";
+    lblNewLabel.setText("<html> <img src= \"/Users/insangjo/git/MyProject/ZZO_teamProject/bin/mainFrame/img/mainBg.jpg\"></html>");
     detailPanel.add(lblNewLabel);
 
     JPanel boxpanel = new JPanel() {
