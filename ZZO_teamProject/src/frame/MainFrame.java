@@ -4,12 +4,14 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Vector;
 
 import javax.swing.DefaultComboBoxModel;
@@ -51,6 +53,12 @@ public class MainFrame extends JFrame {
   private String usname;
   private JLabel lblEa;
   private int eaNum;
+  private JLabel lblCheckCPU;
+  private JLabel lblCheckMain;
+  private JLabel lblCheckGraphic;
+  private JLabel lblCheckRam;
+  private JLabel lblCheckHDD;
+  private JLabel lblCheckSSD;
 
   /**
    * Launch the application.
@@ -59,7 +67,7 @@ public class MainFrame extends JFrame {
     EventQueue.invokeLater(new Runnable() {
       public void run() {
         try {
-          MainFrame frame = new MainFrame("조인상아앙");
+          MainFrame frame = new MainFrame("ㅇ");
           frame.setVisible(true);
         } catch (Exception e) {
           e.printStackTrace();
@@ -71,8 +79,6 @@ public class MainFrame extends JFrame {
   /**
    * Create the frame.
    */
-  public MainFrame() {
-  }
 
   public MainFrame(String username) {
     usname = username;
@@ -215,9 +221,18 @@ public class MainFrame extends JFrame {
     JButton btnOk = new JButton("완료");
     btnOk.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
+        if (lblCheckCPU.getText().equals("선택됨") && lblCheckGraphic.getText().equals("선택됨") && lblCheckHDD.getText().equals("선택됨") && lblCheckMain.getText().equals("선택됨")
+            && lblCheckRam.getText().equals("선택됨") && lblCheckSSD.getText().equals("선택됨")) {
+        }
+        else {
+          int result = JOptionPane.showConfirmDialog(MainFrame.this, "선택되지 않은 옵션이 있습니다. 계속하시겠습니까?");
+          if (result == JOptionPane.OK_OPTION) {
+          }
+          else
+            return;
+        }
         OrderFrame f = new OrderFrame(1, username, model, lblTotalPirce.getText());
         f.setVisible(true);
-
       }
     });
     btnOk.setBounds(279, 303, 108, 29);
@@ -230,6 +245,12 @@ public class MainFrame extends JFrame {
         model = new DefaultTableModel(data, col);
         table.setModel(model);
         lblTotalPirce.setText("");
+        lblCheckCPU.setText("");
+        lblCheckGraphic.setText("");
+        lblCheckHDD.setText("");
+        lblCheckMain.setText("");
+        lblCheckRam.setText("");
+        lblCheckSSD.setText("");
       }
     });
     button.setBounds(159, 304, 108, 29);
@@ -316,6 +337,11 @@ public class MainFrame extends JFrame {
 
         Vector item = orderpageDao.cartAdd(items, ea);
         refreshTable(item);
+
+        list_2 = new JList();
+        scrollPane_2.setViewportView(list_2);
+        eaNum = 0;
+        lblEa.setText(eaNum + "");
       }
     });
     btnSave.setBounds(582, 191, 117, 29);
@@ -370,6 +396,68 @@ public class MainFrame extends JFrame {
     lblEa.setBounds(644, 165, 36, 16);
     option2Panel.add(lblEa);
 
+    JPanel panel = new JPanel(new GridLayout(2, 0)) {
+      @Override
+      protected void paintComponent(Graphics g) {
+        ImageIcon icon = new ImageIcon(MainFrame.class.getResource("/mainFrame/img/panelBg.jpeg"));
+        g.drawImage(icon.getImage(), 0, 0, null);
+        setOpaque(false);
+
+        super.paintComponent(g);
+      }
+    };
+
+    panel.setBounds(6, 154, 532, 66);
+    option2Panel.add(panel);
+
+    JLabel lblcpu = new JLabel("  CPU :");
+    lblcpu.setHorizontalAlignment(SwingConstants.RIGHT);
+    panel.add(lblcpu);
+
+    lblCheckCPU = new JLabel("");
+    lblCheckCPU.setHorizontalAlignment(SwingConstants.LEFT);
+    panel.add(lblCheckCPU);
+
+    JLabel lblNewLabel_6 = new JLabel("메인보드 : ");
+    lblNewLabel_6.setHorizontalAlignment(SwingConstants.RIGHT);
+    panel.add(lblNewLabel_6);
+
+    lblCheckMain = new JLabel("");
+    lblCheckMain.setHorizontalAlignment(SwingConstants.LEFT);
+    panel.add(lblCheckMain);
+
+    JLabel lblNewLabel_8 = new JLabel("그래픽카드 : ");
+    lblNewLabel_8.setHorizontalAlignment(SwingConstants.RIGHT);
+    panel.add(lblNewLabel_8);
+
+    lblCheckGraphic = new JLabel("");
+    lblCheckGraphic.setHorizontalAlignment(SwingConstants.LEFT);
+    panel.add(lblCheckGraphic);
+
+    JLabel lblNewLabel_10 = new JLabel("  메모리카드 : ");
+    lblNewLabel_10.setHorizontalAlignment(SwingConstants.RIGHT);
+    panel.add(lblNewLabel_10);
+
+    lblCheckRam = new JLabel("");
+    lblCheckRam.setHorizontalAlignment(SwingConstants.LEFT);
+    panel.add(lblCheckRam);
+
+    JLabel lblNewLabel_9 = new JLabel("HDD : ");
+    lblNewLabel_9.setHorizontalAlignment(SwingConstants.RIGHT);
+    panel.add(lblNewLabel_9);
+
+    lblCheckHDD = new JLabel("");
+    lblCheckHDD.setHorizontalAlignment(SwingConstants.LEFT);
+    panel.add(lblCheckHDD);
+
+    JLabel lblNewLabel_12 = new JLabel("SSD : ");
+    lblNewLabel_12.setHorizontalAlignment(SwingConstants.RIGHT);
+    panel.add(lblNewLabel_12);
+
+    lblCheckSSD = new JLabel("");
+    lblCheckSSD.setHorizontalAlignment(SwingConstants.LEFT);
+    panel.add(lblCheckSSD);
+
   }
 
   public void refreshTable(Vector item) {
@@ -390,12 +478,37 @@ public class MainFrame extends JFrame {
   }
 
   public void lblTotalChange() {
+    HashSet<String> hs = new HashSet<>();
     int modelCount = table.getRowCount();
     int result = 0;
     for (int i = 0; i < modelCount; i++) {
       result += Integer.parseInt(table.getValueAt(i, 3) + "");
+      hs.add(table.getValueAt(i, 0) + "");
     }
 
     lblTotalPirce.setText(result + " 원");
+
+    for (String t : hs) {
+      switch (t) {
+      case "CPU":
+        lblCheckCPU.setText("선택됨");
+        break;
+      case "메인보드":
+        lblCheckMain.setText("선택됨");
+        break;
+      case "그래픽카드":
+        lblCheckGraphic.setText("선택됨");
+      case "메모리카드":
+        lblCheckRam.setText("선택됨");
+        break;
+      case "HDD":
+        lblCheckHDD.setText("선택됨");
+        break;
+      case "SSD":
+        lblCheckSSD.setText("선택됨");
+        break;
+      }
+    }
   }
+
 }
