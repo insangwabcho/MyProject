@@ -48,7 +48,7 @@ public class MainFrame extends JFrame {
   private DefaultTableModel model;
   private JLabel lblOptionTitle;
   private JComboBox cboMenu;
-  private String username;
+  private String usname;
   private JLabel lblEa;
   private int eaNum;
 
@@ -59,7 +59,7 @@ public class MainFrame extends JFrame {
     EventQueue.invokeLater(new Runnable() {
       public void run() {
         try {
-          MainFrame frame = new MainFrame();
+          MainFrame frame = new MainFrame("조인상아앙");
           frame.setVisible(true);
         } catch (Exception e) {
           e.printStackTrace();
@@ -72,8 +72,11 @@ public class MainFrame extends JFrame {
    * Create the frame.
    */
   public MainFrame() {
+  }
 
-    username = "조인상";
+  public MainFrame(String username) {
+
+    usname = username;
 
     panelBg = new ImageIcon(MainFrame.class.getResource("/mainFrame/img/panelBg.jpeg"));
     orderpageDao = new OrderpageDAO();
@@ -181,7 +184,7 @@ public class MainFrame extends JFrame {
     contentPane.add(boxpanel);
     boxpanel.setLayout(null);
 
-    lblUserStat = new JLabel(username + " 님! 어서오세요!");
+    lblUserStat = new JLabel(usname + " 님! 어서오세요!");
     lblUserStat.setFont(new Font("consolas", Font.BOLD, 20));
     lblUserStat.setHorizontalAlignment(SwingConstants.CENTER);
     lblUserStat.setBounds(6, 6, 394, 30);
