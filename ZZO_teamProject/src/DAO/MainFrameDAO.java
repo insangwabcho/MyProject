@@ -9,7 +9,7 @@ import java.util.Vector;
 
 import common.DB;
 
-public class OrderpageDAO {
+public class MainFrameDAO {
 
   public ArrayList prodList(String company) {
     ArrayList items = new ArrayList<>();

@@ -5,11 +5,13 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
@@ -19,6 +21,8 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+
+import DAO.OrderFrameDAO;
 
 public class OrderFrame extends JFrame {
 
@@ -30,8 +34,9 @@ public class OrderFrame extends JFrame {
   private JLabel lblTotalPrice;
   private int userno;
   private String address;
+  private OrderFrameDAO ofDao;
 
-  public OrderFrame(int userno, String username, DefaultTableModel model, String totalprice) {
+  public OrderFrame(int userno, String username, DefaultTableModel model, String totalprice, String userid) {
     this.userno = userno;
 
     setIconImage(Toolkit.getDefaultToolkit().getImage(OrderFrame.class.getResource("/mainFrame/img/programIcon.ico")));
@@ -43,6 +48,8 @@ public class OrderFrame extends JFrame {
     contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
     setContentPane(contentPane);
     contentPane.setLayout(null);
+
+    ofDao = new OrderFrameDAO();
 
     JLabel label = new JLabel("님이 선택하신 물품");
     label.setFont(new Font("Courier New", Font.PLAIN, 15));
@@ -125,6 +132,107 @@ public class OrderFrame extends JFrame {
     scrollPane_1.setViewportView(textArea);
 
     JButton btnOk = new JButton("주문 확정");
+    btnOk.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+
+        StringBuilder sb = new StringBuilder("select ");
+        StringBuilder sb1 = new StringBuilder();
+        String[] option = { "c.serial ", "m.serial ", "v.serial ", "r.serial ", "h.serial ", "s.serial " };
+        String[] where = { " c.name=", " m.name=", " v.name=", " r.name=", " h.name=", " s.name=" };
+        //select option[] from 
+        int aCount = 0;
+
+        String[] append = new String[model.getRowCount()];
+        for (int k = 0; k < append.length; k++) {
+          append[k] = "";
+        }
+        ArrayList<String> items = new ArrayList<>();
+        ArrayList<String> list = new ArrayList<>();
+
+        for (int i = 0; i < model.getRowCount(); i++) {
+          switch (model.getValueAt(i, 0) + "") {
+          case "CPU":
+            append[i] = "CPU";
+            list.add("CPU");
+            aCount++;
+            break;
+          case "메인보드":
+            append[i] = "메인보드";
+            list.add("메인보드");
+            aCount++;
+            break;
+          case "그래픽카드":
+            append[i] = "그래픽카드";
+            list.add("그래픽카드");
+            aCount++;
+            break;
+          case "메모리카드":
+            append[i] = "메모리카드";
+            list.add("메모리카드");
+            aCount++;
+            break;
+          case "HDD":
+            append[i] = "HDD";
+            list.add("HDD");
+            aCount++;
+            break;
+          case "SSD":
+            append[i] = "SSD";
+            list.add("SSD");
+            aCount++;
+            break;
+          }
+          items.add(model.getValueAt(i, 1) + "");
+        }
+
+        int select = aCount;
+        for (int i = 0; i < append.length; i++) {
+          switch (append[i]) {
+          case "CPU":
+            sb.append(option[0]);
+            sb1.append(where[0] + "'" + items.get(i) + "'");
+            aCount--;
+            break;
+          case "메인보드":
+            sb.append(option[1]);
+            sb1.append(where[1] + "'" + items.get(i) + "'");
+            aCount--;
+            break;
+          case "그래픽카드":
+            sb.append(option[2]);
+            sb1.append(where[2] + "'" + items.get(i) + "'");
+            aCount--;
+            break;
+          case "메모리카드":
+            sb.append(option[3]);
+            sb1.append(where[3] + "'" + items.get(i) + "'");
+            aCount--;
+            break;
+          case "HDD":
+            sb.append(option[4]);
+            sb1.append(where[4] + "'" + items.get(i) + "'");
+            aCount--;
+            break;
+          case "SSD":
+            sb.append(option[5]);
+            sb1.append(where[5] + "'" + items.get(i) + "'");
+            aCount--;
+            break;
+          }
+          if (aCount != 0) {
+            sb.append(",");
+            sb1.append(" and");
+          }
+
+        }
+        int totalPrice = Integer.parseInt(totalprice.replaceAll("[^0-9]", ""));
+        int result = ofDao.addOrder(sb.toString(), sb1.toString(), items.size(), list, userid, totalPrice);
+        if (result == 1) {
+          JOptionPane.showMessageDialog(OrderFrame.this, "주문이 성공하였습니다");
+        }
+        dispose();
+      }
+    });
     btnOk.setBounds(327, 374, 117, 29);
     contentPane.add(btnOk);
 

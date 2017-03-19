@@ -31,7 +31,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
-import DAO.OrderpageDAO;
+import DAO.MainFrameDAO;
 
 public class MainFrame extends JFrame {
 
@@ -39,7 +39,7 @@ public class MainFrame extends JFrame {
   private JLabel lblUserStat;
   private Color colMenu;
   private ImageIcon panelBg;
-  private OrderpageDAO orderpageDao;
+  private MainFrameDAO orderpageDao;
   private JList list_1;
   private JScrollPane scrollPane;
   private JList list_2;
@@ -52,13 +52,14 @@ public class MainFrame extends JFrame {
   private JComboBox cboMenu;
   private String usname;
   private JLabel lblEa;
-  private int eaNum;
+  private int eaNum = 1;
   private JLabel lblCheckCPU;
   private JLabel lblCheckMain;
   private JLabel lblCheckGraphic;
   private JLabel lblCheckRam;
   private JLabel lblCheckHDD;
   private JLabel lblCheckSSD;
+  private String id = "dd";
 
   /**
    * Launch the application.
@@ -82,9 +83,8 @@ public class MainFrame extends JFrame {
 
   public MainFrame(String username) {
     usname = username;
-
     panelBg = new ImageIcon(MainFrame.class.getResource("/mainFrame/img/panelBg.jpeg"));
-    orderpageDao = new OrderpageDAO();
+    orderpageDao = new MainFrameDAO();
     col = new Vector<>();
     col.add("종류");
     col.add("이름");
@@ -136,6 +136,15 @@ public class MainFrame extends JFrame {
           list_1 = new JList(list.toArray());
           list_1.addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent e) {
+              try {
+                for (int i = 0; i < table.getRowCount(); i++) {
+                  if (table.getValueAt(i, 0).equals(cboMenu.getSelectedItem() + "")) {
+                    JOptionPane.showMessageDialog(MainFrame.this, "이미 [" + cboMenu.getSelectedItem() + "] 를 선택하셨습니다.");
+                    return;
+                  }
+                }
+              } catch (NumberFormatException e1) {
+              }
               if (e.getValueIsAdjusting()) {
                 ArrayList items = orderpageDao.optionList(cboMenu.getSelectedItem() + "", list_1.getSelectedValue() + "");
                 list_2 = new JList(items.toArray());
@@ -193,19 +202,19 @@ public class MainFrame extends JFrame {
     boxpanel.setLayout(null);
 
     lblUserStat = new JLabel(usname + " 님! 어서오세요!");
-    lblUserStat.setFont(new Font("consolas", Font.BOLD, 20));
+    lblUserStat.setFont(new Font("Lucida Grande", Font.BOLD, 20));
     lblUserStat.setHorizontalAlignment(SwingConstants.CENTER);
     lblUserStat.setBounds(6, 6, 394, 30);
     boxpanel.add(lblUserStat);
 
     JLabel lblNewLabel_1 = new JLabel("현재 장바구니 목록");
-    lblNewLabel_1.setFont(new Font("consolas", Font.PLAIN, 15));
+    lblNewLabel_1.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
     lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
     lblNewLabel_1.setBounds(6, 35, 394, 16);
     boxpanel.add(lblNewLabel_1);
 
     JScrollPane scrollPane_1 = new JScrollPane();
-    scrollPane_1.setBounds(6, 63, 394, 229);
+    scrollPane_1.setBounds(6, 63, 394, 233);
     boxpanel.add(scrollPane_1);
 
     model = new DefaultTableModel(data, col);
@@ -221,6 +230,10 @@ public class MainFrame extends JFrame {
     JButton btnOk = new JButton("완료");
     btnOk.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
+        if (model.getRowCount() == 0) {
+          JOptionPane.showMessageDialog(MainFrame.this, "장바구니에 상품이 없습니다");
+          return;
+        }
         if (lblCheckCPU.getText().equals("선택됨") && lblCheckGraphic.getText().equals("선택됨") && lblCheckHDD.getText().equals("선택됨") && lblCheckMain.getText().equals("선택됨")
             && lblCheckRam.getText().equals("선택됨") && lblCheckSSD.getText().equals("선택됨")) {
         }
@@ -231,11 +244,11 @@ public class MainFrame extends JFrame {
           else
             return;
         }
-        OrderFrame f = new OrderFrame(1, username, model, lblTotalPirce.getText());
+        OrderFrame f = new OrderFrame(1, username, model, lblTotalPirce.getText(), id);
         f.setVisible(true);
       }
     });
-    btnOk.setBounds(279, 303, 108, 29);
+    btnOk.setBounds(325, 308, 75, 29);
     boxpanel.add(btnOk);
 
     JButton button = new JButton("초기화");
@@ -253,7 +266,7 @@ public class MainFrame extends JFrame {
         lblCheckSSD.setText("");
       }
     });
-    button.setBounds(159, 304, 108, 29);
+    button.setBounds(141, 308, 80, 29);
     boxpanel.add(button);
 
     JLabel lblNewLabel_3 = new JLabel("총 금액");
@@ -263,6 +276,21 @@ public class MainFrame extends JFrame {
     lblTotalPirce = new JLabel("");
     lblTotalPirce.setBounds(51, 308, 96, 16);
     boxpanel.add(lblTotalPirce);
+
+    JButton button_1 = new JButton("상품삭제");
+    button_1.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        if (table.getSelectedRow() == -1) {
+          JOptionPane.showMessageDialog(MainFrame.this, "삭제하실 상품을 선택해주세요");
+        }
+        else {
+          model.removeRow(table.getSelectedRow());
+          table.setModel(model);
+        }
+      }
+    });
+    button_1.setBounds(233, 308, 80, 29);
+    boxpanel.add(button_1);
 
     JPanel optionPanel = new JPanel() {
       @Override
@@ -309,15 +337,6 @@ public class MainFrame extends JFrame {
     list_2 = new JList();
     scrollPane_2.setViewportView(list_2);
 
-    JLabel lblNewLabel_4 = new JLabel("주문하실 갯수 : ");
-    lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
-    lblNewLabel_4.setBounds(550, 165, 92, 16);
-    option2Panel.add(lblNewLabel_4);
-
-    JLabel lblNewLabel_5 = new JLabel("ea");
-    lblNewLabel_5.setBounds(692, 165, 19, 16);
-    option2Panel.add(lblNewLabel_5);
-
     JButton btnSave = new JButton("장바구니에 담기");
     btnSave.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
@@ -340,61 +359,14 @@ public class MainFrame extends JFrame {
 
         list_2 = new JList();
         scrollPane_2.setViewportView(list_2);
-        eaNum = 0;
-        lblEa.setText(eaNum + "");
       }
     });
-    btnSave.setBounds(582, 191, 117, 29);
+    btnSave.setBounds(576, 165, 188, 44);
     option2Panel.add(btnSave);
 
-    JButton btnEaPlus = new JButton("▲");
-    btnEaPlus.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent e) {
-        if (list_2.isSelectionEmpty()) {
-          JOptionPane.showMessageDialog(MainFrame.this, "상세페이지의 모델을 먼저 선택해주세요");
-          return;
-        }
-        String selectModel = list_2.getSelectedValue() + "";
-        int a = selectModel.indexOf("재고수량 : ");
-        selectModel = selectModel.substring(a);
-        selectModel = selectModel.replaceAll("[^0-9]", "");
-        if (Integer.parseInt(selectModel) > eaNum) {
-          eaNum++;
-          lblEa.setText(eaNum + "");
-          return;
-        }
-        else
-          JOptionPane.showMessageDialog(MainFrame.this, "재고수량 보다 많이 선택하실수 없습니다.");
-      }
-    });
-    btnEaPlus.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
-    btnEaPlus.setBounds(723, 154, 15, 15);
-    option2Panel.add(btnEaPlus);
-
-    JButton btnEaMinus = new JButton("▼");
-    btnEaMinus.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent e) {
-        if (list_2.isSelectionEmpty()) {
-          JOptionPane.showMessageDialog(MainFrame.this, "상세페이지의 모델을 먼저 선택해주세요");
-          return;
-        }
-        if (eaNum == 0) {
-          JOptionPane.showMessageDialog(MainFrame.this, "0개 이하로 선택하실수 없습니다");
-          return;
-        }
-        else
-          eaNum--;
-        lblEa.setText(eaNum + "");
-      }
-    });
-    btnEaMinus.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
-    btnEaMinus.setBounds(723, 178, 15, 15);
-    option2Panel.add(btnEaMinus);
-
-    lblEa = new JLabel("0");
+    lblEa = new JLabel("1");
     lblEa.setHorizontalAlignment(SwingConstants.RIGHT);
     lblEa.setBounds(644, 165, 36, 16);
-    option2Panel.add(lblEa);
 
     JPanel panel = new JPanel(new GridLayout(2, 0)) {
       @Override
@@ -415,6 +387,7 @@ public class MainFrame extends JFrame {
     panel.add(lblcpu);
 
     lblCheckCPU = new JLabel("");
+    lblCheckCPU.setForeground(Color.RED);
     lblCheckCPU.setHorizontalAlignment(SwingConstants.LEFT);
     panel.add(lblCheckCPU);
 
@@ -423,6 +396,7 @@ public class MainFrame extends JFrame {
     panel.add(lblNewLabel_6);
 
     lblCheckMain = new JLabel("");
+    lblCheckMain.setForeground(Color.RED);
     lblCheckMain.setHorizontalAlignment(SwingConstants.LEFT);
     panel.add(lblCheckMain);
 
@@ -431,6 +405,7 @@ public class MainFrame extends JFrame {
     panel.add(lblNewLabel_8);
 
     lblCheckGraphic = new JLabel("");
+    lblCheckGraphic.setForeground(Color.RED);
     lblCheckGraphic.setHorizontalAlignment(SwingConstants.LEFT);
     panel.add(lblCheckGraphic);
 
@@ -439,6 +414,7 @@ public class MainFrame extends JFrame {
     panel.add(lblNewLabel_10);
 
     lblCheckRam = new JLabel("");
+    lblCheckRam.setForeground(Color.RED);
     lblCheckRam.setHorizontalAlignment(SwingConstants.LEFT);
     panel.add(lblCheckRam);
 
@@ -447,6 +423,7 @@ public class MainFrame extends JFrame {
     panel.add(lblNewLabel_9);
 
     lblCheckHDD = new JLabel("");
+    lblCheckHDD.setForeground(Color.RED);
     lblCheckHDD.setHorizontalAlignment(SwingConstants.LEFT);
     panel.add(lblCheckHDD);
 
@@ -455,6 +432,7 @@ public class MainFrame extends JFrame {
     panel.add(lblNewLabel_12);
 
     lblCheckSSD = new JLabel("");
+    lblCheckSSD.setForeground(Color.RED);
     lblCheckSSD.setHorizontalAlignment(SwingConstants.LEFT);
     panel.add(lblCheckSSD);
 
@@ -471,7 +449,6 @@ public class MainFrame extends JFrame {
       arr[i] = arr[i].trim();
       t.add(arr[i]);
     }
-
     model.addRow(t);
     table.setModel(model);
     lblTotalChange();
@@ -488,6 +465,12 @@ public class MainFrame extends JFrame {
 
     lblTotalPirce.setText(result + " 원");
 
+    lblCheckCPU.setText("");
+    lblCheckGraphic.setText("");
+    lblCheckHDD.setText("");
+    lblCheckMain.setText("");
+    lblCheckRam.setText("");
+    lblCheckSSD.setText("");
     for (String t : hs) {
       switch (t) {
       case "CPU":
@@ -498,6 +481,7 @@ public class MainFrame extends JFrame {
         break;
       case "그래픽카드":
         lblCheckGraphic.setText("선택됨");
+        break;
       case "메모리카드":
         lblCheckRam.setText("선택됨");
         break;
