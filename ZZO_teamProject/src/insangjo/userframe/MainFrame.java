@@ -21,6 +21,9 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -60,6 +63,12 @@ public class MainFrame extends JFrame {
   private JLabel lblCheckHDD;
   private JLabel lblCheckSSD;
   private String id = "dd";
+  private JPanel selectPanel;
+  private JPanel detailPanel;
+  private JPanel boxpanel;
+  private JPanel optionPanel;
+  private JPanel option2Panel;
+  private JPanel panel;
 
   /**
    * Launch the application.
@@ -95,8 +104,43 @@ public class MainFrame extends JFrame {
     setIconImage(Toolkit.getDefaultToolkit().getImage(MainFrame.class.getResource("/insangjo/img/programIcon.ico")));
     setTitle("comNawa 주문프로그램");
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    setBounds(100, 100, 1000, 651);
+    setBounds(100, 100, 1000, 696);
     setResizable(false);
+
+    JMenuBar menuBar = new JMenuBar();
+    setJMenuBar(menuBar);
+
+    JMenu mnNewMenu = new JMenu("파일");
+    menuBar.add(mnNewMenu);
+
+    JMenu mnNewMenu_1 = new JMenu("테마");
+    menuBar.add(mnNewMenu_1);
+
+    JMenu mnNewMenu_3 = new JMenu("배경 테마 변경");
+    mnNewMenu_1.add(mnNewMenu_3);
+
+    JMenuItem mntmNewMenuItem_1 = new JMenuItem("단색");
+    mntmNewMenuItem_1.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        contentPane.setBackground(new Color(244, 188, 192));
+
+      }
+    });
+    mnNewMenu_3.add(mntmNewMenuItem_1);
+
+    JMenuItem mntmNewMenuItem_2 = new JMenuItem("노랑노랑");
+    mnNewMenu_3.add(mntmNewMenuItem_2);
+
+    JMenu mnNewMenu_2 = new JMenu("정보");
+    menuBar.add(mnNewMenu_2);
+
+    JMenuItem mntmNewMenuItem = new JMenuItem("컴나와는?");
+    mntmNewMenuItem.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        JOptionPane.showMessageDialog(MainFrame.this, "홍홍홍홍홍홍홍홍홍ㅇㅇㅇㅇㅇ");
+      }
+    });
+    mnNewMenu_2.add(mntmNewMenuItem);
     contentPane = new JPanel() {
       @Override
       protected void paintComponent(Graphics g) {
@@ -107,14 +151,14 @@ public class MainFrame extends JFrame {
         super.paintComponent(g);
       }
     };
-    //    contentPane.setBackground(new Color(244, 188, 192));
+    //contentPane.setBackground(new Color(244, 188, 192));
     contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
     setContentPane(contentPane);
     contentPane.setLayout(null);
 
     colMenu = new Color(240, 210, 210);
 
-    JPanel selectPanel = new JPanel() {
+    selectPanel = new JPanel() {
       @Override
       protected void paintComponent(Graphics g) {
         g.drawImage(panelBg.getImage(), 0, 0, null);
@@ -124,7 +168,7 @@ public class MainFrame extends JFrame {
       }
     };
     //selectPanel.setBackground(colMenu);
-    selectPanel.setBounds(6, 6, 168, 266);
+    selectPanel.setBounds(6, 30, 168, 266);
     contentPane.add(selectPanel);
     selectPanel.setLayout(null);
 
@@ -177,7 +221,7 @@ public class MainFrame extends JFrame {
     list_1 = new JList();
     scrollPane.setViewportView(list_1);
 
-    JPanel detailPanel = new JPanel() {
+    detailPanel = new JPanel() {
       @Override
       protected void paintComponent(Graphics g) {
         g.drawImage(panelBg.getImage(), 0, 0, null);
@@ -187,7 +231,7 @@ public class MainFrame extends JFrame {
       }
     };
     //detailPanel.setBackground(colMenu);
-    detailPanel.setBounds(418, 276, 576, 346);
+    detailPanel.setBounds(418, 300, 576, 346);
     contentPane.add(detailPanel);
 
     JLabel lblNewLabel = new JLabel("제품 상세페이지");
@@ -196,7 +240,7 @@ public class MainFrame extends JFrame {
     lblNewLabel.setText("<html> <img src= \"/Users/insangjo/git/MyProject/ZZO_teamProject/bin/insangjo/img/mainBg.jpg\"></html>");
     detailPanel.add(lblNewLabel);
 
-    JPanel boxpanel = new JPanel() {
+    boxpanel = new JPanel() {
       @Override
       protected void paintComponent(Graphics g) {
         g.drawImage(panelBg.getImage(), 0, 0, null);
@@ -206,7 +250,7 @@ public class MainFrame extends JFrame {
       }
     };
     //boxpanel.setBackground(colMenu);
-    boxpanel.setBounds(6, 276, 406, 346);
+    boxpanel.setBounds(6, 300, 406, 346);
     contentPane.add(boxpanel);
     boxpanel.setLayout(null);
 
@@ -301,7 +345,7 @@ public class MainFrame extends JFrame {
     button_1.setBounds(233, 308, 80, 29);
     boxpanel.add(button_1);
 
-    JPanel optionPanel = new JPanel() {
+    optionPanel = new JPanel() {
       @Override
       protected void paintComponent(Graphics g) {
         g.drawImage(panelBg.getImage(), 0, 0, null);
@@ -311,7 +355,7 @@ public class MainFrame extends JFrame {
       }
     };
     //optionPanel.setBackground(colMenu);
-    optionPanel.setBounds(179, 6, 815, 266);
+    optionPanel.setBounds(179, 30, 815, 266);
     contentPane.add(optionPanel);
     optionPanel.setLayout(null);
 
@@ -320,7 +364,7 @@ public class MainFrame extends JFrame {
     lblNewLabel_2.setBounds(6, 6, 803, 16);
     optionPanel.add(lblNewLabel_2);
 
-    JPanel option2Panel = new JPanel() {
+    option2Panel = new JPanel() {
       @Override
       protected void paintComponent(Graphics g) {
         g.drawImage(panelBg.getImage(), 0, 0, null);
@@ -376,7 +420,7 @@ public class MainFrame extends JFrame {
     lblEa.setHorizontalAlignment(SwingConstants.RIGHT);
     lblEa.setBounds(644, 165, 36, 16);
 
-    JPanel panel = new JPanel(new GridLayout(2, 0)) {
+    panel = new JPanel(new GridLayout(2, 0)) {
       @Override
       protected void paintComponent(Graphics g) {
         ImageIcon icon = new ImageIcon(MainFrame.class.getResource("/insangjo/img/panelBg.jpeg"));
@@ -502,5 +546,4 @@ public class MainFrame extends JFrame {
       }
     }
   }
-
 }
