@@ -1,4 +1,4 @@
-package frame;
+package insangjo.userframe;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

@@ -1,4 +1,4 @@
-package frame;
+package insangjo.userframe;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -22,7 +22,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-import DAO.OrderFrameDAO;
+import insangjo.DAO.OrderFrameDAO;
 
 public class OrderFrame extends JFrame {
 

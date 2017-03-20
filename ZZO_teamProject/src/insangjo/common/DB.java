@@ -1,4 +1,4 @@
-package common;
+package insangjo.common;
 
 import java.io.FileInputStream;
 import java.sql.Connection;

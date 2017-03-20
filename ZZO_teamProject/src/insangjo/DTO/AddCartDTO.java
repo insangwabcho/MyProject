@@ -1,4 +1,4 @@
-package DTO;
+package insangjo.DTO;
 
 public class AddCartDTO {
   private int orderNo;

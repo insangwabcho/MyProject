@@ -1,4 +1,4 @@
-package frame;
+package insangjo.userframe;
 
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -31,7 +31,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
-import DAO.MainFrameDAO;
+import insangjo.DAO.MainFrameDAO;
 
 public class MainFrame extends JFrame {
 
@@ -83,7 +83,7 @@ public class MainFrame extends JFrame {
 
   public MainFrame(String username) {
     usname = username;
-    panelBg = new ImageIcon(MainFrame.class.getResource("/mainFrame/img/panelBg.jpeg"));
+    panelBg = new ImageIcon(MainFrame.class.getResource("/insangjo/img/panelBg.jpeg"));
     orderpageDao = new MainFrameDAO();
     col = new Vector<>();
     col.add("종류");
@@ -92,7 +92,7 @@ public class MainFrame extends JFrame {
     col.add("가격");
     data = new Vector<>();
 
-    setIconImage(Toolkit.getDefaultToolkit().getImage(MainFrame.class.getResource("/mainFrame/img/programIcon.ico")));
+    setIconImage(Toolkit.getDefaultToolkit().getImage(MainFrame.class.getResource("/insangjo/img/programIcon.ico")));
     setTitle("comNawa 주문프로그램");
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setBounds(100, 100, 1000, 651);
@@ -100,7 +100,7 @@ public class MainFrame extends JFrame {
     contentPane = new JPanel() {
       @Override
       protected void paintComponent(Graphics g) {
-        ImageIcon icon = new ImageIcon(MainFrame.class.getResource("/mainFrame/img/mainBg.jpg"));
+        ImageIcon icon = new ImageIcon(MainFrame.class.getResource("/insangjo/img/mainBg.jpg"));
         g.drawImage(icon.getImage(), 0, 0, null);
         setOpaque(false);
 
@@ -133,8 +133,14 @@ public class MainFrame extends JFrame {
       public void itemStateChanged(ItemEvent e) {
         if (e.getStateChange() == ItemEvent.SELECTED) {
           String a = e.getItem() + "";
-          if (a.equals("추가 SSD"))
+          boolean b = lblCheckRam.getText().equals("");
+          if (a.equals("추가 SSD")) {
             a = "RAM";
+          }
+          if (b) {
+            JOptionPane.showMessageDialog(MainFrame.this, "기본 메모리카드 먼저 선택해주세요");
+            return;
+          }
           ArrayList list = orderpageDao.prodList(e.getItem() + "");
           list_1 = new JList(list.toArray());
           list_1.addListSelectionListener(new ListSelectionListener() {
@@ -186,8 +192,8 @@ public class MainFrame extends JFrame {
 
     JLabel lblNewLabel = new JLabel("제품 상세페이지");
 
-    String a = "/Users/insangjo/git/MyProject/ZZO_teamProject/bin/mainFrame/img/programIcon.ico";
-    lblNewLabel.setText("<html> <img src= \"/Users/insangjo/git/MyProject/ZZO_teamProject/bin/mainFrame/img/mainBg.jpg\"></html>");
+    String a = "/Users/insangjo/git/MyProject/ZZO_teamProject/bin/insangjo/img/programIcon.ico";
+    lblNewLabel.setText("<html> <img src= \"/Users/insangjo/git/MyProject/ZZO_teamProject/bin/insangjo/img/mainBg.jpg\"></html>");
     detailPanel.add(lblNewLabel);
 
     JPanel boxpanel = new JPanel() {
@@ -373,7 +379,7 @@ public class MainFrame extends JFrame {
     JPanel panel = new JPanel(new GridLayout(2, 0)) {
       @Override
       protected void paintComponent(Graphics g) {
-        ImageIcon icon = new ImageIcon(MainFrame.class.getResource("/mainFrame/img/panelBg.jpeg"));
+        ImageIcon icon = new ImageIcon(MainFrame.class.getResource("/insangjo/img/panelBg.jpeg"));
         g.drawImage(icon.getImage(), 0, 0, null);
         setOpaque(false);
 
