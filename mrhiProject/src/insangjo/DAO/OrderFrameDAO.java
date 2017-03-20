@@ -16,6 +16,7 @@ public class OrderFrameDAO {
     ResultSet rs = null;
     try {
       String sql = query1 + " from cpu c,hdd h,ram r,ssd s,main m,vga v,ram r2 where" + query2;
+      System.out.println(address);
       conn = sangjin.DB.DB.comCon();
       pstmt = conn.prepareStatement(sql);
 
@@ -52,6 +53,7 @@ public class OrderFrameDAO {
     PreparedStatement pstmt = null;
     int result = 0;
 
+    System.out.println(address);
     int[] arr = new int[9];
     arr[0] = getOrderNum();
     arr[7] = totalPrice;
@@ -90,8 +92,9 @@ public class OrderFrameDAO {
 
     try {
       //String sql = "insert into cart values(?,?,?,?,?,?,?,?,?)";
-      String sql = "insert into cart values (" + arr[0] + ",'" + userid + "'," + arr[1] + "," + arr[2] + "," + arr[3] + "," + arr[4] + "," + arr[5] + "," + arr[6] + "," + arr[7] + ",'" + arr8 + "',"
-          + ",'" + arr10 + "'," + arr[8] + ")";
+      String sql = "insert into cart values (" + arr[0] + ",'" + userid + "'," + arr[1] + "," + arr[2] + "," + arr[3] + "," + arr[4] + "," + arr[5] + "," + arr[6] + "," + arr[7] + ",'" + arr8 + "','"
+          + arr10 + "'," + arr[8] + ")";
+      System.out.println(sql);
       conn = sangjin.DB.DB.comCon();
       pstmt = conn.prepareStatement(sql);
 

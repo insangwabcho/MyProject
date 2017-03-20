@@ -37,7 +37,7 @@ public class OrderFrame extends JFrame {
 
   public OrderFrame(int userno, String username, DefaultTableModel model, String totalprice, String userid, String defaultAddress) {
     this.userno = userno;
-
+    address = defaultAddress;
     //setIconImage(Toolkit.getDefaultToolkit().getImage(OrderFrame.class.getResource("/mainFrame/img/programIcon.ico")));
     setTitle("주문하기");
     setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
