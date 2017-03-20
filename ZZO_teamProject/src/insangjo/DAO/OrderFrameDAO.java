@@ -1,13 +1,11 @@
 package insangjo.DAO;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import insangjo.common.DB;
 
 public class OrderFrameDAO {
 
@@ -16,10 +14,9 @@ public class OrderFrameDAO {
     Connection conn = null;
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    String address = "dd";
     try {
       String sql = query1 + " from cpu c,hdd h,ram r,ssd s,main m,vga v,ram r2 where" + query2;
-      conn = DB.getConn();
+      conn = DB.DB.comCon();
       pstmt = conn.prepareStatement(sql);
 
       System.out.println(sql);
@@ -46,11 +43,11 @@ public class OrderFrameDAO {
           e.printStackTrace();
         }
     }
-    int result = updateQuery(items, list, userid, totalPrice, address);
+    int result = updateQuery(items, list, userid, totalPrice);
     return result;
   }
 
-  public int updateQuery(ArrayList<Integer> items, ArrayList<String> list, String userid, int totalPrice, String address) {
+  public int updateQuery(ArrayList<Integer> items, ArrayList<String> list, String userid, int totalPrice) {
     Connection conn = null;
     PreparedStatement pstmt = null;
     int result = 0;
@@ -88,14 +85,10 @@ public class OrderFrameDAO {
       }
     }
 
-    Date arr8 = Date.valueOf("2012-12-12"); //buydate
-    int arr9 = 0; // ea
-    String arr10 = address;
-
     try {
       //String sql = "insert into cart values(?,?,?,?,?,?,?,?,?)";
       String sql = "insert into cart values (" + arr[0] + ",'" + userid + "'," + arr[1] + "," + arr[2] + "," + arr[3] + "," + arr[4] + "," + arr[5] + "," + arr[6] + "," + arr[7] + "," + arr[8] + ")";
-      conn = DB.getConn();
+      conn = DB.DB.comCon();
       pstmt = conn.prepareStatement(sql);
       //      pstmt.setInt(1, arr[0]);
       //      pstmt.setString(2, userid);
@@ -133,7 +126,7 @@ public class OrderFrameDAO {
     ArrayList<Integer> items = new ArrayList<>();
     try {
       String sql = "select order_no from cart";
-      conn = DB.getConn();
+      conn = DB.DB.comCon();
       pstmt = conn.prepareStatement(sql);
       rs = pstmt.executeQuery();
 

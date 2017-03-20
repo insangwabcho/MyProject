@@ -55,6 +55,7 @@ public class MainFrame extends JFrame {
   private JComboBox cboMenu;
   private String usname;
   private JLabel lblEa;
+  private String id;
   private int eaNum = 1;
   private JLabel lblCheckCPU;
   private JLabel lblCheckMain;
@@ -62,7 +63,6 @@ public class MainFrame extends JFrame {
   private JLabel lblCheckRam;
   private JLabel lblCheckHDD;
   private JLabel lblCheckSSD;
-  private String id;
   private JPanel selectPanel;
   private JPanel detailPanel;
   private JPanel boxpanel;
@@ -70,30 +70,10 @@ public class MainFrame extends JFrame {
   private JPanel option2Panel;
   private JPanel panel;
 
-  /**
-   * Launch the application.
-   */
-  public static void main(String[] args) {
-    EventQueue.invokeLater(new Runnable() {
-      public void run() {
-        try {
-          MainFrame frame = new MainFrame("", "", "");
-          frame.setVisible(true);
-        } catch (Exception e) {
-          e.printStackTrace();
-        }
-      }
-    });
-  }
 
-  /**
-   * Create the frame.
-   */
-
-  public MainFrame(String username, String id, String address) {
+  public MainFrame(String username, String id) {
     usname = username;
-    this.id = id;
-
+    this.id= id;
     panelBg = new ImageIcon(MainFrame.class.getResource("/insangjo/img/panelBg.jpeg"));
     orderpageDao = new MainFrameDAO();
     col = new Vector<>();
@@ -183,7 +163,7 @@ public class MainFrame extends JFrame {
           if (a.equals("추가 SSD")) {
             a = "RAM";
           }
-          if (b && a.equals("추가 SSD")) {
+          if (b) {
             JOptionPane.showMessageDialog(MainFrame.this, "기본 메모리카드 먼저 선택해주세요");
             return;
           }
@@ -299,7 +279,7 @@ public class MainFrame extends JFrame {
           else
             return;
         }
-        OrderFrame f = new OrderFrame(1, username, model, lblTotalPirce.getText(), id, address);
+        OrderFrame f = new OrderFrame(1, username, model, lblTotalPirce.getText(), id);
         f.setVisible(true);
       }
     });
