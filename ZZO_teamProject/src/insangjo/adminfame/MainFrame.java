@@ -13,6 +13,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class MainFrame extends JFrame {
 
@@ -55,6 +57,11 @@ public class MainFrame extends JFrame {
     contentPane.add(panel, BorderLayout.EAST);
 
     JButton btnNewButton = new JButton("재고관리 / 품목추가");
+    btnNewButton.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        new sungwon.goods.Management().setVisible(true);
+      }
+    });
     panel.add(btnNewButton);
 
     JButton btnNewButton_1 = new JButton("월별매출");
