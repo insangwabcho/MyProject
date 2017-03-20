@@ -86,15 +86,15 @@ public class OrderFrameDAO {
     }
 
     Date arr8 = Date.valueOf("2012-12-12");
-    int arr9 = 0;
     String arr10 = address;
 
     try {
       //String sql = "insert into cart values(?,?,?,?,?,?,?,?,?)";
       String sql = "insert into cart values (" + arr[0] + ",'" + userid + "'," + arr[1] + "," + arr[2] + "," + arr[3] + "," + arr[4] + "," + arr[5] + "," + arr[6] + "," + arr[7] + ",'" + arr8 + "',"
-          + arr9 + ",'" + arr10 + "'," + arr[8] + ")";
+          + ",'" + arr10 + "'," + arr[8] + ")";
       conn = sangjin.DB.DB.comCon();
       pstmt = conn.prepareStatement(sql);
+
       //      pstmt.setInt(1, arr[0]);
       //      pstmt.setString(2, userid);
       //      int aCount = 1;
