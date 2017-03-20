@@ -1,4 +1,4 @@
-package Client;
+package sangjin.Client;
 
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -29,7 +29,8 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import DB.DB;
+import sangjin.DB.DB;
+
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
 

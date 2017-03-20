@@ -1,4 +1,4 @@
-package Client;
+package sangjin.Client;
 
 import java.sql.Date;
 

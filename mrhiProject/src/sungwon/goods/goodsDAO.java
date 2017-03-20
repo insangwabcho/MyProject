@@ -15,7 +15,7 @@ public class goodsDAO {
     PreparedStatement pstmt = null;
     ResultSet rs = null;
     try {
-      conn = DB.DB.comCon();
+      conn = sangjin.DB.DB.comCon();
       String sql = "select serial,company,name,generation,cost from cpu";
       if (name.equals("VGA")) {
         sql = "select serial,os,company,name,memory,cost from vga";
@@ -93,7 +93,7 @@ public class goodsDAO {
     Connection conn = null;
     PreparedStatement pstmt = null;
     try {
-      conn = DB.DB.comCon();
+      conn = sangjin.DB.DB.comCon();
       // tmpea(현재 재고)+textno(추가할재고)
       int ea = tmpea + textno;
       String sql = "update cpu set ea=? where name=?";
@@ -143,7 +143,7 @@ public class goodsDAO {
     PreparedStatement pstmt = null;
     ResultSet rs = null;
     try {
-      conn = DB.DB.comCon();
+      conn = sangjin.DB.DB.comCon();
       String sql = "select serial,company,name,ea,cost from cpu";
       if (name.equals("VGA")) {
         sql = "select serial,company,name,ea,cost from vga";
@@ -203,7 +203,7 @@ public class goodsDAO {
     PreparedStatement pstmt = null;
     ResultSet rs = null;
     try {
-      conn = DB.DB.comCon();
+      conn = sangjin.DB.DB.comCon();
       String sql = "select *from tab where tname=? or tname=? or tname=? or tname=? " + " or tname=? or tname=? order by tname";
       pstmt = conn.prepareStatement(sql);
       pstmt.setString(1, "CPU");
