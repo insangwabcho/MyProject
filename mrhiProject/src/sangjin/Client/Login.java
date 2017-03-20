@@ -19,6 +19,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import sangjin.DB.*;
 import insangjo.adminfame.rootFrame;
 import insangjo.userframe.MainFrame;
 import java.awt.Color;
@@ -36,7 +37,7 @@ public class Login extends JFrame {
 	private JLabel lblResult;
 	private Join join;
 	private JPasswordField tfLpassword;
-	public static String name,id;
+	public static String name,id,address;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -74,8 +75,6 @@ public class Login extends JFrame {
 		JButton btnLogin = new JButton("로그인");
 		btnLogin.setBackground(SystemColor.control);
 		btnLogin.addActionListener(new ActionListener() {
-			private String address;
-
 			public void actionPerformed(ActionEvent e) {
 				//사용자가 입력한 아이디,비번
 				String Lid = tfLid.getText();
@@ -84,7 +83,7 @@ public class Login extends JFrame {
 				PreparedStatement pstmt=null;
 				ResultSet rs=null;
 				try {
-					conn=sangjin.DB.DB.comCon();
+					conn=DB.comCon();
 					String sql = "select * from member where id=? and password=?";
 					pstmt = conn.prepareStatement(sql);
 					pstmt.setString(1, Lid); //첫번째 물음표(아이디)		  
@@ -94,7 +93,7 @@ public class Login extends JFrame {
 						JoinDAO dao=new JoinDAO();
 						name=dao.returnName(Lid); //이름 리턴
 						id=dao.returnID(Lid); //아이디 리턴
-						address=dao.returnAddress(Lid);
+						address=dao.returnAddress(Lid); //주소 리턴
 						if(Lid.equals("root")){
 							new rootFrame().setVisible(true);
 							dispose();

@@ -186,6 +186,7 @@ public class JoinDAO {
 			return a; //아이디 리턴
 		}
 		
+		//주소리턴 메소드
 		public String returnAddress(String Lid){
 			Vector items = new Vector();
 			String a=null;

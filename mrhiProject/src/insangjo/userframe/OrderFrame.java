@@ -51,7 +51,7 @@ public class OrderFrame extends JFrame {
     ofDao = new OrderFrameDAO();
 
     JLabel label = new JLabel("님이 선택하신 물품");
-    label.setFont(new Font("Courier New", Font.PLAIN, 15));
+    label.setFont(new Font("굴림", Font.PLAIN, 15));
     label.setHorizontalAlignment(SwingConstants.CENTER);
     label.setBounds(179, 20, 130, 16);
     contentPane.add(label);
@@ -69,13 +69,13 @@ public class OrderFrame extends JFrame {
     scrollPane.setViewportView(table);
 
     JLabel lblAddress = new JLabel(defaultAddress);
-    lblAddress.setFont(new Font("consolas", Font.BOLD, 14));
+    lblAddress.setFont(new Font("굴림", Font.BOLD, 14));
     lblAddress.setHorizontalAlignment(SwingConstants.CENTER);
     lblAddress.setBounds(6, 230, 438, 32);
     contentPane.add(lblAddress);
 
     lblName = new JLabel(username);
-    lblName.setFont(new Font("Courier New", Font.PLAIN, 15));
+    lblName.setFont(new Font("굴림", Font.PLAIN, 15));
     lblName.setHorizontalAlignment(SwingConstants.CENTER);
     lblName.setBounds(125, 20, 61, 16);
     contentPane.add(lblName);
@@ -119,7 +119,7 @@ public class OrderFrame extends JFrame {
     JLabel label_1 = new JLabel("배송 요청사항");
     label_1.setForeground(Color.PINK);
     label_1.setHorizontalAlignment(SwingConstants.CENTER);
-    label_1.setFont(new Font("Courier New", Font.PLAIN, 15));
+    label_1.setFont(new Font("굴림", Font.PLAIN, 15));
     label_1.setBounds(167, 274, 130, 16);
     contentPane.add(label_1);
 
@@ -259,7 +259,7 @@ public class OrderFrame extends JFrame {
     contentPane.add(label_2);
 
     lblTotalPrice = new JLabel(totalprice);
-    lblTotalPrice.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+    lblTotalPrice.setFont(new Font("굴림", Font.PLAIN, 15));
     lblTotalPrice.setBounds(94, 195, 74, 23);
     contentPane.add(lblTotalPrice);
 
