@@ -36,7 +36,7 @@ public class OrderFrame extends JFrame {
   private String address;
   private OrderFrameDAO ofDao;
 
-  public OrderFrame(int userno, String username, DefaultTableModel model, String totalprice, String userid) {
+  public OrderFrame(int userno, String username, DefaultTableModel model, String totalprice, String userid, String defaultAddress) {
     this.userno = userno;
 
     setIconImage(Toolkit.getDefaultToolkit().getImage(OrderFrame.class.getResource("/mainFrame/img/programIcon.ico")));

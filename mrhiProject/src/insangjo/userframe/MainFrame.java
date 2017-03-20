@@ -1,7 +1,6 @@
 package insangjo.userframe;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
@@ -70,10 +69,11 @@ public class MainFrame extends JFrame {
   private JPanel option2Panel;
   private JPanel panel;
 
+  public MainFrame(String username, String id, String address) {
 
-  public MainFrame(String username, String id) {
+    System.out.println(address);
     usname = username;
-    this.id= id;
+    this.id = id;
     panelBg = new ImageIcon(MainFrame.class.getResource("/insangjo/img/panelBg.jpeg"));
     orderpageDao = new MainFrameDAO();
     col = new Vector<>();
@@ -279,7 +279,7 @@ public class MainFrame extends JFrame {
           else
             return;
         }
-        OrderFrame f = new OrderFrame(1, username, model, lblTotalPirce.getText(), id);
+        OrderFrame f = new OrderFrame(1, username, model, lblTotalPirce.getText(), id, address);
         f.setVisible(true);
       }
     });
