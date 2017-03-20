@@ -293,12 +293,7 @@ public class MainFrame extends JFrame {
         }
         OrderFrame f = new OrderFrame(1, username, model, lblTotalPirce.getText(), id, address);
         f.setVisible(true);
-        while (true) {
-          if (f.isVisible() == false) {
-            System.out.println("dd");
-            break;
-          }
-        }
+
       }
     });
     btnOk.setBounds(325, 308, 75, 29);
