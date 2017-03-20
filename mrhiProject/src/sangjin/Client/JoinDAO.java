@@ -185,4 +185,42 @@ public class JoinDAO {
 			}
 			return a; //아이디 리턴
 		}
+		
+		public String returnAddress(String Lid){
+			Vector items = new Vector();
+			String a=null;
+			Connection conn=null;
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			try {
+				conn = DB.comCon();
+				String sql="select address from member where id=?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, Lid);
+				rs = pstmt.executeQuery();
+				if(rs.next()){
+					items.add(rs.getString("address"));
+					a=items.get(0).toString();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					if( rs != null ) rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}			
+				try {
+					if( pstmt != null ) pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				try {
+					if( conn != null ) conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			return a; //주소 리턴
+		}
 }
