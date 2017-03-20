@@ -2,7 +2,6 @@ package insangjo.userframe;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -39,7 +38,7 @@ public class OrderFrame extends JFrame {
   public OrderFrame(int userno, String username, DefaultTableModel model, String totalprice, String userid, String defaultAddress) {
     this.userno = userno;
 
-    setIconImage(Toolkit.getDefaultToolkit().getImage(OrderFrame.class.getResource("/mainFrame/img/programIcon.ico")));
+    //setIconImage(Toolkit.getDefaultToolkit().getImage(OrderFrame.class.getResource("/mainFrame/img/programIcon.ico")));
     setTitle("주문하기");
     setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     setBounds(120, 120, 450, 440);
@@ -69,7 +68,7 @@ public class OrderFrame extends JFrame {
     };
     scrollPane.setViewportView(table);
 
-    JLabel lblAddress = new JLabel("인천시 부평구 부평5동 494-7 동일타운 102호");
+    JLabel lblAddress = new JLabel(defaultAddress);
     lblAddress.setFont(new Font("consolas", Font.BOLD, 14));
     lblAddress.setHorizontalAlignment(SwingConstants.CENTER);
     lblAddress.setBounds(6, 230, 438, 32);
@@ -236,7 +235,7 @@ public class OrderFrame extends JFrame {
 
         }
         int totalPrice = Integer.parseInt(totalprice.replaceAll("[^0-9]", ""));
-        int result = ofDao.addOrder(sb.toString(), sb1.toString(), items.size(), list, userid, totalPrice);
+        int result = ofDao.addOrder(sb.toString(), sb1.toString(), items.size(), list, userid, totalPrice, address);
         if (result == 1)
           JOptionPane.showMessageDialog(OrderFrame.this, "주문이 성공하였습니다");
         dispose();

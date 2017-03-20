@@ -1,15 +1,15 @@
 package insangjo.DAO;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-
 public class OrderFrameDAO {
 
-  public int addOrder(String query1, String query2, int ea, ArrayList<String> list, String userid, int totalPrice) {
+  public int addOrder(String query1, String query2, int ea, ArrayList<String> list, String userid, int totalPrice, String address) {
     ArrayList<Integer> items = new ArrayList<>();
     Connection conn = null;
     PreparedStatement pstmt = null;
@@ -43,11 +43,11 @@ public class OrderFrameDAO {
           e.printStackTrace();
         }
     }
-    int result = updateQuery(items, list, userid, totalPrice);
+    int result = updateQuery(items, list, userid, totalPrice, address);
     return result;
   }
 
-  public int updateQuery(ArrayList<Integer> items, ArrayList<String> list, String userid, int totalPrice) {
+  public int updateQuery(ArrayList<Integer> items, ArrayList<String> list, String userid, int totalPrice, String address) {
     Connection conn = null;
     PreparedStatement pstmt = null;
     int result = 0;
@@ -85,9 +85,14 @@ public class OrderFrameDAO {
       }
     }
 
+    Date arr8 = Date.valueOf("2012-12-12");
+    int arr9 = 0;
+    String arr10 = address;
+
     try {
       //String sql = "insert into cart values(?,?,?,?,?,?,?,?,?)";
-      String sql = "insert into cart values (" + arr[0] + ",'" + userid + "'," + arr[1] + "," + arr[2] + "," + arr[3] + "," + arr[4] + "," + arr[5] + "," + arr[6] + "," + arr[7] + "," + arr[8] + ")";
+      String sql = "insert into cart values (" + arr[0] + ",'" + userid + "'," + arr[1] + "," + arr[2] + "," + arr[3] + "," + arr[4] + "," + arr[5] + "," + arr[6] + "," + arr[7] + ",'" + arr8 + "',"
+          + arr9 + ",'" + arr10 + "'," + arr[8] + ")";
       conn = sangjin.DB.DB.comCon();
       pstmt = conn.prepareStatement(sql);
       //      pstmt.setInt(1, arr[0]);

@@ -1,6 +1,7 @@
 package insangjo.userframe;
 
 import java.awt.Color;
+import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
@@ -69,9 +70,20 @@ public class MainFrame extends JFrame {
   private JPanel option2Panel;
   private JPanel panel;
 
-  public MainFrame(String username, String id, String address) {
+  public static void main(String[] args) {
+    EventQueue.invokeLater(new Runnable() {
+      public void run() {
+        try {
+          MainFrame frame = new MainFrame("", "", "");
+          frame.setVisible(true);
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+      }
+    });
+  }
 
-    System.out.println(address);
+  public MainFrame(String username, String id, String address) {
     usname = username;
     this.id = id;
     panelBg = new ImageIcon(MainFrame.class.getResource("/insangjo/img/panelBg.jpeg"));
@@ -163,7 +175,7 @@ public class MainFrame extends JFrame {
           if (a.equals("추가 SSD")) {
             a = "RAM";
           }
-          if (b) {
+          if (b && (e.getItem() + "").equals("추가 SSD")) {
             JOptionPane.showMessageDialog(MainFrame.this, "기본 메모리카드 먼저 선택해주세요");
             return;
           }
