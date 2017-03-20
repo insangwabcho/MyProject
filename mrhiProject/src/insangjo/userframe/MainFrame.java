@@ -1,7 +1,6 @@
 package insangjo.userframe;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
@@ -69,19 +68,6 @@ public class MainFrame extends JFrame {
   private JPanel optionPanel;
   private JPanel option2Panel;
   private JPanel panel;
-
-  public static void main(String[] args) {
-    EventQueue.invokeLater(new Runnable() {
-      public void run() {
-        try {
-          MainFrame frame = new MainFrame("", "", "");
-          frame.setVisible(true);
-        } catch (Exception e) {
-          e.printStackTrace();
-        }
-      }
-    });
-  }
 
   public MainFrame(String username, String id, String address) {
     usname = username;
