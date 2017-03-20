@@ -16,7 +16,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class MainFrame extends JFrame {
+public class rootFrame extends JFrame {
 
   private JPanel contentPane;
   private JTextField textField;
@@ -28,7 +28,7 @@ public class MainFrame extends JFrame {
     EventQueue.invokeLater(new Runnable() {
       public void run() {
         try {
-          MainFrame frame = new MainFrame();
+          rootFrame frame = new rootFrame();
           frame.setVisible(true);
         } catch (Exception e) {
           e.printStackTrace();
@@ -40,7 +40,7 @@ public class MainFrame extends JFrame {
   /**
    * Create the frame.
    */
-  public MainFrame() {
+  public rootFrame() {
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setBounds(100, 100, 704, 376);
     contentPane = new JPanel();

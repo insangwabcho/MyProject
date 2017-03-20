@@ -1,6 +1,7 @@
 package insangjo.DAO;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,6 +16,7 @@ public class OrderFrameDAO {
     Connection conn = null;
     PreparedStatement pstmt = null;
     ResultSet rs = null;
+    String address = "dd";
     try {
       String sql = query1 + " from cpu c,hdd h,ram r,ssd s,main m,vga v,ram r2 where" + query2;
       conn = DB.getConn();
@@ -44,11 +46,11 @@ public class OrderFrameDAO {
           e.printStackTrace();
         }
     }
-    int result = updateQuery(items, list, userid, totalPrice);
+    int result = updateQuery(items, list, userid, totalPrice, address);
     return result;
   }
 
-  public int updateQuery(ArrayList<Integer> items, ArrayList<String> list, String userid, int totalPrice) {
+  public int updateQuery(ArrayList<Integer> items, ArrayList<String> list, String userid, int totalPrice, String address) {
     Connection conn = null;
     PreparedStatement pstmt = null;
     int result = 0;
@@ -85,6 +87,10 @@ public class OrderFrameDAO {
         arr[8] = items.get(i);
       }
     }
+
+    Date arr8 = Date.valueOf("2012-12-12"); //buydate
+    int arr9 = 0; // ea
+    String arr10 = address;
 
     try {
       //String sql = "insert into cart values(?,?,?,?,?,?,?,?,?)";

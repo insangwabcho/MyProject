@@ -62,7 +62,7 @@ public class MainFrame extends JFrame {
   private JLabel lblCheckRam;
   private JLabel lblCheckHDD;
   private JLabel lblCheckSSD;
-  private String id = "dd";
+  private String id;
   private JPanel selectPanel;
   private JPanel detailPanel;
   private JPanel boxpanel;
@@ -77,7 +77,7 @@ public class MainFrame extends JFrame {
     EventQueue.invokeLater(new Runnable() {
       public void run() {
         try {
-          MainFrame frame = new MainFrame("ㅇ");
+          MainFrame frame = new MainFrame("", "", "");
           frame.setVisible(true);
         } catch (Exception e) {
           e.printStackTrace();
@@ -90,8 +90,10 @@ public class MainFrame extends JFrame {
    * Create the frame.
    */
 
-  public MainFrame(String username) {
+  public MainFrame(String username, String id, String address) {
     usname = username;
+    this.id = id;
+
     panelBg = new ImageIcon(MainFrame.class.getResource("/insangjo/img/panelBg.jpeg"));
     orderpageDao = new MainFrameDAO();
     col = new Vector<>();
@@ -181,7 +183,7 @@ public class MainFrame extends JFrame {
           if (a.equals("추가 SSD")) {
             a = "RAM";
           }
-          if (b) {
+          if (b && a.equals("추가 SSD")) {
             JOptionPane.showMessageDialog(MainFrame.this, "기본 메모리카드 먼저 선택해주세요");
             return;
           }
@@ -297,7 +299,7 @@ public class MainFrame extends JFrame {
           else
             return;
         }
-        OrderFrame f = new OrderFrame(1, username, model, lblTotalPirce.getText(), id);
+        OrderFrame f = new OrderFrame(1, username, model, lblTotalPirce.getText(), id, address);
         f.setVisible(true);
       }
     });

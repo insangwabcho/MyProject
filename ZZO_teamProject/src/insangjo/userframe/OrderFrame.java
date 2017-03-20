@@ -2,7 +2,6 @@ package insangjo.userframe;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -36,10 +35,10 @@ public class OrderFrame extends JFrame {
   private String address;
   private OrderFrameDAO ofDao;
 
-  public OrderFrame(int userno, String username, DefaultTableModel model, String totalprice, String userid) {
+  public OrderFrame(int userno, String username, DefaultTableModel model, String totalprice, String userid, String defaultAddress) {
     this.userno = userno;
 
-    setIconImage(Toolkit.getDefaultToolkit().getImage(OrderFrame.class.getResource("/mainFrame/img/programIcon.ico")));
+    //setIconImage(Toolkit.getDefaultToolkit().getImage(OrderFrame.class.getResource("/mainFrame/img/programIcon.ico")));
     setTitle("주문하기");
     setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     setBounds(120, 120, 450, 440);
@@ -87,7 +86,7 @@ public class OrderFrame extends JFrame {
         if (rbtnDefaultaddress.isSelected()) {
           lblAddress.setVisible(true);
           tfAddress.setVisible(false);
-          address = lblAddress.getText();
+          address = defaultAddress;
         }
       }
     });
@@ -263,6 +262,15 @@ public class OrderFrame extends JFrame {
     lblTotalPrice.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
     lblTotalPrice.setBounds(94, 195, 74, 23);
     contentPane.add(lblTotalPrice);
+
+    JButton btnNewButton = new JButton("확인");
+    btnNewButton.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        address = tfAddress.getText();
+      }
+    });
+    btnNewButton.setBounds(383, 219, 61, 16);
+    contentPane.add(btnNewButton);
 
     tfAddress.setVisible(false);
   }
