@@ -11,15 +11,16 @@ import common.DB;
 public class OrderFrameDAO {
 
   public int addOrder(String query1, String query2, int ea, ArrayList<String> list, String userid, int totalPrice) {
-    System.out.println("addOrder");
     ArrayList<Integer> items = new ArrayList<>();
     Connection conn = null;
     PreparedStatement pstmt = null;
     ResultSet rs = null;
     try {
-      String sql = query1 + " from cpu c,hdd h,ram r,ssd s,main m,vga v where" + query2;
+      String sql = query1 + " from cpu c,hdd h,ram r,ssd s,main m,vga v,ram r2 where" + query2;
       conn = DB.getConn();
       pstmt = conn.prepareStatement(sql);
+
+      System.out.println(sql);
       rs = pstmt.executeQuery();
 
       if (rs.next()) {
@@ -48,15 +49,18 @@ public class OrderFrameDAO {
   }
 
   public int updateQuery(ArrayList<Integer> items, ArrayList<String> list, String userid, int totalPrice) {
-    System.out.println("updateQuery");
     Connection conn = null;
     PreparedStatement pstmt = null;
     int result = 0;
 
-    int[] arr = new int[8];
+    int[] arr = new int[9];
     arr[0] = getOrderNum();
-    System.out.println("ordernum지나자마자");
     arr[7] = totalPrice;
+    System.out.println("------");
+    for (int i = 0; i < list.size(); i++) {
+      System.out.println(list.get(i));
+    }
+    System.out.println("------");
     for (int i = 0; i < list.size(); i++) {
       switch (list.get(i)) {
       case "CPU":
@@ -77,13 +81,14 @@ public class OrderFrameDAO {
       case "SSD":
         arr[5] = items.get(i);
         break;
+      case "추가 RAM":
+        arr[8] = items.get(i);
       }
     }
 
     try {
       //String sql = "insert into cart values(?,?,?,?,?,?,?,?,?)";
-      String sql = "insert into cart values (" + arr[0] + ",'" + userid + "'," + arr[1] + "," + arr[2] + "," + arr[3] + "," + arr[4] + "," + arr[5] + "," + arr[6] + "," + totalPrice + ")";
-      System.out.println(sql);
+      String sql = "insert into cart values (" + arr[0] + ",'" + userid + "'," + arr[1] + "," + arr[2] + "," + arr[3] + "," + arr[4] + "," + arr[5] + "," + arr[6] + "," + arr[7] + "," + arr[8] + ")";
       conn = DB.getConn();
       pstmt = conn.prepareStatement(sql);
       //      pstmt.setInt(1, arr[0]);
@@ -94,9 +99,7 @@ public class OrderFrameDAO {
       //        aCount++;
       //      }
       //      pstmt.setInt(9, totalPrice);
-      System.out.println("마지막쿼리 전");
       result = pstmt.executeUpdate();
-      System.out.println("마지막 쿼리 후");
     } catch (Exception e) {
       e.printStackTrace();
     } finally {
@@ -118,7 +121,6 @@ public class OrderFrameDAO {
   }
 
   public int getOrderNum() {
-    System.out.println("getOrderNum");
     Connection conn = null;
     PreparedStatement pstmt = null;
     ResultSet rs = null;

@@ -132,6 +132,9 @@ public class MainFrame extends JFrame {
     cboMenu.addItemListener(new ItemListener() {
       public void itemStateChanged(ItemEvent e) {
         if (e.getStateChange() == ItemEvent.SELECTED) {
+          String a = e.getItem() + "";
+          if (a.equals("추가 SSD"))
+            a = "RAM";
           ArrayList list = orderpageDao.prodList(e.getItem() + "");
           list_1 = new JList(list.toArray());
           list_1.addListSelectionListener(new ListSelectionListener() {
@@ -157,7 +160,7 @@ public class MainFrame extends JFrame {
         }
       }
     });
-    cboMenu.setModel(new DefaultComboBoxModel(new String[] { "부품을 선택해주세요", "CPU", "메인보드", "그래픽카드", "메모리카드", "HDD", "SSD" }));
+    cboMenu.setModel(new DefaultComboBoxModel(new String[] { "부품을 선택해주세요", "CPU", "메인보드", "그래픽카드", "메모리카드", "HDD", "SSD", "추가 RAM" }));
     cboMenu.setBounds(6, 6, 156, 32);
     selectPanel.add(cboMenu);
 
@@ -351,7 +354,6 @@ public class MainFrame extends JFrame {
 
         int start = (list_2.getSelectedValue() + "").indexOf(":") + 1;
         int end = (list_2.getSelectedValue() + "").indexOf(",");
-        System.out.println((list_2.getSelectedValue() + "").substring(start, end).trim());
         items.add((list_2.getSelectedValue() + "").substring(start, end).trim());
 
         Vector item = orderpageDao.cartAdd(items, ea);

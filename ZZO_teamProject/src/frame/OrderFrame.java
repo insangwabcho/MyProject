@@ -137,8 +137,8 @@ public class OrderFrame extends JFrame {
 
         StringBuilder sb = new StringBuilder("select ");
         StringBuilder sb1 = new StringBuilder();
-        String[] option = { "c.serial ", "m.serial ", "v.serial ", "r.serial ", "h.serial ", "s.serial " };
-        String[] where = { " c.name=", " m.name=", " v.name=", " r.name=", " h.name=", " s.name=" };
+        String[] option = { "c.serial ", "m.serial ", "v.serial ", "r.serial ", "h.serial ", "s.serial ", "r2.serial " };
+        String[] where = { " c.name=", " m.name=", " v.name=", " r.name=", " h.name=", " s.name=", " r2.name=" };
         //select option[] from 
         int aCount = 0;
 
@@ -181,6 +181,11 @@ public class OrderFrame extends JFrame {
             list.add("SSD");
             aCount++;
             break;
+          case "추가 RAM":
+            append[i] = "추가 RAM";
+            list.add("추가 RAM");
+            aCount++;
+            break;
           }
           items.add(model.getValueAt(i, 1) + "");
         }
@@ -218,6 +223,11 @@ public class OrderFrame extends JFrame {
             sb1.append(where[5] + "'" + items.get(i) + "'");
             aCount--;
             break;
+          case "추가 RAM":
+            sb.append(option[6]);
+            sb1.append(where[6] + "'" + items.get(i) + "'");
+            aCount--;
+            break;
           }
           if (aCount != 0) {
             sb.append(",");
@@ -227,9 +237,8 @@ public class OrderFrame extends JFrame {
         }
         int totalPrice = Integer.parseInt(totalprice.replaceAll("[^0-9]", ""));
         int result = ofDao.addOrder(sb.toString(), sb1.toString(), items.size(), list, userid, totalPrice);
-        if (result == 1) {
+        if (result == 1)
           JOptionPane.showMessageDialog(OrderFrame.this, "주문이 성공하였습니다");
-        }
         dispose();
       }
     });

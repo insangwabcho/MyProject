@@ -27,11 +27,17 @@ public class MainFrameDAO {
     case "메모리카드":
       kortoeng = "ram";
       break;
+    case "추가 RAM":
+      kortoeng = "ram";
     default:
-      kortoeng = company;
+      if (company.equals("추가 RAM")) {
+        kortoeng = "ram";
+      }
+      else
+        kortoeng = company;
+
     }
     kortoeng = kortoeng.toUpperCase();
-
     try {
       String sql = "select distinct company from " + kortoeng;
       conn = DB.getConn();
@@ -40,7 +46,6 @@ public class MainFrameDAO {
 
       while (rs.next()) {
         String comp = rs.getString("company");
-        System.out.println(comp);
         items.add(comp);
       }
     } catch (Exception e) {
@@ -87,7 +92,10 @@ public class MainFrameDAO {
       kortoeng = "ram";
       break;
     default:
-      kortoeng = company;
+      if (company.equals("추가 RAM"))
+        kortoeng = "ram";
+      else
+        kortoeng = company;
     }
 
     try {
@@ -148,6 +156,9 @@ public class MainFrameDAO {
       break;
     }
 
+    if (one.equals("추가 RAM"))
+      one = "ram";
+
     try {
 
       String company = list.get(1).toUpperCase();
@@ -159,7 +170,6 @@ public class MainFrameDAO {
       sqll.append(sql2);
 
       String sql = sqll.toString();
-      System.out.println(sql);
       conn = DB.getConn();
       pstmt = conn.prepareStatement(sql);
       // 제조사명을 가져오는데 대문자로 가져오기때문에 소문자로 변경
