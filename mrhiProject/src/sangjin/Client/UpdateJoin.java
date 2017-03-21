@@ -30,6 +30,8 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import insangjo.userframe.MainFrame;
+
 
 public class UpdateJoin extends JFrame {
 	private JPanel contentPane;
@@ -39,15 +41,13 @@ public class UpdateJoin extends JFrame {
 	private JTextField tfJtel3; // 사용자 입력 폰번호3 폰번호=1+2+3
 	private JTextField tfJemail1; // 사용자 입력 이메일1
 	private JTextField tfJemail2; // 사용자 입력 이메일2 이메일=1+@+2
-	private final ButtonGroup btnGruop = new ButtonGroup(); // 성별 버튼그룹
 	private JLabel lblJTF; // 비밀번호 일치판별 라벨
 	private JPasswordField tfJpassword1; // 사용자가 입력하는 비밀번호
 	private JPasswordField tfJpassword2; // 사용자가 입력하는 비밀번호 확인
 	private JoinDAO dao;
-	private String Sex; // 라디오박스의 값을 담을 String 변수명
-	private JTextField tfJaddress1;
 	private JComboBox cbtel1;
 	private JTextField tfbirth;
+	private JTextField tfJaddress1;
 	private JTextField tfJaddress2;
 
 	/**
@@ -128,7 +128,7 @@ public class UpdateJoin extends JFrame {
 		contentPane.add(label_9);
 
 		JLabel label_10 = new JLabel("@");
-		label_10.setFont(new Font("굴림", Font.PLAIN, 15));
+		label_10.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		label_10.setHorizontalAlignment(SwingConstants.CENTER);
 		label_10.setBounds(287, 280, 31, 18);
 		contentPane.add(label_10);
@@ -158,16 +158,16 @@ public class UpdateJoin extends JFrame {
 					if (p2.equals(p1)) { // 같을때
 						lblJTF.setText("V");
 						lblJTF.setForeground(Color.green);
-						lblJTF.setFont(new Font("굴림", Font.BOLD, 18));
+						lblJTF.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 					} else { // 다를때
 						lblJTF.setText("X");
 						lblJTF.setForeground(Color.RED);
-						lblJTF.setFont(new Font("굴림", Font.BOLD, 18));
+						lblJTF.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 					}
 				} else { // 비밀번호가 4자리 미만일때
 					lblJTF.setText("6자리 이상 입력");
 					lblJTF.setForeground(Color.RED);
-					lblJTF.setFont(new Font("굴림", Font.BOLD, 15));
+					lblJTF.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 				}
 			}
 		});
@@ -226,7 +226,7 @@ public class UpdateJoin extends JFrame {
 		contentPane.add(lblJTF);
 
 		// 확인버튼을 눌렀을때 이벤트처리
-		JButton btnSave = new JButton("확인");
+		JButton btnSave = new JButton("수정");
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// 사용자가 입력한 값
@@ -247,7 +247,7 @@ public class UpdateJoin extends JFrame {
 			}
 		});
 		btnSave.setFont(new Font("맑은 고딕", Font.BOLD, 16));
-		btnSave.setBounds(224, 591, 116, 35);
+		btnSave.setBounds(170, 598, 116, 35);
 		contentPane.add(btnSave);
 
 		// 콤보박스로 이메일 주소자동 선택
@@ -276,13 +276,13 @@ public class UpdateJoin extends JFrame {
 
 		JLabel lblNewLabel = new JLabel("-");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("굴림", Font.BOLD, 15));
+		lblNewLabel.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		lblNewLabel.setBounds(240, 462, 25, 18);
 		contentPane.add(lblNewLabel);
 
 		JLabel lblNewLabel_1 = new JLabel("-");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setFont(new Font("굴림", Font.BOLD, 15));
+		lblNewLabel_1.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		lblNewLabel_1.setBounds(342, 462, 25, 18);
 		contentPane.add(lblNewLabel_1);
 		
@@ -317,6 +317,21 @@ public class UpdateJoin extends JFrame {
 		tfJaddress2.setBounds(170, 547, 270, 24);
 		contentPane.add(tfJaddress2);
 		tfJaddress2.setColumns(10);
+		
+		JButton btnNewButton = new JButton("회원탈퇴");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String[] yn={"예", "아니오"};
+				if(JOptionPane.showOptionDialog(UpdateJoin.this, "정말 탈퇴하시겠습니까?", "경고",
+						JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null, yn, null)==0){
+					dao.deleteMember(Lid);
+					dispose();
+				}
+			}
+		});
+		btnNewButton.setFont(new Font("맑은 고딕", Font.BOLD, 16));
+		btnNewButton.setBounds(324, 598, 116, 35);
+		contentPane.add(btnNewButton);
 
 	}
 }

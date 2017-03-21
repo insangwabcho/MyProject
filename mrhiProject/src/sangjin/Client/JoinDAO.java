@@ -80,7 +80,7 @@ public class JoinDAO {
 	
 	
 	//회원 탈퇴 데이터베이스에서 정보삭제
-	public int deleteMember(JoinDTO dto){
+	public int deleteMember(String Lid){
 		int result=0;
 		Connection conn=null;
 		PreparedStatement pstmt=null;
@@ -88,7 +88,7 @@ public class JoinDAO {
 			conn =	DB.comCon();
 			String sql="delete from member where id=?"; //해당 아이디면 삭제
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, dto.getId());
+			pstmt.setString(1, Lid);
 			result=pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
