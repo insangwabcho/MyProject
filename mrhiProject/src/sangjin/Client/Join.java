@@ -55,6 +55,7 @@ public class Join extends JFrame {
 	private JTextField tfJaddress1;
 	private JTextField tfJaddress2;
 	private JComboBox cbtel1;
+	private boolean b=false;
 
 	/**
 	 * Launch the application.
@@ -233,6 +234,7 @@ public class Join extends JFrame {
 		btnTest.setBackground(SystemColor.control);
 		btnTest.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				b=true;
 				// 사용자가 입력한 아이디
 				String Jid = tfJid.getText();
 
@@ -285,6 +287,10 @@ public class Join extends JFrame {
 		JButton btnSave = new JButton("확인");
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(!b){
+					JOptionPane.showMessageDialog(Join.this, "아이디 중복확인을 해주세요.");
+					return;
+				}
 				// 사용자가 입력한 값
 				String id = tfJid.getText();
 				String password = String.valueOf(tfJpassword2.getPassword());

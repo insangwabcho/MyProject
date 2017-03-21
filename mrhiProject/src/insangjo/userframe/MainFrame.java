@@ -85,7 +85,7 @@ public class MainFrame extends JFrame {
     setIconImage(Toolkit.getDefaultToolkit().getImage(MainFrame.class.getResource("/insangjo/img/programIcon.ico")));
     setTitle("comNawa 주문프로그램");
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    setBounds(100, 100, 1091, 720);
+    setBounds(100, 100, 1091, 709);
     setResizable(false);
 
     JMenuBar menuBar = new JMenuBar();
