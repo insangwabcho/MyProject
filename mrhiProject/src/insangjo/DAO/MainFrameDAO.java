@@ -9,6 +9,44 @@ import java.util.Vector;
 
 public class MainFrameDAO {
 
+  public String getPwd(String id) {
+    String result = "";
+    Connection conn = null;
+    PreparedStatement pstmt = null;
+    ResultSet rs = null;
+    try {
+      String sql = "select password from member where id='" + id + "'";
+      conn = sangjin.DB.DB.comCon();
+      pstmt = conn.prepareStatement(sql);
+      rs = pstmt.executeQuery();
+      if (rs.next()) {
+        result = rs.getString("password");
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    } finally {
+      if (rs != null)
+        try {
+          rs.close();
+        } catch (SQLException e) {
+          e.printStackTrace();
+        }
+      if (pstmt != null)
+        try {
+          pstmt.close();
+        } catch (SQLException e) {
+          e.printStackTrace();
+        }
+      if (conn != null)
+        try {
+          conn.close();
+        } catch (SQLException e) {
+          e.printStackTrace();
+        }
+    }
+    return result;
+  }
+
   public int deleteMember(String id) {
     int result = 0;
     Connection conn = null;

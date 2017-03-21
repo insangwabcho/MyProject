@@ -1,5 +1,6 @@
 package insangjo.userframe;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -24,6 +25,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
@@ -524,5 +526,45 @@ public class MainFrame extends JFrame {
         break;
       }
     }
+  }
+
+  class Conf extends JFrame {
+    JPanel panel;
+    JLabel label;
+    JButton btn;
+
+    public Conf(String pwd) {
+      setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+      setResizable(false);
+      setSize(300, 120);
+
+      label = new JLabel("비밀번호를 입력해주세요");
+
+      panel = new JPanel(new BorderLayout());
+      JPasswordField fieldPwd = new JPasswordField();
+
+      btn = new JButton("확인");
+      btn.addActionListener(new ActionListener() {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+          if (String.valueOf(fieldPwd.getPassword()).equals(pwd)) {
+            JOptionPane.showMessageDialog(Conf.this, "맞는비번");
+            dispose();
+          }
+          else {
+            JOptionPane.showMessageDialog(Conf.this, "잘못된 비밀번호입니다");
+          }
+        }
+      });
+
+      panel.add(label, "North");
+      panel.add(fieldPwd, "Center");
+      panel.add(btn, "South");
+
+      add(panel);
+      setVisible(true);
+    }
+
   }
 }
