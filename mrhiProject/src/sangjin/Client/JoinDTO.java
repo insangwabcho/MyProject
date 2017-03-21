@@ -15,6 +15,14 @@ public class JoinDTO {
 	//생성자
 	public JoinDTO() {
 	}
+	public JoinDTO(String password, String email, Date birth, String tel, String address, String id){
+		this.passward=password;
+		this.email=email;
+		this.birth=birth;
+		this.tel=tel;
+		this.address=address;
+		this.id=id;
+	}
 	public JoinDTO(String id, String passward, String email, String uname, Date birth, String sex,
 			String tel, String address) {
 		this.id = id;

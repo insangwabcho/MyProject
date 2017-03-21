@@ -34,6 +34,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 import insangjo.DAO.MainFrameDAO;
+import sangjin.Client.UpdateJoin;
 
 public class MainFrame extends JFrame {
 
@@ -214,7 +215,7 @@ public class MainFrame extends JFrame {
     contentPane.add(boxpanel);
     boxpanel.setLayout(null);
 
-    lblUserStat = new JLabel("<dynamic> 님 로그인중");
+    lblUserStat = new JLabel(username+"님 로그인중");
     lblUserStat.setFont(new Font("Lucida Grande", Font.BOLD, 20));
     lblUserStat.setHorizontalAlignment(SwingConstants.CENTER);
     lblUserStat.setBounds(14, 6, 243, 30);
@@ -452,6 +453,11 @@ public class MainFrame extends JFrame {
     scrollPane_1.setBorder(lb);
     
     JButton btnNewButton = new JButton("정보수정");
+    btnNewButton.addActionListener(new ActionListener() {
+    	public void actionPerformed(ActionEvent arg0) {
+    		new UpdateJoin(id).setVisible(true);
+    	}
+    });
     btnNewButton.setBounds(256, 7, 105, 27);
     boxpanel.add(btnNewButton);
     
