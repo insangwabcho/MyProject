@@ -64,7 +64,7 @@ public class Login extends JFrame {
 
     tfLid = new JTextField();
     tfLid.setBackground(SystemColor.control);
-    tfLid.setFont(new Font("굴림", Font.PLAIN, 18));
+    tfLid.setFont(new Font("맑은 고딕", Font.PLAIN, 18));
     tfLid.setToolTipText("");
     tfLid.setBounds(224, 156, 320, 50);
     contentPane.add(tfLid);
@@ -125,10 +125,11 @@ public class Login extends JFrame {
     });
 
     tfLpassword = new JPasswordField();
+    tfLpassword.setFont(new Font("맑은 고딕", Font.PLAIN, 18));
     tfLpassword.setBackground(SystemColor.control);
     tfLpassword.setBounds(224, 239, 320, 50);
     contentPane.add(tfLpassword);
-    btnLogin.setFont(new Font("굴림", Font.PLAIN, 16));
+    btnLogin.setFont(new Font("맑은 고딕", Font.BOLD, 16));
     btnLogin.setBounds(254, 340, 120, 40);
     contentPane.add(btnLogin);
 
@@ -140,7 +141,7 @@ public class Login extends JFrame {
         join.setVisible(true);
       }
     });
-    btnJoin.setFont(new Font("굴림", Font.PLAIN, 16));
+    btnJoin.setFont(new Font("맑은 고딕", Font.BOLD, 16));
     btnJoin.setBounds(403, 340, 120, 40);
     contentPane.add(btnJoin);
 
@@ -151,12 +152,12 @@ public class Login extends JFrame {
     contentPane.add(lblResult);
 
     lblNewLabel = new JLabel("아이디");
-    lblNewLabel.setFont(new Font("굴림", Font.BOLD, 18));
+    lblNewLabel.setFont(new Font("맑은 고딕", Font.BOLD, 18));
     lblNewLabel.setBounds(92, 152, 135, 57);
     contentPane.add(lblNewLabel);
 
     lblNewLabel_1 = new JLabel("비밀번호");
-    lblNewLabel_1.setFont(new Font("굴림", Font.BOLD, 18));
+    lblNewLabel_1.setFont(new Font("맑은 고딕", Font.BOLD, 18));
     lblNewLabel_1.setBounds(92, 234, 135, 57);
     contentPane.add(lblNewLabel_1);
 

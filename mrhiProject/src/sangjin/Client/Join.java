@@ -87,52 +87,52 @@ public class Join extends JFrame {
 		contentPane.setLayout(null);
 
 		JLabel label = new JLabel("아이디*");
-		label.setFont(new Font("굴림", Font.PLAIN, 15));
-		label.setBounds(40, 100, 120, 18);
+		label.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		label.setBounds(40, 103, 120, 18);
 		contentPane.add(label);
 
 		JLabel label_1 = new JLabel("비밀번호*");
-		label_1.setFont(new Font("굴림", Font.PLAIN, 15));
+		label_1.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		label_1.setBounds(40, 160, 120, 18);
 		contentPane.add(label_1);
 
 		JLabel label_2 = new JLabel("비밀번호 확인*");
-		label_2.setFont(new Font("굴림", Font.PLAIN, 15));
+		label_2.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		label_2.setBounds(40, 220, 120, 18);
 		contentPane.add(label_2);
 
 		JLabel label_3 = new JLabel("이메일*");
-		label_3.setFont(new Font("굴림", Font.PLAIN, 15));
+		label_3.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		label_3.setBounds(40, 280, 62, 18);
 		contentPane.add(label_3);
 
 		JLabel label_4 = new JLabel("이름*");
-		label_4.setFont(new Font("굴림", Font.PLAIN, 15));
+		label_4.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		label_4.setBounds(40, 340, 120, 18);
 		contentPane.add(label_4);
 
 		JLabel label_5 = new JLabel("생년월일*");
-		label_5.setFont(new Font("굴림", Font.PLAIN, 15));
+		label_5.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		label_5.setBounds(40, 400, 120, 18);
 		contentPane.add(label_5);
 
 		JLabel label_6 = new JLabel("성별*");
-		label_6.setFont(new Font("굴림", Font.PLAIN, 15));
+		label_6.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		label_6.setBounds(40, 460, 62, 18);
 		contentPane.add(label_6);
 
 		JLabel label_7 = new JLabel("휴대폰번호*");
-		label_7.setFont(new Font("굴림", Font.PLAIN, 15));
+		label_7.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		label_7.setBounds(40, 520, 120, 18);
 		contentPane.add(label_7);
 
 		JLabel label_8 = new JLabel("주소*");
-		label_8.setFont(new Font("굴림", Font.PLAIN, 15));
+		label_8.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		label_8.setBounds(40, 580, 62, 18);
 		contentPane.add(label_8);
 
 		JLabel label_9 = new JLabel("정보입력");
-		label_9.setFont(new Font("굴림", Font.BOLD, 20));
+		label_9.setFont(new Font("Dialog", Font.BOLD, 20));
 		label_9.setBounds(40, 30, 130, 35);
 		contentPane.add(label_9);
 
@@ -143,16 +143,19 @@ public class Join extends JFrame {
 		contentPane.add(label_10);
 
 		tfJid = new JTextField();
+		tfJid.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		tfJid.setBounds(170, 99, 270, 24);
 		contentPane.add(tfJid);
 		tfJid.setColumns(10);
 
 		tfJpassword1 = new JPasswordField();
+		tfJpassword1.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		tfJpassword1.setBounds(170, 159, 270, 24);
 		contentPane.add(tfJpassword1);
 
 		// 비밀번호 확인 입력시 판독 이벤트처리
 		tfJpassword2 = new JPasswordField();
+		tfJpassword2.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		tfJpassword2.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent e) {
@@ -180,21 +183,25 @@ public class Join extends JFrame {
 		contentPane.add(tfJpassword2);
 
 		tfJemail1 = new JTextField();
+		tfJemail1.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		tfJemail1.setBounds(170, 277, 116, 24);
 		contentPane.add(tfJemail1);
 		tfJemail1.setColumns(10);
 
 		tfJemail2 = new JTextField();
+		tfJemail2.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		tfJemail2.setBounds(324, 277, 116, 24);
 		contentPane.add(tfJemail2);
 		tfJemail2.setColumns(10);
 
 		tfJname = new JTextField();
+		tfJname.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		tfJname.setBounds(170, 337, 270, 24);
 		contentPane.add(tfJname);
 		tfJname.setColumns(10);
 
 		tfJtel2 = new JTextField();
+		tfJtel2.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		tfJtel2.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent arg0) {
@@ -208,6 +215,7 @@ public class Join extends JFrame {
 		tfJtel2.setColumns(10);
 
 		tfJtel3 = new JTextField();
+		tfJtel3.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		tfJtel3.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent arg0) {
@@ -265,8 +273,8 @@ public class Join extends JFrame {
 				}
 			}
 		});
-		btnTest.setFont(new Font("굴림", Font.PLAIN, 15));
-		btnTest.setBounds(460, 97, 90, 27);
+		btnTest.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		btnTest.setBounds(454, 97, 103, 27);
 		contentPane.add(btnTest);
 
 		lblJTF = new JLabel();
@@ -296,7 +304,7 @@ public class Join extends JFrame {
 				}
 			}
 		});
-		btnSave.setFont(new Font("굴림", Font.BOLD, 16));
+		btnSave.setFont(new Font("맑은 고딕", Font.BOLD, 16));
 		btnSave.setBounds(224, 678, 116, 35);
 		contentPane.add(btnSave);
 
@@ -318,10 +326,10 @@ public class Join extends JFrame {
 				}
 			}
 		});
-		comboBox.setFont(new Font("굴림", Font.PLAIN, 15));
+		comboBox.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		comboBox.setModel(
 				new DefaultComboBoxModel(new String[] { "선택하기", "naver.com", "hanmail.net", "google.com", "직접입력" }));
-		comboBox.setBounds(447, 277, 110, 24);
+		comboBox.setBounds(454, 277, 103, 24);
 		contentPane.add(comboBox);
 		// 라디오 버튼을 그룹으로 묶어서 String값 대입
 		JRadioButton radioBtnMale = new JRadioButton("남");
@@ -331,7 +339,7 @@ public class Join extends JFrame {
 				Sex = "남";
 			}
 		});
-		radioBtnMale.setFont(new Font("굴림", Font.PLAIN, 15));
+		radioBtnMale.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		btnGruop.add(radioBtnMale);
 		radioBtnMale.setBounds(170, 456, 60, 27);
 		contentPane.add(radioBtnMale);
@@ -343,7 +351,7 @@ public class Join extends JFrame {
 				Sex = "여";
 			}
 		});
-		radioBtnFemale.setFont(new Font("굴림", Font.PLAIN, 15));
+		radioBtnFemale.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		btnGruop.add(radioBtnFemale);
 		radioBtnFemale.setBounds(287, 456, 60, 27);
 		contentPane.add(radioBtnFemale);
@@ -362,7 +370,7 @@ public class Join extends JFrame {
 
 		cbyear = new JComboBox();
 		cbyear.setBackground(SystemColor.control);
-		cbyear.setFont(new Font("굴림", Font.PLAIN, 15));
+		cbyear.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		cbyear.setBounds(170, 397, 99, 24);
 		contentPane.add(cbyear);
 		for (int i = 2017; i > 1920; i--) {
@@ -398,26 +406,29 @@ public class Join extends JFrame {
 				}
 			}
 		});
-		cbmonth.setFont(new Font("굴림", Font.PLAIN, 15));
+		cbmonth.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		cbmonth.setBounds(287, 397, 70, 24);
 		contentPane.add(cbmonth);
 		
 		cbday = new JComboBox();
+		cbday.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		cbday.setBackground(SystemColor.control);
 		cbday.setBounds(371, 397, 69, 24);
 		contentPane.add(cbday);
 		
 		JLabel lblNewLabel_2 = new JLabel("상세주소*");
-		lblNewLabel_2.setFont(new Font("굴림", Font.PLAIN, 15));
+		lblNewLabel_2.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		lblNewLabel_2.setBounds(40, 616, 90, 18);
 		contentPane.add(lblNewLabel_2);
 		
 		tfJaddress1 = new JTextField();
+		tfJaddress1.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		tfJaddress1.setBounds(170, 577, 270, 24);
 		contentPane.add(tfJaddress1);
 		tfJaddress1.setColumns(10);
 		
 		tfJaddress2 = new JTextField();
+		tfJaddress2.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		tfJaddress2.setBounds(170, 613, 270, 24);
 		contentPane.add(tfJaddress2);
 		tfJaddress2.setColumns(10);
@@ -429,7 +440,7 @@ public class Join extends JFrame {
 			}
 		});
 		cbtel1.setModel(new DefaultComboBoxModel(new String[] {"010", "011", "016", "017", "018", "019"}));
-		cbtel1.setFont(new Font("굴림", Font.PLAIN, 15));
+		cbtel1.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		cbtel1.setBounds(170, 517, 70, 24);
 		contentPane.add(cbtel1);
 		for (int i = 1; i <= 12; i++) {
