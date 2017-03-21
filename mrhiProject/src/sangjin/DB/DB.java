@@ -3,6 +3,7 @@ package sangjin.DB;
 import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.Properties;
 
 public class DB {
@@ -16,7 +17,11 @@ public class DB {
       String url = prop.getProperty("url");
       String id = prop.getProperty("id");
       String password = prop.getProperty("password");
-      conn = DriverManager.getConnection(url, id, password);
+      try {
+        conn = DriverManager.getConnection(url, id, password);
+      } catch (SQLException e) {
+        conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521/orcl", id, password);
+      }
     } catch (Exception e) {
       e.printStackTrace();
     }
