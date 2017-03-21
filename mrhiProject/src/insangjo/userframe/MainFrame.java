@@ -2,8 +2,6 @@ package insangjo.userframe;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,6 +27,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -37,15 +36,12 @@ import insangjo.DAO.MainFrameDAO;
 
 public class MainFrame extends JFrame {
 
-  private JPanel contentPane;
   private JLabel lblUserStat;
   private Color colMenu;
   private ImageIcon panelBg;
   private MainFrameDAO orderpageDao;
   private JList list_1;
-  private JScrollPane scrollPane;
   private JList list_2;
-  private JScrollPane scrollPane_2;
   private JTable table;
   private Vector data, col;
   private JLabel lblTotalPirce;
@@ -62,12 +58,16 @@ public class MainFrame extends JFrame {
   private JLabel lblCheckRam;
   private JLabel lblCheckHDD;
   private JLabel lblCheckSSD;
+  private JScrollPane scrollPane_2;
+  private JScrollPane scrollPane;
+  private JPanel contentPane;
   private JPanel selectPanel;
   private JPanel detailPanel;
   private JPanel boxpanel;
   private JPanel optionPanel;
   private JPanel option2Panel;
   private JPanel panel;
+  private JScrollPane scrollPane_1;
 
   public MainFrame(String username, String id, String address) {
     usname = username;
@@ -84,7 +84,7 @@ public class MainFrame extends JFrame {
     setIconImage(Toolkit.getDefaultToolkit().getImage(MainFrame.class.getResource("/insangjo/img/programIcon.ico")));
     setTitle("comNawa 주문프로그램");
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    setBounds(100, 100, 1000, 696);
+    setBounds(100, 100, 1000, 720);
     setResizable(false);
 
     JMenuBar menuBar = new JMenuBar();
@@ -102,7 +102,7 @@ public class MainFrame extends JFrame {
     JMenuItem mntmNewMenuItem_1 = new JMenuItem("단색");
     mntmNewMenuItem_1.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        contentPane.setBackground(new Color(244, 188, 192));
+        contentPane.setBackground(new Color(255, 255, 255));
 
       }
     });
@@ -121,33 +121,16 @@ public class MainFrame extends JFrame {
       }
     });
     mnNewMenu_2.add(mntmNewMenuItem);
-    contentPane = new JPanel() {
-      @Override
-      protected void paintComponent(Graphics g) {
-        ImageIcon icon = new ImageIcon(MainFrame.class.getResource("/insangjo/img/mainBg.jpg"));
-        g.drawImage(icon.getImage(), 0, 0, null);
-        setOpaque(false);
-
-        super.paintComponent(g);
-      }
-    };
-    //contentPane.setBackground(new Color(244, 188, 192));
+    contentPane = new JPanel();
+    contentPane.setBackground(new Color(255, 255, 255));
     contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
     setContentPane(contentPane);
     contentPane.setLayout(null);
 
     colMenu = new Color(240, 210, 210);
 
-    selectPanel = new JPanel() {
-      @Override
-      protected void paintComponent(Graphics g) {
-        g.drawImage(panelBg.getImage(), 0, 0, null);
-        setOpaque(false);
-
-        super.paintComponent(g);
-      }
-    };
-    //selectPanel.setBackground(colMenu);
+    selectPanel = new JPanel();
+    selectPanel.setBackground(Color.white);
     selectPanel.setBounds(6, 30, 168, 266);
     contentPane.add(selectPanel);
     selectPanel.setLayout(null);
@@ -156,6 +139,12 @@ public class MainFrame extends JFrame {
     cboMenu.addItemListener(new ItemListener() {
       public void itemStateChanged(ItemEvent e) {
         if (e.getStateChange() == ItemEvent.SELECTED) {
+          if (cboMenu.getSelectedIndex() == 0) {
+            list_1 = new JList();
+            list_1.setBackground(new Color(20, 105, 230));
+            scrollPane.setViewportView(list_1);
+            return;
+          }
           String a = e.getItem() + "";
           boolean b = lblCheckRam.getText().equals("");
           if (a.equals("추가 SSD")) {
@@ -167,6 +156,8 @@ public class MainFrame extends JFrame {
           }
           ArrayList list = orderpageDao.prodList(e.getItem() + "");
           list_1 = new JList(list.toArray());
+          list_1.setBackground(new Color(20, 105, 230));
+          list_1.setForeground(Color.white);
           list_1.addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent e) {
               try {
@@ -199,18 +190,12 @@ public class MainFrame extends JFrame {
     selectPanel.add(scrollPane);
 
     list_1 = new JList();
+    list_1.setBackground(new Color(20, 105, 255));
+    list_1.setForeground(Color.white);
     scrollPane.setViewportView(list_1);
 
-    detailPanel = new JPanel() {
-      @Override
-      protected void paintComponent(Graphics g) {
-        g.drawImage(panelBg.getImage(), 0, 0, null);
-        setOpaque(false);
-
-        super.paintComponent(g);
-      }
-    };
-    //detailPanel.setBackground(colMenu);
+    detailPanel = new JPanel();
+    detailPanel.setBackground(Color.white);
     detailPanel.setBounds(418, 300, 576, 346);
     contentPane.add(detailPanel);
 
@@ -220,16 +205,8 @@ public class MainFrame extends JFrame {
     lblNewLabel.setText("<html> <img src= \"/Users/insangjo/git/MyProject/ZZO_teamProject/bin/insangjo/img/mainBg.jpg\"></html>");
     detailPanel.add(lblNewLabel);
 
-    boxpanel = new JPanel() {
-      @Override
-      protected void paintComponent(Graphics g) {
-        g.drawImage(panelBg.getImage(), 0, 0, null);
-        setOpaque(false);
-
-        super.paintComponent(g);
-      }
-    };
-    //boxpanel.setBackground(colMenu);
+    boxpanel = new JPanel();
+    boxpanel.setBackground(Color.white);
     boxpanel.setBounds(6, 300, 406, 346);
     contentPane.add(boxpanel);
     boxpanel.setLayout(null);
@@ -246,7 +223,7 @@ public class MainFrame extends JFrame {
     lblNewLabel_1.setBounds(6, 35, 394, 16);
     boxpanel.add(lblNewLabel_1);
 
-    JScrollPane scrollPane_1 = new JScrollPane();
+    scrollPane_1 = new JScrollPane();
     scrollPane_1.setBounds(6, 63, 394, 233);
     boxpanel.add(scrollPane_1);
 
@@ -326,16 +303,8 @@ public class MainFrame extends JFrame {
     button_1.setBounds(233, 308, 80, 29);
     boxpanel.add(button_1);
 
-    optionPanel = new JPanel() {
-      @Override
-      protected void paintComponent(Graphics g) {
-        g.drawImage(panelBg.getImage(), 0, 0, null);
-        setOpaque(false);
-
-        super.paintComponent(g);
-      }
-    };
-    //optionPanel.setBackground(colMenu);
+    optionPanel = new JPanel();
+    optionPanel.setBackground(Color.white);
     optionPanel.setBounds(179, 30, 815, 266);
     contentPane.add(optionPanel);
     optionPanel.setLayout(null);
@@ -345,16 +314,8 @@ public class MainFrame extends JFrame {
     lblNewLabel_2.setBounds(6, 6, 803, 16);
     optionPanel.add(lblNewLabel_2);
 
-    option2Panel = new JPanel() {
-      @Override
-      protected void paintComponent(Graphics g) {
-        g.drawImage(panelBg.getImage(), 0, 0, null);
-        setOpaque(false);
-
-        super.paintComponent(g);
-      }
-    };
-
+    option2Panel = new JPanel();
+    option2Panel.setBackground(Color.white);
     option2Panel.setBounds(6, 34, 803, 226);
     optionPanel.add(option2Panel);
     option2Panel.setLayout(null);
@@ -401,73 +362,89 @@ public class MainFrame extends JFrame {
     lblEa.setHorizontalAlignment(SwingConstants.RIGHT);
     lblEa.setBounds(644, 165, 36, 16);
 
-    panel = new JPanel(new GridLayout(2, 0)) {
-      @Override
-      protected void paintComponent(Graphics g) {
-        ImageIcon icon = new ImageIcon(MainFrame.class.getResource("/insangjo/img/panelBg.jpeg"));
-        g.drawImage(icon.getImage(), 0, 0, null);
-        setOpaque(false);
-
-        super.paintComponent(g);
-      }
-    };
-
+    panel = new JPanel();
+    panel.setBackground(Color.white);
     panel.setBounds(6, 154, 532, 66);
     option2Panel.add(panel);
 
     JLabel lblcpu = new JLabel("  CPU :");
+    lblcpu.setFont(new Font("Dialog", Font.BOLD, 13));
     lblcpu.setHorizontalAlignment(SwingConstants.RIGHT);
     panel.add(lblcpu);
 
     lblCheckCPU = new JLabel("");
+    lblCheckCPU.setFont(new Font("Dialog", Font.BOLD, 13));
     lblCheckCPU.setForeground(Color.RED);
     lblCheckCPU.setHorizontalAlignment(SwingConstants.LEFT);
     panel.add(lblCheckCPU);
 
     JLabel lblNewLabel_6 = new JLabel("메인보드 : ");
+    lblNewLabel_6.setFont(new Font("Dialog", Font.BOLD, 13));
     lblNewLabel_6.setHorizontalAlignment(SwingConstants.RIGHT);
     panel.add(lblNewLabel_6);
 
     lblCheckMain = new JLabel("");
+    lblCheckMain.setFont(new Font("Dialog", Font.BOLD, 13));
     lblCheckMain.setForeground(Color.RED);
     lblCheckMain.setHorizontalAlignment(SwingConstants.LEFT);
     panel.add(lblCheckMain);
 
     JLabel lblNewLabel_8 = new JLabel("그래픽카드 : ");
+    lblNewLabel_8.setFont(new Font("Dialog", Font.BOLD, 13));
     lblNewLabel_8.setHorizontalAlignment(SwingConstants.RIGHT);
     panel.add(lblNewLabel_8);
 
     lblCheckGraphic = new JLabel("");
+    lblCheckGraphic.setFont(new Font("Dialog", Font.BOLD, 13));
     lblCheckGraphic.setForeground(Color.RED);
     lblCheckGraphic.setHorizontalAlignment(SwingConstants.LEFT);
     panel.add(lblCheckGraphic);
 
     JLabel lblNewLabel_10 = new JLabel("  메모리카드 : ");
+    lblNewLabel_10.setFont(new Font("Dialog", Font.BOLD, 13));
     lblNewLabel_10.setHorizontalAlignment(SwingConstants.RIGHT);
     panel.add(lblNewLabel_10);
 
     lblCheckRam = new JLabel("");
+    lblCheckRam.setFont(new Font("Dialog", Font.BOLD, 13));
     lblCheckRam.setForeground(Color.RED);
     lblCheckRam.setHorizontalAlignment(SwingConstants.LEFT);
     panel.add(lblCheckRam);
 
     JLabel lblNewLabel_9 = new JLabel("HDD : ");
+    lblNewLabel_9.setFont(new Font("Dialog", Font.BOLD, 13));
     lblNewLabel_9.setHorizontalAlignment(SwingConstants.RIGHT);
     panel.add(lblNewLabel_9);
 
     lblCheckHDD = new JLabel("");
+    lblCheckHDD.setFont(new Font("Dialog", Font.BOLD, 13));
     lblCheckHDD.setForeground(Color.RED);
     lblCheckHDD.setHorizontalAlignment(SwingConstants.LEFT);
     panel.add(lblCheckHDD);
 
     JLabel lblNewLabel_12 = new JLabel("SSD : ");
+    lblNewLabel_12.setFont(new Font("Dialog", Font.BOLD, 13));
     lblNewLabel_12.setHorizontalAlignment(SwingConstants.RIGHT);
     panel.add(lblNewLabel_12);
 
     lblCheckSSD = new JLabel("");
+    lblCheckSSD.setFont(new Font("Dialog", Font.BOLD, 13));
     lblCheckSSD.setForeground(Color.RED);
     lblCheckSSD.setHorizontalAlignment(SwingConstants.LEFT);
     panel.add(lblCheckSSD);
+
+    LineBorder lb = new LineBorder(Color.black);
+    lb.createBlackLineBorder();
+    scrollPane_2.setBorder(lb);
+    scrollPane.setBorder(lb);
+    contentPane.setBorder(lb);
+    selectPanel.setBorder(lb);
+    detailPanel.setBorder(lb);
+    boxpanel.setBorder(lb);
+    optionPanel.setBorder(lb);
+    option2Panel.setBorder(lb);
+    panel.setBorder(lb);
+    scrollPane_1.setBorder(lb);
 
   }
 

@@ -46,6 +46,7 @@ public class OrderFrame extends JFrame {
     setBounds(120, 120, 450, 440);
     setResizable(false);
     contentPane = new JPanel();
+    contentPane.setBackground(new Color(255, 255, 255));
     contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
     setContentPane(contentPane);
     contentPane.setLayout(null);
