@@ -98,12 +98,6 @@ public class OrderFrame extends JFrame {
     contentPane.add(rbtnDefaultaddress);
 
     JRadioButton rbtnNewaddress = new JRadioButton("신규 배송지");
-    rbtnNewaddress.addFocusListener(new FocusAdapter() {
-      @Override
-      public void focusLost(FocusEvent e) {
-        address = tfAddress.getText();
-      }
-    });
     rbtnNewaddress.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         if (rbtnNewaddress.isSelected()) {
@@ -117,6 +111,13 @@ public class OrderFrame extends JFrame {
     contentPane.add(rbtnNewaddress);
 
     tfAddress = new JTextField();
+    tfAddress.addFocusListener(new FocusAdapter() {
+      @Override
+      public void focusLost(FocusEvent e) {
+        System.out.println("dd");
+        address = tfAddress.getText();
+      }
+    });
     tfAddress.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
     tfAddress.setHorizontalAlignment(SwingConstants.CENTER);
     tfAddress.setBounds(6, 234, 438, 26);
