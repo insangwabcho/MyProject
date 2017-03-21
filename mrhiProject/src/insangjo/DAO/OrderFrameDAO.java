@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class OrderFrameDAO {
 
@@ -87,7 +88,12 @@ public class OrderFrameDAO {
       }
     }
 
-    Date arr8 = Date.valueOf("2012-12-12");
+    Calendar cal = Calendar.getInstance();
+    int year = cal.get(cal.YEAR);
+    int month = cal.get(cal.MONTH) + 1;
+    int date = cal.get(cal.DATE);
+
+    Date arr8 = Date.valueOf(year + "-" + month + "-" + date);
     String arr10 = address;
 
     try {
