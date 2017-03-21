@@ -214,10 +214,10 @@ public class MainFrame extends JFrame {
     contentPane.add(boxpanel);
     boxpanel.setLayout(null);
 
-    lblUserStat = new JLabel(usname + " 님! 어서오세요!");
+    lblUserStat = new JLabel("<dynamic> 님 로그인중");
     lblUserStat.setFont(new Font("Lucida Grande", Font.BOLD, 20));
     lblUserStat.setHorizontalAlignment(SwingConstants.CENTER);
-    lblUserStat.setBounds(37, 6, 417, 30);
+    lblUserStat.setBounds(14, 6, 243, 30);
     boxpanel.add(lblUserStat);
 
     JLabel lblNewLabel_1 = new JLabel("현재 장바구니 목록");
@@ -450,6 +450,14 @@ public class MainFrame extends JFrame {
     option2Panel.setBorder(lb);
     panel.setBorder(lb);
     scrollPane_1.setBorder(lb);
+    
+    JButton btnNewButton = new JButton("정보수정");
+    btnNewButton.setBounds(256, 7, 105, 27);
+    boxpanel.add(btnNewButton);
+    
+    JButton btnNewButton_1 = new JButton("로그아웃");
+    btnNewButton_1.setBounds(367, 7, 105, 27);
+    boxpanel.add(btnNewButton_1);
 
   }
 
