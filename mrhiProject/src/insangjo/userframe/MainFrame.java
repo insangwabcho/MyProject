@@ -34,6 +34,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 import insangjo.DAO.MainFrameDAO;
+import sangjin.Client.Login;
 
 public class MainFrame extends JFrame {
 
@@ -183,7 +184,7 @@ public class MainFrame extends JFrame {
         }
       }
     });
-    cboMenu.setModel(new DefaultComboBoxModel(new String[] {"[부품 선택]", "CPU", "메인보드", "그래픽카드", "메모리카드", "HDD", "SSD", "추가 RAM"}));
+    cboMenu.setModel(new DefaultComboBoxModel(new String[] { "[부품 선택]", "CPU", "메인보드", "그래픽카드", "메모리카드", "HDD", "SSD", "추가 RAM" }));
     cboMenu.setBounds(6, 6, 156, 32);
     selectPanel.add(cboMenu);
 
@@ -367,7 +368,7 @@ public class MainFrame extends JFrame {
     lblEa.setHorizontalAlignment(SwingConstants.RIGHT);
     lblEa.setBounds(644, 165, 36, 16);
 
-    panel = new JPanel(new GridLayout(2,6));
+    panel = new JPanel(new GridLayout(2, 6));
     panel.setBackground(Color.white);
     panel.setBounds(7, 160, 627, 55);
     option2Panel.add(panel);
@@ -450,12 +451,18 @@ public class MainFrame extends JFrame {
     option2Panel.setBorder(lb);
     panel.setBorder(lb);
     scrollPane_1.setBorder(lb);
-    
+
     JButton btnNewButton = new JButton("정보수정");
     btnNewButton.setBounds(256, 7, 105, 27);
     boxpanel.add(btnNewButton);
-    
+
     JButton btnNewButton_1 = new JButton("로그아웃");
+    btnNewButton_1.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        sangjin.Client.Login f = new Login();
+        f.setVisible(true);
+      }
+    });
     btnNewButton_1.setBounds(367, 7, 105, 27);
     boxpanel.add(btnNewButton_1);
 
