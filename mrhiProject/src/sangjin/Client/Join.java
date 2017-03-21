@@ -314,6 +314,7 @@ public class Join extends JFrame {
 					tfJemail2.setText("google.com");
 				} else if (address.equals("직접입력")) {
 					tfJemail2.setText("");
+					tfJemail2.requestFocus();
 				}
 			}
 		});
