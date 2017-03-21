@@ -36,8 +36,8 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 import insangjo.DAO.MainFrameDAO;
-import sangjin.Client.UpdateJoin;
 import sangjin.Client.Login;
+import sangjin.Client.UpdateJoin;
 
 public class MainFrame extends JFrame {
 
@@ -218,7 +218,7 @@ public class MainFrame extends JFrame {
     contentPane.add(boxpanel);
     boxpanel.setLayout(null);
 
-    lblUserStat = new JLabel(username+"님 로그인중");
+    lblUserStat = new JLabel(username + "님 로그인중");
     lblUserStat.setFont(new Font("Lucida Grande", Font.BOLD, 20));
     lblUserStat.setHorizontalAlignment(SwingConstants.CENTER);
     lblUserStat.setBounds(14, 6, 243, 30);
@@ -457,9 +457,10 @@ public class MainFrame extends JFrame {
 
     JButton btnNewButton = new JButton("정보수정");
     btnNewButton.addActionListener(new ActionListener() {
-    	public void actionPerformed(ActionEvent arg0) {
-    		new UpdateJoin(id).setVisible(true);
-    	}
+      public void actionPerformed(ActionEvent arg0) {
+        Conf f = new Conf(new MainFrameDAO().getPwd(id), id);
+        f.setVisible(true);
+      }
     });
     btnNewButton.setBounds(256, 7, 105, 27);
     boxpanel.add(btnNewButton);
@@ -539,12 +540,13 @@ public class MainFrame extends JFrame {
     JLabel label;
     JButton btn;
 
-    public Conf(String pwd) {
+    public Conf(String pwd, String id) {
       setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
       setResizable(false);
-      setSize(300, 120);
+      setSize(300, 105);
 
-      label = new JLabel("비밀번호를 입력해주세요");
+      label = new JLabel("비밀번호를 입력해주세요", JLabel.CENTER);
+      label.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
 
       panel = new JPanel(new BorderLayout());
       JPasswordField fieldPwd = new JPasswordField();
@@ -555,11 +557,12 @@ public class MainFrame extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
           if (String.valueOf(fieldPwd.getPassword()).equals(pwd)) {
-            JOptionPane.showMessageDialog(Conf.this, "맞는비번");
+            new UpdateJoin(id).setVisible(true);
             dispose();
           }
           else {
-            JOptionPane.showMessageDialog(Conf.this, "잘못된 비밀번호입니다");
+            JOptionPane.showMessageDialog(Conf.this, "잘못된 비밀번호입니다 다시 시도해주세요");
+            dispose();
           }
         }
       });
