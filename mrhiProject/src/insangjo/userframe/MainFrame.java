@@ -2,6 +2,7 @@ package insangjo.userframe;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -84,7 +85,7 @@ public class MainFrame extends JFrame {
     setIconImage(Toolkit.getDefaultToolkit().getImage(MainFrame.class.getResource("/insangjo/img/programIcon.ico")));
     setTitle("comNawa 주문프로그램");
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    setBounds(100, 100, 1000, 720);
+    setBounds(100, 100, 1091, 720);
     setResizable(false);
 
     JMenuBar menuBar = new JMenuBar();
@@ -136,6 +137,7 @@ public class MainFrame extends JFrame {
     selectPanel.setLayout(null);
 
     cboMenu = new JComboBox();
+    cboMenu.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
     cboMenu.addItemListener(new ItemListener() {
       public void itemStateChanged(ItemEvent e) {
         if (e.getStateChange() == ItemEvent.SELECTED) {
@@ -181,7 +183,7 @@ public class MainFrame extends JFrame {
         }
       }
     });
-    cboMenu.setModel(new DefaultComboBoxModel(new String[] { "부품을 선택해주세요", "CPU", "메인보드", "그래픽카드", "메모리카드", "HDD", "SSD", "추가 RAM" }));
+    cboMenu.setModel(new DefaultComboBoxModel(new String[] {"[부품 선택]", "CPU", "메인보드", "그래픽카드", "메모리카드", "HDD", "SSD", "추가 RAM"}));
     cboMenu.setBounds(6, 6, 156, 32);
     selectPanel.add(cboMenu);
 
@@ -190,13 +192,14 @@ public class MainFrame extends JFrame {
     selectPanel.add(scrollPane);
 
     list_1 = new JList();
+    list_1.setFont(new Font("맑은 고딕", Font.BOLD, 16));
     list_1.setBackground(new Color(20, 105, 255));
     list_1.setForeground(Color.white);
     scrollPane.setViewportView(list_1);
 
     detailPanel = new JPanel();
     detailPanel.setBackground(Color.white);
-    detailPanel.setBounds(418, 300, 576, 346);
+    detailPanel.setBounds(506, 300, 576, 346);
     contentPane.add(detailPanel);
 
     JLabel lblNewLabel = new JLabel("제품 상세페이지");
@@ -207,24 +210,24 @@ public class MainFrame extends JFrame {
 
     boxpanel = new JPanel();
     boxpanel.setBackground(Color.white);
-    boxpanel.setBounds(6, 300, 406, 346);
+    boxpanel.setBounds(6, 300, 486, 346);
     contentPane.add(boxpanel);
     boxpanel.setLayout(null);
 
     lblUserStat = new JLabel(usname + " 님! 어서오세요!");
     lblUserStat.setFont(new Font("Lucida Grande", Font.BOLD, 20));
     lblUserStat.setHorizontalAlignment(SwingConstants.CENTER);
-    lblUserStat.setBounds(6, 6, 394, 30);
+    lblUserStat.setBounds(37, 6, 417, 30);
     boxpanel.add(lblUserStat);
 
     JLabel lblNewLabel_1 = new JLabel("현재 장바구니 목록");
-    lblNewLabel_1.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+    lblNewLabel_1.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
     lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-    lblNewLabel_1.setBounds(6, 35, 394, 16);
+    lblNewLabel_1.setBounds(6, 35, 466, 16);
     boxpanel.add(lblNewLabel_1);
 
     scrollPane_1 = new JScrollPane();
-    scrollPane_1.setBounds(6, 63, 394, 233);
+    scrollPane_1.setBounds(6, 63, 466, 233);
     boxpanel.add(scrollPane_1);
 
     model = new DefaultTableModel(data, col);
@@ -259,7 +262,7 @@ public class MainFrame extends JFrame {
 
       }
     });
-    btnOk.setBounds(325, 308, 75, 29);
+    btnOk.setBounds(397, 308, 75, 29);
     boxpanel.add(btnOk);
 
     JButton button = new JButton("초기화");
@@ -277,15 +280,15 @@ public class MainFrame extends JFrame {
         lblCheckSSD.setText("");
       }
     });
-    button.setBounds(141, 308, 80, 29);
+    button.setBounds(200, 308, 80, 29);
     boxpanel.add(button);
 
     JLabel lblNewLabel_3 = new JLabel("총 금액");
-    lblNewLabel_3.setBounds(6, 308, 37, 16);
+    lblNewLabel_3.setBounds(6, 314, 75, 16);
     boxpanel.add(lblNewLabel_3);
 
     lblTotalPirce = new JLabel("");
-    lblTotalPirce.setBounds(51, 308, 96, 16);
+    lblTotalPirce.setBounds(86, 314, 107, 16);
     boxpanel.add(lblTotalPirce);
 
     JButton button_1 = new JButton("상품삭제");
@@ -300,36 +303,38 @@ public class MainFrame extends JFrame {
         }
       }
     });
-    button_1.setBounds(233, 308, 80, 29);
+    button_1.setBounds(283, 308, 110, 29);
     boxpanel.add(button_1);
 
     optionPanel = new JPanel();
     optionPanel.setBackground(Color.white);
-    optionPanel.setBounds(179, 30, 815, 266);
+    optionPanel.setBounds(179, 30, 902, 266);
     contentPane.add(optionPanel);
     optionPanel.setLayout(null);
 
     JLabel lblNewLabel_2 = new JLabel("상세 옵션 선택");
+    lblNewLabel_2.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
     lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
-    lblNewLabel_2.setBounds(6, 6, 803, 16);
+    lblNewLabel_2.setBounds(0, 6, 905, 26);
     optionPanel.add(lblNewLabel_2);
 
     option2Panel = new JPanel();
     option2Panel.setBackground(Color.white);
-    option2Panel.setBounds(6, 34, 803, 226);
+    option2Panel.setBounds(0, 34, 901, 226);
     optionPanel.add(option2Panel);
     option2Panel.setLayout(null);
 
     lblOptionTitle = new JLabel("");
     lblOptionTitle.setHorizontalAlignment(SwingConstants.CENTER);
-    lblOptionTitle.setBounds(6, 6, 803, 16);
+    lblOptionTitle.setBounds(6, 6, 887, 16);
     option2Panel.add(lblOptionTitle);
 
     scrollPane_2 = new JScrollPane();
-    scrollPane_2.setBounds(6, 34, 791, 119);
+    scrollPane_2.setBounds(6, 30, 887, 123);
     option2Panel.add(scrollPane_2);
 
     list_2 = new JList();
+    list_2.setFont(new Font("맑은 고딕", Font.BOLD, 16));
     scrollPane_2.setViewportView(list_2);
 
     JButton btnSave = new JButton("장바구니에 담기");
@@ -355,16 +360,16 @@ public class MainFrame extends JFrame {
         scrollPane_2.setViewportView(list_2);
       }
     });
-    btnSave.setBounds(576, 165, 188, 44);
+    btnSave.setBounds(681, 165, 188, 44);
     option2Panel.add(btnSave);
 
     lblEa = new JLabel("1");
     lblEa.setHorizontalAlignment(SwingConstants.RIGHT);
     lblEa.setBounds(644, 165, 36, 16);
 
-    panel = new JPanel();
+    panel = new JPanel(new GridLayout(2,6));
     panel.setBackground(Color.white);
-    panel.setBounds(6, 154, 532, 66);
+    panel.setBounds(7, 160, 627, 55);
     option2Panel.add(panel);
 
     JLabel lblcpu = new JLabel("  CPU :");
