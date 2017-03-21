@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.util.ArrayList;
 
 import javax.swing.ButtonGroup;
@@ -96,12 +98,17 @@ public class OrderFrame extends JFrame {
     contentPane.add(rbtnDefaultaddress);
 
     JRadioButton rbtnNewaddress = new JRadioButton("신규 배송지");
+    rbtnNewaddress.addFocusListener(new FocusAdapter() {
+      @Override
+      public void focusLost(FocusEvent e) {
+        address = tfAddress.getText();
+      }
+    });
     rbtnNewaddress.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         if (rbtnNewaddress.isSelected()) {
           lblAddress.setVisible(false);
           tfAddress.setVisible(true);
-          address = tfAddress.getText();
         }
       }
     });
