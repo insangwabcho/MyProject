@@ -461,6 +461,7 @@ public class MainFrame extends JFrame {
       public void actionPerformed(ActionEvent e) {
         sangjin.Client.Login f = new Login();
         f.setVisible(true);
+        dispose();
       }
     });
     btnNewButton_1.setBounds(367, 7, 105, 27);
