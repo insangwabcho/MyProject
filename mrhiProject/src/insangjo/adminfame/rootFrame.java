@@ -1,6 +1,6 @@
 package insangjo.adminfame;
 
-import java.awt.BorderLayout;//
+import java.awt.BorderLayout;//d
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridLayout;
