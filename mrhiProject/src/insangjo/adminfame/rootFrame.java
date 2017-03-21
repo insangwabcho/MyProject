@@ -56,7 +56,7 @@ public class rootFrame extends JFrame {
     JPanel panel = new JPanel(new GridLayout(3, 0));
     contentPane.add(panel, BorderLayout.EAST);
 
-    JButton btnNewButton = new JButton("재고관리 / 품목추가");
+    JButton btnNewButton = new JButton("재고관리 / 추가삭제");
     btnNewButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         new sungwon.goods.Management().setVisible(true);
