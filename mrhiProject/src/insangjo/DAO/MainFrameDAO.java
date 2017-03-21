@@ -7,8 +7,36 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Vector;
 
-
 public class MainFrameDAO {
+
+  public int deleteMember(String id) {
+    int result = 0;
+    Connection conn = null;
+    PreparedStatement pstmt = null;
+
+    try {
+      String sql = "delete from member where id='" + id + "'";
+      conn = sangjin.DB.DB.comCon();
+      pstmt = conn.prepareStatement(sql);
+      result = pstmt.executeUpdate();
+    } catch (Exception e) {
+      e.printStackTrace();
+    } finally {
+      if (pstmt != null)
+        try {
+          pstmt.close();
+        } catch (SQLException e) {
+          e.printStackTrace();
+        }
+      if (conn != null)
+        try {
+          conn.close();
+        } catch (SQLException e) {
+          e.printStackTrace();
+        }
+    }
+    return result;
+  }
 
   public ArrayList prodList(String company) {
     ArrayList items = new ArrayList<>();
