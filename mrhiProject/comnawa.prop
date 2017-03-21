@@ -5,3 +5,5 @@ password=java1234
 
 jdcb 로드시 sid 로 연결할시 => 포트번호:sid
 그렇지 않고 servicename으로 연결할시 => 포트번호/servicename
+
+sdfkjafal
