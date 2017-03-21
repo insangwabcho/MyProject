@@ -1,12 +1,16 @@
+
 package sangjin.Client;
 
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
@@ -28,24 +32,19 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 
-import sangjin.DB.DB;
-
-import java.awt.event.ItemListener;
-import java.awt.event.ItemEvent;
 
 public class Join extends JFrame {
 	private JPanel contentPane;
 	private JTextField tfJid; // 사용자 입력 아이디
 	private JTextField tfJname; // 사용자 입력 이름
-	private JTextField tfJtel1; // 사용자 입력 폰번호1
 	private JTextField tfJtel2; // 사용자 입력 폰번호2
 	private JTextField tfJtel3; // 사용자 입력 폰번호3 폰번호=1+2+3
 	private JTextField tfJemail1; // 사용자 입력 이메일1
 	private JTextField tfJemail2; // 사용자 입력 이메일2 이메일=1+@+2
 	private final ButtonGroup btnGruop = new ButtonGroup(); // 성별 버튼그룹
 	private JLabel lblJTF; // 비밀번호 일치판별 라벨
-	private JTextArea taJaddress; // 사용자가 입력하는 주소
 	private JPasswordField tfJpassword1; // 사용자가 입력하는 비밀번호
 	private JPasswordField tfJpassword2; // 사용자가 입력하는 비밀번호 확인
 	private JoinDAO dao;
@@ -53,6 +52,9 @@ public class Join extends JFrame {
 	private JComboBox cbday;
 	private JComboBox cbmonth;
 	private JComboBox cbyear;
+	private JTextField tfJaddress1;
+	private JTextField tfJaddress2;
+	private JComboBox cbtel1;
 
 	/**
 	 * Launch the application.
@@ -76,8 +78,9 @@ public class Join extends JFrame {
 	public Join() {
 		setTitle("회원가입");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 601, 845);
+		setBounds(100, 100, 601, 786);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.WHITE);
 		contentPane.setForeground(new Color(0, 128, 0));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -123,7 +126,7 @@ public class Join extends JFrame {
 		label_7.setBounds(40, 520, 120, 18);
 		contentPane.add(label_7);
 
-		JLabel label_8 = new JLabel("주소지*");
+		JLabel label_8 = new JLabel("주소*");
 		label_8.setFont(new Font("굴림", Font.PLAIN, 15));
 		label_8.setBounds(40, 580, 62, 18);
 		contentPane.add(label_8);
@@ -138,11 +141,6 @@ public class Join extends JFrame {
 		label_10.setHorizontalAlignment(SwingConstants.CENTER);
 		label_10.setBounds(287, 280, 31, 18);
 		contentPane.add(label_10);
-
-		JLabel label_11 = new JLabel("ex)1991-05-05");
-		label_11.setFont(new Font("굴림", Font.PLAIN, 15));
-		label_11.setBounds(188, 427, 130, 18);
-		contentPane.add(label_11);
 
 		tfJid = new JTextField();
 		tfJid.setBounds(170, 99, 270, 24);
@@ -196,20 +194,6 @@ public class Join extends JFrame {
 		contentPane.add(tfJname);
 		tfJname.setColumns(10);
 
-		// 휴대폰번호 입력시 자동포커스 이벤트 처리
-		tfJtel1 = new JTextField();
-		tfJtel1.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyTyped(KeyEvent arg0) {
-				int len = tfJtel1.getText().length(); // 입력한 문자열의 길이를 담음
-				if (len == 2)
-					tfJtel2.requestFocus(); // 3자리 입력했을시 포커스 이동
-			}
-		});
-		tfJtel1.setBounds(170, 517, 70, 24);
-		contentPane.add(tfJtel1);
-		tfJtel1.setColumns(10);
-
 		tfJtel2 = new JTextField();
 		tfJtel2.addKeyListener(new KeyAdapter() {
 			@Override
@@ -229,19 +213,16 @@ public class Join extends JFrame {
 			public void keyTyped(KeyEvent arg0) {
 				int len = tfJtel3.getText().length(); // 입력한 문자열의 길이를 담음
 				if (len == 3)
-					taJaddress.requestFocus(); // 4자리 입력했을시 주소입력란으로 포커스 이동
+					tfJaddress1.requestFocus(); // 4자리 입력했을시 주소입력란으로 포커스 이동
 			}
 		});
 		tfJtel3.setBounds(370, 517, 70, 24);
 		contentPane.add(tfJtel3);
-		tfJtel3.setColumns(10);
-
-		taJaddress = new JTextArea();
-		taJaddress.setBounds(170, 577, 270, 122);
-		contentPane.add(taJaddress);
+		tfJtel3.setColumns(10);;
 
 		// 아이디 중복확인 이벤트
 		JButton btnTest = new JButton("중복확인");
+		btnTest.setBackground(SystemColor.control);
 		btnTest.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// 사용자가 입력한 아이디
@@ -251,7 +232,7 @@ public class Join extends JFrame {
 				PreparedStatement pstmt = null;
 				ResultSet rs = null;
 				try {
-					conn = DB.comCon();
+					conn = sangjin.DB.DB.comCon();
 					String sql = "select * from member where id=?";
 					pstmt = conn.prepareStatement(sql);
 
@@ -303,8 +284,8 @@ public class Join extends JFrame {
 				String name = tfJname.getText();
 				Date birth = Date.valueOf((String.valueOf(cbyear.getSelectedItem()+"-"+cbmonth.getSelectedItem()+"-"+cbday.getSelectedItem()))); 
 				String sex = Sex; // 라디오박스에서 리턴받은 값을 대입
-				String tel = (tfJtel1.getText() + tfJtel2.getText() + tfJtel3.getText());
-				String address = taJaddress.getText();
+				String tel = (String.valueOf(cbtel1.getSelectedItem())+"-"+ tfJtel2.getText()+"-"+ tfJtel3.getText());
+				String address = (tfJaddress1.getText()+" "+tfJaddress2.getText());
 				dao = new JoinDAO();
 				int result = dao.insertMember(new JoinDTO(id, password, email, name, birth, sex, tel, address));
 				if (result == 1) {
@@ -316,11 +297,12 @@ public class Join extends JFrame {
 			}
 		});
 		btnSave.setFont(new Font("굴림", Font.BOLD, 16));
-		btnSave.setBounds(226, 727, 116, 35);
+		btnSave.setBounds(224, 678, 116, 35);
 		contentPane.add(btnSave);
 
 		// 콤보박스로 이메일 주소자동 선택
 		JComboBox comboBox = new JComboBox();
+		comboBox.setBackground(SystemColor.control);
 		comboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String address = comboBox.getSelectedItem().toString();
@@ -342,6 +324,7 @@ public class Join extends JFrame {
 		contentPane.add(comboBox);
 		// 라디오 버튼을 그룹으로 묶어서 String값 대입
 		JRadioButton radioBtnMale = new JRadioButton("남");
+		radioBtnMale.setBackground(Color.WHITE);
 		radioBtnMale.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
 				Sex = "남";
@@ -353,6 +336,7 @@ public class Join extends JFrame {
 		contentPane.add(radioBtnMale);
 
 		JRadioButton radioBtnFemale = new JRadioButton("여");
+		radioBtnFemale.setBackground(Color.WHITE);
 		radioBtnFemale.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				Sex = "여";
@@ -376,14 +360,16 @@ public class Join extends JFrame {
 		contentPane.add(lblNewLabel_1);
 
 		cbyear = new JComboBox();
+		cbyear.setBackground(SystemColor.control);
 		cbyear.setFont(new Font("굴림", Font.PLAIN, 15));
-		cbyear.setBounds(174, 397, 99, 24);
+		cbyear.setBounds(170, 397, 99, 24);
 		contentPane.add(cbyear);
 		for (int i = 2017; i > 1920; i--) {
 			cbyear.addItem(i);
 		}
 
 		cbmonth = new JComboBox();
+		cbmonth.setBackground(SystemColor.control);
 		cbmonth.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				if (e.getStateChange() == ItemEvent.SELECTED) {
@@ -416,8 +402,35 @@ public class Join extends JFrame {
 		contentPane.add(cbmonth);
 		
 		cbday = new JComboBox();
+		cbday.setBackground(SystemColor.control);
 		cbday.setBounds(371, 397, 69, 24);
 		contentPane.add(cbday);
+		
+		JLabel lblNewLabel_2 = new JLabel("상세주소*");
+		lblNewLabel_2.setFont(new Font("굴림", Font.PLAIN, 15));
+		lblNewLabel_2.setBounds(40, 616, 90, 18);
+		contentPane.add(lblNewLabel_2);
+		
+		tfJaddress1 = new JTextField();
+		tfJaddress1.setBounds(170, 577, 270, 24);
+		contentPane.add(tfJaddress1);
+		tfJaddress1.setColumns(10);
+		
+		tfJaddress2 = new JTextField();
+		tfJaddress2.setBounds(170, 613, 270, 24);
+		contentPane.add(tfJaddress2);
+		tfJaddress2.setColumns(10);
+		
+		cbtel1 = new JComboBox();
+		cbtel1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tfJtel2.requestFocus();
+			}
+		});
+		cbtel1.setModel(new DefaultComboBoxModel(new String[] {"010", "011", "016", "017", "018", "019"}));
+		cbtel1.setFont(new Font("굴림", Font.PLAIN, 15));
+		cbtel1.setBounds(170, 517, 70, 24);
+		contentPane.add(cbtel1);
 		for (int i = 1; i <= 12; i++) {
 			cbmonth.addItem(i);
 		}
