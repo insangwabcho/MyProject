@@ -218,7 +218,7 @@ public class UpdateJoin extends JFrame {
         String email = (tfJemail1.getText() + "@" + tfJemail2.getText()); //이메일
         Date birth = Date.valueOf(tfbirth.getText()); //생년월일
         String tel = (String.valueOf(cbtel1.getSelectedItem()) + "-" + tfJtel2.getText() + "-" + tfJtel3.getText());
-        String address = (tfJaddress1.getText() + " " + tfJaddress2.getText()); //주소
+        String address = (tfJaddress1.getText() + ", " + tfJaddress2.getText()); //주소
         String id = tfJid.getText(); //파라미터로 쓰일 아이디
         dao = new JoinDAO();
         int result = dao.updateMember(new JoinDTO(password, email, birth, tel, address, id));
@@ -269,8 +269,8 @@ public class UpdateJoin extends JFrame {
     lblNewLabel_1.setFont(new Font("맑은 고딕", Font.BOLD, 15));
     lblNewLabel_1.setBounds(342, 462, 25, 18);
     contentPane.add(lblNewLabel_1);
-
-    tfJaddress1 = new JTextField(String.valueOf(v.get(5)));
+    String[] Address = String.valueOf(v.get(5)).split(", "); //dao에서 리턴받은 주소값을 주소와 상세주소로 나눔
+    tfJaddress1 = new JTextField(Address[0]);
     tfJaddress1.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
     tfJaddress1.setBounds(170, 517, 270, 24);
     contentPane.add(tfJaddress1);
@@ -288,16 +288,19 @@ public class UpdateJoin extends JFrame {
     contentPane.add(cbtel1);
 
     tfbirth = new JTextField(String.valueOf(v.get(3)));
+    tfbirth.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
     tfbirth.setEditable(false);
     tfbirth.setBounds(170, 399, 270, 24);
     contentPane.add(tfbirth);
     tfbirth.setColumns(10);
 
     JLabel tfad = new JLabel("상세주소*");
+    tfad.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
     tfad.setBounds(40, 550, 84, 18);
     contentPane.add(tfad);
 
-    tfJaddress2 = new JTextField();
+    tfJaddress2 = new JTextField(Address[1]);
+    tfJaddress2.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
     tfJaddress2.setBounds(170, 547, 270, 24);
     contentPane.add(tfJaddress2);
     tfJaddress2.setColumns(10);
