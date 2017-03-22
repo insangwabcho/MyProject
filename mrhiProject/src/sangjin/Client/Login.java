@@ -129,9 +129,9 @@ public class Login extends JFrame {
     tfLpassword = new JPasswordField();
     tfLpassword.addKeyListener(new KeyAdapter() {
     	@Override
-    	public void keyPressed(KeyEvent e) {
-    		if(e.getKeyCode()==10){
-    			btnLogin.doClick();
+    	public void keyPressed(KeyEvent e) { 
+    		if(e.getKeyCode()==10){ //비밀번호 텍스트 필드에서 엔터키를 입력하면
+    			btnLogin.doClick(); //로그인 버튼이 클릭됨
     		}
     	}
     });
