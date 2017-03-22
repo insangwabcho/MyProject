@@ -557,6 +557,14 @@ public class MainFrame extends JFrame {
 
       panel = new JPanel(new BorderLayout());
       JPasswordField fieldPwd = new JPasswordField();
+      fieldPwd.addKeyListener(new KeyAdapter() {
+      	@Override
+      	public void keyPressed(KeyEvent e) { 
+      		if(e.getKeyCode()==10){ //비밀번호 텍스트 필드에서 엔터키를 입력하면
+      			btn.doClick(); //확인버튼클
+      		}
+      	}
+      });
 
       btn = new JButton("확인");
       btn.addActionListener(new ActionListener() {
