@@ -38,6 +38,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 import insangjo.DAO.MainFrameDAO;
+import insangjo.DAO.SearchFrameDAO;
 import sangjin.Client.Login;
 import sangjin.Client.UpdateJoin;
 
@@ -455,37 +456,49 @@ public class MainFrame extends JFrame {
     option2Panel.setBorder(lb);
     panel.setBorder(lb);
     scrollPane_1.setBorder(lb);
-    
-        lblUserStat = new JLabel(username + "님 로그인중");
-        lblUserStat.setBounds(435, 12, 243, 30);
-        contentPane.add(lblUserStat);
-        lblUserStat.setFont(new Font("Lucida Grande", Font.BOLD, 20));
-        lblUserStat.setHorizontalAlignment(SwingConstants.CENTER);
-        
-            JButton btnUpdate = new JButton("정보수정");
-            btnUpdate.setBounds(823, 16, 117, 27);
-            contentPane.add(btnUpdate);
-            
-                JButton btnLogout = new JButton("로그아웃");
-                btnLogout.setBounds(954, 16, 117, 27);
-                contentPane.add(btnLogout);
-                
-                JButton btnSearch = new JButton("주문내역조회");
-                btnSearch.setBounds(692, 16, 117, 27);
-                contentPane.add(btnSearch);
-                btnLogout.addActionListener(new ActionListener() {
-                  public void actionPerformed(ActionEvent e) {
-                    sangjin.Client.Login f = new Login();
-                    f.setVisible(true);
-                    dispose();
-                  }
-                });
-            btnUpdate.addActionListener(new ActionListener() {
-              public void actionPerformed(ActionEvent arg0) {
-                Conf f = new Conf(new MainFrameDAO().getPwd(id), id, MainFrame.this);
-                f.setVisible(true);
-              }
-            });
+
+    lblUserStat = new JLabel(username + "님 로그인중");
+    lblUserStat.setBounds(435, 12, 243, 30);
+    contentPane.add(lblUserStat);
+    lblUserStat.setFont(new Font("Lucida Grande", Font.BOLD, 20));
+    lblUserStat.setHorizontalAlignment(SwingConstants.CENTER);
+
+    JButton btnUpdate = new JButton("정보수정");
+    btnUpdate.setBounds(823, 16, 117, 27);
+    contentPane.add(btnUpdate);
+
+    JButton btnLogout = new JButton("로그아웃");
+    btnLogout.setBounds(954, 16, 117, 27);
+    contentPane.add(btnLogout);
+
+    JButton btnSearch = new JButton("주문내역조회");
+    btnSearch.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        if (new SearchFrameDAO().checkOrder(id) == 0) {
+          JOptionPane.showMessageDialog(MainFrame.this, "주문하신 내역이 없습니다.");
+          return;
+        }
+        else {
+          SearchFrame f = new SearchFrame(id, username);
+          f.setVisible(true);
+        }
+      }
+    });
+    btnSearch.setBounds(692, 16, 117, 27);
+    contentPane.add(btnSearch);
+    btnLogout.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        sangjin.Client.Login f = new Login();
+        f.setVisible(true);
+        dispose();
+      }
+    });
+    btnUpdate.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent arg0) {
+        Conf f = new Conf(new MainFrameDAO().getPwd(id), id, MainFrame.this);
+        f.setVisible(true);
+      }
+    });
 
   }
 
