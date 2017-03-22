@@ -91,7 +91,7 @@ public class MainFrame extends JFrame {
     setIconImage(Toolkit.getDefaultToolkit().getImage(MainFrame.class.getResource("/insangjo/img/programIcon.ico")));
     setTitle("comNawa 주문프로그램");
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    setBounds(100, 100, 1091, 709);
+    setBounds(100, 100, 1091, 768);
     setResizable(false);
 
     JMenuBar menuBar = new JMenuBar();
@@ -138,7 +138,7 @@ public class MainFrame extends JFrame {
 
     selectPanel = new JPanel();
     selectPanel.setBackground(Color.white);
-    selectPanel.setBounds(6, 30, 168, 266);
+    selectPanel.setBounds(6, 71, 168, 266);
     contentPane.add(selectPanel);
     selectPanel.setLayout(null);
 
@@ -205,7 +205,7 @@ public class MainFrame extends JFrame {
 
     detailPanel = new JPanel();
     detailPanel.setBackground(Color.white);
-    detailPanel.setBounds(506, 300, 576, 346);
+    detailPanel.setBounds(506, 349, 576, 346);
     contentPane.add(detailPanel);
 
     JLabel lblNewLabel = new JLabel("제품 상세페이지");
@@ -216,24 +216,18 @@ public class MainFrame extends JFrame {
 
     boxpanel = new JPanel();
     boxpanel.setBackground(Color.white);
-    boxpanel.setBounds(6, 300, 486, 346);
+    boxpanel.setBounds(6, 349, 486, 346);
     contentPane.add(boxpanel);
     boxpanel.setLayout(null);
-
-    lblUserStat = new JLabel(username + "님 로그인중");
-    lblUserStat.setFont(new Font("Lucida Grande", Font.BOLD, 20));
-    lblUserStat.setHorizontalAlignment(SwingConstants.CENTER);
-    lblUserStat.setBounds(14, 6, 243, 30);
-    boxpanel.add(lblUserStat);
 
     JLabel lblNewLabel_1 = new JLabel("현재 장바구니 목록");
     lblNewLabel_1.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
     lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-    lblNewLabel_1.setBounds(6, 35, 466, 16);
+    lblNewLabel_1.setBounds(6, 12, 466, 16);
     boxpanel.add(lblNewLabel_1);
 
     scrollPane_1 = new JScrollPane();
-    scrollPane_1.setBounds(6, 63, 466, 233);
+    scrollPane_1.setBounds(6, 40, 466, 256);
     boxpanel.add(scrollPane_1);
 
     model = new DefaultTableModel(data, col);
@@ -314,7 +308,7 @@ public class MainFrame extends JFrame {
 
     optionPanel = new JPanel();
     optionPanel.setBackground(Color.white);
-    optionPanel.setBounds(179, 30, 902, 266);
+    optionPanel.setBounds(180, 71, 902, 266);
     contentPane.add(optionPanel);
     optionPanel.setLayout(null);
 
@@ -452,27 +446,37 @@ public class MainFrame extends JFrame {
     option2Panel.setBorder(lb);
     panel.setBorder(lb);
     scrollPane_1.setBorder(lb);
-
-    JButton btnUpdate = new JButton("정보수정");
-    btnUpdate.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent arg0) {
-        Conf f = new Conf(new MainFrameDAO().getPwd(id), id, MainFrame.this);
-        f.setVisible(true);
-      }
-    });
-    btnUpdate.setBounds(256, 7, 105, 27);
-    boxpanel.add(btnUpdate);
-
-    JButton btnLogout = new JButton("로그아웃");
-    btnLogout.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent e) {
-        sangjin.Client.Login f = new Login();
-        f.setVisible(true);
-        dispose();
-      }
-    });
-    btnLogout.setBounds(367, 7, 105, 27);
-    boxpanel.add(btnLogout);
+    
+        lblUserStat = new JLabel(username + "님 로그인중");
+        lblUserStat.setBounds(435, 12, 243, 30);
+        contentPane.add(lblUserStat);
+        lblUserStat.setFont(new Font("Lucida Grande", Font.BOLD, 20));
+        lblUserStat.setHorizontalAlignment(SwingConstants.CENTER);
+        
+            JButton btnUpdate = new JButton("정보수정");
+            btnUpdate.setBounds(823, 16, 117, 27);
+            contentPane.add(btnUpdate);
+            
+                JButton btnLogout = new JButton("로그아웃");
+                btnLogout.setBounds(954, 16, 117, 27);
+                contentPane.add(btnLogout);
+                
+                JButton btnSearch = new JButton("주문내역조회");
+                btnSearch.setBounds(692, 16, 117, 27);
+                contentPane.add(btnSearch);
+                btnLogout.addActionListener(new ActionListener() {
+                  public void actionPerformed(ActionEvent e) {
+                    sangjin.Client.Login f = new Login();
+                    f.setVisible(true);
+                    dispose();
+                  }
+                });
+            btnUpdate.addActionListener(new ActionListener() {
+              public void actionPerformed(ActionEvent arg0) {
+                Conf f = new Conf(new MainFrameDAO().getPwd(id), id, MainFrame.this);
+                f.setVisible(true);
+              }
+            });
 
   }
 
