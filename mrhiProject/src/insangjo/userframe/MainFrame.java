@@ -39,7 +39,7 @@ import insangjo.DAO.MainFrameDAO;
 import sangjin.Client.Login;
 import sangjin.Client.UpdateJoin;
 
-public class MainFrame extends JFrame implements Runnable {
+public class MainFrame extends JFrame {
 
   private JLabel lblUserStat;
   private Color colMenu;
@@ -458,8 +458,8 @@ public class MainFrame extends JFrame implements Runnable {
     JButton btnUpdate = new JButton("정보수정");
     btnUpdate.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent arg0) {
-        Thread th = new Thread(MainFrame.this);
-        th.start();
+        Conf f = new Conf(new MainFrameDAO().getPwd(id), id, MainFrame.this);
+        f.setVisible(true);
       }
     });
     btnUpdate.setBounds(256, 7, 105, 27);
@@ -580,11 +580,5 @@ public class MainFrame extends JFrame implements Runnable {
   public void closeMainFrame() {
     new sangjin.Client.Login().setVisible(true);
     dispose();
-  }
-
-  @Override
-  public void run() {
-    Conf f = new Conf(new MainFrameDAO().getPwd(id), id, MainFrame.this);
-    f.setVisible(true);
   }
 }
