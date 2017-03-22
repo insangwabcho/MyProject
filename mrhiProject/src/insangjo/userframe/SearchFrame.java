@@ -5,12 +5,10 @@ import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 
-import javax.swing.AbstractListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -43,7 +41,7 @@ public class SearchFrame extends JFrame {
    */
   public SearchFrame(String userid, String username) {
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    setBounds(100, 100, 700, 350);
+    setBounds(100, 100, 500, 350);
     contentPane = new JPanel();
     contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
     setContentPane(contentPane);
@@ -51,21 +49,6 @@ public class SearchFrame extends JFrame {
 
     JScrollPane scrollPane = new JScrollPane();
     contentPane.add(scrollPane, BorderLayout.WEST);
-
-    JList list = new JList();
-    list.setModel(new AbstractListModel() {
-      String[] values = new String[] { "주문번호 [ 2 ] , 상품 [ cpuasdlfnw 외 2개 ]" };
-
-      public int getSize() {
-        return values.length;
-      }
-
-      public Object getElementAt(int index) {
-        return values[index];
-      }
-    });
-    list.setToolTipText("");
-    scrollPane.setViewportView(list);
 
     JPanel panel = new JPanel(new GridLayout(2, 0));
     contentPane.add(panel, BorderLayout.NORTH);
