@@ -41,7 +41,7 @@ import sangjin.Client.UpdateJoin;
 
 public class MainFrame extends JFrame {
 
-  private JLabel lblUserStat; //d
+  private JLabel lblUserStat; //dd
   private Color colMenu;
   private ImageIcon panelBg;
   private MainFrameDAO orderpageDao;
