@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -30,6 +31,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
@@ -92,7 +94,7 @@ public class MainFrame extends JFrame {
     setIconImage(Toolkit.getDefaultToolkit().getImage(MainFrame.class.getResource("/insangjo/img/programIcon.ico")));
     setTitle("comNawa 주문프로그램");
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    setBounds(100, 100, 1091, 768);
+    setBounds(100, 100, 1200, 768);
     setResizable(false);
 
     JMenuBar menuBar = new JMenuBar();
@@ -213,16 +215,19 @@ public class MainFrame extends JFrame {
     list_1.setForeground(Color.white);
     scrollPane.setViewportView(list_1);
 
+    JScrollPane scrollPane_3 = new JScrollPane();
     detailPanel = new JPanel();
     detailPanel.setBackground(Color.white);//
-    detailPanel.setBounds(506, 349, 576, 346);
+    detailPanel.setBounds(506, 349, 688, 346);
     contentPane.add(detailPanel);
 
-    JLabel lblNewLabel = new JLabel("제품 상세페이지");
-
-    String a = "/Users/insangjo/git/MyProject/ZZO_teamProject/bin/insangjo/img/programIcon.ico";
-    lblNewLabel.setText("<html> <img src= \"/Users/insangjo/git/MyProject/ZZO_teamProject/bin/insangjo/img/mainBg.jpg\"></html>");
-    detailPanel.add(lblNewLabel);
+    String a = (String.valueOf(sangjin.DB.DB.class.getResource("img"))).replaceAll("file:", "") + "/cpu/cputemp.jpeg";
+    System.out.println(a);
+    ImageIcon imgicon = new ImageIcon(a);
+    Image src = imgicon.getImage();
+    Image ss = src.getScaledInstance(678, imgicon.getIconHeight(), Image.SCALE_AREA_AVERAGING);
+    imgicon = new ImageIcon(ss);
+    detailPanel.setLayout(new BorderLayout(0, 0));
 
     boxpanel = new JPanel();
     boxpanel.setBackground(Color.white);
@@ -318,7 +323,7 @@ public class MainFrame extends JFrame {
 
     optionPanel = new JPanel();
     optionPanel.setBackground(Color.white);
-    optionPanel.setBounds(180, 71, 902, 266);
+    optionPanel.setBounds(180, 71, 1014, 266);
     contentPane.add(optionPanel);
     optionPanel.setLayout(null);
 
@@ -330,7 +335,7 @@ public class MainFrame extends JFrame {
 
     option2Panel = new JPanel();
     option2Panel.setBackground(Color.white);
-    option2Panel.setBounds(0, 34, 901, 226);
+    option2Panel.setBounds(0, 34, 1014, 226);
     optionPanel.add(option2Panel);
     option2Panel.setLayout(null);
 
@@ -340,7 +345,7 @@ public class MainFrame extends JFrame {
     option2Panel.add(lblOptionTitle);
 
     scrollPane_2 = new JScrollPane();
-    scrollPane_2.setBounds(6, 30, 887, 123);
+    scrollPane_2.setBounds(6, 30, 1002, 123);
     option2Panel.add(scrollPane_2);
 
     list_2 = new JList();
@@ -366,7 +371,7 @@ public class MainFrame extends JFrame {
         scrollPane_2.setViewportView(list_2);
       }
     });
-    btnSave.setBounds(681, 165, 188, 44);
+    btnSave.setBounds(806, 165, 188, 44);
     option2Panel.add(btnSave);
 
     lblEa = new JLabel("1");
@@ -375,7 +380,7 @@ public class MainFrame extends JFrame {
 
     panel = new JPanel(new GridLayout(2, 6));
     panel.setBackground(Color.white);
-    panel.setBounds(7, 160, 627, 55);
+    panel.setBounds(33, 160, 737, 55);
     option2Panel.add(panel);
 
     JLabel lblcpu = new JLabel("  CPU :");
@@ -451,10 +456,17 @@ public class MainFrame extends JFrame {
     contentPane.setBorder(lb);
     selectPanel.setBorder(lb);
     detailPanel.setBorder(lb);
+
+    scrollPane_3.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+    scrollPane_3.getVerticalScrollBar().setUnitIncrement(30);
+    detailPanel.add(scrollPane_3, BorderLayout.CENTER);
+    JLabel lblDetail = new JLabel("제품상세페이지");
+    lblDetail.setIcon(imgicon);
     boxpanel.setBorder(lb);
     optionPanel.setBorder(lb);
     option2Panel.setBorder(lb);
     panel.setBorder(lb);
+    scrollPane_3.setViewportView(lblDetail);
     scrollPane_1.setBorder(lb);
 
     lblUserStat = new JLabel(username + "님 로그인중");
