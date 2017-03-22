@@ -475,7 +475,7 @@ public class MainFrame extends JFrame {
     btnSearch.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         if (new SearchFrameDAO().checkOrder(id) == 0) {
-          JOptionPane.showMessageDialog(MainFrame.this, "주문하신 내역이 없습니다.");
+          JOptionPane.showMessageDialog(MainFrame.this, "주문하신 내역이 없습니다.");//
           return;
         }
         else {
