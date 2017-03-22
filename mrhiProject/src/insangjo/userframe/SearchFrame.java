@@ -29,7 +29,7 @@ public class SearchFrame extends JFrame {
   private Vector data, col;
 
   public SearchFrame(String userid, String username) {
-    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     setBounds(100, 100, 500, 350);
     contentPane = new JPanel();
     contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

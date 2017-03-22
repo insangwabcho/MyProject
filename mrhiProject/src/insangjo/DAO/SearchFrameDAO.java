@@ -186,6 +186,8 @@ public class SearchFrameDAO {
       String sql = sql1.toString() + sql2.toString() + sql3.toString();
       conn = sangjin.DB.DB.comCon();
       pstmt = conn.prepareStatement(sql);
+
+      System.out.println(sql);
       rs = pstmt.executeQuery();
 
       while (rs.next()) {
