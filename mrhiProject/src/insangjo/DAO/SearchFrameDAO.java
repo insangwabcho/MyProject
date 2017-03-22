@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Vector;
 
 import insangjo.DTO.CartDTO;
 
@@ -102,7 +103,71 @@ public class SearchFrameDAO {
         }
 
     }
-    return items;
 
+    return items;
+  }
+
+  public Vector detailOrder(CartDTO dto) {
+    Vector items = new Vector<>();
+    Connection conn = null;
+    PreparedStatement pstmt = null;
+    ResultSet rs = null;
+    try {
+      ArrayList<String> serials = new ArrayList<>();
+      serials.add(dto.getCpu() + ",cpu");
+      serials.add(dto.getVga() + ",vga");
+      serials.add(dto.getRam() + ",ram");
+      serials.add(dto.getHdd() + ",hdd");
+      serials.add(dto.getSsd() + ",ssd");
+      serials.add(dto.getMain() + ",main");
+      serials.add(dto.getRam2() + ",ramtwo");
+
+      String[] item = new String[serials.size()];
+      int[] itemSerial = new int[serials.size()];
+      int aCount = 0;
+      for (int i = 0; i < serials.size(); i++) {
+        if (serials.get(i).replaceAll("[^0-9]", "").equals("0")) {
+          serials.remove(i);
+        }
+        else {
+          item[aCount] = serials.get(i).replaceAll("[^0-9]", "");
+          String t = serials.get(i).replaceAll("[^a-z]", "");
+          t = t.replaceAll(",", "");
+          itemSerial[i] = Integer.parseInt(t);
+        }
+        aCount++;
+      }
+      StringBuilder sql = new StringBuilder("select ");
+      for (int i = 0; i < item.length; i++) {
+        sql.append(item[i]);
+        if (i != item.length - 1) {
+          sql.append(",");
+        }
+      }
+      System.out.println(sql);
+
+    } catch (Exception e) {
+      e.printStackTrace();
+    } finally {
+      if (rs != null)
+        try {
+          rs.close();
+        } catch (SQLException e) {
+          e.printStackTrace();
+        }
+      if (pstmt != null)
+        try {
+          pstmt.close();
+        } catch (SQLException e) {
+          e.printStackTrace();
+        }
+      if (conn != null)
+        try {
+          conn.close();
+        } catch (SQLException e) {
+          e.printStackTrace();
+        }
+    }
+    return items;
   }
 }
