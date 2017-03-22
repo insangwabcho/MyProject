@@ -41,7 +41,6 @@ public class SearchFrame extends JFrame {
     col = new Vector<>();
     col.add("종류");
     col.add("이름");
-    col.add("수량");
     col.add("가격");
 
     DefaultTableModel model = new DefaultTableModel(data, col);
@@ -64,10 +63,10 @@ public class SearchFrame extends JFrame {
     comboBox.addItemListener(new ItemListener() {
       public void itemStateChanged(ItemEvent e) {
         if (e.getStateChange() == ItemEvent.SELECTED) {
-          data = new Vector<>();
-          new SearchFrameDAO().detailOrder(items.get(comboBox.getSelectedIndex()));
+          data = new SearchFrameDAO().detailOrder(items.get(comboBox.getSelectedIndex() - 1));
+          System.out.println(data.toString());
           DefaultTableModel model = new DefaultTableModel(data, col);
-
+          table.setModel(model);
         }
       }
     });

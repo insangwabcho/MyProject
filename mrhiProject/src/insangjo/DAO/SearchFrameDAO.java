@@ -114,13 +114,13 @@ public class SearchFrameDAO {
     ResultSet rs = null;
     try {
       ArrayList<String> serials = new ArrayList<>();
-      serials.add(dto.getCpu() + ",cpu");
-      serials.add(dto.getVga() + ",vga");
-      serials.add(dto.getRam() + ",ram");
-      serials.add(dto.getHdd() + ",hdd");
-      serials.add(dto.getSsd() + ",ssd");
-      serials.add(dto.getMain() + ",main");
-      serials.add(dto.getRam2() + ",ramtwo");
+      serials.add(dto.getCpu() + ",cpu c ");
+      serials.add(dto.getVga() + ",vga v ");
+      serials.add(dto.getRam() + ",ram r ");
+      serials.add(dto.getHdd() + ",hdd h ");
+      serials.add(dto.getSsd() + ",ssd s ");
+      serials.add(dto.getMain() + ",main m ");
+      serials.add(dto.getRam2() + ",ram rtwo ");
 
       String[] item = new String[serials.size()];
       int[] itemSerial = new int[serials.size()];
@@ -130,22 +130,71 @@ public class SearchFrameDAO {
           serials.remove(i);
         }
         else {
-          item[aCount] = serials.get(i).replaceAll("[^0-9]", "");
-          String t = serials.get(i).replaceAll("[^a-z]", "");
+          itemSerial[aCount] = Integer.parseInt(serials.get(i).replaceAll("[^0-9]", ""));
+          String t = serials.get(i).replaceAll("[0-9]", "");
           t = t.replaceAll(",", "");
-          itemSerial[i] = Integer.parseInt(t);
-        }
-        aCount++;
-      }
-      StringBuilder sql = new StringBuilder("select ");
-      for (int i = 0; i < item.length; i++) {
-        sql.append(item[i]);
-        if (i != item.length - 1) {
-          sql.append(",");
+          item[aCount] = t;
+          aCount++;
         }
       }
-      System.out.println(sql);
+      StringBuilder sql2 = new StringBuilder("from cart,");
+      for (int i = 0; i < aCount; i++) {
+        if (item[i] != null) {
+          sql2.append(item[i]);
+        }
+        if (i != aCount - 1) {
+          sql2.append(",");
+        }
+      } // where절 끝
 
+      StringBuilder sql1 = new StringBuilder("select ");
+      StringBuilder sql3 = new StringBuilder("where ");
+      for (int i = 0; i < aCount; i++) {
+        switch (item[i]) {
+        case "cpu c ":
+          sql1.append("c.name ,c.price ");
+          sql3.append("c.serial= cart.cpu_serial ");
+          break;
+        case "vga v ":
+          sql1.append("v.name ,v.price ");
+          sql3.append("v.serial= cart.vga_serial ");
+          break;
+        case "ram r ":
+          sql1.append("r.name ,r.price ");
+          sql3.append("r.serial= cart.ram_serial");
+          break;
+        case "hdd h ":
+          sql1.append("h.name ,h.price ");
+          sql3.append("h.serial= cart.hdd_serial");
+          break;
+        case "ssd s ":
+          sql1.append("s.name ,s.price ");
+          sql3.append("s.serial= cart.ssd_serial");
+          break;
+        case "main m ":
+          sql1.append("m.name ,m.price ");
+          sql3.append("m.serial= cart.main_serial");
+          break;
+        case "ram rtow ":
+          sql1.append("rtow.name ,rtow.price ");
+          sql3.append("rtow.serial= cart.ram2_serial");
+          break;
+        }
+        if (i != aCount - 1)
+          sql1.append(",");
+      }
+      String sql = sql1.toString() + sql2.toString() + sql3.toString();
+      conn = sangjin.DB.DB.comCon();
+      pstmt = conn.prepareStatement(sql);
+      rs = pstmt.executeQuery();
+
+      while (rs.next()) {
+        Vector temp = new Vector<>();
+        temp.add(rs.getString("name"));
+        temp.add(rs.getInt("price"));
+
+        items.add(item);
+      }
     } catch (Exception e) {
       e.printStackTrace();
     } finally {
