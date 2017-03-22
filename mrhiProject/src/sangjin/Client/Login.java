@@ -7,6 +7,8 @@ import java.awt.Image;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,8 +26,6 @@ import javax.swing.border.EmptyBorder;
 import insangjo.adminfame.rootFrame;
 import insangjo.userframe.MainFrame;
 import sangjin.DB.DB;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 public class Login extends JFrame {
 
@@ -128,12 +128,12 @@ public class Login extends JFrame {
 
     tfLpassword = new JPasswordField();
     tfLpassword.addKeyListener(new KeyAdapter() {
-    	@Override
-    	public void keyPressed(KeyEvent e) { 
-    		if(e.getKeyCode()==10){ //비밀번호 텍스트 필드에서 엔터키를 입력하면
-    			btnLogin.doClick(); //로그인 버튼이 클릭됨
-    		}
-    	}
+      @Override
+      public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode() == 10) { //비밀번호 텍스트 필드에서 엔터키를 입력하면
+          btnLogin.doClick(); //로그인 버튼이 클릭됨
+        }
+      }
     });
     tfLpassword.setFont(new Font("맑은 고딕", Font.PLAIN, 18));
     tfLpassword.setBackground(SystemColor.control);
