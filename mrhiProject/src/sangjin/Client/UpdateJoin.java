@@ -318,8 +318,8 @@ public class UpdateJoin extends JFrame {
 		contentPane.add(tfJaddress2);
 		tfJaddress2.setColumns(10);
 		
-		JButton btnNewButton = new JButton("회원탈퇴");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnDelete = new JButton("회원탈퇴");
+		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String[] yn={"예", "아니오"};
 				if(JOptionPane.showOptionDialog(UpdateJoin.this, "정말 탈퇴하시겠습니까?", "경고",
@@ -329,9 +329,9 @@ public class UpdateJoin extends JFrame {
 				}
 			}
 		});
-		btnNewButton.setFont(new Font("맑은 고딕", Font.BOLD, 16));
-		btnNewButton.setBounds(324, 598, 116, 35);
-		contentPane.add(btnNewButton);
+		btnDelete.setFont(new Font("맑은 고딕", Font.BOLD, 16));
+		btnDelete.setBounds(324, 598, 116, 35);
+		contentPane.add(btnDelete);
 
 	}
 }

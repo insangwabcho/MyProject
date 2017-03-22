@@ -74,6 +74,7 @@ public class MainFrame extends JFrame {
   private JPanel panel;
   private JScrollPane scrollPane_1;
 
+  
   public MainFrame(String username, String id, String address) {
     usname = username;
     this.id = id;
@@ -455,26 +456,26 @@ public class MainFrame extends JFrame {
     panel.setBorder(lb);
     scrollPane_1.setBorder(lb);
 
-    JButton btnNewButton = new JButton("정보수정");
-    btnNewButton.addActionListener(new ActionListener() {
+    JButton btnUpdate = new JButton("정보수정");
+    btnUpdate.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent arg0) {
         Conf f = new Conf(new MainFrameDAO().getPwd(id), id);
         f.setVisible(true);
       }
     });
-    btnNewButton.setBounds(256, 7, 105, 27);
-    boxpanel.add(btnNewButton);
+    btnUpdate.setBounds(256, 7, 105, 27);
+    boxpanel.add(btnUpdate);
 
-    JButton btnNewButton_1 = new JButton("로그아웃");
-    btnNewButton_1.addActionListener(new ActionListener() {
+    JButton btnLogout = new JButton("로그아웃");
+    btnLogout.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         sangjin.Client.Login f = new Login();
         f.setVisible(true);
         dispose();
       }
     });
-    btnNewButton_1.setBounds(367, 7, 105, 27);
-    boxpanel.add(btnNewButton_1);
+    btnLogout.setBounds(367, 7, 105, 27);
+    boxpanel.add(btnLogout);
 
   }
 
