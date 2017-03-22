@@ -31,7 +31,7 @@ public class Login extends JFrame {
   private JPanel contentPane;
   private JTextField tfLid;
   private JButton btnJoin;
-  private JLabel lblNewLabel;
+  private JLabel lblNewLabel;//
   private JLabel lblNewLabel_1;
   private JLabel lblmain;
   private JLabel lblResult;
