@@ -480,7 +480,7 @@ public class MainFrame extends JFrame {
         }
         else {
           SearchFrame f = new SearchFrame(id, username);
-          f.setVisible(true);
+          f.setVisible(true);//sdfhsdfslkj
         }
       }
     });
