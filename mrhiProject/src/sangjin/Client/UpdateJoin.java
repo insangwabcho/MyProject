@@ -208,6 +208,12 @@ public class UpdateJoin extends JFrame {
     btnSave.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         // 사용자가 입력한 값
+        String t1 = String.valueOf(tfJpassword1.getPassword());
+        String t2 = String.valueOf(tfJpassword1.getPassword());
+        if (t1.equals("") || t2.equals("")) {
+          JOptionPane.showMessageDialog(UpdateJoin.this, "입력되지 않은 정보가있습니다.");
+          return;
+        }
         String password = String.valueOf(tfJpassword2.getPassword()); //비번
         String email = (tfJemail1.getText() + "@" + tfJemail2.getText()); //이메일
         Date birth = Date.valueOf(tfbirth.getText()); //생년월일
@@ -219,9 +225,6 @@ public class UpdateJoin extends JFrame {
         if (result == 1) {
           JOptionPane.showMessageDialog(UpdateJoin.this, "정보수정 완료");
           setVisible(false); // 창을 닫음
-        }
-        else {
-          JOptionPane.showMessageDialog(UpdateJoin.this, "입력되지 않은 정보가있습니다.");
         }
       }
     });
