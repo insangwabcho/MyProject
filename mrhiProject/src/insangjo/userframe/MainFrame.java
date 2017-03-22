@@ -496,7 +496,7 @@ public class MainFrame extends JFrame {
     btnUpdate.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent arg0) {
         Conf f = new Conf(new MainFrameDAO().getPwd(id), id, MainFrame.this);
-        f.setVisible(true);
+        f.setVisible(true); //dd
       }
     });
 
