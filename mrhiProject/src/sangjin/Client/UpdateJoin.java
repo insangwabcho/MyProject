@@ -2,7 +2,6 @@
 package sangjin.Client;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
@@ -45,25 +44,6 @@ public class UpdateJoin extends JFrame {
   private JTextField tfJaddress1;
   private JTextField tfJaddress2;
 
-  /**
-   * Launch the application.
-   */
-  public static void main(String[] args) {
-    EventQueue.invokeLater(new Runnable() {
-      public void run() {
-        try {
-          Join frame = new Join();
-          frame.setVisible(true);
-        } catch (Exception e) {
-          e.printStackTrace();
-        }
-      }
-    });
-  }
-
-  /**
-   * Create the frame.
-   */
   public UpdateJoin(String Lid, MainFrame mf) {
     dao = new JoinDAO();
     Vector v = dao.List(Lid); //아이디로 회원정보를 불러옴
