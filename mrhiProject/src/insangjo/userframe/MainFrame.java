@@ -344,11 +344,7 @@ public class MainFrame extends JFrame {
     JButton btnSave = new JButton("장바구니에 담기");
     btnSave.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        if (lblEa.getText().equals("0")) {
-          JOptionPane.showMessageDialog(MainFrame.this, "수량을 선택하지 않으셨습니다");
-          return;
-        }
-        String ea = lblEa.getText().replaceAll("[^0-9]", "");
+
         ArrayList<String> items = new ArrayList<>();
         items.add(cboMenu.getSelectedItem() + "");
         items.add(list_1.getSelectedValue() + "");
@@ -357,7 +353,7 @@ public class MainFrame extends JFrame {
         int end = (list_2.getSelectedValue() + "").indexOf(",");
         items.add((list_2.getSelectedValue() + "").substring(start, end).trim());
 
-        Vector item = orderpageDao.cartAdd(items, ea);
+        Vector item = orderpageDao.cartAdd(items, 1 + "");
         refreshTable(item);
 
         list_2 = new JList();
