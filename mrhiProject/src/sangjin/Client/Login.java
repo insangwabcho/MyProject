@@ -31,7 +31,7 @@ public class Login extends JFrame {
   private JPanel contentPane;
   private JTextField tfLid;
   private JButton btnJoin;
-  private JLabel lblNewLabel;//
+  private JLabel lblNewLabel;
   private JLabel lblNewLabel_1;
   private JLabel lblmain;
   private JLabel lblResult;
@@ -93,11 +93,11 @@ public class Login extends JFrame {
             name = dao.returnName(Lid); //이름 리턴
             id = dao.returnID(Lid); //아이디 리턴
             address = dao.returnAddress(Lid); //주소 리턴
-            if (Lid.equals("root")) {
+            if (Lid.equals("root")) { //관리자 아이디면
               new rootFrame().setVisible(true);
               dispose();
             }
-            else {
+            else { //일반 사용자면
               new MainFrame(name, id, address).setVisible(true); //메인프레임을 띄움
               dispose();
             }

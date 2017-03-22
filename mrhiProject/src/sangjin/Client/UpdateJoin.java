@@ -35,15 +35,15 @@ import insangjo.userframe.MainFrame;
 
 public class UpdateJoin extends JFrame {
 	private JPanel contentPane;
-	private JTextField tfJid; // 사용자 입력 아이디
-	private JTextField tfJname; // 사용자 입력 이름
-	private JTextField tfJtel2; // 사용자 입력 폰번호2
-	private JTextField tfJtel3; // 사용자 입력 폰번호3 폰번호=1+2+3
-	private JTextField tfJemail1; // 사용자 입력 이메일1
+	private JTextField tfJid; 
+	private JTextField tfJname; 
+	private JTextField tfJtel2;
+	private JTextField tfJtel3; //폰번호=1+2+3
+	private JTextField tfJemail1;
 	private JTextField tfJemail2; // 사용자 입력 이메일2 이메일=1+@+2
 	private JLabel lblJTF; // 비밀번호 일치판별 라벨
-	private JPasswordField tfJpassword1; // 사용자가 입력하는 비밀번호
-	private JPasswordField tfJpassword2; // 사용자가 입력하는 비밀번호 확인
+	private JPasswordField tfJpassword1; 
+	private JPasswordField tfJpassword2; 
 	private JoinDAO dao;
 	private JComboBox cbtel1;
 	private JTextField tfbirth;
@@ -71,8 +71,8 @@ public class UpdateJoin extends JFrame {
 	 */
 	public UpdateJoin(String Lid) {
 		dao=new JoinDAO();
-		Vector v=dao.List(Lid);
-		setTitle("정보수정");
+		Vector v=dao.List(Lid); //아이디로 회원정보를 불러옴
+		setTitle("회원정보수정");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 601, 692);
 		contentPane = new JPanel();
@@ -133,7 +133,7 @@ public class UpdateJoin extends JFrame {
 		label_10.setBounds(287, 280, 31, 18);
 		contentPane.add(label_10);
 
-		tfJid = new JTextField(String.valueOf(v.get(0)));
+		tfJid = new JTextField(String.valueOf(v.get(0))); //dao에서 리턴받은 아이디값을 텍스트필드에 출력
 		tfJid.setEditable(false);
 		tfJid.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		tfJid.setBounds(170, 99, 270, 24);
@@ -173,27 +173,27 @@ public class UpdateJoin extends JFrame {
 		});
 		tfJpassword2.setBounds(170, 219, 270, 24);
 		contentPane.add(tfJpassword2);
-		String[] email=String.valueOf(v.get(1)).split("@");
-		tfJemail1 = new JTextField(email[0]);
+		String[] email=String.valueOf(v.get(1)).split("@"); //dao에서 리턴받은 이메일값을 @를 기준으로 나눔
+		tfJemail1 = new JTextField(email[0]); //이메일의 앞부분을 텍스트필드에 출력
 		tfJemail1.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		tfJemail1.setBounds(170, 277, 116, 24);
 		contentPane.add(tfJemail1);
 		tfJemail1.setColumns(10);
 
-		tfJemail2 = new JTextField(email[1]);
+		tfJemail2 = new JTextField(email[1]); //이메일의 뒷부분을 텍스트필드에 출력
 		tfJemail2.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		tfJemail2.setBounds(324, 277, 116, 24);
 		contentPane.add(tfJemail2);
 		tfJemail2.setColumns(10);
 
-		tfJname = new JTextField(String.valueOf(v.get(2)));
+		tfJname = new JTextField(String.valueOf(v.get(2))); //dao에서 리턴받은 이름을 텍스트필드에 출력
 		tfJname.setEditable(false);
 		tfJname.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		tfJname.setBounds(170, 337, 270, 24);
 		contentPane.add(tfJname);
 		tfJname.setColumns(10);
-		String[] tel=String.valueOf(v.get(4)).split("-");
-		tfJtel2 = new JTextField(tel[1]);
+		String[] tel=String.valueOf(v.get(4)).split("-"); //dao에서 리턴받은 폰번호를 -를 기준으로 나눔
+		tfJtel2 = new JTextField(tel[1]); //휴대폰 중간번호
 		tfJtel2.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		tfJtel2.addKeyListener(new KeyAdapter() {
 			@Override
@@ -207,7 +207,7 @@ public class UpdateJoin extends JFrame {
 		contentPane.add(tfJtel2);
 		tfJtel2.setColumns(10);
 
-		tfJtel3 = new JTextField(tel[2]);
+		tfJtel3 = new JTextField(tel[2]); //휴대폰 뒷번호
 		tfJtel3.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		tfJtel3.addKeyListener(new KeyAdapter() {
 			@Override
@@ -225,7 +225,7 @@ public class UpdateJoin extends JFrame {
 		lblJTF.setBounds(454, 220, 115, 23);
 		contentPane.add(lblJTF);
 
-		// 확인버튼을 눌렀을때 이벤트처리
+		// 수정버튼을 눌렀을때 이벤트처리
 		JButton btnSave = new JButton("수정");
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -235,7 +235,7 @@ public class UpdateJoin extends JFrame {
 				Date birth = Date.valueOf(tfbirth.getText()); //생년월일
 				String tel = (String.valueOf(cbtel1.getSelectedItem())+"-"+ tfJtel2.getText()+"-"+ tfJtel3.getText());
 				String address = (tfJaddress1.getText()+" "+tfJaddress2.getText()); //주소
-				String id =tfJid.getText();
+				String id =tfJid.getText(); //파라미터로 쓰일 아이디
 				dao = new JoinDAO();
 				int result = dao.updateMember(new JoinDTO(password, email, birth, tel, address, id));
 				if (result == 1) {
@@ -318,6 +318,7 @@ public class UpdateJoin extends JFrame {
 		contentPane.add(tfJaddress2);
 		tfJaddress2.setColumns(10);
 		
+		//회원탈퇴 이벤트 처리
 		JButton btnDelete = new JButton("회원탈퇴");
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
