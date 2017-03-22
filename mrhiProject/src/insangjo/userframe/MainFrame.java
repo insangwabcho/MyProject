@@ -9,6 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Vector;
@@ -162,9 +164,7 @@ public class MainFrame extends JFrame {
           }
           ArrayList list = orderpageDao.prodList(e.getItem() + "");
           list_1 = new JList(list.toArray());
-          list_1.setBackground(new Color(20, 105, 230));
-          list_1.setForeground(Color.white);
-          list_1.addListSelectionListener(new ListSelectionListener() {
+          ListSelectionListener list_1listener = new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent e) {
               try {
                 for (int i = 0; i < table.getRowCount(); i++) {
@@ -182,7 +182,18 @@ public class MainFrame extends JFrame {
                 lblOptionTitle.setText(cboMenu.getSelectedItem() + " " + list_1.getSelectedValue());
               }
             }
+          };
+          list_1.setBackground(new Color(20, 105, 230));
+          list_1.setForeground(Color.white);
+          list_1.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+              if (e.getKeyCode() == 10) {
+
+              }
+            }
           });
+          list_1.addListSelectionListener(list_1listener);
           scrollPane.setViewportView(list_1);
         }
       }
