@@ -39,7 +39,7 @@ import insangjo.DAO.MainFrameDAO;
 import sangjin.Client.Login;
 import sangjin.Client.UpdateJoin;
 
-public class MainFrame extends JFrame {
+public class MainFrame extends JFrame implements Runnable {
 
   private JLabel lblUserStat;
   private Color colMenu;
@@ -74,7 +74,6 @@ public class MainFrame extends JFrame {
   private JPanel panel;
   private JScrollPane scrollPane_1;
 
-  
   public MainFrame(String username, String id, String address) {
     usname = username;
     this.id = id;
@@ -459,8 +458,8 @@ public class MainFrame extends JFrame {
     JButton btnUpdate = new JButton("정보수정");
     btnUpdate.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent arg0) {
-        Conf f = new Conf(new MainFrameDAO().getPwd(id), id);
-        f.setVisible(true);
+        Thread th = new Thread(MainFrame.this);
+        th.start();
       }
     });
     btnUpdate.setBounds(256, 7, 105, 27);
@@ -541,7 +540,7 @@ public class MainFrame extends JFrame {
     JLabel label;
     JButton btn;
 
-    public Conf(String pwd, String id) {
+    public Conf(String pwd, String id, MainFrame mf) {
       setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
       setResizable(false);
       setSize(300, 105);
@@ -558,7 +557,7 @@ public class MainFrame extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
           if (String.valueOf(fieldPwd.getPassword()).equals(pwd)) {
-            new UpdateJoin(id).setVisible(true);
+            new UpdateJoin(id, mf).setVisible(true);
             dispose();
           }
           else {
@@ -576,5 +575,16 @@ public class MainFrame extends JFrame {
       setVisible(true);
     }
 
+  }
+
+  public void closeMainFrame() {
+    new sangjin.Client.Login().setVisible(true);
+    dispose();
+  }
+
+  @Override
+  public void run() {
+    Conf f = new Conf(new MainFrameDAO().getPwd(id), id, MainFrame.this);
+    f.setVisible(true);
   }
 }
