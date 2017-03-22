@@ -74,7 +74,6 @@ public class MainFrame extends JFrame {
   private JPanel panel;
   private JScrollPane scrollPane_1;
 
-  
   public MainFrame(String username, String id, String address) {
     usname = username;
     this.id = id;
@@ -345,11 +344,7 @@ public class MainFrame extends JFrame {
     JButton btnSave = new JButton("장바구니에 담기");
     btnSave.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        if (lblEa.getText().equals("0")) {
-          JOptionPane.showMessageDialog(MainFrame.this, "수량을 선택하지 않으셨습니다");
-          return;
-        }
-        String ea = lblEa.getText().replaceAll("[^0-9]", "");
+
         ArrayList<String> items = new ArrayList<>();
         items.add(cboMenu.getSelectedItem() + "");
         items.add(list_1.getSelectedValue() + "");
@@ -358,7 +353,7 @@ public class MainFrame extends JFrame {
         int end = (list_2.getSelectedValue() + "").indexOf(",");
         items.add((list_2.getSelectedValue() + "").substring(start, end).trim());
 
-        Vector item = orderpageDao.cartAdd(items, ea);
+        Vector item = orderpageDao.cartAdd(items, 1 + "");
         refreshTable(item);
 
         list_2 = new JList();
@@ -459,7 +454,7 @@ public class MainFrame extends JFrame {
     JButton btnUpdate = new JButton("정보수정");
     btnUpdate.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent arg0) {
-        Conf f = new Conf(new MainFrameDAO().getPwd(id), id);
+        Conf f = new Conf(new MainFrameDAO().getPwd(id), id, MainFrame.this);
         f.setVisible(true);
       }
     });
@@ -541,7 +536,7 @@ public class MainFrame extends JFrame {
     JLabel label;
     JButton btn;
 
-    public Conf(String pwd, String id) {
+    public Conf(String pwd, String id, MainFrame mf) {
       setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
       setResizable(false);
       setSize(300, 105);
@@ -558,7 +553,7 @@ public class MainFrame extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
           if (String.valueOf(fieldPwd.getPassword()).equals(pwd)) {
-            new UpdateJoin(id).setVisible(true);
+            new UpdateJoin(id, mf).setVisible(true);
             dispose();
           }
           else {
@@ -576,5 +571,10 @@ public class MainFrame extends JFrame {
       setVisible(true);
     }
 
+  }
+
+  public void closeMainFrame() {
+    new sangjin.Client.Login().setVisible(true);
+    dispose();
   }
 }
