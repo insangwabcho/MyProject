@@ -299,7 +299,7 @@ public class Join extends JFrame {
 				Date birth = Date.valueOf((String.valueOf(cbyear.getSelectedItem()+"-"+cbmonth.getSelectedItem()+"-"+cbday.getSelectedItem()))); 
 				String sex = Sex; // 라디오박스에서 리턴받은 값을 대입
 				String tel = (String.valueOf(cbtel1.getSelectedItem())+"-"+ tfJtel2.getText()+"-"+ tfJtel3.getText());
-				String address = (tfJaddress1.getText()+" "+tfJaddress2.getText());
+				String address = (tfJaddress1.getText()+", "+tfJaddress2.getText()); //주소,상세주소
 				dao = new JoinDAO();
 				int result = dao.insertMember(new JoinDTO(id, password, email, name, birth, sex, tel, address));
 				if (result == 1) {
