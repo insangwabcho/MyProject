@@ -204,7 +204,7 @@ public class MainFrame extends JFrame {
     scrollPane.setViewportView(list_1);
 
     detailPanel = new JPanel();
-    detailPanel.setBackground(Color.white);
+    detailPanel.setBackground(Color.white);//
     detailPanel.setBounds(506, 349, 576, 346);
     contentPane.add(detailPanel);
 
