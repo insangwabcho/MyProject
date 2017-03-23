@@ -1,8 +1,8 @@
 package sungwon.goods;
 
-//22?¼ ?ˆ˜? •?•  ?‚´?š© - ?´ë¯¸ì? ???¥ë°? ?‚­? œ?‹œ lblimg ì´ˆê¸°?™”
-//				*?‹œë¦¬ì–¼ë²ˆí˜¸ ì¤‘ê°„êº? ?‚­? œ?‹œ ì¶”ê?ë°? ?‚­? œ ë¶ˆê??•œ ?˜„?ƒ
-//               ?‚­? œ?ƒ­?—?„œ ?…Œ?´ë¸? ?„ ?ƒ?‹œ ?Šë¦¬ê²Œ ?‚˜???‚˜?Š”?˜„?ƒ
+//22ÀÏ ¼öÁ¤ÇÒ ³»¿ë - ÀÌ¹ÌÁö ÀúÀå¹× »èÁ¦½Ã lblimg ÃÊ±âÈ­
+//				*½Ã¸®¾ó¹øÈ£ Áß°£²¨ »èÁ¦½Ã Ãß°¡¹× »èÁ¦ ºÒ°¡ÇÑ Çö»ó
+//               »èÁ¦ÅÇ¿¡¼­ Å×ÀÌºí ¼±ÅÃ½Ã ´À¸®°Ô ³ªÅ¸³ª´ÂÇö»ó
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.EventQueue;
@@ -87,41 +87,41 @@ public class Management extends JFrame {
 		contentPane.setLayout(null);
 
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setFont(new Font("ë§‘ì? ê³ ë”•", Font.PLAIN, 12));
+		tabbedPane.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 12));
 		tabbedPane.setBounds(166, 10, 602, 403);
 		contentPane.add(tabbedPane);
 
 		panel_ea = new JPanel();
-		tabbedPane.addTab("?¬ê³ ê?ë¦?", null, panel_ea, null);
+		tabbedPane.addTab("Àç°í°ü¸®", null, panel_ea, null);
 		panel_ea.setLayout(null);
 
 		JPanel panel_item = new JPanel();
-		tabbedPane.addTab("ë¬¼í’ˆ ì¶”ê?", null, panel_item, null);
+		tabbedPane.addTab("¹°Ç° Ãß°¡", null, panel_item, null);
 		panel_item.setLayout(null);
 
 		JPanel panel_delete = new JPanel();
-		tabbedPane.addTab("ë¬¼í’ˆ ?‚­? œ", null, panel_delete, null);
+		tabbedPane.addTab("¹°Ç° »èÁ¦", null, panel_delete, null);
 		panel_delete.setLayout(null);
 
 		JScrollPane scrollPane1 = new JScrollPane();
 		scrollPane1.setBounds(12, 74, 573, 290);
 		panel_ea.add(scrollPane1);
 
-		lblname1 = new JLabel("?…¡");
-		lblname1.setFont(new Font("ë§‘ì? ê³ ë”•", Font.PLAIN, 12));
+		lblname1 = new JLabel("¤Ñ");
+		lblname1.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 12));
 		lblname1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblname1.setBounds(81, 10, 367, 21);
 		panel_ea.add(lblname1);
 
 		tfea1 = new JTextField();
-		tfea1.setFont(new Font("ë§‘ì? ê³ ë”•", Font.BOLD, 12));
+		tfea1.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 12));
 		tfea1.setText("0");
 
 		tfea1.setHorizontalAlignment(SwingConstants.TRAILING);
 		tfea1.setBounds(460, 10, 108, 21);
 		panel_ea.add(tfea1);
 		tfea1.setColumns(10);
-		// ?…? ¥?•œ ê°??ˆ˜ë§Œí¼ ?›ê°? ê³„ì‚°
+		// ÀÔ·ÂÇÑ °¹¼ö¸¸Å­ ¿ø°¡ °è»ê
 		tfea1.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
@@ -130,13 +130,13 @@ public class Management extends JFrame {
 					Object value = table.getValueAt(row, 4);
 					int price = Integer.valueOf(value.toString());
 					int ea = Integer.valueOf(tfea1.getText());
-					lblcost1.setText(price * ea + " ?›");
+					lblcost1.setText(price * ea + " ¿ø");
 				} catch (Exception e2) {
-					JOptionPane.showMessageDialog(Management.this, "?ƒ?’ˆ?„ ?„ ?ƒ?•˜?„¸?š”");
+					JOptionPane.showMessageDialog(Management.this, "»óÇ°À» ¼±ÅÃÇÏ¼¼¿ä");
 				}
 			}
 		});
-		// TextField ?¬ì»¤ìŠ¤ ?´ë²¤íŠ¸
+		// TextField Æ÷Ä¿½º ÀÌº¥Æ®
 		tfea1.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent arg0) {
@@ -144,58 +144,58 @@ public class Management extends JFrame {
 			}
 		});
 
-		lblimg = new JLabel("?´ë¯¸ì? ?“±ë¡?");
-		lblimg.setFont(new Font("ë§‘ì? ê³ ë”•", Font.PLAIN, 12));
+		lblimg = new JLabel("ÀÌ¹ÌÁö µî·Ï");
+		lblimg.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 12));
 		lblimg.setHorizontalAlignment(SwingConstants.CENTER);
 		lblimg.setBounds(12, 5, 142, 137);
 		panel_item.add(lblimg);
 
-		JLabel lblcompany2 = new JLabel("? œì¡°ì‚¬");
-		lblcompany2.setFont(new Font("ë§‘ì? ê³ ë”•", Font.PLAIN, 12));
+		JLabel lblcompany2 = new JLabel("Á¦Á¶»ç");
+		lblcompany2.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 12));
 		lblcompany2.setBounds(160, 10, 60, 25);
 		panel_item.add(lblcompany2);
 
 		tfcompany2 = new JTextField();
-		tfcompany2.setFont(new Font("ë§‘ì? ê³ ë”•", Font.PLAIN, 12));
+		tfcompany2.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 12));
 		tfcompany2.setHorizontalAlignment(SwingConstants.TRAILING);
 		tfcompany2.setBounds(240, 10, 140, 25);
 		panel_item.add(tfcompany2);
 		tfcompany2.setColumns(10);
 
-		JLabel lblname2 = new JLabel("ëª¨ë¸ëª?");
-		lblname2.setFont(new Font("ë§‘ì? ê³ ë”•", Font.PLAIN, 12));
+		JLabel lblname2 = new JLabel("¸ğµ¨¸í");
+		lblname2.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 12));
 		lblname2.setBounds(160, 40, 60, 25);
 		panel_item.add(lblname2);
 
 		tfname2 = new JTextField();
-		tfname2.setFont(new Font("ë§‘ì? ê³ ë”•", Font.PLAIN, 12));
+		tfname2.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 12));
 		tfname2.setHorizontalAlignment(SwingConstants.TRAILING);
 		tfname2.setBounds(240, 40, 140, 25);
 		panel_item.add(tfname2);
 		tfname2.setColumns(10);
 
-		JLabel lblcost2 = new JLabel("?›ê°?");
-		lblcost2.setFont(new Font("ë§‘ì? ê³ ë”•", Font.PLAIN, 12));
+		JLabel lblcost2 = new JLabel("¿ø°¡");
+		lblcost2.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 12));
 		lblcost2.setBounds(160, 130, 60, 25);
 		panel_item.add(lblcost2);
 
 		tfspec1_2 = new JTextField();
-		tfspec1_2.setFont(new Font("ë§‘ì? ê³ ë”•", Font.PLAIN, 12));
+		tfspec1_2.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 12));
 		tfspec1_2.setHorizontalAlignment(SwingConstants.TRAILING);
 		tfspec1_2.setBounds(240, 70, 140, 25);
 		panel_item.add(tfspec1_2);
 		tfspec1_2.setColumns(10);
 
-		JLabel lblea2 = new JLabel("ê°œìˆ˜");
-		lblea2.setFont(new Font("ë§‘ì? ê³ ë”•", Font.PLAIN, 12));
+		JLabel lblea2 = new JLabel("°³¼ö");
+		lblea2.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 12));
 		lblea2.setBounds(160, 160, 60, 25);
 		panel_item.add(lblea2);
 
 		tfcost2 = new JTextField();
-		tfcost2.setFont(new Font("ë§‘ì? ê³ ë”•", Font.PLAIN, 12));
+		tfcost2.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 12));
 		tfcost2.setHorizontalAlignment(SwingConstants.TRAILING);
 		tfcost2.setText("0");
-		// ?›ê°? ?…? ¥?‹œ ?Œë§¤ê? ê³„ì‚°
+		// ¿ø°¡ ÀÔ·Â½Ã ÆÇ¸Å°¡ °è»ê
 		tfcost2.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
@@ -208,7 +208,7 @@ public class Management extends JFrame {
 				}
 			}
 		});
-		// ?¬ì»¤ìŠ¤ ?„ ?ƒ?‹œ ê¸??”¨ ì´ˆê¸°?™”
+		// Æ÷Ä¿½º ¼±ÅÃ½Ã ±Û¾¾ ÃÊ±âÈ­
 		tfcost2.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
@@ -219,11 +219,11 @@ public class Management extends JFrame {
 		panel_item.add(tfcost2);
 		tfcost2.setColumns(10);
 
-		JButton btnimage = new JButton("?‚¬ì§? ?“±ë¡?");
-		btnimage.setFont(new Font("ë§‘ì? ê³ ë”•", Font.PLAIN, 12));
+		JButton btnimage = new JButton("»çÁø µî·Ï");
+		btnimage.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 12));
 		btnimage.setBounds(22, 157, 125, 23);
 		panel_item.add(btnimage);
-		// ?´ë¯¸ì? ???¥ ?´ë²¤íŠ¸
+		// ÀÌ¹ÌÁö ÀúÀå ÀÌº¥Æ®
 		btnimage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JFileChooser fc = new JFileChooser();
@@ -248,13 +248,13 @@ public class Management extends JFrame {
 			}
 		});
 
-		lblspec1_2 = new JLabel("?„¸??");
-		lblspec1_2.setFont(new Font("ë§‘ì? ê³ ë”•", Font.PLAIN, 12));
+		lblspec1_2 = new JLabel("¼¼´ë");
+		lblspec1_2.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 12));
 		lblspec1_2.setBounds(160, 70, 60, 25);
 		panel_item.add(lblspec1_2);
 
 		tfea2 = new JTextField();
-		tfea2.setFont(new Font("ë§‘ì? ê³ ë”•", Font.PLAIN, 12));
+		tfea2.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 12));
 		tfea2.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
@@ -268,23 +268,23 @@ public class Management extends JFrame {
 		tfea2.setColumns(10);
 
 		lblspec2_2 = new JLabel("-");
-		lblspec2_2.setFont(new Font("ë§‘ì? ê³ ë”•", Font.PLAIN, 12));
+		lblspec2_2.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 12));
 		lblspec2_2.setBounds(160, 100, 60, 25);
 		panel_item.add(lblspec2_2);
 
 		tfspec2_2 = new JTextField();
-		tfspec2_2.setFont(new Font("ë§‘ì? ê³ ë”•", Font.PLAIN, 12));
+		tfspec2_2.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 12));
 		tfspec2_2.setHorizontalAlignment(SwingConstants.TRAILING);
 		tfspec2_2.setEditable(false);
 		tfspec2_2.setBounds(240, 100, 140, 25);
 		panel_item.add(tfspec2_2);
 		tfspec2_2.setColumns(10);
 
-		JButton btnsave2 = new JButton("???¥");
-		btnsave2.setFont(new Font("ë§‘ì? ê³ ë”•", Font.PLAIN, 12));
+		JButton btnsave2 = new JButton("ÀúÀå");
+		btnsave2.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 12));
 		btnsave2.setBounds(418, 5, 142, 90);
 		panel_item.add(btnsave2);
-		// table2 ???¥ ë²„íŠ¼ ?´ë¦??‹œ ?´ë²¤íŠ¸ë°œìƒ
+		// table2 ÀúÀå ¹öÆ° Å¬¸¯½Ã ÀÌº¥Æ®¹ß»ı
 		btnsave2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -305,9 +305,9 @@ public class Management extends JFrame {
 					String img = img_path;
 					dao.insertGoods(name, serial, name2, company, spec1, spec2, cost, price, ea, img);
 				} catch (Exception e2) {
-					JOptionPane.showMessageDialog(Management.this, "ì¶”ê??•  ? •ë³´ë?? ëª¨ë‘ ê¸°ì…?•´ì£¼ì„¸?š”");
+					JOptionPane.showMessageDialog(Management.this, "Ãß°¡ÇÒ Á¤º¸¸¦ ¸ğµÎ ±âÀÔÇØÁÖ¼¼¿ä");
 				}
-				JOptionPane.showMessageDialog(Management.this, "???¥?˜?—ˆ?Šµ?‹ˆ?‹¤.");
+				JOptionPane.showMessageDialog(Management.this, "ÀúÀåµÇ¾ú½À´Ï´Ù.");
 				tfname2.setText("");
 				tfcompany2.setText("");
 				tfspec1_2.setText("");
@@ -315,7 +315,7 @@ public class Management extends JFrame {
 				tfcost2.setText("0");
 				tfea2.setText("0");
 				lblimg.setIcon(null);
-				lblimg.setText("?´ë¯¸ì? ?“±ë¡?");
+				lblimg.setText("ÀÌ¹ÌÁö µî·Ï");
 
 				refreshTable();
 				refreshTable2();
@@ -330,19 +330,19 @@ public class Management extends JFrame {
 		scrollPane3.setBounds(12, 162, 573, 200);
 		panel_delete.add(scrollPane3);
 
-		JLabel lblKategorie = new JLabel("ì¹´í…Œê³ ë¦¬");
+		JLabel lblKategorie = new JLabel("Ä«Å×°í¸®");
 		lblKategorie.setForeground(Color.BLACK);
 		lblKategorie.setBackground(Color.WHITE);
 		lblKategorie.setOpaque(true);
-		lblKategorie.setFont(new Font("ë§‘ì? ê³ ë”•", Font.BOLD, 20));
+		lblKategorie.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 20));
 		lblKategorie.setHorizontalAlignment(SwingConstants.CENTER);
 		lblKategorie.setBounds(0, 111, 160, 25);
 		contentPane.add(lblKategorie);
 
 		dao = new goodsDAO();
 		table = new JTable();
-		table.setFont(new Font("ë§‘ì? ê³ ë”•", Font.PLAIN, 12));
-		// ?…Œ?´ë¸?1 ë§ˆìš°?Š¤?„ ?ƒ?‹œ ëª¨ë¸ëª? ì¶œë ¥?´ë²¤íŠ¸
+		table.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 12));
+		// Å×ÀÌºí1 ¸¶¿ì½º¼±ÅÃ½Ã ¸ğµ¨¸í Ãâ·ÂÀÌº¥Æ®
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -351,10 +351,10 @@ public class Management extends JFrame {
 				String tmpname = value + "";
 				lblname1.setText(tmpname);
 				tfea1.setText("0");
-				lblcost1.setText("0?›");
+				lblcost1.setText("0¿ø");
 			}
 		});
-		// ?…Œ?´ë¸?1 ?‚¤ë³´ë“œ?„ ?ƒ?‹œ ëª¨ë¸ëª? ì¶œë ¥?´ë²¤íŠ¸
+		// Å×ÀÌºí1 Å°º¸µå¼±ÅÃ½Ã ¸ğµ¨¸í Ãâ·ÂÀÌº¥Æ®
 		table.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
@@ -369,7 +369,7 @@ public class Management extends JFrame {
 				String tmpname = value + "";
 				lblname1.setText(tmpname);
 				tfea1.setText("0");
-				lblcost1.setText("0?›");
+				lblcost1.setText("0¿ø");
 			}
 		});
 		scrollPane1.setViewportView(table);
@@ -378,7 +378,7 @@ public class Management extends JFrame {
 		scrollPane2.setViewportView(table2);
 
 		table3 = new JTable();
-		// ?…Œ?´ë¸?3 ë§ˆìš°?Š¤?„ ?ƒ?‹œ ëª©ë¡ ì¶œë ¥?´ë²¤íŠ¸
+		// Å×ÀÌºí3 ¸¶¿ì½º¼±ÅÃ½Ã ¸ñ·Ï Ãâ·ÂÀÌº¥Æ®
 		table3.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
@@ -409,7 +409,7 @@ public class Management extends JFrame {
 				}
 			}
 		});
-		// ?…Œ?´ë¸?3 ?‚¤ë³´ë“œ?…? ¥?‹œ ëª©ë¡ ì¶œë ¥?´ë²¤íŠ¸
+		// Å×ÀÌºí3 Å°º¸µåÀÔ·Â½Ã ¸ñ·Ï Ãâ·ÂÀÌº¥Æ®
 		table3.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
@@ -440,11 +440,11 @@ public class Management extends JFrame {
 				}
 			}
 		});
-		table3.setFont(new Font("ë§‘ì? ê³ ë”•", Font.PLAIN, 12));
+		table3.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 12));
 		scrollPane3.setViewportView(table3);
 
 		tfprice2 = new JTextField();
-		tfprice2.setFont(new Font("ë§‘ì? ê³ ë”•", Font.PLAIN, 12));
+		tfprice2.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 12));
 		tfprice2.setHorizontalAlignment(SwingConstants.TRAILING);
 		tfprice2.setText("0");
 		tfprice2.setEditable(false);
@@ -452,122 +452,122 @@ public class Management extends JFrame {
 		panel_item.add(tfprice2);
 		tfprice2.setColumns(10);
 
-		JLabel lblprice2 = new JLabel("?Œë§¤ê?=(?›ê°?*0.2)+?›ê°?");
-		lblprice2.setFont(new Font("ë§‘ì? ê³ ë”•", Font.PLAIN, 12));
+		JLabel lblprice2 = new JLabel("ÆÇ¸Å°¡=(¿ø°¡*0.2)+¿ø°¡");
+		lblprice2.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 12));
 		lblprice2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblprice2.setBounds(420, 130, 140, 20);
 		panel_item.add(lblprice2);
 
-		// Jlist?— DBê°? ì¶œë ¥
+		// Jlist¿¡ DB°ª Ãâ·Â
 		ArrayList<String> jlistList = dao.jlistList();
 		list = new JList(jlistList.toArray());
 		list.setForeground(Color.WHITE);
 		list.setBackground(new Color(20, 105, 230));
 		list.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-		list.setFont(new Font("ë§‘ì? ê³ ë”•", Font.BOLD, 12));
+		list.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 12));
 		list.setBounds(0, 136, 160, 122);
 		contentPane.add(list);
 		list.setSelectedIndex(0);
-		// ì»¬ëŸ¼ê°’ì‚½?…
+		// ÄÃ·³°ª»ğÀÔ
 		col = new Vector();
-		col.add("?’ˆë²?");
-		col.add("? œì¡°ì‚¬");
-		col.add("?ƒ?’ˆëª?");
-		col.add("ê°??ˆ˜");
-		col.add("?›ê°?");
+		col.add("Ç°¹ø");
+		col.add("Á¦Á¶»ç");
+		col.add("»óÇ°¸í");
+		col.add("°¹¼ö");
+		col.add("¿ø°¡");
 
 		col2 = new Vector();
-		col2.add("?’ˆë²?");
-		col2.add("? œì¡°ì‚¬");
-		col2.add("?ƒ?’ˆëª?");
-		col2.add("?„¸??");
-		col2.add("?›ê°?");
+		col2.add("Ç°¹ø");
+		col2.add("Á¦Á¶»ç");
+		col2.add("»óÇ°¸í");
+		col2.add("¼¼´ë");
+		col2.add("¿ø°¡");
 		name = "CPU";
 		refreshTable();
 		refreshTable2();
-		// ë¦¬ìŠ¤?Š¸ ?„ ?ƒ?‹œ ?…Œ?´ë¸? ëª©ë¡ ë³??™˜?´ë²¤íŠ¸
+		// ¸®½ºÆ® ¼±ÅÃ½Ã Å×ÀÌºí ¸ñ·Ï º¯È¯ÀÌº¥Æ®
 		list.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
 				if (e.getValueIsAdjusting()) {
 					if (list.getSelectedIndex() == 0) {
 						name = "CPU";
 						col2.clear();
-						col2.add("?’ˆë²?");
-						col2.add("? œì¡°ì‚¬");
-						col2.add("?ƒ?’ˆëª?");
-						col2.add("?„¸??");
-						col2.add("?›ê°?");
-						lblspec1_2.setText("?„¸??");
+						col2.add("Ç°¹ø");
+						col2.add("Á¦Á¶»ç");
+						col2.add("»óÇ°¸í");
+						col2.add("¼¼´ë");
+						col2.add("¿ø°¡");
+						lblspec1_2.setText("¼¼´ë");
 						tfspec2_2.setEditable(false);
-						lblspec1_3.setText("?„¸??");
+						lblspec1_3.setText("¼¼´ë");
 						lblspec2_3.setText("-");
 						tfspec2_3.setText("");
 					} else if (list.getSelectedIndex() == 1) {
 						name = "HDD";
 						col2.clear();
-						col2.add("?’ˆë²?");
-						col2.add("? œì¡°ì‚¬");
-						col2.add("?ƒ?’ˆëª?");
-						col2.add("?š©?Ÿ‰");
-						col2.add("?›ê°?");
-						lblspec1_2.setText("?š©?Ÿ‰");
+						col2.add("Ç°¹ø");
+						col2.add("Á¦Á¶»ç");
+						col2.add("»óÇ°¸í");
+						col2.add("¿ë·®");
+						col2.add("¿ø°¡");
+						lblspec1_2.setText("¿ë·®");
 						tfspec2_2.setEditable(false);
-						lblspec1_3.setText("?š©?Ÿ‰");
+						lblspec1_3.setText("¿ë·®");
 						lblspec2_3.setText("-");
 						tfspec2_3.setText("");
 					} else if (list.getSelectedIndex() == 2) {
 						name = "MAIN";
 						col2.clear();
-						col2.add("?’ˆë²?");
-						col2.add("?†Œì¼?");
-						col2.add("? œì¡°ì‚¬");
-						col2.add("?ƒ?’ˆëª?");
-						col2.add("?›ê°?");
-						lblspec1_2.setText("?†Œì¼?");
+						col2.add("Ç°¹ø");
+						col2.add("¼ÒÄÏ");
+						col2.add("Á¦Á¶»ç");
+						col2.add("»óÇ°¸í");
+						col2.add("¿ø°¡");
+						lblspec1_2.setText("¼ÒÄÏ");
 						tfspec2_2.setEditable(false);
-						lblspec1_3.setText("?†Œì¼?");
+						lblspec1_3.setText("¼ÒÄÏ");
 						lblspec2_3.setText("-");
 						tfspec2_3.setText("");
 					} else if (list.getSelectedIndex() == 3) {
 						name = "RAM";
 						col2.clear();
-						col2.add("?’ˆë²?");
-						col2.add("? œì¡°ì‚¬");
-						col2.add("?ƒ?’ˆëª?");
-						col2.add("?š©?Ÿ‰");
-						col2.add("?›ê°?");
-						lblspec1_2.setText("?š©?Ÿ‰");
+						col2.add("Ç°¹ø");
+						col2.add("Á¦Á¶»ç");
+						col2.add("»óÇ°¸í");
+						col2.add("¿ë·®");
+						col2.add("¿ø°¡");
+						lblspec1_2.setText("¿ë·®");
 						tfspec2_2.setEditable(false);
-						lblspec1_3.setText("?š©?Ÿ‰");
+						lblspec1_3.setText("¿ë·®");
 						lblspec2_3.setText("-");
 						tfspec2_3.setText("");
 					} else if (list.getSelectedIndex() == 4) {
 						name = "SSD";
 						col2.clear();
-						col2.add("?’ˆë²?");
-						col2.add("? œì¡°ì‚¬");
-						col2.add("?ƒ?’ˆëª?");
-						col2.add("?š©?Ÿ‰");
-						col2.add("?›ê°?");
-						lblspec1_2.setText("?š©?Ÿ‰");
+						col2.add("Ç°¹ø");
+						col2.add("Á¦Á¶»ç");
+						col2.add("»óÇ°¸í");
+						col2.add("¿ë·®");
+						col2.add("¿ø°¡");
+						lblspec1_2.setText("¿ë·®");
 						tfspec2_2.setEditable(false);
-						lblspec1_3.setText("?š©?Ÿ‰");
+						lblspec1_3.setText("¿ë·®");
 						lblspec2_3.setText("-");
 						tfspec2_3.setText("");
 					} else if (list.getSelectedIndex() == 5) {
 						name = "VGA";
 						col2.clear();
-						col2.add("?’ˆë²?");
+						col2.add("Ç°¹ø");
 						col2.add("OS");
-						col2.add("? œì¡°ì‚¬");
-						col2.add("?ƒ?’ˆëª?");
-						col2.add("ë©”ëª¨ë¦?");
-						col2.add("?›ê°?");
+						col2.add("Á¦Á¶»ç");
+						col2.add("»óÇ°¸í");
+						col2.add("¸Ş¸ğ¸®");
+						col2.add("¿ø°¡");
 						lblspec1_2.setText("OS");
-						lblspec2_2.setText("ë©”ëª¨ë¦?");
+						lblspec2_2.setText("¸Ş¸ğ¸®");
 						tfspec2_2.setEditable(true);
 						lblspec1_3.setText("OS");
-						lblspec2_3.setText("ë©”ëª¨ë¦?");
+						lblspec2_3.setText("¸Ş¸ğ¸®");
 					}
 					refreshTable();
 					refreshTable2();
@@ -576,14 +576,14 @@ public class Management extends JFrame {
 
 		});
 
-		JButton btnadd1 = new JButton("???¥");
-		btnadd1.setFont(new Font("ë§‘ì? ê³ ë”•", Font.PLAIN, 12));
+		JButton btnadd1 = new JButton("ÀúÀå");
+		btnadd1.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 12));
 		btnadd1.setBounds(452, 41, 116, 23);
 		panel_ea.add(btnadd1);
-		// ???¥ë²„íŠ¼ ?´ë¦??‹œ ?´ë²¤íŠ¸ë°œìƒ
+		// ÀúÀå¹öÆ° Å¬¸¯½Ã ÀÌº¥Æ®¹ß»ı
 		btnadd1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (!(lblcost1.getText().equals("0 ?›"))) {
+				if (!(lblcost1.getText().equals("0 ¿ø"))) {
 					try {
 						int no = Integer.valueOf(tfea1.getText());
 						int row = table.getSelectedRow();
@@ -592,118 +592,118 @@ public class Management extends JFrame {
 						int tmpea = Integer.valueOf((value + ""));
 						if (tmpea != 0) {
 							dao.updateEa(name, no, tmpea, serial);
-							JOptionPane.showMessageDialog(Management.this, "???¥?™„ë£?");
+							JOptionPane.showMessageDialog(Management.this, "ÀúÀå¿Ï·á");
 							tfea1.setText("0");
-							lblcost1.setText("0 ?›");
-							lblname1.setText("?…¡");
+							lblcost1.setText("0 ¿ø");
+							lblname1.setText("¤Ñ");
 							refreshTable();
 							refreshTable2();
 						}
 					} catch (Exception e2) {
-						JOptionPane.showMessageDialog(Management.this, "?ƒ?’ˆê³? ê°??ˆ˜ë¥? ?™•?¸?•´ì£¼ì„¸?š”");
+						JOptionPane.showMessageDialog(Management.this, "»óÇ°°ú °¹¼ö¸¦ È®ÀÎÇØÁÖ¼¼¿ä");
 					}
 				} else {
-					JOptionPane.showMessageDialog(Management.this, "?ƒ?’ˆê³? ê°??ˆ˜ë¥? ?™•?¸?•´ì£¼ì„¸?š”");
+					JOptionPane.showMessageDialog(Management.this, "»óÇ°°ú °¹¼ö¸¦ È®ÀÎÇØÁÖ¼¼¿ä");
 				}
 			}
 		});
 
-		lblcost1 = new JLabel("0 ?›");
-		lblcost1.setFont(new Font("ë§‘ì? ê³ ë”•", Font.PLAIN, 12));
+		lblcost1 = new JLabel("0 ¿ø");
+		lblcost1.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 12));
 		lblcost1.setHorizontalAlignment(SwingConstants.TRAILING);
 		lblcost1.setBounds(290, 43, 150, 21);
 		panel_ea.add(lblcost1);
 
-		JLabel lblprice1 = new JLabel("ê¸ˆì•¡ :");
-		lblprice1.setFont(new Font("ë§‘ì? ê³ ë”•", Font.BOLD, 12));
+		JLabel lblprice1 = new JLabel("±İ¾× :");
+		lblprice1.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 12));
 		lblprice1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblprice1.setBounds(221, 43, 57, 21);
 		panel_ea.add(lblprice1);
 
-		JLabel lblNewLabel_1 = new JLabel("?ƒ?’ˆëª? :");
+		JLabel lblNewLabel_1 = new JLabel("»óÇ°¸í :");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setFont(new Font("ë§‘ì? ê³ ë”•", Font.BOLD, 12));
+		lblNewLabel_1.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 12));
 		lblNewLabel_1.setBounds(12, 10, 57, 21);
 		panel_ea.add(lblNewLabel_1);
 
-		lblimg3 = new JLabel("?‚¬ì§?");
+		lblimg3 = new JLabel("»çÁø");
 		lblimg3.setHorizontalAlignment(SwingConstants.CENTER);
-		lblimg3.setFont(new Font("ë§‘ì? ê³ ë”•", Font.PLAIN, 12));
+		lblimg3.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 12));
 		lblimg3.setBounds(12, 5, 142, 153);
 		panel_delete.add(lblimg3);
 
-		JLabel lblserial3 = new JLabel("? œ?’ˆ ë²ˆí˜¸");
-		lblserial3.setFont(new Font("ë§‘ì? ê³ ë”•", Font.PLAIN, 12));
+		JLabel lblserial3 = new JLabel("Á¦Ç° ¹øÈ£");
+		lblserial3.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 12));
 		lblserial3.setBounds(170, 5, 60, 25);
 		panel_delete.add(lblserial3);
 
 		tfserial3 = new JTextField();
-		tfserial3.setFont(new Font("ë§‘ì? ê³ ë”•", Font.PLAIN, 12));
+		tfserial3.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 12));
 		tfserial3.setEditable(false);
 		tfserial3.setBounds(250, 5, 105, 25);
 		panel_delete.add(tfserial3);
 		tfserial3.setColumns(10);
 
-		JLabel lblname3 = new JLabel("ëª¨ë¸ëª?");
-		lblname3.setFont(new Font("ë§‘ì? ê³ ë”•", Font.PLAIN, 12));
+		JLabel lblname3 = new JLabel("¸ğµ¨¸í");
+		lblname3.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 12));
 		lblname3.setBounds(170, 35, 60, 25);
 		panel_delete.add(lblname3);
 
 		tfname3 = new JTextField();
-		tfname3.setFont(new Font("ë§‘ì? ê³ ë”•", Font.PLAIN, 12));
+		tfname3.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 12));
 		tfname3.setEditable(false);
 		tfname3.setBounds(250, 35, 315, 25);
 		panel_delete.add(tfname3);
 		tfname3.setColumns(10);
 
-		JLabel lblcompany3 = new JLabel("? œì¡°ì‚¬");
-		lblcompany3.setFont(new Font("ë§‘ì? ê³ ë”•", Font.PLAIN, 12));
+		JLabel lblcompany3 = new JLabel("Á¦Á¶»ç");
+		lblcompany3.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 12));
 		lblcompany3.setBounds(170, 65, 60, 25);
 		panel_delete.add(lblcompany3);
 
 		tfcompany3 = new JTextField();
-		tfcompany3.setFont(new Font("ë§‘ì? ê³ ë”•", Font.PLAIN, 12));
+		tfcompany3.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 12));
 		tfcompany3.setEditable(false);
 		tfcompany3.setBounds(250, 65, 105, 25);
 		panel_delete.add(tfcompany3);
 		tfcompany3.setColumns(10);
 
-		lblspec1_3 = new JLabel("?„¸??");
-		lblspec1_3.setFont(new Font("ë§‘ì? ê³ ë”•", Font.PLAIN, 12));
+		lblspec1_3 = new JLabel("¼¼´ë");
+		lblspec1_3.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 12));
 		lblspec1_3.setBounds(170, 95, 60, 25);
 		panel_delete.add(lblspec1_3);
 
 		tfspec1_3 = new JTextField();
-		tfspec1_3.setFont(new Font("ë§‘ì? ê³ ë”•", Font.PLAIN, 12));
+		tfspec1_3.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 12));
 		tfspec1_3.setEditable(false);
 		tfspec1_3.setBounds(250, 95, 105, 25);
 		panel_delete.add(tfspec1_3);
 		tfspec1_3.setColumns(10);
 
 		lblspec2_3 = new JLabel("-");
-		lblspec2_3.setFont(new Font("ë§‘ì? ê³ ë”•", Font.PLAIN, 12));
+		lblspec2_3.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 12));
 		lblspec2_3.setBounds(170, 125, 60, 25);
 		panel_delete.add(lblspec2_3);
 
 		tfspec2_3 = new JTextField();
-		tfspec2_3.setFont(new Font("ë§‘ì? ê³ ë”•", Font.PLAIN, 12));
+		tfspec2_3.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 12));
 		tfspec2_3.setEditable(false);
 		tfspec2_3.setBounds(250, 125, 105, 25);
 		panel_delete.add(tfspec2_3);
 		tfspec2_3.setColumns(10);
 
-		JButton btnDelete = new JButton("?‚­? œ");
-		btnDelete.setFont(new Font("ë§‘ì? ê³ ë”•", Font.PLAIN, 12));
+		JButton btnDelete = new JButton("»èÁ¦");
+		btnDelete.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 12));
 		btnDelete.setBounds(405, 5, 160, 25);
 		panel_delete.add(btnDelete);
-		// ?‚­? œ ë²„íŠ¼ ?…? ¥?‹œ ?´ë²¤íŠ¸ ë°œìƒ
+		// »èÁ¦ ¹öÆ° ÀÔ·Â½Ã ÀÌº¥Æ® ¹ß»ı
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int tmpea = Integer.valueOf(tfea3.getText());
 				int serial = Integer.valueOf(tfserial3.getText());
 				if (tmpea != 0) {
-					String[] str = { "?˜ˆ", "?•„?‹ˆ?˜¤" };
-					if (JOptionPane.showOptionDialog(Management.this, "?¬ê³ ê??‚¨?•„?ˆ?Šµ?‹ˆ?‹¤.\n? •ë§ì‚­? œ?•˜?‹œê² ìŠµ?‹ˆê¹??", "?‚­? œ?™•?¸",
+					String[] str = { "¿¹", "¾Æ´Ï¿À" };
+					if (JOptionPane.showOptionDialog(Management.this, "Àç°í°¡³²¾ÆÀÖ½À´Ï´Ù.\nÁ¤¸»»èÁ¦ÇÏ½Ã°Ú½À´Ï±î?", "»èÁ¦È®ÀÎ",
 							JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null, str, str[0]) == 0) {
 						dao.deleteGoods(name, serial);
 						tfserial3.setText("");
@@ -715,8 +715,8 @@ public class Management extends JFrame {
 						tfcost3.setText("");
 						tfprice3.setText("");
 						lblimg3.setIcon(null);
-						lblimg3.setText("?‚¬ì§?");
-						JOptionPane.showMessageDialog(Management.this, "?‚­? œê°? ?™„ë£Œë˜?—ˆ?Šµ?‹ˆ?‹¤.");
+						lblimg3.setText("»çÁø");
+						JOptionPane.showMessageDialog(Management.this, "»èÁ¦°¡ ¿Ï·áµÇ¾ú½À´Ï´Ù.");
 						refreshTable();
 						refreshTable2();
 					}
@@ -731,11 +731,11 @@ public class Management extends JFrame {
 					tfcost3.setText("");
 					tfprice3.setText("");
 					lblimg3.setText("");
-					JOptionPane.showMessageDialog(Management.this, "?‚­? œê°? ?™„ë£Œë˜?—ˆ?Šµ?‹ˆ?‹¤.");
+					JOptionPane.showMessageDialog(Management.this, "»èÁ¦°¡ ¿Ï·áµÇ¾ú½À´Ï´Ù.");
 					refreshTable();
 					refreshTable2();
 				}
-				//ì¤‘ê°„ ëª©ë¡?´ ?‚­? œ?˜ë©? ?’¤?—?„œ ?•˜?‚˜?”© serial?„ ?‹¹ê¹?
+				//Áß°£ ¸ñ·ÏÀÌ »èÁ¦µÇ¸é µÚ¿¡¼­ ÇÏ³ª¾¿ serialÀ» ´ç±è
 				for (int i = serial; i <= table3.getRowCount(); i++) {
 					int Aserial = i;
 					int Bserial = i+1;
@@ -747,41 +747,41 @@ public class Management extends JFrame {
 
 		});
 
-		JLabel lblcost3 = new JLabel("?›ê°?");
-		lblcost3.setFont(new Font("ë§‘ì? ê³ ë”•", Font.PLAIN, 12));
+		JLabel lblcost3 = new JLabel("¿ø°¡");
+		lblcost3.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 12));
 		lblcost3.setHorizontalAlignment(SwingConstants.LEFT);
 		lblcost3.setBounds(390, 95, 60, 25);
 		panel_delete.add(lblcost3);
 
 		tfcost3 = new JTextField();
 		tfcost3.setHorizontalAlignment(SwingConstants.TRAILING);
-		tfcost3.setFont(new Font("ë§‘ì? ê³ ë”•", Font.PLAIN, 12));
+		tfcost3.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 12));
 		tfcost3.setEditable(false);
 		tfcost3.setBounds(460, 95, 105, 25);
 		panel_delete.add(tfcost3);
 		tfcost3.setColumns(10);
 
-		JLabel lblprice3 = new JLabel("?Œë§¤ê?");
-		lblprice3.setFont(new Font("ë§‘ì? ê³ ë”•", Font.PLAIN, 12));
+		JLabel lblprice3 = new JLabel("ÆÇ¸Å°¡");
+		lblprice3.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 12));
 		lblprice3.setBounds(390, 125, 60, 25);
 		panel_delete.add(lblprice3);
 
 		tfprice3 = new JTextField();
 		tfprice3.setHorizontalAlignment(SwingConstants.TRAILING);
-		tfprice3.setFont(new Font("ë§‘ì? ê³ ë”•", Font.PLAIN, 12));
+		tfprice3.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 12));
 		tfprice3.setEditable(false);
 		tfprice3.setBounds(460, 125, 105, 25);
 		panel_delete.add(tfprice3);
 		tfprice3.setColumns(10);
 
-		JLabel lblea3 = new JLabel("?¬ê³?");
-		lblea3.setFont(new Font("ë§‘ì? ê³ ë”•", Font.PLAIN, 12));
+		JLabel lblea3 = new JLabel("Àç°í");
+		lblea3.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 12));
 		lblea3.setBounds(390, 65, 60, 25);
 		panel_delete.add(lblea3);
 
 		tfea3 = new JTextField();
 		tfea3.setHorizontalAlignment(SwingConstants.TRAILING);
-		tfea3.setFont(new Font("ë§‘ì? ê³ ë”•", Font.PLAIN, 12));
+		tfea3.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 12));
 		tfea3.setEditable(false);
 		tfea3.setBounds(460, 65, 105, 25);
 		panel_delete.add(tfea3);
@@ -793,7 +793,7 @@ public class Management extends JFrame {
 			Image newImage = imageSrc.getScaledInstance(160, 90, Image.SCALE_AREA_AVERAGING);
 			logo = new ImageIcon(newImage);
 			JLabel lbllogo = new JLabel(logo);
-			lbllogo.setFont(new Font("ë§‘ì? ê³ ë”•", Font.PLAIN, 12));
+			lbllogo.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 12));
 			lbllogo.setBounds(0, 10, 160, 90);
 			contentPane.add(lbllogo);
 		} catch (Exception e) {
@@ -802,14 +802,14 @@ public class Management extends JFrame {
 
 	}
 
-	// table1 ?¬ì¶œë ¥ ë©”ì†Œ?“œ
+	// table1 ÀçÃâ·Â ¸Ş¼Òµå
 	public void refreshTable() {
 		DefaultTableModel model = new DefaultTableModel(dao.jtableList(name), col);
 		table.setModel(model);
 		model.fireTableDataChanged();
 		resizeColumnWidth(table);
 
-		// ?…Œ?´ë¸? ?‚´?š© ê°??š´?° ? •? ¬?•˜ê¸?
+		// Å×ÀÌºí ³»¿ë °¡¿îµ¥ Á¤·ÄÇÏ±â
 		DefaultTableCellRenderer right = new DefaultTableCellRenderer();
 		right.setHorizontalAlignment(SwingConstants.RIGHT);
 		DefaultTableCellRenderer center = new DefaultTableCellRenderer();
@@ -821,7 +821,7 @@ public class Management extends JFrame {
 		cell.getColumn(1).setCellRenderer(center);
 	}
 
-	// table2,3 ?¬ì¶œë ¥ ë©”ì†Œ?“œ
+	// table2,3 ÀçÃâ·Â ¸Ş¼Òµå
 	public void refreshTable2() {
 		DefaultTableModel model2 = new DefaultTableModel(dao.jtable2List(name), col2);
 		table2.setModel(model2);
@@ -831,7 +831,7 @@ public class Management extends JFrame {
 		table3.setModel(model3);
 		resizeColumnWidth(table3);
 
-		// ?…Œ?´ë¸? ?‚´?š© ê°??š´?° ? •? ¬?•˜ê¸?
+		// Å×ÀÌºí ³»¿ë °¡¿îµ¥ Á¤·ÄÇÏ±â
 		DefaultTableCellRenderer right = new DefaultTableCellRenderer();
 		right.setHorizontalAlignment(SwingConstants.RIGHT);
 		DefaultTableCellRenderer center = new DefaultTableCellRenderer();
@@ -861,7 +861,7 @@ public class Management extends JFrame {
 		cell2.getColumn(2).setCellRenderer(center);
 	}
 
-	// ???¬ê¸? ??™? •? ¬ ë©”ì†Œ?“œ
+	// ¼¿Å©±â ÀÚµ¿Á¤·Ä ¸Ş¼Òµå
 	public void resizeColumnWidth(JTable table) {
 		final TableColumnModel columnModel = table.getColumnModel();
 		for (int column = 0; column < table.getColumnCount(); column++) {

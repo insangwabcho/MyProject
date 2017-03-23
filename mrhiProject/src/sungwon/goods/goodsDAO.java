@@ -7,8 +7,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Vector;
 
+
+
 public class goodsDAO {
-	//?궘?젣?썑 ?떆由ъ뼹踰덊샇 ?젙?젹 硫붿냼?뱶
+	//삭제후 시리얼번호 정렬 메소드
 	public int updateserial(String table,int Aserial, int Bserial){
 		int result = 0;
 		Connection conn = null;
@@ -16,7 +18,7 @@ public class goodsDAO {
 		try {
 			conn = sangjin.DB.DB.comCon();
 			String sql = "update "+table+" set serial=? where serial=?";
-			System.out.println("dao?떎?뻾");
+			System.out.println("dao실행");
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, Aserial);
 			pstmt.setInt(2, Bserial);
@@ -40,7 +42,7 @@ public class goodsDAO {
 		return result;
 	}
 	
-	// ?궘?젣?븷 臾쇳뭹 異뺣젰硫붿냼?뱶
+	// 삭제할 물품 축력메소드
 	public ArrayList<String> selectDelete(String table, int num) {
 		ArrayList<String> items = new ArrayList<String>();
 		Connection conn = null;
@@ -97,7 +99,7 @@ public class goodsDAO {
 		return items;
 	}
 
-	// 臾쇳뭹 ?궘?젣
+	// 물품 삭제
 	public int deleteGoods(String name, int serial) {
 		int result = 0;
 		Connection conn = null;
@@ -127,7 +129,7 @@ public class goodsDAO {
 		return result;
 	}
 
-	// 臾쇳뭹 異붽?
+	// 물품 추가
 	public int insertGoods(String name, int serial, String name2, String company, String spec1, String spec2, int cost,
 			int price, int ea, String img) {
 		int result = 0;
@@ -206,7 +208,7 @@ public class goodsDAO {
 		return result;
 	}
 
-	// table2 table3 異쒕젰硫붿냼?뱶
+	// table2 table3 출력메소드
 	public Vector jtable2List(String name) {
 		Vector items = new Vector();
 		Connection conn = null;
@@ -277,15 +279,15 @@ public class goodsDAO {
 		return items;
 	}
 
-	//// table 1異쒕젰
-	// ?엯?젰?븳?옱怨? ?뾽?뜲?씠?듃
+	//// table 1출력
+	// 입력한재고 업데이트
 	public int updateEa(String name, int textno, int tmpea, int serial) {
 		int result = 0;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		try {
 			conn = sangjin.DB.DB.comCon();
-			// tmpea(?쁽?옱 ?옱怨?)+textno(異붽??븷?옱怨?)
+			// tmpea(현재 재고)+textno(추가할재고)
 			int ea = tmpea + textno;
 			String sql = "update cpu set ea=? where serial=?";
 			if (name.equals("VGA")) {
@@ -323,7 +325,7 @@ public class goodsDAO {
 		return result;
 	}
 
-	// JTABLE?뿉 ?꽑?깮?븳table ?옱怨좎텧?젰
+	// JTABLE에 선택한table 재고출력
 	public Vector jtableList(String name) {
 		Vector items = new Vector();
 		Connection conn = null;
@@ -379,7 +381,7 @@ public class goodsDAO {
 		return items;
 	}
 
-	// 由ъ뒪?듃?뿉 TABLE 異쒕젰 硫붿냼?뱶
+	// 리스트에 TABLE 출력 메소드
 	public ArrayList<String> jlistList() {
 		ArrayList<String> items = new ArrayList<String>();
 		Connection conn = null;
