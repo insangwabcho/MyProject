@@ -113,6 +113,7 @@ public class DeliveryChangeFrame extends JFrame {
 				tfmain.setText(dto.getMain());
 				tftotal.setText(String.valueOf(dto.getTotal()));
 				tfdvs.setText(dto.getDvs());
+				tfdvs.setForeground(Color.red);
 			}
 		});
 		scrollPane.setViewportView(table);
@@ -124,6 +125,7 @@ public class DeliveryChangeFrame extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		tfdvs = new JTextField();
+		tfdvs.setBackground(Color.WHITE);
 		tfdvs.setEditable(false);
 		tfdvs.setFont(new Font("맑은 고딕", Font.PLAIN, 18));
 		tfdvs.setBounds(518, 44, 104, 31);
@@ -133,17 +135,17 @@ public class DeliveryChangeFrame extends JFrame {
 		JComboBox cbdvs = new JComboBox();
 		cbdvs.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-//				String address = comboBox.getSelectedItem().toString();
-//				if (address.equals("naver.com")) {
-//					.setText("naver.com");
-//				} else if (address.equals("hanmail.net")) {
-//					tfJemail2.setText("hanmail.com");
-//				} else if (address.equals("google.com")) {
-//					tfJemail2.setText("google.com");
-//				} else if (address.equals("직접입력")) {
-//					tfJemail2.setText("");
-//					tfJemail2.requestFocus();
-//				}
+				String status = cbdvs.getSelectedItem().toString();
+				if (status.equals("배송대기")) {
+					tfdvs.setText("배송대기");
+					tfdvs.setForeground(Color.red);
+				} else if (status.equals("배송중")) {
+					tfdvs.setText("배송중");
+					tfdvs.setForeground(new Color(255,228,0));
+				} else if (status.equals("배송완료")) {
+					tfdvs.setText("배송완료");
+					tfdvs.setForeground(new Color(47,157,39));
+				}
 			}
 		});
 		cbdvs.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
