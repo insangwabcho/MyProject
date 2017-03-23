@@ -20,7 +20,11 @@ public class DB {
       try {
         conn = DriverManager.getConnection(url, id, password);
       } catch (SQLException e) {
-        conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521/orcl", id, password);
+        try {
+          conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", id, password);
+        } catch (SQLException e1) {
+          conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521/orcl", id, password);
+        }
       }
     } catch (Exception e) {
       e.printStackTrace();
