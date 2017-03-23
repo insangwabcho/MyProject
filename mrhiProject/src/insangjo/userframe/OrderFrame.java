@@ -145,8 +145,8 @@ public class OrderFrame extends JFrame {
 
         StringBuilder sb = new StringBuilder("select ");
         StringBuilder sb1 = new StringBuilder();
-        String[] option = { "c.serial cpu ", "m.serial 메인보드 ", "v.serial 그래픽카드 ", "r.serial 메모리카드 ", "h.serial HDD ", "s.serial SSD ", "r2.serial 추가 RAM " };
-        String[] where = { " c.name=", " m.name=", " v.name=", " r.name=", " h.name=", " s.name=", " r2.name=" };
+        String[] option = { "c.serial cpu ", "m.serial 메인보드 ", "v.serial 그래픽카드 ", "r.serial 메모리카드 ", "h.serial HDD ", "s.serial SSD ", "rtwo.serial 추가RAM " };
+        String[] where = { " c.name=", " m.name=", " v.name=", " r.name=", " h.name=", " s.name=", " rtwo.name=" };
         //select option[] from 
         int aCount = 0;
 
@@ -190,8 +190,8 @@ public class OrderFrame extends JFrame {
             aCount++;
             break;
           case "추가 RAM":
-            append[i] = "추가 RAM";
-            list.add("추가 RAM");
+            append[i] = "추가RAM";
+            list.add("추가RAM");
             aCount++;
             break;
           }
@@ -231,7 +231,7 @@ public class OrderFrame extends JFrame {
             sb1.append(where[5] + "'" + items.get(i) + "'");
             aCount--;
             break;
-          case "추가 RAM":
+          case "추가RAM":
             sb.append(option[6]);
             sb1.append(where[6] + "'" + items.get(i) + "'");
             aCount--;

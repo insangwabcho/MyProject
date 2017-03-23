@@ -47,7 +47,7 @@ public class OrderFrameDAO {
     PreparedStatement pstmt = null;
     ResultSet rs = null;
     try {
-      String sql = query1 + " from cpu c,hdd h,ram r,ssd s,main m,vga v,ram r2 where" + query2;
+      String sql = query1 + " from cpu c,hdd h,ram r,ssd s,main m,vga v,ram rtwo where" + query2;
       conn = sangjin.DB.DB.comCon();
       pstmt = conn.prepareStatement(sql);
 
@@ -98,6 +98,7 @@ public class OrderFrameDAO {
     }
     System.out.println("------");
     for (int i = 0; i < list.size(); i++) {
+      System.out.println(list.get(i));
       switch (list.get(i)) {
       case "CPU":
         arr[1] = items.get(i);
@@ -117,7 +118,7 @@ public class OrderFrameDAO {
       case "SSD":
         arr[5] = items.get(i);
         break;
-      case "추가 RAM":
+      case "추가RAM":
         arr[8] = items.get(i);
       }
     }
