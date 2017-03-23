@@ -508,10 +508,10 @@ public class MainFrame extends JFrame {
 
     contentPane.add(lblLogo);
 
-    JLabel lblAd = new JLabel("New label");
+    JLabel lblAd = new JLabel(new insangjo.img.SetImageIcon().getScaleImg("/AD/AD5.PNG/", 390, 60));
+    lblAd.setBounds(180, 5, 390, 60);
     new sungwon.ad.AD(lblAd);
 
-    lblAd.setBounds(180, 12, 372, 47);
     contentPane.add(lblAd);
     btnLogout.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
