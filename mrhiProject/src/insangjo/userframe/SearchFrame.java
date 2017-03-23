@@ -35,8 +35,8 @@ public class SearchFrame extends JFrame {
     contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
     setContentPane(contentPane);
     contentPane.setLayout(new BorderLayout(0, 0));
-
-    ArrayList<CartDTO> items = new SearchFrameDAO().dateOrder(userid);
+    SearchFrameDAO searchframeDao = new SearchFrameDAO();
+    ArrayList<CartDTO> items = searchframeDao.dateOrder(userid);
 
     col = new Vector<>();
     col.add("종류");
@@ -48,7 +48,12 @@ public class SearchFrame extends JFrame {
     JScrollPane scrollPane = new JScrollPane();
     contentPane.add(scrollPane, BorderLayout.CENTER);
 
-    table = new JTable(model);
+    table = new JTable(model) {
+      @Override
+      public boolean isCellEditable(int row, int column) {
+        return false;
+      }
+    };
     scrollPane.setViewportView(table);
 
     JPanel panel = new JPanel(new GridLayout(2, 0));
@@ -63,14 +68,14 @@ public class SearchFrame extends JFrame {
     comboBox.addItemListener(new ItemListener() {
       public void itemStateChanged(ItemEvent e) {
         if (e.getStateChange() == ItemEvent.SELECTED) {
-          data = new SearchFrameDAO().detailOrder(items.get(comboBox.getSelectedIndex() - 1));
-          System.out.println(data.toString());
+          data = searchframeDao.detailOrder(items.get(comboBox.getSelectedIndex() - 1));
           DefaultTableModel model = new DefaultTableModel(data, col);
           table.setModel(model);
+          table.getColumn("이름").setPreferredWidth(200);
         }
       }
     });
-    for (int i = 0; i < items.size(); i++) {
+    for (int i = 0; i <= items.size() - 1; i++) {
       comboBox.addItem(items.get(i).getBuydate() + ", 주문번호 : " + items.get(i).getOrder_no());
     }
     panel.add(comboBox);

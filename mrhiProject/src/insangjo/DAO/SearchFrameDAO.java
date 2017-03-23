@@ -121,22 +121,26 @@ public class SearchFrameDAO {
       serials.add(dto.getSsd() + ",ssd s ");
       serials.add(dto.getMain() + ",main m ");
       serials.add(dto.getRam2() + ",ram rtwo ");
-
+      String[] t = new String[9];
+      for (int i = 0; i < serials.size(); i++) {
+        t[i] = serials.get(i).replaceAll("[^0-9]", "");
+      }
       String[] item = new String[serials.size()];
       int[] itemSerial = new int[serials.size()];
       int aCount = 0;
       for (int i = 0; i < serials.size(); i++) {
-        if (serials.get(i).replaceAll("[^0-9]", "").equals("0")) {
-          serials.remove(i);
+        //if (serials.get(i).replaceAll("[^0-9]", "").equals("0")) {
+        if (t[i].equals("0")) {
         }
         else {
           itemSerial[aCount] = Integer.parseInt(serials.get(i).replaceAll("[^0-9]", ""));
-          String t = serials.get(i).replaceAll("[0-9]", "");
-          t = t.replaceAll(",", "");
-          item[aCount] = t;
+          String temp = serials.get(i).replaceAll("[0-9]", "");
+          temp = temp.replaceAll(",", "");
+          item[aCount] = temp;
           aCount++;
         }
       }
+
       StringBuilder sql2 = new StringBuilder("from cart,");
       for (int i = 0; i < aCount; i++) {
         if (item[i] != null) {
@@ -149,35 +153,43 @@ public class SearchFrameDAO {
 
       StringBuilder sql1 = new StringBuilder("select ");
       StringBuilder sql3 = new StringBuilder("where ");
+      ArrayList<String> kinds = new ArrayList<>();
       for (int i = 0; i < aCount; i++) {
         switch (item[i]) {
         case "cpu c ":
           sql1.append("c.name ,c.price ");
           sql3.append("c.serial= cart.cpu_serial ");
+          kinds.add("CPU");
           break;
         case "vga v ":
           sql1.append("v.name ,v.price ");
           sql3.append("v.serial= cart.vga_serial ");
+          kinds.add("그래픽카드");
           break;
         case "ram r ":
           sql1.append("r.name ,r.price ");
           sql3.append("r.serial= cart.ram_serial");
+          kinds.add("메모리카드");
           break;
         case "hdd h ":
           sql1.append("h.name ,h.price ");
           sql3.append("h.serial= cart.hdd_serial");
+          kinds.add("HDD");
           break;
         case "ssd s ":
           sql1.append("s.name ,s.price ");
           sql3.append("s.serial= cart.ssd_serial");
+          kinds.add("SSD");
           break;
         case "main m ":
           sql1.append("m.name ,m.price ");
           sql3.append("m.serial= cart.main_serial");
+          kinds.add("메인보드");
           break;
         case "ram rtow ":
           sql1.append("rtow.name ,rtow.price ");
           sql3.append("rtow.serial= cart.ram2_serial");
+          kinds.add("추가 메모리카드");
           break;
         }
         if (i != aCount - 1)
@@ -187,15 +199,17 @@ public class SearchFrameDAO {
       conn = sangjin.DB.DB.comCon();
       pstmt = conn.prepareStatement(sql);
 
-      System.out.println(sql);
       rs = pstmt.executeQuery();
 
+      aCount = 0;
       while (rs.next()) {
-        Vector temp = new Vector<>();
-        temp.add(rs.getString("name"));
-        temp.add(rs.getInt("price"));
+        Vector row = new Vector<>();
+        row.add(kinds.get(aCount));
+        row.add(rs.getString("name"));
+        row.add(rs.getInt("price"));
 
-        items.add(item);
+        items.add(row);
+        aCount++;
       }
     } catch (Exception e) {
       e.printStackTrace();

@@ -222,7 +222,6 @@ public class MainFrame extends JFrame {
     contentPane.add(detailPanel);
 
     String a = (String.valueOf(sangjin.DB.DB.class.getResource("img"))).replaceAll("file:", "") + "/cpu/cputemp.jpeg";
-    System.out.println(a);
     ImageIcon imgicon = new ImageIcon(a);
     Image src = imgicon.getImage();
     Image ss = src.getScaledInstance(678, imgicon.getIconHeight(), Image.SCALE_AREA_AVERAGING);
