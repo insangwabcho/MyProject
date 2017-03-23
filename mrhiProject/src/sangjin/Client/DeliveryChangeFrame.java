@@ -87,7 +87,13 @@ public class DeliveryChangeFrame extends JFrame {
     col.add("주문일자");
     col.add("배송상태");
     dcdao = new DeliveryChangeDAO();
-    DefaultTableModel model = new DefaultTableModel(dcdao.list(), col);
+    DefaultTableModel model = new DefaultTableModel(dcdao.list(), col){
+    	 @Override
+    	    public boolean isCellEditable(int row, int column) {
+    	       //all cells false
+    	       return false;
+    	    }
+    };
 
 
     table = new JTable(model);
@@ -363,7 +369,13 @@ public class DeliveryChangeFrame extends JFrame {
 			int result = dcdao.updateMember(status,order_no);
 			if (result == 1) {
 				JOptionPane.showMessageDialog(DeliveryChangeFrame.this, "변경완료");
-				DefaultTableModel model = new DefaultTableModel(dcdao.list(), col);
+				DefaultTableModel model = new DefaultTableModel(dcdao.list(), col){
+					 @Override
+					    public boolean isCellEditable(int row, int column) {
+					       //all cells false
+					       return false;
+					    }
+				};
 				table.setModel(model);
 				tfdvs.setText("");
 			}
