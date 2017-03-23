@@ -252,7 +252,7 @@ public class MainFrame extends JFrame {
         return false;
       }
     };
-    table.setFont(new Font("consolas", Font.PLAIN, 12));
+    table.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
     scrollPane_1.setViewportView(table);
 
     JButton btnOk = new JButton("완료");
