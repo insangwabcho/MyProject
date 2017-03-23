@@ -24,7 +24,7 @@ public class OrderFrameDAO {
       System.out.println(sql);
       rs = pstmt.executeQuery();
 
-      if (rs.next()) {
+      while (rs.next()) {
         for (int i = 0; i < ea; i++) {
           items.add(rs.getInt("serial"));
         }
@@ -49,7 +49,11 @@ public class OrderFrameDAO {
     return result;
   }
 
-  public int updateQuery(ArrayList<Integer> items, ArrayList<String> list, String userid, int totalPrice, String address) {
+  public int updateQuery(ArrayList<Integer> itemss, ArrayList<String> list, String userid, int totalPrice, String address) {
+    ArrayList<Integer> items = itemss;
+    for (int i = 0; i < items.size(); i++) {
+      System.out.println("ddd" + items.get(i));
+    }
     Connection conn = null;
     PreparedStatement pstmt = null;
     int result = 0;
