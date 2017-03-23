@@ -4,10 +4,13 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Vector;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -19,29 +22,31 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import insangjo.DTO.CartDTO;
 import sangjin.DB.DB;
-import javax.swing.JButton;
 
 
-public class DeliveryChangFrame extends JFrame {
+public class DeliveryChangeFrame extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
-	private JTextField textField;
+	private JTextField tfdvs;
 	private JTextField tfid;
 	private JTextField tfname;
 	private JTextField tfaddress;
 	private JTextField tfcpu;
 	private JTextField tfvga;
 	private JTextField tfram;
+	private JTextField tfram2;
 	private JTextField tfhdd;
 	private JTextField tfssd;
 	private JTextField tfmain;
-	private JTextField tfram2;
 	private JTextField tftotal;
 	private DeliveryChangeDAO dcdao;
 	private Vector data,col;
 	private ImageIcon logo;
+	private DeliveryChangeDTO dto;
+
 
 	/**
 	 * Launch the application.
@@ -50,7 +55,7 @@ public class DeliveryChangFrame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					DeliveryChangFrame frame = new DeliveryChangFrame();
+					DeliveryChangeFrame frame = new DeliveryChangeFrame();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -62,7 +67,7 @@ public class DeliveryChangFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public DeliveryChangFrame() {
+	public DeliveryChangeFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 849, 582);
 		contentPane = new JPanel();
@@ -85,6 +90,27 @@ public class DeliveryChangFrame extends JFrame {
 		DefaultTableModel model=new DefaultTableModel(dcdao.list(),col);
 		
 		table = new JTable(model);
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				int order_no=table.getSelectedRow();
+				dto=dcdao.detailCart(order_no);
+				dcdao=new DeliveryChangeDAO();
+				System.out.println(dto);
+				tfname.setText(dto.getName());
+				tfid.setText(dto.getId());
+				tfaddress.setText(dto.getAddress());
+				tfcpu.setText(dto.getCpu());
+				tfvga.setText(dto.getVga());
+				tfram.setText(dto.getRam());
+				tfram2.setText(dto.getRam2());
+				tfhdd.setText(dto.getHdd());
+				tfssd.setText(dto.getSsd());
+				tfmain.setText(dto.getMain());
+				tftotal.setText(String.valueOf(dto.getTotal()));
+				tfdvs.setText(dto.getDvs());
+			}
+		});
 		scrollPane.setViewportView(table);
 		table.setModel(model);
 		
@@ -93,18 +119,18 @@ public class DeliveryChangFrame extends JFrame {
 		lblNewLabel.setBounds(425, 43, 91, 33);
 		contentPane.add(lblNewLabel);
 		
-		textField = new JTextField();
-		textField.setEditable(false);
-		textField.setFont(new Font("맑은 고딕", Font.PLAIN, 18));
-		textField.setBounds(518, 44, 104, 31);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		tfdvs = new JTextField();
+		tfdvs.setEditable(false);
+		tfdvs.setFont(new Font("맑은 고딕", Font.PLAIN, 18));
+		tfdvs.setBounds(518, 44, 104, 31);
+		contentPane.add(tfdvs);
+		tfdvs.setColumns(10);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"상태변경", "배송대기", "배송중", "배송완료"}));
-		comboBox.setBounds(636, 45, 91, 31);
-		contentPane.add(comboBox);
+		JComboBox cbdvs = new JComboBox();
+		cbdvs.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
+		cbdvs.setModel(new DefaultComboBoxModel(new String[] {"상태변경", "배송대기", "배송중", "배송완료"}));
+		cbdvs.setBounds(636, 45, 91, 31);
+		contentPane.add(cbdvs);
 		
 	    String a = (String.valueOf(DB.class.getResource("img/comnawalogo.png"))).replaceAll("file:", "");
 	    ImageIcon tmplogo = new ImageIcon(a);
@@ -167,25 +193,25 @@ public class DeliveryChangFrame extends JFrame {
 		lblNewLabel_8.setBounds(34, 320, 62, 18);
 		contentPane.add(lblNewLabel_8);
 		
-		JLabel lblNewLabel_9 = new JLabel("HDD : ");
+		JLabel lblNewLabel_9 = new JLabel("RAM2 : ");
 		lblNewLabel_9.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNewLabel_9.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		lblNewLabel_9.setBounds(34, 350, 62, 18);
 		contentPane.add(lblNewLabel_9);
 		
-		JLabel lblNewLabel_10 = new JLabel("SSD : ");
+		JLabel lblNewLabel_10 = new JLabel("HDD : ");
 		lblNewLabel_10.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNewLabel_10.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		lblNewLabel_10.setBounds(34, 380, 62, 18);
 		contentPane.add(lblNewLabel_10);
 		
-		JLabel lblNewLabel_11 = new JLabel("MAIN : ");
+		JLabel lblNewLabel_11 = new JLabel("SSD : ");
 		lblNewLabel_11.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNewLabel_11.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		lblNewLabel_11.setBounds(34, 410, 62, 18);
 		contentPane.add(lblNewLabel_11);
 		
-		JLabel lblNewLabel_12 = new JLabel("RAM2 : ");
+		JLabel lblNewLabel_12 = new JLabel("MAIN : ");
 		lblNewLabel_12.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNewLabel_12.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		lblNewLabel_12.setBounds(34, 440, 62, 18);
@@ -241,29 +267,29 @@ public class DeliveryChangFrame extends JFrame {
 		tfram.setBounds(110, 319, 268, 24);
 		contentPane.add(tfram);
 		
+		tfram2 = new JTextField();
+		tfram2.setEditable(false);
+		tfram2.setColumns(10);
+		tfram2.setBounds(110, 349, 268, 24);
+		contentPane.add(tfram2);
+		
 		tfhdd = new JTextField();
 		tfhdd.setEditable(false);
 		tfhdd.setColumns(10);
-		tfhdd.setBounds(110, 349, 268, 24);
+		tfhdd.setBounds(110, 379, 268, 24);
 		contentPane.add(tfhdd);
 		
 		tfssd = new JTextField();
 		tfssd.setEditable(false);
 		tfssd.setColumns(10);
-		tfssd.setBounds(110, 379, 268, 24);
+		tfssd.setBounds(110, 409, 268, 24);
 		contentPane.add(tfssd);
 		
 		tfmain = new JTextField();
 		tfmain.setEditable(false);
 		tfmain.setColumns(10);
-		tfmain.setBounds(110, 409, 268, 24);
+		tfmain.setBounds(110, 439, 268, 24);
 		contentPane.add(tfmain);
-		
-		tfram2 = new JTextField();
-		tfram2.setEditable(false);
-		tfram2.setColumns(10);
-		tfram2.setBounds(110, 439, 268, 24);
-		contentPane.add(tfram2);
 		
 		tftotal = new JTextField();
 		tftotal.setEditable(false);
