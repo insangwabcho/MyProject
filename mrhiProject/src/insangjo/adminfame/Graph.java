@@ -82,26 +82,12 @@ public class Graph extends JFrame {
     contentPane.add(lblMonth6);
 
     JLabel lblNewLabel = new JLabel("New label");
+    lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
     lblNewLabel.setBounds(6, 283, 61, 16);
     contentPane.add(lblNewLabel);
 
-    JLabel lblMoney = new JLabel("New label");
-    lblMoney.setBounds(6, 233, 61, 16);
-    contentPane.add(lblMoney);
-
-    JLabel label_1 = new JLabel("New label");
-    label_1.setBounds(6, 180, 61, 16);
-    contentPane.add(label_1);
-
-    JLabel label_2 = new JLabel("New label");
-    label_2.setBounds(6, 128, 61, 16);
-    contentPane.add(label_2);
-
-    JLabel label_3 = new JLabel("New label");
-    label_3.setBounds(6, 73, 61, 16);
-    contentPane.add(label_3);
-
     JLabel label_4 = new JLabel("New label");
+    label_4.setHorizontalAlignment(SwingConstants.CENTER);
     label_4.setBounds(6, 23, 61, 16);
     contentPane.add(label_4);
 

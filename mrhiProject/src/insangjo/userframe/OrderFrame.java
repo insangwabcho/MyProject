@@ -145,7 +145,7 @@ public class OrderFrame extends JFrame {
 
         StringBuilder sb = new StringBuilder("select ");
         StringBuilder sb1 = new StringBuilder();
-        String[] option = { "c.serial ", "m.serial ", "v.serial ", "r.serial ", "h.serial ", "s.serial ", "r2.serial " };
+        String[] option = { "c.serial cpu ", "m.serial 메인보드 ", "v.serial 그래픽카드 ", "r.serial 메모리카드 ", "h.serial HDD ", "s.serial SSD ", "r2.serial 추가 RAM " };
         String[] where = { " c.name=", " m.name=", " v.name=", " r.name=", " h.name=", " s.name=", " r2.name=" };
         //select option[] from 
         int aCount = 0;
@@ -244,9 +244,15 @@ public class OrderFrame extends JFrame {
 
         }
         int totalPrice = Integer.parseInt(totalprice.replaceAll("[^0-9]", ""));
+        System.out.println(items.toString());
+        System.out.println(list.toString());
         int result = ofDao.addOrder(sb.toString(), sb1.toString(), items.size(), list, userid, totalPrice, address);
-        if (result == 1)
-          JOptionPane.showMessageDialog(OrderFrame.this, "주문이 성공하였습니다");
+        if (result == 1) {
+          if (ofDao.addDelevery(ofDao.getOrderNum() - 1) == 1)
+            JOptionPane.showMessageDialog(OrderFrame.this, "주문이 성공하였습니다");
+          else
+            JOptionPane.showMessageDialog(OrderFrame.this, "주문이 실패하였습니다");
+        }
         dispose();
       }
     });
