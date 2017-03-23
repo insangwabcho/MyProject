@@ -242,7 +242,7 @@ public class OrderFrame extends JFrame {
             sb1.append(" and");
           }
 
-        }
+        } //
         int totalPrice = Integer.parseInt(totalprice.replaceAll("[^0-9]", ""));
         System.out.println(items.toString());
         System.out.println(list.toString());
