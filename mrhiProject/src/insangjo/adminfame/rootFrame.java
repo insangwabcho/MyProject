@@ -1,7 +1,6 @@
 package insangjo.adminfame;
 
 import java.awt.BorderLayout;//d
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -21,25 +20,6 @@ public class rootFrame extends JFrame {
   private JPanel contentPane;
   private JTextField textField;
 
-  /**
-   * Launch the application.
-   */
-  public static void main(String[] args) {
-    EventQueue.invokeLater(new Runnable() {
-      public void run() {
-        try {
-          rootFrame frame = new rootFrame();
-          frame.setVisible(true);
-        } catch (Exception e) {
-          e.printStackTrace();
-        }
-      }
-    });
-  }
-
-  /**
-   * Create the frame.
-   */
   public rootFrame() {
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setBounds(100, 100, 704, 376);
@@ -67,7 +47,12 @@ public class rootFrame extends JFrame {
     JButton btnNewButton_1 = new JButton("월별매출");
     panel.add(btnNewButton_1);
 
-    JButton btnNewButton_2 = new JButton("환경설정");
+    JButton btnNewButton_2 = new JButton("배송관리");
+    btnNewButton_2.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        new sangjin.Client.DeliveryChangFrame().setVisible(true);
+      }
+    });
     panel.add(btnNewButton_2);
 
     JTextArea textArea = new JTextArea();

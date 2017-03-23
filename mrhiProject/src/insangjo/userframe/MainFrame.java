@@ -507,6 +507,10 @@ public class MainFrame extends JFrame {
     lblLogo.setIcon(getScaleImg("/comnawalogo.png", lblLogo.getWidth(), lblLogo.getHeight()));
 
     contentPane.add(lblLogo);
+
+    JLabel lblAd = new JLabel("New label");
+    lblAd.setBounds(180, 12, 372, 47);
+    contentPane.add(lblAd);
     btnLogout.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         sangjin.Client.Login f = new Login();
