@@ -102,8 +102,6 @@ public class DeliveryChangeFrame extends JFrame {
       public void mousePressed(MouseEvent arg0) {
         int order_no = Integer.parseInt(model.getValueAt(table.getSelectedRow(), 0) + "");
         dto = dcdao.detailCart(order_no);
-        //dcdao=new DeliveryChangeDAO();
-        System.out.println(dto);
         tfname.setText(dto.getName());
         tfid.setText(dto.getId());
         tfaddress.setText(dto.getAddress());
