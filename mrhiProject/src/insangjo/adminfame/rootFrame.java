@@ -50,7 +50,7 @@ public class rootFrame extends JFrame {
     JButton btnNewButton_2 = new JButton("배송관리");
     btnNewButton_2.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        new sangjin.Client.DeliveryChangeFrame().setVisible(true);
+        new sangjin.Client.DeliveryChangFrame().setVisible(true);
       }
     });
     panel.add(btnNewButton_2);
