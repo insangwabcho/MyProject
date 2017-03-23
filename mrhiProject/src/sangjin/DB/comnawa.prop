@@ -1,4 +1,4 @@
-url=jdbc:oracle:thin:@localhost:1521:orcl
+url=jdbc:oracle:thin:@192.168.0.148:1521:orcl
 driver=oracle.jdbc.OracleDriver
 id=com
 password=com1234
