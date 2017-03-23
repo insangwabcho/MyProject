@@ -110,7 +110,7 @@ public class DeliveryChangeFrame extends JFrame {
 				tfram2.setText(dto.getRam2());
 				tfhdd.setText(dto.getHdd());
 				tfssd.setText(dto.getSsd());
-				tfmain.setText(dto.getMain());
+				tfmain.setText(dto.getMain());//
 				tftotal.setText(String.valueOf(dto.getTotal()));
 				tfdvs.setText(dto.getDvs());
 				tfdvs.setForeground(Color.red);
