@@ -10,7 +10,7 @@ import java.util.Vector;
 
 
 public class goodsDAO {
-	//»èÁ¦ÈÄ ½Ã¸®¾ó¹øÈ£ Á¤·Ä ¸Ş¼Òµå
+	//ì‚­ì œí›„ ì‹œë¦¬ì–¼ë²ˆí˜¸ ì •ë ¬ ë©”ì†Œë“œ
 	public int updateserial(String table,int Aserial, int Bserial){
 		int result = 0;
 		Connection conn = null;
@@ -18,7 +18,6 @@ public class goodsDAO {
 		try {
 			conn = sangjin.DB.DB.comCon();
 			String sql = "update "+table+" set serial=? where serial=?";
-			System.out.println("dao½ÇÇà");
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, Aserial);
 			pstmt.setInt(2, Bserial);
@@ -42,7 +41,7 @@ public class goodsDAO {
 		return result;
 	}
 	
-	// »èÁ¦ÇÒ ¹°Ç° Ãà·Â¸Ş¼Òµå
+	// ì‚­ì œí•  ë¬¼í’ˆ ì¶•ë ¥ë©”ì†Œë“œ
 	public ArrayList<String> selectDelete(String table, int num) {
 		ArrayList<String> items = new ArrayList<String>();
 		Connection conn = null;
@@ -99,7 +98,7 @@ public class goodsDAO {
 		return items;
 	}
 
-	// ¹°Ç° »èÁ¦
+	// ë¬¼í’ˆ ì‚­ì œ
 	public int deleteGoods(String name, int serial) {
 		int result = 0;
 		Connection conn = null;
@@ -129,7 +128,7 @@ public class goodsDAO {
 		return result;
 	}
 
-	// ¹°Ç° Ãß°¡
+	// ë¬¼í’ˆ ì¶”ê°€
 	public int insertGoods(String name, int serial, String name2, String company, String spec1, String spec2, int cost,
 			int price, int ea, String img) {
 		int result = 0;
@@ -141,9 +140,6 @@ public class goodsDAO {
 			if (name.equals("VGA")) {
 				sql = "insert into " + name + " values(?,?,?,?,?,?,?,?,?)";
 			}
-			System.out.println(sql);
-			System.out.println(name);
-			System.out.println(serial + name + company + spec1 + spec2 + cost + price + ea + img);
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, serial);
 			pstmt.setString(2, company);
@@ -208,7 +204,7 @@ public class goodsDAO {
 		return result;
 	}
 
-	// table2 table3 Ãâ·Â¸Ş¼Òµå
+	// table2 table3 ì¶œë ¥ë©”ì†Œë“œ
 	public Vector jtable2List(String name) {
 		Vector items = new Vector();
 		Connection conn = null;
@@ -279,15 +275,15 @@ public class goodsDAO {
 		return items;
 	}
 
-	//// table 1Ãâ·Â
-	// ÀÔ·ÂÇÑÀç°í ¾÷µ¥ÀÌÆ®
+	//// table 1ì¶œë ¥
+	// ì…ë ¥í•œì¬ê³  ì—…ë°ì´íŠ¸
 	public int updateEa(String name, int textno, int tmpea, int serial) {
 		int result = 0;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		try {
 			conn = sangjin.DB.DB.comCon();
-			// tmpea(ÇöÀç Àç°í)+textno(Ãß°¡ÇÒÀç°í)
+			// tmpea(í˜„ì¬ ì¬ê³ )+textno(ì¶”ê°€í• ì¬ê³ )
 			int ea = tmpea + textno;
 			String sql = "update cpu set ea=? where serial=?";
 			if (name.equals("VGA")) {
@@ -325,7 +321,7 @@ public class goodsDAO {
 		return result;
 	}
 
-	// JTABLE¿¡ ¼±ÅÃÇÑtable Àç°íÃâ·Â
+	// JTABLEì— ì„ íƒí•œtable ì¬ê³ ì¶œë ¥
 	public Vector jtableList(String name) {
 		Vector items = new Vector();
 		Connection conn = null;
@@ -381,7 +377,7 @@ public class goodsDAO {
 		return items;
 	}
 
-	// ¸®½ºÆ®¿¡ TABLE Ãâ·Â ¸Ş¼Òµå
+	// ë¦¬ìŠ¤íŠ¸ì— TABLE ì¶œë ¥ ë©”ì†Œë“œ
 	public ArrayList<String> jlistList() {
 		ArrayList<String> items = new ArrayList<String>();
 		Connection conn = null;
