@@ -24,6 +24,10 @@ import javax.swing.table.DefaultTableModel;
 
 import insangjo.DTO.CartDTO;
 import sangjin.DB.DB;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
 public class DeliveryChangeFrame extends JFrame {
@@ -127,6 +131,21 @@ public class DeliveryChangeFrame extends JFrame {
 		tfdvs.setColumns(10);
 		
 		JComboBox cbdvs = new JComboBox();
+		cbdvs.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+//				String address = comboBox.getSelectedItem().toString();
+//				if (address.equals("naver.com")) {
+//					.setText("naver.com");
+//				} else if (address.equals("hanmail.net")) {
+//					tfJemail2.setText("hanmail.com");
+//				} else if (address.equals("google.com")) {
+//					tfJemail2.setText("google.com");
+//				} else if (address.equals("직접입력")) {
+//					tfJemail2.setText("");
+//					tfJemail2.requestFocus();
+//				}
+			}
+		});
 		cbdvs.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
 		cbdvs.setModel(new DefaultComboBoxModel(new String[] {"상태변경", "배송대기", "배송중", "배송완료"}));
 		cbdvs.setBounds(636, 45, 91, 31);

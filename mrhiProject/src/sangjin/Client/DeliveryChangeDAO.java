@@ -9,7 +9,7 @@ import java.util.Vector;
 import sangjin.DB.DB;
 
 public class DeliveryChangeDAO {
-
+	//전체 구매리스트
 	public Vector list(){
 		Vector items=new Vector();
 		Connection conn=null;
@@ -49,7 +49,7 @@ public class DeliveryChangeDAO {
 		}
 		return items;
 	}
-	
+	//구매 배송 상세내역
 	public DeliveryChangeDTO detailCart(int order_no){
 		DeliveryChangeDTO dto=null;
 		Connection conn=null;
@@ -104,5 +104,6 @@ public class DeliveryChangeDAO {
 		}
 		return dto;
 	}
+	
 	
 }
