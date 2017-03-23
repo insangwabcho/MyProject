@@ -10,6 +10,37 @@ import java.util.Calendar;
 
 public class OrderFrameDAO {
 
+  public int addDelevery(int n) {
+    int result = 0;
+    Connection conn = null;
+    PreparedStatement pstmt = null;
+
+    try {
+      String sql = "insert into delivery values (" + n + ",'배송대기')";
+      conn = sangjin.DB.DB.comCon();
+      pstmt = conn.prepareStatement(sql);
+
+      result = pstmt.executeUpdate();
+    } catch (Exception e) {
+      e.printStackTrace();
+    } finally {
+      if (pstmt != null)
+        try {
+          pstmt.close();
+        } catch (SQLException e1) {
+          e1.printStackTrace();
+        }
+      if (conn != null)
+        try {
+          conn.close();
+        } catch (SQLException e) {
+          e.printStackTrace();
+        }
+    } // try , catch , finally
+
+    return result;
+  }
+
   public int addOrder(String query1, String query2, int ea, ArrayList<String> list, String userid, int totalPrice, String address) {
     ArrayList<Integer> items = new ArrayList<>();
     Connection conn = null;
@@ -17,17 +48,16 @@ public class OrderFrameDAO {
     ResultSet rs = null;
     try {
       String sql = query1 + " from cpu c,hdd h,ram r,ssd s,main m,vga v,ram r2 where" + query2;
-      System.out.println(address);
       conn = sangjin.DB.DB.comCon();
       pstmt = conn.prepareStatement(sql);
 
       System.out.println(sql);
       rs = pstmt.executeQuery();
 
-      while (rs.next()) {
-        for (int i = 0; i < ea; i++) {
-          items.add(rs.getInt("serial"));
-        }
+      System.out.println("listsize" + list.size());
+      if (rs.next()) {
+        for (int i = 0; i < list.size(); i++)
+          items.add(rs.getInt(list.get(i)));
       }
     } catch (Exception e) {
       e.printStackTrace();
