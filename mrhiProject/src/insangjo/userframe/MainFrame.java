@@ -140,7 +140,7 @@ public class MainFrame extends JFrame {
     colMenu = new Color(240, 210, 210);
 
     selectPanel = new JPanel();
-    selectPanel.setBackground(Color.white);
+    selectPanel.setBackground(new Color(0, 51, 255));
     selectPanel.setBounds(6, 71, 168, 266);
     contentPane.add(selectPanel);
     selectPanel.setLayout(null);
@@ -206,12 +206,12 @@ public class MainFrame extends JFrame {
     selectPanel.add(cboMenu);
 
     scrollPane = new JScrollPane();
-    scrollPane.setBounds(6, 49, 156, 206);
+    scrollPane.setBounds(0, 49, 168, 217);
     selectPanel.add(scrollPane);
 
     list_1 = new JList();
     list_1.setFont(new Font("맑은 고딕", Font.BOLD, 16));
-    list_1.setBackground(new Color(20, 105, 255));
+    list_1.setBackground(Color.WHITE);
     list_1.setForeground(Color.white);
     scrollPane.setViewportView(list_1);
 
@@ -229,19 +229,20 @@ public class MainFrame extends JFrame {
     detailPanel.setLayout(new BorderLayout(0, 0));
 
     boxpanel = new JPanel();
-    boxpanel.setBackground(Color.white);
+    boxpanel.setBackground(new Color(0, 51, 255));
     boxpanel.setBounds(6, 349, 486, 346);
     contentPane.add(boxpanel);
     boxpanel.setLayout(null);
 
     JLabel lblNewLabel_1 = new JLabel("현재 장바구니 목록");
+    lblNewLabel_1.setForeground(new Color(255, 255, 255));
     lblNewLabel_1.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
     lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-    lblNewLabel_1.setBounds(6, 12, 466, 16);
+    lblNewLabel_1.setBounds(6, 12, 474, 16);
     boxpanel.add(lblNewLabel_1);
 
     scrollPane_1 = new JScrollPane();
-    scrollPane_1.setBounds(6, 40, 466, 256);
+    scrollPane_1.setBounds(6, 40, 474, 256);
     boxpanel.add(scrollPane_1);
 
     model = new DefaultTableModel(data, col);
@@ -298,10 +299,12 @@ public class MainFrame extends JFrame {
     boxpanel.add(button);
 
     JLabel lblNewLabel_3 = new JLabel("총 금액");
+    lblNewLabel_3.setForeground(new Color(255, 255, 255));
     lblNewLabel_3.setBounds(6, 314, 75, 16);
     boxpanel.add(lblNewLabel_3);
 
     lblTotalPirce = new JLabel("");
+    lblTotalPirce.setForeground(new Color(255, 255, 255));
     lblTotalPirce.setBounds(86, 314, 107, 16);
     boxpanel.add(lblTotalPirce);
 
@@ -321,20 +324,21 @@ public class MainFrame extends JFrame {
     boxpanel.add(button_1);
 
     optionPanel = new JPanel();
-    optionPanel.setBackground(Color.white);
+    optionPanel.setBackground(new Color(0, 51, 255));
     optionPanel.setBounds(180, 71, 1014, 266);
     contentPane.add(optionPanel);
     optionPanel.setLayout(null);
 
     JLabel lblNewLabel_2 = new JLabel("상세 옵션 선택");
+    lblNewLabel_2.setForeground(new Color(255, 255, 255));
     lblNewLabel_2.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
     lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
-    lblNewLabel_2.setBounds(0, 6, 905, 26);
+    lblNewLabel_2.setBounds(0, 6, 1008, 26);
     optionPanel.add(lblNewLabel_2);
 
     option2Panel = new JPanel();
     option2Panel.setBackground(Color.white);
-    option2Panel.setBounds(0, 34, 1014, 226);
+    option2Panel.setBounds(0, 34, 1014, 232);
     optionPanel.add(option2Panel);
     option2Panel.setLayout(null);
 
@@ -469,17 +473,17 @@ public class MainFrame extends JFrame {
     scrollPane_1.setBorder(lb);
 
     lblUserStat = new JLabel(username + "님 로그인중");
-    lblUserStat.setBounds(435, 12, 243, 30);
+    lblUserStat.setBounds(564, 12, 243, 30);
     contentPane.add(lblUserStat);
     lblUserStat.setFont(new Font("Lucida Grande", Font.BOLD, 20));
     lblUserStat.setHorizontalAlignment(SwingConstants.CENTER);
 
     JButton btnUpdate = new JButton("정보수정");
-    btnUpdate.setBounds(823, 16, 117, 27);
+    btnUpdate.setBounds(948, 18, 117, 27);
     contentPane.add(btnUpdate);
 
     JButton btnLogout = new JButton("로그아웃");
-    btnLogout.setBounds(954, 16, 117, 27);
+    btnLogout.setBounds(1077, 18, 117, 27);
     contentPane.add(btnLogout);
 
     JButton btnSearch = new JButton("주문내역조회");
@@ -495,8 +499,14 @@ public class MainFrame extends JFrame {
         }
       }
     });
-    btnSearch.setBounds(692, 16, 117, 27);
+    btnSearch.setBounds(819, 18, 117, 27);
     contentPane.add(btnSearch);
+
+    JLabel lblLogo = new JLabel("New label");
+    lblLogo.setBounds(6, 12, 168, 47);
+    lblLogo.setIcon(getScaleImg("/comnawalogo.png", lblLogo.getWidth(), lblLogo.getHeight()));
+
+    contentPane.add(lblLogo);
     btnLogout.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         sangjin.Client.Login f = new Login();
@@ -623,5 +633,13 @@ public class MainFrame extends JFrame {
   public void closeMainFrame() {
     new sangjin.Client.Login().setVisible(true);
     dispose();
+  }
+
+  public ImageIcon getScaleImg(String url, int width, int height) {
+    String a = (String.valueOf(sangjin.DB.DB.class.getResource("img"))).replaceAll("file:", "") + url;
+    ImageIcon imgicon = new ImageIcon(a);
+    Image t = imgicon.getImage();
+    imgicon = new ImageIcon(t.getScaledInstance(width, height, Image.SCALE_AREA_AVERAGING));
+    return imgicon;
   }
 }
