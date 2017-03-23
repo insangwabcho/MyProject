@@ -509,6 +509,8 @@ public class MainFrame extends JFrame {
     contentPane.add(lblLogo);
 
     JLabel lblAd = new JLabel("New label");
+    new sungwon.ad.AD(lblAd);
+
     lblAd.setBounds(180, 12, 372, 47);
     contentPane.add(lblAd);
     btnLogout.addActionListener(new ActionListener() {
