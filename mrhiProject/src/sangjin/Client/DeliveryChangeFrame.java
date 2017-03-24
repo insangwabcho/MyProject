@@ -55,25 +55,7 @@ public class DeliveryChangeFrame extends JFrame {
   private StatusDAO sttdao;
   private JComboBox cbstt;
 
-  /**
-   * Launch the application.
-   */
-  public static void main(String[] args) {
-    EventQueue.invokeLater(new Runnable() {
-      public void run() {
-        try {
-          DeliveryChangeFrame frame = new DeliveryChangeFrame();
-          frame.setVisible(true);
-        } catch (Exception e) {
-          e.printStackTrace();
-        }
-      }
-    });
-  }
-
-  /**
-   * Create the frame.
-   */
+  
   public DeliveryChangeFrame() {
     setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     setBounds(100, 100, 849, 582);

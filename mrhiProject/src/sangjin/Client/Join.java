@@ -57,25 +57,6 @@ public class Join extends JFrame {
 	private JComboBox cbtel1;
 	private boolean b=false;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Join frame = new Join();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
 	public Join() {
 		setTitle("회원가입");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
