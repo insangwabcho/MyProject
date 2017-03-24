@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
+import sangjin.DB.DB;
+
 public class DeliveryChangeDAO {
   //전체 구매리스트
   public Vector list() {
@@ -106,5 +108,34 @@ public class DeliveryChangeDAO {
     }
     return dto;
   }
+  	//배송상태 수정
+	public int updateMember(String status, int order_no){
+		int result=0;
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		try {
+			conn=DB.comCon();
+			String sql="update delivery set status=? where order_no=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, status);
+			pstmt.setInt(2, order_no);
+			result=pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if( pstmt != null ) pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if( conn != null ) conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
 
 }

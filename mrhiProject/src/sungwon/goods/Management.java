@@ -78,7 +78,7 @@ public class Management extends JFrame {
 	 * Create the frame.
 	 */
 	public Management() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 796, 462);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);

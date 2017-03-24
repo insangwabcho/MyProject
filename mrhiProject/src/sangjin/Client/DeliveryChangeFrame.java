@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -67,7 +68,7 @@ public class DeliveryChangeFrame extends JFrame {
    * Create the frame.
    */
   public DeliveryChangeFrame() {
-    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     setBounds(100, 100, 849, 582);
     contentPane = new JPanel();
     contentPane.setBackground(new Color(255, 255, 255));
@@ -86,7 +87,14 @@ public class DeliveryChangeFrame extends JFrame {
     col.add("주문일자");
     col.add("배송상태");
     dcdao = new DeliveryChangeDAO();
-    DefaultTableModel model = new DefaultTableModel(dcdao.list(), col);
+    DefaultTableModel model = new DefaultTableModel(dcdao.list(), col){
+    	 @Override
+    	    public boolean isCellEditable(int row, int column) {
+    	       //all cells false
+    	       return false;
+    	    }
+    };
+
 
     table = new JTable(model);
     table.addMouseListener(new MouseAdapter() {
@@ -94,8 +102,6 @@ public class DeliveryChangeFrame extends JFrame {
       public void mousePressed(MouseEvent arg0) {
         int order_no = Integer.parseInt(model.getValueAt(table.getSelectedRow(), 0) + "");
         dto = dcdao.detailCart(order_no);
-        //dcdao=new DeliveryChangeDAO();
-        System.out.println(dto);
         tfname.setText(dto.getName());
         tfid.setText(dto.getId());
         tfaddress.setText(dto.getAddress());
@@ -108,7 +114,18 @@ public class DeliveryChangeFrame extends JFrame {
         tfmain.setText(dto.getMain());//
         tftotal.setText(String.valueOf(dto.getTotal()));
         tfdvs.setText(dto.getDvs());
-        tfdvs.setForeground(Color.red);
+        if (tfdvs.getText().equals("배송대기")) {
+            tfdvs.setText("배송대기");
+            tfdvs.setForeground(Color.red);
+          }
+          else if (tfdvs.getText().equals("배송중")) {
+            tfdvs.setText("배송중");
+            tfdvs.setForeground(new Color(255, 228, 0));
+          }
+          else if (tfdvs.getText().equals("배송완료")) {
+            tfdvs.setText("배송완료");
+            tfdvs.setForeground(new Color(47, 157, 39));
+          }
       }
     });
     scrollPane.setViewportView(table);
@@ -122,7 +139,7 @@ public class DeliveryChangeFrame extends JFrame {
     tfdvs = new JTextField();
     tfdvs.setBackground(Color.WHITE);
     tfdvs.setEditable(false);
-    tfdvs.setFont(new Font("맑은 고딕", Font.PLAIN, 18));
+    tfdvs.setFont(new Font("맑은 고딕", Font.BOLD, 18));
     tfdvs.setBounds(518, 44, 104, 31);
     contentPane.add(tfdvs);
     tfdvs.setColumns(10);
@@ -343,6 +360,25 @@ public class DeliveryChangeFrame extends JFrame {
     contentPane.add(label_1);
 
     JButton btnSave = new JButton("저장");
+    btnSave.addActionListener(new ActionListener() {
+    	public void actionPerformed(ActionEvent e) {
+    		String status=tfdvs.getText();
+    		int order_no=Integer.valueOf(model.getValueAt(table.getSelectedRow(), 0)+"");
+			int result = dcdao.updateMember(status,order_no);
+			if (result == 1) {
+				JOptionPane.showMessageDialog(DeliveryChangeFrame.this, "변경완료");
+				DefaultTableModel model = new DefaultTableModel(dcdao.list(), col){
+					 @Override
+					    public boolean isCellEditable(int row, int column) {
+					       //all cells false
+					       return false;
+					    }
+				};
+				table.setModel(model);
+				tfdvs.setText("");
+			}
+    	}
+    });
     btnSave.setBounds(741, 47, 79, 27);
     contentPane.add(btnSave);
   }
