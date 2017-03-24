@@ -89,7 +89,7 @@ public class SearchFrame extends JFrame {
     });
     for (int i = 0; i <= items.size() - 1; i++) {
       comboBox.addItem(items.get(i).getBuydate() + ", 주문번호 : " + items.get(i).getOrder_no());
-    }
+    } //
     panel.add(comboBox);
 
     JPanel panel_1 = new JPanel(new GridLayout(0, 3));
