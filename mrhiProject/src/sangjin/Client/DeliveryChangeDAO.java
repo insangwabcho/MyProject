@@ -10,15 +10,20 @@ import sungwon.DB.DB;
 
 public class DeliveryChangeDAO {
   //전체 구매리스트
-  public Vector list() {
+  public Vector list(String status) {
     Vector items = new Vector();
     Connection conn = null;
     PreparedStatement pstmt = null;
     ResultSet rs = null;
     try {
       conn = sungwon.DB.DB.comCon();
-      String sql = "select c.order_no,c.id,c.buydate,d.status from cart c,delivery d where c.order_no=d.order_no";
+      String sql = "select c.order_no,c.id,c.buydate,d.status from cart c,delivery d"
+      		+ " where c.order_no=d.order_no and status like ? order by order_no";
       pstmt = conn.prepareStatement(sql);
+      if(status.equals("전체배송현황")){
+    	  status="%";
+      }
+      pstmt.setString(1, status);
       rs = pstmt.executeQuery();
       while (rs.next()) {
         Vector row = new Vector();

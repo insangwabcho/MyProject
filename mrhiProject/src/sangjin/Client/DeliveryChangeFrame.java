@@ -6,11 +6,15 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.Vector;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -47,6 +51,8 @@ public class DeliveryChangeFrame extends JFrame {
   private Vector data, col;
   private ImageIcon logo;
   private DeliveryChangeDTO dto;
+  private StatusDTO sttdto;
+  private StatusDAO sttdao;
 
   /**
    * Launch the application.
@@ -77,7 +83,7 @@ public class DeliveryChangeFrame extends JFrame {
     contentPane.setLayout(null);
 
     JScrollPane scrollPane = new JScrollPane();
-    scrollPane.setBounds(425, 98, 397, 416);
+    scrollPane.setBounds(425, 123, 397, 391);
     contentPane.add(scrollPane);
 
     //테이블의 컬럼 정의
@@ -87,7 +93,7 @@ public class DeliveryChangeFrame extends JFrame {
     col.add("주문일자");
     col.add("배송상태");
     dcdao = new DeliveryChangeDAO();
-    DefaultTableModel model = new DefaultTableModel(dcdao.list(), col){
+    DefaultTableModel model = new DefaultTableModel(dcdao.list("%"), col){
     	 @Override
     	    public boolean isCellEditable(int row, int column) {
     	       //all cells false
@@ -163,7 +169,6 @@ public class DeliveryChangeFrame extends JFrame {
       }
     });
     cbdvs.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
-    cbdvs.setModel(new DefaultComboBoxModel(new String[] { "상태변경", "배송대기", "배송중", "배송완료" }));
     cbdvs.setBounds(636, 45, 91, 31);
     contentPane.add(cbdvs);
 
@@ -367,7 +372,7 @@ public class DeliveryChangeFrame extends JFrame {
 			int result = dcdao.updateMember(status,order_no);
 			if (result == 1) {
 				JOptionPane.showMessageDialog(DeliveryChangeFrame.this, "변경완료");
-				DefaultTableModel model = new DefaultTableModel(dcdao.list(), col){
+				DefaultTableModel model = new DefaultTableModel(dcdao.list(status), col){
 					 @Override
 					    public boolean isCellEditable(int row, int column) {
 					       //all cells false
@@ -381,5 +386,35 @@ public class DeliveryChangeFrame extends JFrame {
     });
     btnSave.setBounds(741, 47, 79, 27);
     contentPane.add(btnSave);
+    
+    JComboBox cbstt = new JComboBox();
+    DefaultListCellRenderer dlcr=new DefaultListCellRenderer();
+    dlcr.setHorizontalAlignment(DefaultListCellRenderer.CENTER);
+    cbstt.setRenderer(dlcr);
+    cbstt.setFont(new Font("맑은 고딕", Font.BOLD, 17));
+	cbstt.addItemListener(new ItemListener() {
+		public void itemStateChanged(ItemEvent e) {
+			if( e.getStateChange() == ItemEvent.SELECTED ){
+				String status=(String)cbstt.getSelectedItem();
+				DefaultTableModel model=new DefaultTableModel(dcdao.list(status), col);
+				table.setModel(model);
+			}
+		}
+	});
+    cbstt.setOpaque(true);
+    cbstt.setBackground(Color.BLUE);
+    cbstt.setForeground(Color.WHITE);
+    cbstt.setBounds(425, 98, 397, 24);
+    contentPane.add(cbstt);
+	
+    //콤보박스에 바인딩
+	sttdao=new StatusDAO();
+	ArrayList<StatusDTO> list=sttdao.list();
+	cbstt.addItem("전체배송현황");
+	System.out.println(list.size());
+	for(StatusDTO dto : list) {
+		cbstt.addItem(dto.getStatus());
+	}
+	
   }
 }
