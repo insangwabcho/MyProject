@@ -219,13 +219,11 @@ public class Management extends JFrame {
 				int result = fc.showOpenDialog(Management.this);
 				if (result == JFileChooser.APPROVE_OPTION) {
 					File file = fc.getSelectedFile();
-
+					//이미지 리사이즈 
 					try {
 						BufferedImage bi = ImageIO.read(file);
 						String a = (String.valueOf(sungwon.DB.DB.class.getResource("img"))).replaceAll("file:", "");
 						a = a.replaceAll("/bin/", "/src/");
-						System.out.println(a.substring(a.indexOf(a)));
-						System.out.println(a + "/" + name + "/" + file.getName());
 						File copyfile = new File(a + "/" + name + "/" + file.getName());
 						ImageIO.write(bi, "jpg", copyfile);
 						originimg = new ImageIcon(ImageIO.read(copyfile));
