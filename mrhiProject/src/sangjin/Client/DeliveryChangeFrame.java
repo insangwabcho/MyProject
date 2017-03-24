@@ -53,6 +53,7 @@ public class DeliveryChangeFrame extends JFrame {
   private DeliveryChangeDTO dto;
   private StatusDTO sttdto;
   private StatusDAO sttdao;
+  private JComboBox cbstt;
 
   /**
    * Launch the application.
@@ -151,6 +152,7 @@ public class DeliveryChangeFrame extends JFrame {
     tfdvs.setColumns(10);
 
     JComboBox cbdvs = new JComboBox();
+    cbdvs.setModel(new DefaultComboBoxModel(new String[] {"배송대기", "배송중", "배송완료"}));
     cbdvs.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent arg0) {
         String status = cbdvs.getSelectedItem().toString();
@@ -364,6 +366,28 @@ public class DeliveryChangeFrame extends JFrame {
     label_1.setBounds(399, 98, 2, 373);
     contentPane.add(label_1);
 
+    
+    cbstt = new JComboBox();
+	cbstt.addItemListener(new ItemListener() {
+		public void itemStateChanged(ItemEvent e) {
+			if( e.getStateChange() == ItemEvent.SELECTED ){
+				String status=(String)cbstt.getSelectedItem();
+				DefaultTableModel model=new DefaultTableModel(dcdao.list(status), col){
+					 @Override
+					    public boolean isCellEditable(int row, int column) {
+					       //all cells false
+					       return false;
+					    }
+				};
+				table.setModel(model);
+			}
+		}
+	});
+    DefaultListCellRenderer dlcr=new DefaultListCellRenderer();
+    dlcr.setHorizontalAlignment(DefaultListCellRenderer.CENTER);
+    cbstt.setRenderer(dlcr);
+    cbstt.setFont(new Font("맑은 고딕", Font.BOLD, 17));
+    
     JButton btnSave = new JButton("저장");
     btnSave.addActionListener(new ActionListener() {
     	public void actionPerformed(ActionEvent e) {
@@ -381,26 +405,15 @@ public class DeliveryChangeFrame extends JFrame {
 				};
 				table.setModel(model);
 				tfdvs.setText("");
+				refreshcombo();
 			}
     	}
     });
     btnSave.setBounds(741, 47, 79, 27);
     contentPane.add(btnSave);
     
-    JComboBox cbstt = new JComboBox();
-    DefaultListCellRenderer dlcr=new DefaultListCellRenderer();
-    dlcr.setHorizontalAlignment(DefaultListCellRenderer.CENTER);
-    cbstt.setRenderer(dlcr);
-    cbstt.setFont(new Font("맑은 고딕", Font.BOLD, 17));
-	cbstt.addItemListener(new ItemListener() {
-		public void itemStateChanged(ItemEvent e) {
-			if( e.getStateChange() == ItemEvent.SELECTED ){
-				String status=(String)cbstt.getSelectedItem();
-				DefaultTableModel model=new DefaultTableModel(dcdao.list(status), col);
-				table.setModel(model);
-			}
-		}
-	});
+    
+
     cbstt.setOpaque(true);
     cbstt.setBackground(Color.BLUE);
     cbstt.setForeground(Color.WHITE);
@@ -409,12 +422,15 @@ public class DeliveryChangeFrame extends JFrame {
 	
     //콤보박스에 바인딩
 	sttdao=new StatusDAO();
-	ArrayList<StatusDTO> list=sttdao.list();
-	cbstt.addItem("전체배송현황");
-	System.out.println(list.size());
-	for(StatusDTO dto : list) {
-		cbstt.addItem(dto.getStatus());
-	}
+	refreshcombo();
 	
+  }
+  void refreshcombo(){
+		ArrayList<StatusDTO> list=sttdao.list();
+		cbstt.removeAllItems();
+		cbstt.addItem("전체배송현황");
+		for(StatusDTO dto : list) {
+			cbstt.addItem(dto.getStatus());
+		}
   }
 }
