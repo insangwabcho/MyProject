@@ -63,7 +63,7 @@ public class rootFrame extends JFrame {
     btnNewButton_2.setFont(new Font("맑은 고딕", Font.BOLD, 16));
     btnNewButton_2.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        new sangjin.Client.DeliveryChangeFrame().setVisible(true);
+        new sangjin.DeliveryStatus.DeliveryChangeFrame().setVisible(true);
       }
     });
     panel.add(btnNewButton_2);

@@ -98,6 +98,7 @@ public class Login extends JFrame {
             name = dao.returnName(Lid); //이름 리턴
             id = dao.returnID(Lid); //아이디 리턴
             address = dao.returnAddress(Lid); //주소 리턴
+            dao.updateLog(Lid);
             if (Lid.equals("root")) { //관리자 아이디면
               new rootFrame().setVisible(true);
               dispose();
@@ -132,7 +133,8 @@ public class Login extends JFrame {
     tfLpassword = new JPasswordField();
     tfLpassword.addKeyListener(new KeyAdapter() {
       @Override
-      public void keyPressed(KeyEvent e) {
+      public void keyTyped(KeyEvent e) {
+    	  System.out.println(e.getKeyCode());
         if (e.getKeyCode() == 10) { //비밀번호 텍스트 필드에서 엔터키를 입력하면
           btnLogin.doClick(); //로그인 버튼이 클릭됨
         }

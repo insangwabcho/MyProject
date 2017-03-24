@@ -1,4 +1,4 @@
-package sangjin.Client;
+package sangjin.DeliveryStatus;
 
 public class StatusDTO {
 	private String status;

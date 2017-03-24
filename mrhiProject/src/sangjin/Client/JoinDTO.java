@@ -11,6 +11,7 @@ public class JoinDTO {
 	private String sex; //성별
 	private String tel; //폰번호
 	private String address; //주소
+	private Date log; //로그인기록
 
 	//생성자
 	public JoinDTO() {
@@ -83,6 +84,12 @@ public class JoinDTO {
 	}
 	public void setAddress(String address) {
 		this.address = address;
+	}
+	public Date getLog() {
+		return log;
+	}
+	public void setLog(Date log) {
+		this.log = log;
 	}
 	
 	//toString()
