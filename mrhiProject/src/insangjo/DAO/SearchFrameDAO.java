@@ -129,8 +129,8 @@ public class SearchFrameDAO {
       int[] itemSerial = new int[serials.size()];
       int aCount = 0;
       for (int i = 0; i < serials.size(); i++) {
-        //if (serials.get(i).replaceAll("[^0-9]", "").equals("0")) {
         if (t[i].equals("0")) {
+
         }
         else {
           itemSerial[aCount] = Integer.parseInt(serials.get(i).replaceAll("[^0-9]", ""));
@@ -191,14 +191,18 @@ public class SearchFrameDAO {
           sql3.append("rtow.serial= cart.ram2_serial");
           kinds.add("추가 메모리카드");
           break;
+        default:
+          break;
         }
-        if (i != aCount - 1)
+        if (i != aCount - 1) {
           sql1.append(",");
+          sql3.append(" and ");
+        }
       }
       String sql = sql1.toString() + sql2.toString() + sql3.toString();
       conn = sungwon.DB.DB.comCon();
       pstmt = conn.prepareStatement(sql);
-
+      System.out.println(sql);
       rs = pstmt.executeQuery();
 
       aCount = 0;
