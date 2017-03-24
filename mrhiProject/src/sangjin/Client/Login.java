@@ -76,7 +76,7 @@ public class Login extends JFrame {
     JButton btnLogin = new JButton("로그인");
     btnLogin.setBackground(SystemColor.control);
     btnLogin.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent e) {
+      public void actionPerformed(ActionEvent e) {//
         //사용자가 입력한 아이디,비번
         String Lid = tfLid.getText();
         String Lpassword = String.valueOf(tfLpassword.getPassword());
