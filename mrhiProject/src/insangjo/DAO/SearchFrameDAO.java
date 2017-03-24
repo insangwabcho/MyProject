@@ -107,7 +107,7 @@ public class SearchFrameDAO {
     return items;
   }
 
-  public Vector detailOrder(CartDTO dto) {
+  public Vector detailOrder(CartDTO dto, int order_no) {
     Vector items = new Vector<>();
     Connection conn = null;
     PreparedStatement pstmt = null;
@@ -157,39 +157,39 @@ public class SearchFrameDAO {
       for (int i = 0; i < aCount; i++) {
         switch (item[i]) {
         case "cpu c ":
-          sql1.append("c.name ,c.price ");
+          sql1.append("c.name CPU ,c.price CPUp ");
           sql3.append("c.serial= cart.cpu_serial ");
           kinds.add("CPU");
           break;
         case "vga v ":
-          sql1.append("v.name ,v.price ");
+          sql1.append("v.name 그래픽카드 ,v.price 그래픽카드p ");
           sql3.append("v.serial= cart.vga_serial ");
           kinds.add("그래픽카드");
           break;
         case "ram r ":
-          sql1.append("r.name ,r.price ");
+          sql1.append("r.name 메모리카드 ,r.price 메모리카드p ");
           sql3.append("r.serial= cart.ram_serial");
           kinds.add("메모리카드");
           break;
         case "hdd h ":
-          sql1.append("h.name ,h.price ");
+          sql1.append("h.name HDD ,h.price HDDp ");
           sql3.append("h.serial= cart.hdd_serial");
           kinds.add("HDD");
           break;
         case "ssd s ":
-          sql1.append("s.name ,s.price ");
+          sql1.append("s.name SSD ,s.price SSDp ");
           sql3.append("s.serial= cart.ssd_serial");
           kinds.add("SSD");
           break;
         case "main m ":
-          sql1.append("m.name ,m.price ");
+          sql1.append("m.name 메인보드 ,m.price 메인보드p ");
           sql3.append("m.serial= cart.main_serial");
           kinds.add("메인보드");
           break;
         case "ram rtwo ":
-          sql1.append("rtwo.name ,rtwo.price ");
+          sql1.append("rtwo.name 추가메모리카드 ,rtwo.price 추가메모리카드p ");
           sql3.append("rtwo.serial= cart.ram2_serial");
-          kinds.add("추가 메모리카드");
+          kinds.add("추가메모리카드");
           break;
         }
         if (i != aCount - 1) {
@@ -197,20 +197,25 @@ public class SearchFrameDAO {
           sql3.append(" and ");
         }
       }
-      String sql = sql1.toString() + sql2.toString() + sql3.toString();
+      String sql = sql1.toString() + sql2.toString() + sql3.toString() + " and cart.order_no=" + order_no;
       conn = sungwon.DB.DB.comCon();
       pstmt = conn.prepareStatement(sql);
       rs = pstmt.executeQuery();
 
+      int aCountt = aCount;
       aCount = 0;
-      while (rs.next()) {
-        Vector row = new Vector<>();
-        row.add(kinds.get(aCount));
-        row.add(rs.getString("name"));
-        row.add(rs.getInt("price"));
 
-        items.add(row);
-        aCount++;
+      if (rs.next()) {
+        for (int i = 0; i < aCountt; i++) {
+          Vector row = new Vector<>();
+          row.add(kinds.get(aCount));
+          String a = kinds.get(aCount);
+          String b = kinds.get(aCount) + "P";
+          row.add(rs.getString(a));
+          row.add(rs.getInt(b));
+          aCount++;
+          items.add(row);
+        }
       }
     } catch (Exception e) {
       e.printStackTrace();
