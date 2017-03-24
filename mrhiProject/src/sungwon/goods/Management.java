@@ -14,13 +14,13 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Vector;
+
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -233,14 +233,20 @@ public class Management extends JFrame {
 					
 					try {
 						BufferedImage bi = ImageIO.read(file);
-						File copyfile = new File(name+"/"+file.getName());
+						String a = (String.valueOf
+								(sangjin.DB.DB.class.getResource("img"))).replaceAll("file:", "");
+						a= a.replaceAll("/bin/", "/src/");
+						System.out.println(a.substring(a.indexOf(a)));
+						System.out.println(a+"/"+name+"/"+file.getName());
+						File copyfile = new File(a+"/"+name+"/"+file.getName());
 						ImageIO.write(bi, "jpg", copyfile);
 						ImageIcon icon = new ImageIcon(ImageIO.read(copyfile));
 						Image imageSrc = icon.getImage();
 						Image imageNew = imageSrc.getScaledInstance(142, 137, Image.SCALE_AREA_AVERAGING);
 						icon = new ImageIcon(imageNew);
 						lblimg.setIcon(icon);
-						img_path = name+"/"+file.getName();
+						img_path = "/"+name+"/"+file.getName();
+						System.out.println("/"+name+"/"+file.getName());
 					} catch (Exception e2) {
 						e2.printStackTrace();
 					}
