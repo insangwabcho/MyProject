@@ -1,8 +1,0 @@
-/**
- * 
- */
-/**
- * @author insangjo
- *
- */
-package sungwon;
