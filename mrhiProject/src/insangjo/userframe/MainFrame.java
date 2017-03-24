@@ -221,11 +221,6 @@ public class MainFrame extends JFrame {
     detailPanel.setBounds(506, 349, 688, 346);
     contentPane.add(detailPanel);
 
-    String a = (String.valueOf(sangjin.DB.DB.class.getResource("img"))).replaceAll("file:", "") + "/cpu/cputemp.jpeg";
-    ImageIcon imgicon = new ImageIcon(a);
-    Image src = imgicon.getImage();
-    Image ss = src.getScaledInstance(678, imgicon.getIconHeight(), Image.SCALE_AREA_AVERAGING);
-    imgicon = new ImageIcon(ss);
     detailPanel.setLayout(new BorderLayout(0, 0));
 
     boxpanel = new JPanel();
@@ -464,7 +459,6 @@ public class MainFrame extends JFrame {
     scrollPane_3.getVerticalScrollBar().setUnitIncrement(30);
     detailPanel.add(scrollPane_3, BorderLayout.CENTER);
     JLabel lblDetail = new JLabel("제품상세페이지");
-    lblDetail.setIcon(imgicon);
     boxpanel.setBorder(lb);
     optionPanel.setBorder(lb);
     option2Panel.setBorder(lb);
