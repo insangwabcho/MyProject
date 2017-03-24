@@ -51,10 +51,8 @@ public class OrderFrameDAO {
       conn = sungwon.DB.DB.comCon();
       pstmt = conn.prepareStatement(sql);
 
-      System.out.println(sql);
       rs = pstmt.executeQuery();
 
-      System.out.println("listsize" + list.size());
       if (rs.next()) {
         for (int i = 0; i < list.size(); i++)
           items.add(rs.getInt(list.get(i)));
@@ -82,23 +80,15 @@ public class OrderFrameDAO {
   public int updateQuery(ArrayList<Integer> itemss, ArrayList<String> list, String userid, int totalPrice, String address) {
     ArrayList<Integer> items = itemss;
     for (int i = 0; i < items.size(); i++) {
-      System.out.println("ddd" + items.get(i));
     }
     Connection conn = null;
     PreparedStatement pstmt = null;
     int result = 0;
 
-    System.out.println(address);
     int[] arr = new int[9];
     arr[0] = getOrderNum();
     arr[7] = totalPrice;
-    System.out.println("------");
     for (int i = 0; i < list.size(); i++) {
-      System.out.println(list.get(i));
-    }
-    System.out.println("------");
-    for (int i = 0; i < list.size(); i++) {
-      System.out.println(list.get(i));
       switch (list.get(i)) {
       case "CPU":
         arr[1] = items.get(i);
@@ -135,7 +125,6 @@ public class OrderFrameDAO {
       //String sql = "insert into cart values(?,?,?,?,?,?,?,?,?)";
       String sql = "insert into cart values (" + arr[0] + ",'" + userid + "'," + arr[1] + "," + arr[2] + "," + arr[3] + "," + arr[4] + "," + arr[5] + "," + arr[6] + "," + arr[7] + ",'" + arr8 + "','"
           + arr10 + "'," + arr[8] + ")";
-      System.out.println(sql);
       conn = sungwon.DB.DB.comCon();
       pstmt = conn.prepareStatement(sql);
 

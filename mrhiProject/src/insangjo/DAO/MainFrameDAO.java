@@ -36,7 +36,7 @@ public class MainFrameDAO {
     Connection conn = null;
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    try {
+    try {//
       String sql = "select password from member where id='" + id + "'";
       conn = sungwon.DB.DB.comCon();
       pstmt = conn.prepareStatement(sql);

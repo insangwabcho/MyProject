@@ -44,7 +44,7 @@ public class Graph extends JFrame {
       @Override
       protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-
+        g.drawLine(200, 200, 300, 300);
       }
     };
     graphpane.setBounds(71, 6, 455, 330);
