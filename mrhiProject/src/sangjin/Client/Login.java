@@ -193,5 +193,5 @@ public class Login extends JFrame {
     lblmain.setHorizontalAlignment(SwingConstants.CENTER);
     lblmain.setBounds(224, 12, 320, 132);
     contentPane.add(lblmain);
-  }
+  }//
 }
