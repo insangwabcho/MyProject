@@ -26,6 +26,8 @@ import javax.swing.border.EmptyBorder;
 import insangjo.adminfame.rootFrame;
 import insangjo.userframe.MainFrame;
 import sungwon.DB.DB;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Login extends JFrame {
 
@@ -55,6 +57,7 @@ public class Login extends JFrame {
   }
 
   public Login() {
+  	setResizable(false);
     setTitle("ComNawa");
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setBounds(100, 100, 675, 481);

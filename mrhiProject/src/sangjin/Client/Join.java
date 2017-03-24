@@ -58,6 +58,7 @@ public class Join extends JFrame {
 	private boolean b=false;
 
 	public Join() {
+		setResizable(false);
 		setTitle("회원가입");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 601, 786);

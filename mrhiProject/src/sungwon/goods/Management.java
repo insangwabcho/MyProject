@@ -44,6 +44,10 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
 
+import sungwon.DB.DB;
+
+import javax.swing.JLayeredPane;
+
 public class Management extends JFrame {
 
 	private JTable table, table2, table3;
@@ -55,10 +59,18 @@ public class Management extends JFrame {
 			tfcompany3, tfspec1_3, tfspec2_3, tfcost3, tfprice3, tfea1;
 	private goodsDAO dao;
 	private String name, img_path;
-	private ImageIcon logo, img;
+	private ImageIcon logo, img,size,icon, originimg;
 	private JTextField tfea3;
 	private int table3num;
+	private JButton btnsizeup;
+	private JLayeredPane layeredPane;
 
+	/**
+	 * Launch the application.
+	 */
+	/**
+	 * Create the frame.
+	 */
 	public Management() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 796, 462);
@@ -125,12 +137,6 @@ public class Management extends JFrame {
 				tfea1.setText("");
 			}
 		});
-
-		lblimg = new JLabel("이미지 등록");
-		lblimg.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		lblimg.setHorizontalAlignment(SwingConstants.CENTER);
-		lblimg.setBounds(12, 5, 142, 137);
-		panel_item.add(lblimg);
 
 		JLabel lblcompany2 = new JLabel("제조사");
 		lblcompany2.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
@@ -203,7 +209,7 @@ public class Management extends JFrame {
 
 		JButton btnimage = new JButton("사진 등록");
 		btnimage.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		btnimage.setBounds(22, 157, 125, 23);
+		btnimage.setBounds(22, 161, 125, 23);
 		panel_item.add(btnimage);
 		// 이미지 저장 이벤트
 		btnimage.addActionListener(new ActionListener() {
@@ -212,23 +218,19 @@ public class Management extends JFrame {
 				int result = fc.showOpenDialog(Management.this);
 				if (result == JFileChooser.APPROVE_OPTION) {
 					File file = fc.getSelectedFile();
-					
+					//이미지 리사이즈 
 					try {
 						BufferedImage bi = ImageIO.read(file);
-						String a = (String.valueOf
-								(sungwon.DB.DB.class.getResource("img"))).replaceAll("file:", "");
-						a= a.replaceAll("/bin/", "/src/");
-						System.out.println(a.substring(a.indexOf(a)));
-						System.out.println(a+"/"+name+"/"+file.getName());
-						File copyfile = new File(a+"/"+name+"/"+file.getName());
+						String a = (String.valueOf(sungwon.DB.DB.class.getResource("img"))).replaceAll("file:", "");
+						a = a.replaceAll("/bin/", "/src/");
+						File copyfile = new File(a + "/" + name + "/" + file.getName());
 						ImageIO.write(bi, "jpg", copyfile);
-						ImageIcon icon = new ImageIcon(ImageIO.read(copyfile));
-						Image imageSrc = icon.getImage();
+						originimg = new ImageIcon(ImageIO.read(copyfile));
+						Image imageSrc = originimg.getImage();
 						Image imageNew = imageSrc.getScaledInstance(142, 137, Image.SCALE_AREA_AVERAGING);
 						icon = new ImageIcon(imageNew);
 						lblimg.setIcon(icon);
-						img_path = "/"+name+"/"+file.getName();
-						System.out.println("/"+name+"/"+file.getName());
+						img_path = name + "/" + file.getName();
 					} catch (Exception e2) {
 						e2.printStackTrace();
 					}
@@ -445,6 +447,37 @@ public class Management extends JFrame {
 		lblprice2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblprice2.setBounds(420, 130, 140, 20);
 		panel_item.add(lblprice2);
+
+		layeredPane = new JLayeredPane();
+		layeredPane.setBounds(12, 10, 140, 145);
+		panel_item.add(layeredPane);
+
+		lblimg = new JLabel("이미지 등록");
+		lblimg.setBounds(0, 0, 136, 145);
+		layeredPane.add(lblimg, 1, 0);
+		lblimg.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		lblimg.setHorizontalAlignment(SwingConstants.CENTER);
+
+		btnsizeup = new JButton("");
+		btnsizeup.setBounds(109, 118, 25, 25);
+		layeredPane.add(btnsizeup, 2, 0);
+		String a2 = (String.valueOf(DB.class.getResource("img/sizeup.png"))).replaceAll("file:", "");
+		ImageIcon tmpsizeup = new ImageIcon(a2);
+		Image sizeSrc = tmpsizeup.getImage();
+		Image newsize = sizeSrc.getScaledInstance(25, 25, Image.SCALE_AREA_AVERAGING);
+		size = new ImageIcon(newsize);
+		btnsizeup.setIcon(size);
+		btnsizeup.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					new sungwon.goods.ImgSizeUp(originimg).setVisible(true);	
+				} catch (Exception e2) {
+					JOptionPane.showMessageDialog(Management.this, "사진을 먼저등록하세요");
+				}
+			}
+		});
 
 		// Jlist에 DB값 출력
 		ArrayList<String> jlistList = dao.jlistList();
@@ -723,10 +756,10 @@ public class Management extends JFrame {
 					refreshTable();
 					refreshTable2();
 				}
-				//중간 목록이 삭제되면 뒤에서 하나씩 serial을 당김
+				// 중간 목록이 삭제되면 뒤에서 하나씩 serial을 당김
 				for (int i = serial; i <= table3.getRowCount(); i++) {
 					int Aserial = i;
-					int Bserial = i+1;
+					int Bserial = i + 1;
 					dao.updateserial(name, Aserial, Bserial);
 					refreshTable();
 					refreshTable2();
@@ -775,7 +808,8 @@ public class Management extends JFrame {
 		panel_delete.add(tfea3);
 		tfea3.setColumns(10);
 
-		ImageIcon tmplogo = new ImageIcon("logo.png");
+		String a1 = (String.valueOf(DB.class.getResource("img/comnawalogo.png"))).replaceAll("file:", "");
+		ImageIcon tmplogo = new ImageIcon(a1);
 		try {
 			Image imageSrc = tmplogo.getImage();
 			Image newImage = imageSrc.getScaledInstance(160, 90, Image.SCALE_AREA_AVERAGING);
@@ -862,5 +896,4 @@ public class Management extends JFrame {
 			columnModel.getColumn(column).setPreferredWidth(width);
 		}
 	}
-
 }
