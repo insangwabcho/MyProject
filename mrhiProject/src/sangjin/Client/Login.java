@@ -154,7 +154,7 @@ public class Login extends JFrame {
     btnJoin.setBounds(403, 340, 120, 40);
     contentPane.add(btnJoin);
 
-    lblResult = new JLabel("");
+    lblResult = new JLabel("");//
     lblResult.setFont(new Font("굴림", Font.PLAIN, 15));
     lblResult.setHorizontalAlignment(SwingConstants.CENTER);
     lblResult.setBounds(254, 303, 269, 25);
