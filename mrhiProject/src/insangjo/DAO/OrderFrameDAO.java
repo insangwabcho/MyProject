@@ -17,7 +17,7 @@ public class OrderFrameDAO {
 
     try {
       String sql = "insert into delivery values (" + n + ",'배송대기')";
-      conn = sangjin.DB.DB.comCon();
+      conn = sungwon.DB.DB.comCon();
       pstmt = conn.prepareStatement(sql);
 
       result = pstmt.executeUpdate();
@@ -48,7 +48,7 @@ public class OrderFrameDAO {
     ResultSet rs = null;
     try {
       String sql = query1 + " from cpu c,hdd h,ram r,ssd s,main m,vga v,ram rtwo where" + query2;
-      conn = sangjin.DB.DB.comCon();
+      conn = sungwon.DB.DB.comCon();
       pstmt = conn.prepareStatement(sql);
 
       System.out.println(sql);
@@ -136,7 +136,7 @@ public class OrderFrameDAO {
       String sql = "insert into cart values (" + arr[0] + ",'" + userid + "'," + arr[1] + "," + arr[2] + "," + arr[3] + "," + arr[4] + "," + arr[5] + "," + arr[6] + "," + arr[7] + ",'" + arr8 + "','"
           + arr10 + "'," + arr[8] + ")";
       System.out.println(sql);
-      conn = sangjin.DB.DB.comCon();
+      conn = sungwon.DB.DB.comCon();
       pstmt = conn.prepareStatement(sql);
 
       //      pstmt.setInt(1, arr[0]);
@@ -175,7 +175,7 @@ public class OrderFrameDAO {
     ArrayList<Integer> items = new ArrayList<>();
     try {
       String sql = "select order_no from cart";
-      conn = sangjin.DB.DB.comCon();
+      conn = sungwon.DB.DB.comCon();
       pstmt = conn.prepareStatement(sql);
       rs = pstmt.executeQuery();
 

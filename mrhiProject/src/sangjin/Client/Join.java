@@ -242,7 +242,7 @@ public class Join extends JFrame {
 				PreparedStatement pstmt = null;
 				ResultSet rs = null;
 				try {
-					conn = sangjin.DB.DB.comCon();
+					conn = sungwon.DB.DB.comCon();
 					String sql = "select * from member where id=?";
 					pstmt = conn.prepareStatement(sql);
 

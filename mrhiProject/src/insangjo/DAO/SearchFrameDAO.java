@@ -19,7 +19,7 @@ public class SearchFrameDAO {
 
     try {
       String sql = "select order_no from cart where id='" + userid + "'";
-      conn = sangjin.DB.DB.comCon();
+      conn = sungwon.DB.DB.comCon();
       pstmt = conn.prepareStatement(sql);
       rs = pstmt.executeQuery();
 
@@ -60,7 +60,7 @@ public class SearchFrameDAO {
 
     try {
       String sql = "select * from cart where id='" + userid + "'";
-      conn = sangjin.DB.DB.comCon();
+      conn = sungwon.DB.DB.comCon();
       pstmt = conn.prepareStatement(sql);
       rs = pstmt.executeQuery();
 
@@ -196,7 +196,7 @@ public class SearchFrameDAO {
           sql1.append(",");
       }
       String sql = sql1.toString() + sql2.toString() + sql3.toString();
-      conn = sangjin.DB.DB.comCon();
+      conn = sungwon.DB.DB.comCon();
       pstmt = conn.prepareStatement(sql);
 
       rs = pstmt.executeQuery();

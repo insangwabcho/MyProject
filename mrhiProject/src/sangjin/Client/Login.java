@@ -25,7 +25,7 @@ import javax.swing.border.EmptyBorder;
 
 import insangjo.adminfame.rootFrame;
 import insangjo.userframe.MainFrame;
-import sangjin.DB.DB;
+import sungwon.DB.DB;
 
 public class Login extends JFrame {
 

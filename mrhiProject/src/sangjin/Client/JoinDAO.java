@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
-import sangjin.DB.DB;
+import sungwon.DB.DB;
 
 public class JoinDAO {
 	

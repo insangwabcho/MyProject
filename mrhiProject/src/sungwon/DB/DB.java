@@ -1,4 +1,4 @@
-package sangjin.DB;
+package sungwon.DB;
 
 import java.io.FileInputStream;
 import java.sql.Connection;

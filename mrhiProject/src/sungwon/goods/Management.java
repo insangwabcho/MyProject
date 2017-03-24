@@ -234,7 +234,7 @@ public class Management extends JFrame {
 					try {
 						BufferedImage bi = ImageIO.read(file);
 						String a = (String.valueOf
-								(sangjin.DB.DB.class.getResource("img"))).replaceAll("file:", "");
+								(sungwon.DB.DB.class.getResource("img"))).replaceAll("file:", "");
 						a= a.replaceAll("/bin/", "/src/");
 						System.out.println(a.substring(a.indexOf(a)));
 						System.out.println(a+"/"+name+"/"+file.getName());

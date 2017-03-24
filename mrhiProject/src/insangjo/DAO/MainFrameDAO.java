@@ -17,7 +17,7 @@ public class MainFrameDAO {
 
     try {
       String sql = "select img from " + kind + " where serial=" + serial;
-      conn = sangjin.DB.DB.comCon();
+      conn = sungwon.DB.DB.comCon();
       pstmt = conn.prepareStatement(sql);
       rs = pstmt.executeQuery();
 
@@ -38,7 +38,7 @@ public class MainFrameDAO {
     ResultSet rs = null;
     try {
       String sql = "select password from member where id='" + id + "'";
-      conn = sangjin.DB.DB.comCon();
+      conn = sungwon.DB.DB.comCon();
       pstmt = conn.prepareStatement(sql);
       rs = pstmt.executeQuery();
       if (rs.next()) {
@@ -76,7 +76,7 @@ public class MainFrameDAO {
 
     try {
       String sql = "delete from member where id='" + id + "'";
-      conn = sangjin.DB.DB.comCon();
+      conn = sungwon.DB.DB.comCon();
       pstmt = conn.prepareStatement(sql);
       result = pstmt.executeUpdate();
     } catch (Exception e) {
@@ -127,7 +127,7 @@ public class MainFrameDAO {
     kortoeng = kortoeng.toUpperCase();
     try {
       String sql = "select distinct company from " + kortoeng;
-      conn = sangjin.DB.DB.comCon();
+      conn = sungwon.DB.DB.comCon();
       pstmt = conn.prepareStatement(sql);
       rs = pstmt.executeQuery();
 
@@ -187,7 +187,7 @@ public class MainFrameDAO {
 
     try {
       String sql = "select '제품번호 : '||serial||', 모델명 : '||name||' , 가격 : '||price||'원 , 재고수량 : '||ea||'ea' detail from " + kortoeng + " where company=?";
-      conn = sangjin.DB.DB.comCon();
+      conn = sungwon.DB.DB.comCon();
       pstmt = conn.prepareStatement(sql);
       pstmt.setString(1, tablename.toUpperCase());
       rs = pstmt.executeQuery();
@@ -257,7 +257,7 @@ public class MainFrameDAO {
       sqll.append(sql2);
 
       String sql = sqll.toString();
-      conn = sangjin.DB.DB.comCon();
+      conn = sungwon.DB.DB.comCon();
       pstmt = conn.prepareStatement(sql);
       // 제조사명을 가져오는데 대문자로 가져오기때문에 소문자로 변경
       //pstmt.setString(1, company);

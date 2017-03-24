@@ -672,7 +672,7 @@ public class MainFrame extends JFrame {
   }
 
   public ImageIcon getScaleImg(String url, int width, int height) {
-    String a = (String.valueOf(sangjin.DB.DB.class.getResource("img"))).replaceAll("file:", "") + url;
+    String a = (String.valueOf(sungwon.DB.DB.class.getResource("img"))).replaceAll("file:", "") + url;
     ImageIcon imgicon = new ImageIcon(a);
     Image t = imgicon.getImage();
     imgicon = new ImageIcon(t.getScaledInstance(width, height, Image.SCALE_AREA_AVERAGING));

@@ -25,7 +25,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-import sangjin.DB.DB;
+import sungwon.DB.DB;
 
 public class DeliveryChangeFrame extends JFrame {
 

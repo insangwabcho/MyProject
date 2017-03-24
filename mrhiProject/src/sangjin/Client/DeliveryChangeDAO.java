@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
-import sangjin.DB.DB;
+import sungwon.DB.DB;
 
 public class DeliveryChangeDAO {
   //전체 구매리스트
@@ -16,7 +16,7 @@ public class DeliveryChangeDAO {
     PreparedStatement pstmt = null;
     ResultSet rs = null;
     try {
-      conn = sangjin.DB.DB.comCon();
+      conn = sungwon.DB.DB.comCon();
       String sql = "select c.order_no,c.id,c.buydate,d.status from cart c,delivery d where c.order_no=d.order_no";
       pstmt = conn.prepareStatement(sql);
       rs = pstmt.executeQuery();
@@ -60,7 +60,7 @@ public class DeliveryChangeDAO {
     PreparedStatement pstmt = null;
     ResultSet rs = null;
     try {
-      conn = sangjin.DB.DB.comCon();
+      conn = sungwon.DB.DB.comCon();
       String sql = "select ct.order_no 주문번호,member.name 이름,member.id 아이디,ct.newadress 주소, c.name CPU, v.name VGA,"
           + " r.name RAM,r2.name RAM2, h.name HDD, s.name SSD, m.name MAIN,ct.total 합계, d.status 배송상태" + " from member ,cart ct,cpu c, vga v, ram r, hdd h, ssd s, main m ,ram r2, delivery d"
           + " where d.order_no=ct.order_no and member.id=ct.id" + " and c.serial(+)=ct.cpu_serial and v.serial(+)=ct.vga_serial" + " and r.serial(+)=ct.ram_serial and h.serial(+)=ct.hdd_serial"
