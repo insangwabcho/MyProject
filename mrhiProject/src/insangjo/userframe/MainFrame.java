@@ -146,7 +146,7 @@ public class MainFrame extends JFrame {
     contentPane.add(selectPanel);
     selectPanel.setLayout(null);
 
-    lblDetail = new JLabel("제품상세페이지");
+    lblDetail = new JLabel();
     JScrollPane scrollPane_3 = new JScrollPane();
     scrollPane_3.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
     scrollPane_3.getVerticalScrollBar().setUnitIncrement(30);
