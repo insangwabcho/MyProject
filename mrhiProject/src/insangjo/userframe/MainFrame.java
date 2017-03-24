@@ -78,6 +78,7 @@ public class MainFrame extends JFrame {
   private JPanel option2Panel;
   private JPanel panel;
   private JScrollPane scrollPane_1;
+  private JLabel lblDetail;
 
   public MainFrame(String username, String id, String address) {
     usname = username;
@@ -145,6 +146,16 @@ public class MainFrame extends JFrame {
     contentPane.add(selectPanel);
     selectPanel.setLayout(null);
 
+    lblDetail = new JLabel("제품상세페이지");
+    JScrollPane scrollPane_3 = new JScrollPane();
+    scrollPane_3.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+    scrollPane_3.getVerticalScrollBar().setUnitIncrement(30);
+    scrollPane_3.setViewportView(lblDetail);
+    detailPanel = new JPanel();
+    detailPanel.setBackground(Color.white);//
+    detailPanel.setBounds(506, 349, 688, 346);
+    contentPane.add(detailPanel);
+
     cboMenu = new JComboBox();
     cboMenu.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
     cboMenu.addItemListener(new ItemListener() {
@@ -181,6 +192,41 @@ public class MainFrame extends JFrame {
               if (e.getValueIsAdjusting()) {
                 ArrayList items = orderpageDao.optionList(cboMenu.getSelectedItem() + "", list_1.getSelectedValue() + "");
                 list_2 = new JList(items.toArray());
+                list_2.addListSelectionListener(new ListSelectionListener() {
+                  public void valueChanged(ListSelectionEvent e) {
+                    //요기
+                    if (e.getValueIsAdjusting()) {
+                      int start = (list_2.getSelectedValue() + "").indexOf(":") + 1;
+                      int end = (list_2.getSelectedValue() + "").indexOf(",");
+                      int serial = Integer.parseInt((list_2.getSelectedValue() + "").substring(start, end).trim());
+                      String kind = "";
+                      switch (cboMenu.getSelectedItem() + "") {
+                      case "CPU":
+                        kind = "cpu";
+                        break;
+                      case "메인보드":
+                        kind = "main";
+                        break;
+                      case "그래픽카드":
+                        kind = "vga";
+                        break;
+                      case "추가 RAM":
+                      case "메모리카드":
+                        kind = "ram";
+                        break;
+                      case "HDD":
+                        kind = "hdd";
+                        break;
+                      case "SSD":
+                        kind = "ssd";
+                        break;
+                      }
+                      String path = new MainFrameDAO().getImgPath(kind, serial);
+                      ImageIcon icon = new insangjo.img.SetImageIcon().getScaleImg(path, scrollPane_3.getWidth() - 15);
+                      lblDetail.setIcon(icon);
+                    }
+                  }
+                });
                 scrollPane_2.setViewportView(list_2);
                 lblOptionTitle.setText(cboMenu.getSelectedItem() + " " + list_1.getSelectedValue());
               }
@@ -214,12 +260,6 @@ public class MainFrame extends JFrame {
     list_1.setBackground(Color.WHITE);
     list_1.setForeground(Color.white);
     scrollPane.setViewportView(list_1);
-
-    JScrollPane scrollPane_3 = new JScrollPane();
-    detailPanel = new JPanel();
-    detailPanel.setBackground(Color.white);//
-    detailPanel.setBounds(506, 349, 688, 346);
-    contentPane.add(detailPanel);
 
     detailPanel.setLayout(new BorderLayout(0, 0));
 
@@ -454,16 +494,11 @@ public class MainFrame extends JFrame {
     contentPane.setBorder(lb);
     selectPanel.setBorder(lb);
     detailPanel.setBorder(lb);
-
-    scrollPane_3.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-    scrollPane_3.getVerticalScrollBar().setUnitIncrement(30);
     detailPanel.add(scrollPane_3, BorderLayout.CENTER);
-    JLabel lblDetail = new JLabel("제품상세페이지");
     boxpanel.setBorder(lb);
     optionPanel.setBorder(lb);
     option2Panel.setBorder(lb);
     panel.setBorder(lb);
-    scrollPane_3.setViewportView(lblDetail);
     scrollPane_1.setBorder(lb);
 
     lblUserStat = new JLabel(username + "님 로그인중");

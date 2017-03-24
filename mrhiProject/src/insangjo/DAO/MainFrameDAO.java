@@ -9,6 +9,28 @@ import java.util.Vector;
 
 public class MainFrameDAO {
 
+  public String getImgPath(String kind, int serial) {
+    String result = "";
+    Connection conn = null;
+    PreparedStatement pstmt = null;
+    ResultSet rs = null;
+
+    try {
+      String sql = "select img from " + kind + " where serial=" + serial;
+      conn = sangjin.DB.DB.comCon();
+      pstmt = conn.prepareStatement(sql);
+      rs = pstmt.executeQuery();
+
+      if (rs.next()) {
+        result = rs.getString("img");
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
+    return result;
+  }
+
   public String getPwd(String id) {
     String result = "";
     Connection conn = null;
