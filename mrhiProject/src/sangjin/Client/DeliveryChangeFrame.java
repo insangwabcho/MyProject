@@ -405,7 +405,7 @@ public class DeliveryChangeFrame extends JFrame {
     cbstt.setBackground(Color.BLUE);
     cbstt.setForeground(Color.WHITE);
     cbstt.setBounds(425, 98, 397, 24);
-    contentPane.add(cbstt);
+    contentPane.add(cbstt);//
 	
     //콤보박스에 바인딩
 	sttdao=new StatusDAO();
