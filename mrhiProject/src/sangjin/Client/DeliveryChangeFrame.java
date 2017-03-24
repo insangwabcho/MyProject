@@ -110,7 +110,7 @@ public class DeliveryChangeFrame extends JFrame {
           }
           else if (tfdvs.getText().equals("배송중")) {
             tfdvs.setText("배송중");
-            tfdvs.setForeground(new Color(255, 228, 0));
+            tfdvs.setForeground(Color.ORANGE);
           }
           else if (tfdvs.getText().equals("배송완료")) {
             tfdvs.setText("배송완료");
@@ -145,7 +145,7 @@ public class DeliveryChangeFrame extends JFrame {
         }
         else if (status.equals("배송중")) {
           tfdvs.setText("배송중");
-          tfdvs.setForeground(new Color(255, 228, 0));
+          tfdvs.setForeground(Color.ORANGE);
         }
         else if (status.equals("배송완료")) {
           tfdvs.setText("배송완료");
