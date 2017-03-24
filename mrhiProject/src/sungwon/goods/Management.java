@@ -218,7 +218,7 @@ public class Management extends JFrame {
 				int result = fc.showOpenDialog(Management.this);
 				if (result == JFileChooser.APPROVE_OPTION) {
 					File file = fc.getSelectedFile();
-
+					//이미지 리사이즈 
 					try {
 						BufferedImage bi = ImageIO.read(file);
 						String a = (String.valueOf(sungwon.DB.DB.class.getResource("img"))).replaceAll("file:", "");
