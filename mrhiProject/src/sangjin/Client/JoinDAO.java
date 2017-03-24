@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
+
 public class JoinDAO {
 	
 	//회원가입정보 데이터베이스에 저장
@@ -16,7 +17,8 @@ public class JoinDAO {
 		PreparedStatement pstmt=null;
 		try {
 			conn =	sungwon.DB.DB.comCon();
-			String sql="insert into member values (?,?,?,?,?,?,?,?)"; //아이디,비번,이메일,이름,생년월일,성별,폰번호,주소
+			String sql="insert into member (id,password,email,name,birth,sex,tel,address) "
+					+ "values (?,?,?,?,?,?,?,?)"; //아이디,비번,이메일,이름,생년월일,성별,폰번호,주소
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getId());
 			pstmt.setString(2, dto.getPassward());
