@@ -186,12 +186,10 @@ public class SearchFrameDAO {
           sql3.append("m.serial= cart.main_serial");
           kinds.add("메인보드");
           break;
-        case "ram rtow ":
-          sql1.append("rtow.name ,rtow.price ");
-          sql3.append("rtow.serial= cart.ram2_serial");
+        case "ram rtwo ":
+          sql1.append("rtwo.name ,rtwo.price ");
+          sql3.append("rtwo.serial= cart.ram2_serial");
           kinds.add("추가 메모리카드");
-          break;
-        default:
           break;
         }
         if (i != aCount - 1) {
@@ -202,7 +200,6 @@ public class SearchFrameDAO {
       String sql = sql1.toString() + sql2.toString() + sql3.toString();
       conn = sungwon.DB.DB.comCon();
       pstmt = conn.prepareStatement(sql);
-      System.out.println(sql);
       rs = pstmt.executeQuery();
 
       aCount = 0;
