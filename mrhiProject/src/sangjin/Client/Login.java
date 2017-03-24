@@ -172,7 +172,7 @@ public class Login extends JFrame {
     contentPane.add(lblNewLabel_1);
 
     //ImageIcon tmplogo = new ImageIcon("d:\\comnawa\\comnawalogo.png");
-    String a = (String.valueOf(DB.class.getResource("img/comnawalogo.png"))).replaceAll("file:", "");
+    String a = (String.valueOf(sungwon.DB.DB.class.getResource("img/comnawalogo.png"))).replaceAll("file:", "");
     ImageIcon tmplogo = new ImageIcon(a);
 
     try {
