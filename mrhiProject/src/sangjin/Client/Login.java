@@ -26,8 +26,6 @@ import javax.swing.border.EmptyBorder;
 import insangjo.adminfame.rootFrame;
 import insangjo.userframe.MainFrame;
 import sungwon.DB.DB;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class Login extends JFrame {
 
@@ -57,7 +55,7 @@ public class Login extends JFrame {
   }
 
   public Login() {
-  	setResizable(false);
+    setResizable(false);
     setTitle("ComNawa");
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setBounds(100, 100, 675, 481);
@@ -98,7 +96,7 @@ public class Login extends JFrame {
             name = dao.returnName(Lid); //이름 리턴
             id = dao.returnID(Lid); //아이디 리턴
             address = dao.returnAddress(Lid); //주소 리턴
-            dao.updateLog(Lid);
+            //            /dao.updateLog(Lid);
             if (Lid.equals("root")) { //관리자 아이디면
               new rootFrame().setVisible(true);
               dispose();
@@ -134,7 +132,6 @@ public class Login extends JFrame {
     tfLpassword.addKeyListener(new KeyAdapter() {
       @Override
       public void keyTyped(KeyEvent e) {
-    	  System.out.println(e.getKeyCode());
         if (e.getKeyCode() == 10) { //비밀번호 텍스트 필드에서 엔터키를 입력하면
           btnLogin.doClick(); //로그인 버튼이 클릭됨
         }
