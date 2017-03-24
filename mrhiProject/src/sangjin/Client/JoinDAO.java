@@ -1,12 +1,12 @@
 package sangjin.Client;
 
-import java.sql.Connection;import java.sql.Date;
+import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.Vector;
-
-import sungwon.DB.DB;
 
 public class JoinDAO {
 	
@@ -60,6 +60,44 @@ public class JoinDAO {
 			pstmt.setString(3, dto.getTel());
 			pstmt.setString(4, dto.getAddress());
 			pstmt.setString(5, dto.getId());
+			result=pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if( pstmt != null ) pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if( conn != null ) conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+	
+	//회원 로그인기록 업데이트
+	public int updateLog(String Lid){
+		int result=0;
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		Calendar cal=Calendar.getInstance();
+	    int year = cal.get(cal.YEAR);
+	    int month = cal.get(cal.MONTH) + 1;
+	    int date = cal.get(cal.DATE);
+	    int hour = cal.get(cal.HOUR);
+	    int min = cal.get(cal.MINUTE);
+	    int sec = cal.get(cal.SECOND);
+	    Date log = Date.valueOf(year + "-" + month + "-" + date +"-"+hour+":"+min+":"+sec);
+	    
+		try {
+			conn =	sungwon.DB.DB.comCon();
+			String sql="update member set log=? where id=?"; 
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setDate(1, log);
+			pstmt.setString(2, Lid);
 			result=pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
