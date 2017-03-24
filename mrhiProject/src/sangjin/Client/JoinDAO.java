@@ -16,7 +16,7 @@ public class JoinDAO {
 		Connection conn=null;
 		PreparedStatement pstmt=null;
 		try {
-			conn =	DB.comCon();
+			conn =	sungwon.DB.DB.comCon();
 			String sql="insert into member values (?,?,?,?,?,?,?,?)"; //아이디,비번,이메일,이름,생년월일,성별,폰번호,주소
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getId());
@@ -51,7 +51,7 @@ public class JoinDAO {
 		Connection conn=null;
 		PreparedStatement pstmt=null;
 		try {
-			conn =	DB.comCon();
+			conn =	sungwon.DB.DB.comCon();
 			String sql="update member set password=?, email=?, tel=?, address=?"
 					+ " where id=?"; //비밀번호, 이메일, 폰번호, 주소 변경
 			pstmt = conn.prepareStatement(sql);
@@ -85,7 +85,7 @@ public class JoinDAO {
 		Connection conn=null;
 		PreparedStatement pstmt=null;
 		try {
-			conn =	DB.comCon();
+			conn =	sungwon.DB.DB.comCon();
 			String sql="delete from member where id=?"; //해당 아이디면 삭제
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, Lid);
@@ -115,7 +115,7 @@ public class JoinDAO {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		try {
-			conn = DB.comCon();
+			conn = sungwon.DB.DB.comCon();
 			String sql="select name from member where id=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, Lid);
@@ -154,7 +154,7 @@ public class JoinDAO {
 			PreparedStatement pstmt=null;
 			ResultSet rs=null;
 			try {
-				conn = DB.comCon();
+				conn = sungwon.DB.DB.comCon();
 				String sql="select id from member where id=?";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, Lid);
@@ -193,7 +193,7 @@ public class JoinDAO {
 			PreparedStatement pstmt=null;
 			ResultSet rs=null;
 			try {
-				conn = DB.comCon();
+				conn = sungwon.DB.DB.comCon();
 				String sql="select address from member where id=?";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, Lid);
@@ -233,7 +233,7 @@ public class JoinDAO {
 			PreparedStatement pstmt=null;
 			ResultSet rs=null;
 			try {
-				conn = DB.comCon();
+				conn = sungwon.DB.DB.comCon();
 				String sql="select id,name,email,birth,tel,address from member where id=?";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, Lid);
