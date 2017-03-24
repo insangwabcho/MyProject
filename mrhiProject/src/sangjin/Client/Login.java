@@ -25,9 +25,6 @@ import javax.swing.border.EmptyBorder;
 
 import insangjo.adminfame.rootFrame;
 import insangjo.userframe.MainFrame;
-import sungwon.DB.DB;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class Login extends JFrame {
 
@@ -57,7 +54,6 @@ public class Login extends JFrame {
   }
 
   public Login() {
-  	setResizable(false);
     setTitle("ComNawa");
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setBounds(100, 100, 675, 481);
@@ -87,7 +83,7 @@ public class Login extends JFrame {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         try {
-          conn = DB.comCon();
+          conn = sungwon.DB.DB.comCon();
           String sql = "select * from member where id=? and password=?";
           pstmt = conn.prepareStatement(sql);
           pstmt.setString(1, Lid); //첫번째 물음표(아이디)		  
@@ -98,7 +94,6 @@ public class Login extends JFrame {
             name = dao.returnName(Lid); //이름 리턴
             id = dao.returnID(Lid); //아이디 리턴
             address = dao.returnAddress(Lid); //주소 리턴
-            dao.updateLog(Lid);
             if (Lid.equals("root")) { //관리자 아이디면
               new rootFrame().setVisible(true);
               dispose();
@@ -133,8 +128,7 @@ public class Login extends JFrame {
     tfLpassword = new JPasswordField();
     tfLpassword.addKeyListener(new KeyAdapter() {
       @Override
-      public void keyTyped(KeyEvent e) {
-    	  System.out.println(e.getKeyCode());
+      public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == 10) { //비밀번호 텍스트 필드에서 엔터키를 입력하면
           btnLogin.doClick(); //로그인 버튼이 클릭됨
         }
@@ -161,7 +155,6 @@ public class Login extends JFrame {
     contentPane.add(btnJoin);
 
     lblResult = new JLabel("");
-
     lblResult.setFont(new Font("굴림", Font.PLAIN, 15));
     lblResult.setHorizontalAlignment(SwingConstants.CENTER);
     lblResult.setBounds(254, 303, 269, 25);
