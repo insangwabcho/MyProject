@@ -37,6 +37,7 @@ public class Login extends JFrame {
   private JLabel lblmain;
   private JLabel lblResult;
   private Join join;
+  private JoinDAO dao;
   private JPasswordField tfLpassword;
   public static String name, id, address;
 
@@ -90,7 +91,7 @@ public class Login extends JFrame {
           pstmt.setString(2, Lpassword); //두번째 물음표(비번)
           rs = pstmt.executeQuery();
           if (rs.next()) {
-            JoinDAO dao = new JoinDAO();
+            dao = new JoinDAO();
             name = dao.returnName(Lid); //이름 리턴
             id = dao.returnID(Lid); //아이디 리턴
             address = dao.returnAddress(Lid); //주소 리턴
@@ -99,6 +100,7 @@ public class Login extends JFrame {
               dispose();
             }
             else { //일반 사용자면
+              dao.updateLog(Lid);
               new MainFrame(name, id, address).setVisible(true); //메인프레임을 띄움
               dispose();
             }
