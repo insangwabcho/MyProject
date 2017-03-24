@@ -156,6 +156,7 @@ public class Login extends JFrame {
     contentPane.add(btnJoin);
 
     lblResult = new JLabel("");
+
     lblResult.setFont(new Font("굴림", Font.PLAIN, 15));
     lblResult.setHorizontalAlignment(SwingConstants.CENTER);
     lblResult.setBounds(254, 303, 269, 25);
@@ -174,7 +175,6 @@ public class Login extends JFrame {
     //ImageIcon tmplogo = new ImageIcon("d:\\comnawa\\comnawalogo.png");
     String a = (sungwon.DB.DB.class.getResource("img/comnawalogo.png") + "").replaceAll("file:", "");
     ImageIcon tmplogo = new ImageIcon(a);
-    System.out.println(a);
 
     try {
       Image imageSrc = tmplogo.getImage();
