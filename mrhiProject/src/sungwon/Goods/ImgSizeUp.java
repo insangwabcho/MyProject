@@ -1,4 +1,4 @@
-package sungwon.goods;
+package sungwon.Goods;
 
 import java.awt.Image;
 

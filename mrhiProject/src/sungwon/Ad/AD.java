@@ -1,4 +1,4 @@
-package sungwon.ad;
+package sungwon.Ad;
 
 import java.util.ArrayList;
 

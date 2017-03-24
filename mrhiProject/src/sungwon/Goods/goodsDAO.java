@@ -1,4 +1,4 @@
-package sungwon.goods;
+package sungwon.Goods;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

@@ -44,7 +44,7 @@ public class rootFrame extends JFrame {
     btnNewButton.setFont(new Font("맑은 고딕", Font.BOLD, 16));
     btnNewButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        new sungwon.goods.Management().setVisible(true);
+        new sungwon.Goods.Management().setVisible(true);
       }
     });
     panel.add(btnNewButton);

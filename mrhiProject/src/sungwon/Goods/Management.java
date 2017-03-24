@@ -1,4 +1,4 @@
-package sungwon.goods;
+package sungwon.Goods;
 
 //22일 수정할 내용 - 이미지 저장및 삭제시 lblimg 초기화
 //				*시리얼번호 중간꺼 삭제시 추가및 삭제 불가한 현상
@@ -473,7 +473,7 @@ public class Management extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					ImgSizeUp from=new sungwon.goods.ImgSizeUp(originimg);
+					ImgSizeUp from=new sungwon.Goods.ImgSizeUp(originimg);
 					from.setVisible(true);
 					from.setLocation(400,50);
 				} catch (Exception e2) {

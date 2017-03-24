@@ -540,7 +540,7 @@ public class MainFrame extends JFrame {
 
     JLabel lblAd = new JLabel(new insangjo.img.SetImageIcon().getScaleImg("/AD/AD5.PNG/", 390, 60));
     lblAd.setBounds(180, 5, 390, 60);
-    new sungwon.ad.AD(lblAd);
+    new sungwon.Ad.AD(lblAd);
 
     contentPane.add(lblAd);
     btnLogout.addActionListener(new ActionListener() {
