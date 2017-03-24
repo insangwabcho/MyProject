@@ -45,6 +45,7 @@ public class UpdateJoin extends JFrame {
   private JTextField tfJaddress2;
 
   public UpdateJoin(String Lid, MainFrame mf) {
+  	setResizable(false);
     dao = new JoinDAO();
     Vector v = dao.List(Lid); //아이디로 회원정보를 불러옴
     setTitle("회원정보수정");

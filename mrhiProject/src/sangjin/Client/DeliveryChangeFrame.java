@@ -57,6 +57,7 @@ public class DeliveryChangeFrame extends JFrame {
 
   
   public DeliveryChangeFrame() {
+  	setResizable(false);
     setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     setBounds(100, 100, 849, 582);
     contentPane = new JPanel();
