@@ -14,7 +14,7 @@ public class ImgSizeUp extends JFrame {
 	private  JPanel contentPane;
 	private  JScrollPane scrollPane; 
 	private  JLabel lblsizeupimg;
-	
+	//확대버튼클릭시 이미지 프레임 생성
 	public ImgSizeUp(ImageIcon originimg) {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
