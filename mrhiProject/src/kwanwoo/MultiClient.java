@@ -18,7 +18,7 @@ public class MultiClient {
     String getchat = "";
     try {
       Socket socket = new Socket(ServerIP, 9999);
-      if (tArea.getText().equals(""))
+      if (tArea.getText().equals(""))//
         tArea.append("채팅서버에 연결되었습니다!\n");
       //System.out.println("서버와 연결이 되었습니다.");
       //사용자로부터 얻은 문자열을 서버로 전송해주는 역할을 하는 thread
