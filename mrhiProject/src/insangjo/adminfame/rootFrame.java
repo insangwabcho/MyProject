@@ -7,24 +7,31 @@ import java.awt.GridLayout;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import kwanwoo.MultiClient;
+import kwanwoo.MultiServer;
 import sangjin.Client.Login;
 import sangjin.Client.MemberList;
 
-public class rootFrame extends JFrame {
+public class rootFrame extends JFrame implements Runnable {
 
   private JPanel contentPane;
   private JTextField textField;
+  private ArrayList<String> idList;
+  private JComboBox comboBox;
+  private JTextArea textArea;
 
   public rootFrame() {
     setResizable(false);
@@ -34,9 +41,13 @@ public class rootFrame extends JFrame {
     contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
     contentPane.setLayout(new BorderLayout(0, 0));
     setContentPane(contentPane);
+    comboBox = new JComboBox();
 
     JPanel panel = new JPanel(new GridLayout(3, 0));
     contentPane.add(panel, BorderLayout.EAST);
+
+    kwanwoo.MultiClient mc = new MultiClient();
+    textArea = new JTextArea();
 
     JButton btnNewButton = new JButton("재고관리 / 추가삭제");
     btnNewButton.setOpaque(true);
@@ -74,9 +85,9 @@ public class rootFrame extends JFrame {
     btnlist.setFont(new Font("맑은 고딕", Font.BOLD, 16));
     panel.add(btnlist);
 
-    JTextArea textArea = new JTextArea();
-
-    contentPane.add(textArea, BorderLayout.CENTER);
+    idList = new ArrayList<>();
+    Thread th = new Thread(rootFrame.this);
+    th.start();
 
     JPanel panel_1 = new JPanel();
     panel_1.setBackground(new Color(0, 51, 255));
@@ -103,7 +114,6 @@ public class rootFrame extends JFrame {
     JPanel panel_2 = new JPanel(new GridLayout(0, 3));
     contentPane.add(panel_2, BorderLayout.SOUTH);
 
-    JComboBox comboBox = new JComboBox();
     panel_2.add(comboBox);
 
     textField = new JTextField();
@@ -111,7 +121,32 @@ public class rootFrame extends JFrame {
     textField.setColumns(10);
 
     JButton btnSend = new JButton("Send");
+    //    btnSend.addActionListener(new ActionListener() {
+    //      public void actionPerformed(ActionEvent e) {
+    //        try {
+    //          mc.chatClient("root", textField.getText(), textArea, comboBox.getSelectedItem() + "");
+    //        } catch (UnknownHostException e1) {
+    //          e1.printStackTrace();
+    //        } catch (IOException e1) {
+    //          e1.printStackTrace();
+    //        }
+    //      }
+    //    });
     panel_2.add(btnSend);
+
+    JScrollPane scrollPane = new JScrollPane();
+    contentPane.add(scrollPane, BorderLayout.CENTER);
+
+    scrollPane.setViewportView(textArea);
   }
 
+  @Override
+  public void run() {
+    kwanwoo.MultiServer sv = new MultiServer();
+    try {
+      sv.init("root", idList, comboBox, textArea);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
 }

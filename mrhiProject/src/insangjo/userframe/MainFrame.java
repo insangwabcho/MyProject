@@ -81,8 +81,10 @@ public class MainFrame extends JFrame {
   private JScrollPane scrollPane_1;
   private JLabel lblDetail;
   private JTextField textField;
+  private JTextArea textArea;
 
   public MainFrame(String username, String id, String address) {
+
     panelBg = new ImageIcon(MainFrame.class.getResource("/insangjo/img/panelBg.jpeg"));
     orderpageDao = new MainFrameDAO();
     col = new Vector<>();
@@ -557,7 +559,7 @@ public class MainFrame extends JFrame {
     scrollPane_4.setBounds(6, 6, 424, 178);
     internalFrame.getContentPane().add(scrollPane_4);
 
-    JTextArea textArea = new JTextArea();
+    textArea = new JTextArea();
     scrollPane_4.setViewportView(textArea);
 
     textField = new JTextField();

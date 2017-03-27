@@ -18,12 +18,12 @@ public class MultiClient {
     String getchat = "";
 
     try {
-      Socket socket = new Socket("192.168.0.90", 9999);
+      Socket socket = new Socket("localhost", 9999);
       if (tArea.getText().equals(""))
         tArea.append("채팅서버에 연결되었습니다!\n");
       //System.out.println("서버와 연결이 되었습니다.");
       //사용자로부터 얻은 문자열을 서버로 전송해주는 역할을 하는 thread
-      Thread sender = new Sender(socket, userid, chat);
+      Thread sender = new Sender(socket, userid, chat, tArea);
       //서버에서 보내는 메시지를 사용자의 콘솔에 출력하는 스레드.//
       Thread receiver = new Receiver(socket, tArea);
       //System.out.println("채팅방에 입장하셨습니다.");
