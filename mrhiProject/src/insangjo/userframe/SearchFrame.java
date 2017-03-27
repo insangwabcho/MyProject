@@ -162,7 +162,8 @@ public class SearchFrame extends JFrame {
     	  }
           String[] yn = { "예", "아니오" };
           if (JOptionPane.showOptionDialog(SearchFrame.this, "주문을 취소하시겠습니까?", "경고", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null, yn, null) == 0) {
-        	  searchframeDao.cancelOrder(order_no);
+        	  searchframeDao.cancelcartOrder(order_no);
+        	  searchframeDao.canceldeliveryOrder(order_no);
         	  dispose();
           }
       }
