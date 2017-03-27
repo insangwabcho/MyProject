@@ -22,7 +22,7 @@ public class MultiServer {
   HashMap hm;
   ServerSocket serverSocket = null;
   Socket socket = null;
-  HashMap idList = null;
+  HashMap idList = null;//
 
   //생성자
   public MultiServer() {
