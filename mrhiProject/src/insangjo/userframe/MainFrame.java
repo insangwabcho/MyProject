@@ -21,6 +21,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JMenu;
@@ -95,7 +96,7 @@ public class MainFrame extends JFrame {
     setIconImage(Toolkit.getDefaultToolkit().getImage(MainFrame.class.getResource("/insangjo/img/programIcon.ico")));
     setTitle("comNawa 주문프로그램");
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    setBounds(100, 100, 1200, 768);
+    setBounds(100, 100, 1350, 768);
     setResizable(false);
 
     JMenuBar menuBar = new JMenuBar();
@@ -153,7 +154,7 @@ public class MainFrame extends JFrame {
     scrollPane_3.setViewportView(lblDetail);
     detailPanel = new JPanel();
     detailPanel.setBackground(Color.white);//
-    detailPanel.setBounds(506, 349, 688, 346);
+    detailPanel.setBounds(506, 349, 838, 346);
     contentPane.add(detailPanel);
 
     cboMenu = new JComboBox();
@@ -361,7 +362,7 @@ public class MainFrame extends JFrame {
 
     optionPanel = new JPanel();
     optionPanel.setBackground(new Color(0, 51, 255));
-    optionPanel.setBounds(180, 71, 1014, 266);
+    optionPanel.setBounds(180, 71, 692, 266);
     contentPane.add(optionPanel);
     optionPanel.setLayout(null);
 
@@ -369,22 +370,22 @@ public class MainFrame extends JFrame {
     lblNewLabel_2.setForeground(new Color(255, 255, 255));
     lblNewLabel_2.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
     lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
-    lblNewLabel_2.setBounds(0, 6, 1008, 26);
+    lblNewLabel_2.setBounds(0, 6, 687, 26);
     optionPanel.add(lblNewLabel_2);
 
     option2Panel = new JPanel();
     option2Panel.setBackground(Color.white);
-    option2Panel.setBounds(0, 34, 1014, 232);
+    option2Panel.setBounds(0, 34, 692, 232);
     optionPanel.add(option2Panel);
     option2Panel.setLayout(null);
 
     lblOptionTitle = new JLabel("");
     lblOptionTitle.setHorizontalAlignment(SwingConstants.CENTER);
-    lblOptionTitle.setBounds(6, 6, 887, 16);
+    lblOptionTitle.setBounds(6, 6, 679, 16);
     option2Panel.add(lblOptionTitle);
 
     scrollPane_2 = new JScrollPane();
-    scrollPane_2.setBounds(6, 30, 1002, 123);
+    scrollPane_2.setBounds(6, 30, 679, 123);
     option2Panel.add(scrollPane_2);
 
     list_2 = new JList();
@@ -410,7 +411,7 @@ public class MainFrame extends JFrame {
         scrollPane_2.setViewportView(list_2);
       }
     });
-    btnSave.setBounds(806, 165, 188, 44);
+    btnSave.setBounds(541, 165, 144, 55);
     option2Panel.add(btnSave);
 
     lblEa = new JLabel("1");
@@ -419,7 +420,7 @@ public class MainFrame extends JFrame {
 
     panel = new JPanel(new GridLayout(2, 6));
     panel.setBackground(Color.white);
-    panel.setBounds(33, 160, 737, 55);
+    panel.setBounds(6, 165, 523, 55);
     option2Panel.add(panel);
 
     JLabel lblcpu = new JLabel("  CPU :");
@@ -502,18 +503,18 @@ public class MainFrame extends JFrame {
     panel.setBorder(lb);
     scrollPane_1.setBorder(lb);
 
-    lblUserStat = new JLabel(username + "님 로그인중");
-    lblUserStat.setBounds(564, 12, 243, 30);
+    lblUserStat = new JLabel(username + "님 반갑습니다!!");
+    lblUserStat.setBounds(582, 12, 358, 47);
     contentPane.add(lblUserStat);
     lblUserStat.setFont(new Font("Lucida Grande", Font.BOLD, 20));
     lblUserStat.setHorizontalAlignment(SwingConstants.CENTER);
 
     JButton btnUpdate = new JButton("정보수정");
-    btnUpdate.setBounds(948, 18, 117, 27);
+    btnUpdate.setBounds(1098, 18, 117, 27);
     contentPane.add(btnUpdate);
 
     JButton btnLogout = new JButton("로그아웃");
-    btnLogout.setBounds(1077, 18, 117, 27);
+    btnLogout.setBounds(1227, 18, 117, 27);
     contentPane.add(btnLogout);
 
     JButton btnSearch = new JButton("주문내역조회");
@@ -529,7 +530,7 @@ public class MainFrame extends JFrame {
         }
       }
     });
-    btnSearch.setBounds(819, 18, 117, 27);
+    btnSearch.setBounds(969, 18, 117, 27);
     contentPane.add(btnSearch);
 
     JLabel lblLogo = new JLabel("New label");
@@ -543,6 +544,11 @@ public class MainFrame extends JFrame {
     new sungwon.Ad.AD(lblAd);
 
     contentPane.add(lblAd);
+
+    JInternalFrame internalFrame = new JInternalFrame("실시간 상담");
+    internalFrame.setBounds(884, 71, 460, 266);
+    contentPane.add(internalFrame);
+    internalFrame.setVisible(true);
     btnLogout.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         sangjin.Client.Login f = new Login();
