@@ -5,15 +5,19 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 
 public class MultiServer {
-  public static void main(String[] args) {
-    MultiServer ms = new MultiServer(); //서버객체
-    ms.init();//실행
-  }
+  //  public static void main(String[] args) {
+  //    MultiServer ms = new MultiServer(); //서버객체
+  //    ms.init();//실행
+  //  }
 
   HashMap hm;
   ServerSocket serverSocket = null;
@@ -32,7 +36,7 @@ public class MultiServer {
       while (true) {//서버가 실행되는 동안 클라이언트들의 접속을 기다림.
         socket = serverSocket.accept();
         //클라이언트의 접속을 기다리다가 접속이 되면 Socket객체를 생성		
-        //				System.out.println(socket.getInetAddress()+":"+socket.getPort());
+        System.out.println(socket.getInetAddress() + ":" + socket.getPort());
         //클라이언트 정보(ip,port)출력
         Thread msr = new MultiServerRec(socket);//쓰레드생성
         msr.start();//쓰레드사용
@@ -40,6 +44,44 @@ public class MultiServer {
     } catch (Exception e) {
       e.printStackTrace();
     }
+  }
+
+  public String getId(String ip) {
+    String id = "";
+    Connection conn = null;
+    PreparedStatement pstmt = null;
+    ResultSet rs = null;
+
+    try {
+      String sql = "";
+      conn = sungwon.DB.DB.comCon();
+      pstmt = conn.prepareStatement(sql);
+      rs = pstmt.executeQuery();
+
+    } catch (Exception e) {
+      e.printStackTrace();
+    } finally {
+      if (rs != null)
+        try {
+          rs.close();
+        } catch (SQLException e) {
+          e.printStackTrace();
+        }
+      if (pstmt != null)
+        try {
+          pstmt.close();
+        } catch (SQLException e) {
+          e.printStackTrace();
+        }
+      if (conn != null)
+        try {
+          conn.close();
+        } catch (SQLException e) {
+          e.printStackTrace();
+        }
+    }
+
+    return id;
   }
 
   //접속 된 모든 클라이언트들에게 메시지를 전달.

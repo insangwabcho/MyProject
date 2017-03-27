@@ -24,15 +24,15 @@ public class Sender extends Thread {
   @Override
   public void run() {
     //	  Scanner s = new Scanner(System.in);
-    try {
-      out.writeUTF(name);
-    } catch (Exception e) {
-      System.out.println("예외 : " + e);
-    }
+    //    try {
+    //      out.writeUTF(name);
+    //    } catch (Exception e) {
+    //      System.out.println("예외 : " + e);
+    //    }
     while (out != null) {
       try {
         if (chat != null) {
-          out.writeUTF(name + "=>" + chat);
+          out.writeUTF(name + " => " + chat);
           chat = null;
         }
         //키보드로부터 입력받은 문자열을 서버로 보냄	

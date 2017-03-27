@@ -569,7 +569,7 @@ public class MainFrame extends JFrame {
     btnSend.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         try {
-          mc.chatClient(id, textField.getText());
+          mc.chatClient(id, textField.getText(), textArea, "root");
           textField.setText("");
         } catch (Exception e2) {
           e2.printStackTrace();
