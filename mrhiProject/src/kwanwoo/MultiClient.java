@@ -16,9 +16,8 @@ public class MultiClient {
 
     String ServerIP = getIp(recive);
     String getchat = "";
-
     try {
-      Socket socket = new Socket("localhost", 9999);
+      Socket socket = new Socket(ServerIP, 9999);
       if (tArea.getText().equals(""))
         tArea.append("채팅서버에 연결되었습니다!\n");
       //System.out.println("서버와 연결이 되었습니다.");
@@ -72,7 +71,7 @@ public class MultiClient {
           e.printStackTrace();
         }
     }
-
+    System.out.println(Ip);
     return Ip;
   }
 }

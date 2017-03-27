@@ -121,17 +121,16 @@ public class rootFrame extends JFrame implements Runnable {
     textField.setColumns(10);
 
     JButton btnSend = new JButton("Send");
-    //    btnSend.addActionListener(new ActionListener() {
-    //      public void actionPerformed(ActionEvent e) {
-    //        try {
-    //          mc.chatClient("root", textField.getText(), textArea, comboBox.getSelectedItem() + "");
-    //        } catch (UnknownHostException e1) {
-    //          e1.printStackTrace();
-    //        } catch (IOException e1) {
-    //          e1.printStackTrace();
-    //        }
-    //      }
-    //    });
+    btnSend.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        try {
+          mc.chatClient("root", textField.getText(), textArea, comboBox.getSelectedItem() + "");
+          textField.setText("");
+        } catch (Exception e2) {
+          e2.printStackTrace();
+        }
+      }
+    });
     panel_2.add(btnSend);
 
     JScrollPane scrollPane = new JScrollPane();
@@ -144,7 +143,7 @@ public class rootFrame extends JFrame implements Runnable {
   public void run() {
     kwanwoo.MultiServer sv = new MultiServer();
     try {
-      sv.init("root", idList, comboBox, textArea);
+      sv.init(comboBox);
     } catch (Exception e) {
       e.printStackTrace();
     }
