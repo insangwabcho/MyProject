@@ -22,7 +22,7 @@ public class MultiServer {
   HashMap hm;
   ServerSocket serverSocket = null;
   Socket socket = null;
-  HashMap idList = null;//
+  HashMap idList = null;
 
   //생성자
   public MultiServer() {
@@ -122,7 +122,7 @@ public class MultiServer {
         out = new DataOutputStream(socket.getOutputStream());
       } catch (Exception e) {
         System.out.println("예외 : " + e);
-      }
+      } //
     }
 
     public void run() {//thread를 사용하기위해서 run메소드 재정의
@@ -130,7 +130,7 @@ public class MultiServer {
       try {
         name = in.readUTF();//client에서 처음으로보내는 메시지는 client가 사용할 이름.
         idList = new HashMap<>();
-
+        idList.put(name, socket.getInetAddress() + "");
         //sendAllMsg(name + "님이 입장하셨습니다.");
         //현재객체가 가지고 있는 소캣을 제외하고 다른 소켓들에게 접속을 알림.
         hm.put(name, out);//해쉬맵에 키를  name으로  출력스트림 객체를 저장.
