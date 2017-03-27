@@ -32,6 +32,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
@@ -43,6 +44,7 @@ import javax.swing.table.DefaultTableModel;
 
 import insangjo.DAO.MainFrameDAO;
 import insangjo.DAO.SearchFrameDAO;
+import kwanwoo.MultiClient;
 import sangjin.Client.Login;
 import sangjin.Client.UpdateJoin;
 
@@ -547,22 +549,30 @@ public class MainFrame extends JFrame {
 
     contentPane.add(lblAd);
 
+    kwanwoo.MultiClient mc = new MultiClient();
+
     JInternalFrame internalFrame = new JInternalFrame("실시간 상담");
     internalFrame.setResizable(false);
     internalFrame.setClosable(false);
-
     internalFrame.setBounds(884, 71, 460, 266);
     contentPane.add(internalFrame);
+    internalFrame.getContentPane().setLayout(null);
 
-    JPanel panel_1 = new JPanel();
-    internalFrame.getContentPane().add(panel_1, BorderLayout.SOUTH);
-    panel_1.setLayout(null);
-    //panel_1.setSize(, height);
+    JScrollPane scrollPane_4 = new JScrollPane();
+    scrollPane_4.setBounds(6, 6, 424, 178);
+    internalFrame.getContentPane().add(scrollPane_4);
+
+    JTextArea textArea = new JTextArea();
+    scrollPane_4.setViewportView(textArea);
 
     textField = new JTextField();
-    textField.setBounds(153, 5, 130, 26);
-    panel_1.add(textField);
+    textField.setBounds(6, 188, 331, 26);
+    internalFrame.getContentPane().add(textField);
     textField.setColumns(10);
+
+    JButton btnNewButton = new JButton("전송");
+    btnNewButton.setBounds(349, 188, 81, 29);
+    internalFrame.getContentPane().add(btnNewButton);
     internalFrame.setVisible(true);
     btnLogout.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
