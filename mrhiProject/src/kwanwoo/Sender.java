@@ -2,19 +2,29 @@
 package kwanwoo;
 
 import java.io.DataOutputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
+import java.io.Serializable;
 import java.net.Socket;
 
-public class Sender extends Thread {
+import javax.swing.JTextArea;
+
+public class Sender extends Thread implements Serializable {
   Socket socket;
   DataOutputStream out;
+  ObjectOutputStream objout;
+  OutputStream os;
   String name;//
   private String chat = null;
+  JTextArea tArea;
 
-  public Sender(Socket socket, String name, String chat) {
+  public Sender(Socket socket, String name, String chat, JTextArea tArea) {
     this.chat = chat;
     this.socket = socket;
+    this.tArea = tArea;
     try {
       out = new DataOutputStream(this.socket.getOutputStream());
+
       this.name = name;
     } catch (Exception e) {
       System.out.println("예외 : " + e);
@@ -40,5 +50,6 @@ public class Sender extends Thread {
         System.out.println("예외 : " + e);
       }
     }
+    tArea.append(chat);
   }
 }
