@@ -34,7 +34,7 @@ import sungwon.DB.DB;
 public class DeliveryChangeFrame extends JFrame {
 
   private JPanel contentPane;
-  private JTable table;
+  private JTable table;//
   private JTextField tfdvs;
   private JTextField tfid;
   private JTextField tfname;
