@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class Sender extends Thread{
 	Socket socket;
 	DataOutputStream out;
-	String	name;
+	String	name;//
 	
 	public Sender(Socket socket, String name){
 		this.socket = socket;
