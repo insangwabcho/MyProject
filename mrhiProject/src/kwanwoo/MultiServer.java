@@ -22,11 +22,13 @@ public class MultiServer {
   HashMap hm;
   ServerSocket serverSocket = null;
   Socket socket = null;
+  HashMap idList = null;
 
   //생성자
   public MultiServer() {
     hm = new HashMap();
     Collections.synchronizedMap(hm);
+    idList = new HashMap<>();
   }
 
   public void init() {
@@ -53,7 +55,7 @@ public class MultiServer {
     ResultSet rs = null;
 
     try {
-      String sql = "";
+      String sql = "select id from member ";
       conn = sungwon.DB.DB.comCon();
       pstmt = conn.prepareStatement(sql);
       rs = pstmt.executeQuery();
@@ -126,7 +128,9 @@ public class MultiServer {
     public void run() {//thread를 사용하기위해서 run메소드 재정의
       String name = ""; //클라이언트로부터 받은 이름을 저장할 변수.
       try {
-        //name = in.readUTF();//client에서 처음으로보내는 메시지는 client가 사용할 이름.
+        name = in.readUTF();//client에서 처음으로보내는 메시지는 client가 사용할 이름.
+        idList = new HashMap<>();
+
         //sendAllMsg(name + "님이 입장하셨습니다.");
         //현재객체가 가지고 있는 소캣을 제외하고 다른 소켓들에게 접속을 알림.
         hm.put(name, out);//해쉬맵에 키를  name으로  출력스트림 객체를 저장.
@@ -142,7 +146,7 @@ public class MultiServer {
         //보통 종료하거나 나가면 java.net.SocketException: 예외발생
         hm.remove(name);
         sendAllMsg(name + "님이 퇴장하셨습니다.");
-        System.out.println("현재 접속자 수는" + hm.size() + "명 입니다.");
+        //System.out.println("현재 접속자 수는" + hm.size() + "명 입니다.");
       }
     }
   }
