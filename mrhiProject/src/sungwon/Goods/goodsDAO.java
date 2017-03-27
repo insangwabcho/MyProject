@@ -7,8 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Vector;
 
-
-
 public class goodsDAO {
 	//삭제후 시리얼번호 정렬 메소드
 	public int updateserial(String table,int Aserial, int Bserial){
