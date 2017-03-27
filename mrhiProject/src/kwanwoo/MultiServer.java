@@ -1,3 +1,4 @@
+
 package kwanwoo;
 
 import java.io.DataInputStream;
@@ -10,13 +11,13 @@ import java.util.Iterator;
 
 public class MultiServer {
 	public static void main(String[] args) {
-		MultiServer ms = new MultiServer(); //¼­¹ö°´Ã¼
-		ms.init();//½ÇÇà
+		MultiServer ms = new MultiServer(); //ì„œë²„ê°ì²´
+		ms.init();//ì‹¤í–‰
 	}
 	HashMap hm;
 	ServerSocket serverSocket = null;
 	Socket socket = null;
-	//»ý¼ºÀÚ
+	//ìƒì„±ìž
 	public MultiServer(){
 		hm = new HashMap();
 		Collections.synchronizedMap(hm);
@@ -24,22 +25,22 @@ public class MultiServer {
 	public void init(){
 		try {
 			serverSocket = new ServerSocket(9999);
-			System.out.println("¼­¹ö°¡ ½ÃÀÛµÇ¾ú½À´Ï´Ù.");
-			while(true){//¼­¹ö°¡ ½ÇÇàµÇ´Â µ¿¾È Å¬¶óÀÌ¾ðÆ®µéÀÇ Á¢¼ÓÀ» ±â´Ù¸².
+			System.out.println("ì„œë²„ê°€ ì‹œìž‘ë˜ì—ˆìŠµë‹ˆë‹¤.");
+			while(true){//ì„œë²„ê°€ ì‹¤í–‰ë˜ëŠ” ë™ì•ˆ í´ë¼ì´ì–¸íŠ¸ë“¤ì˜ ì ‘ì†ì„ ê¸°ë‹¤ë¦¼.
 				socket = serverSocket.accept();
-		//Å¬¶óÀÌ¾ðÆ®ÀÇ Á¢¼ÓÀ» ±â´Ù¸®´Ù°¡ Á¢¼ÓÀÌ µÇ¸é Socket°´Ã¼¸¦ »ý¼º		
+		//í´ë¼ì´ì–¸íŠ¸ì˜ ì ‘ì†ì„ ê¸°ë‹¤ë¦¬ë‹¤ê°€ ì ‘ì†ì´ ë˜ë©´ Socketê°ì²´ë¥¼ ìƒì„±		
 				System.out.println(socket.getInetAddress()+":"+socket.getPort());
-		//Å¬¶óÀÌ¾ðÆ® Á¤º¸(ip,port)Ãâ·Â
-				Thread msr = new MultiServerRec(socket);//¾²·¹µå»ý¼º
-				msr.start();//¾²·¹µå»ç¿ë
+		//í´ë¼ì´ì–¸íŠ¸ ì •ë³´(ip,port)ì¶œë ¥
+				Thread msr = new MultiServerRec(socket);//ì“°ë ˆë“œìƒì„±
+				msr.start();//ì“°ë ˆë“œì‚¬ìš©
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-//Á¢¼Ó µÈ ¸ðµç Å¬¶óÀÌ¾ðÆ®µé¿¡°Ô ¸Þ½ÃÁö¸¦ Àü´Þ.
+//ì ‘ì† ëœ ëª¨ë“  í´ë¼ì´ì–¸íŠ¸ë“¤ì—ê²Œ ë©”ì‹œì§€ë¥¼ ì „ë‹¬.
 	public void sendAllMsg(String msg){
-	//Ãâ·Â½ºÆ®¸²À» ¼øÂ÷ÀûÀ¸·Î ¾ò¾î¿Í¼­ ÇØ´ç ¸Þ½ÃÁö¸¦ Ãâ·ÂÇÑ´Ù.
+	//ì¶œë ¥ìŠ¤íŠ¸ë¦¼ì„ ìˆœì°¨ì ìœ¼ë¡œ ì–»ì–´ì™€ì„œ í•´ë‹¹ ë©”ì‹œì§€ë¥¼ ì¶œë ¥í•œë‹¤.
 		Iterator it = hm.keySet().iterator();
 		
 		while(it.hasNext()){
@@ -48,53 +49,49 @@ public class MultiServer {
 				it_out.writeUTF(msg);
 				
 			}catch (Exception e) {
-				System.out.println("¿¹¿Ü : "+e);
+				System.out.println("ì˜ˆì™¸ : "+e);
 			}
 		}
 	}
-//client·ÎºÎÅÍ ÀÐ¾î¿Â ¸Þ½ÃÁö¸¦ ´Ù¸¥ client(socket)¿¡ º¸³»´Â ¿ªÇÒÀ» ÇÏ´Â method	
+//clientë¡œë¶€í„° ì½ì–´ì˜¨ ë©”ì‹œì§€ë¥¼ ë‹¤ë¥¸ client(socket)ì— ë³´ë‚´ëŠ” ì—­í• ì„ í•˜ëŠ” method	
 	class MultiServerRec extends Thread {
 		Socket socket;
 		DataInputStream in;
 		DataOutputStream out;
-		//»ý¼ºÀÚ
+		//ìƒì„±ìž
 	public MultiServerRec(Socket socket){
 		this.socket = socket;
 		try {
-		//¼ÒÄ¹À¸·ÎºÎÅÍ ÀÔ·Â½ºÆ®¸²À» ¾ò´Â´Ù.
+		//ì†Œìº£ìœ¼ë¡œë¶€í„° ìž…ë ¥ìŠ¤íŠ¸ë¦¼ì„ ì–»ëŠ”ë‹¤.
 			in = new DataInputStream(socket.getInputStream());
-		//Ãâ·Â½ºÆ®¸²
+		//ì¶œë ¥ìŠ¤íŠ¸ë¦¼
 			out = new DataOutputStream(socket.getOutputStream());
 		} catch (Exception e) {
-			System.out.println("¿¹¿Ü : "+e);
+			System.out.println("ì˜ˆì™¸ : "+e);
 		}
 	}
-	public void run() {//thread¸¦ »ç¿ëÇÏ±âÀ§ÇØ¼­ run¸Þ¼Òµå ÀçÁ¤ÀÇ
-		String name=""; //Å¬¶óÀÌ¾ðÆ®·ÎºÎÅÍ ¹ÞÀº ÀÌ¸§À» ÀúÀåÇÒ º¯¼ö.
+	public void run() {//threadë¥¼ ì‚¬ìš©í•˜ê¸°ìœ„í•´ì„œ runë©”ì†Œë“œ ìž¬ì •ì˜
+		String name=""; //í´ë¼ì´ì–¸íŠ¸ë¡œë¶€í„° ë°›ì€ ì´ë¦„ì„ ì €ìž¥í•  ë³€ìˆ˜.
 		try {
-			name = in.readUTF();//client¿¡¼­ Ã³À½À¸·Îº¸³»´Â ¸Þ½ÃÁö´Â client°¡ »ç¿ëÇÒ ÀÌ¸§.
-			sendAllMsg(name + "´ÔÀÌ ÀÔÀåÇÏ¼Ì½À´Ï´Ù.");
-	//ÇöÀç°´Ã¼°¡ °¡Áö°í ÀÖ´Â ¼ÒÄ¹À» Á¦¿ÜÇÏ°í ´Ù¸¥ ¼ÒÄÏµé¿¡°Ô Á¢¼ÓÀ» ¾Ë¸².
-			hm.put(name,out);//ÇØ½¬¸Ê¿¡ Å°¸¦  nameÀ¸·Î  Ãâ·Â½ºÆ®¸² °´Ã¼¸¦ ÀúÀå.
-			System.out.println("ÇöÀç Á¢¼ÓÀÚ ¼ö´Â"+hm.size()+"¸í ÀÔ´Ï´Ù.");
-			while(in != null){//ÀÔ·Â½ºÆ®¸²ÀÌ nullÀÌ ¾Æ´Ï¸é ¹Ýº¹
-				sendAllMsg(in.readUTF());//ÇöÀç ¼ÒÄÏ¿¡¼­ ÀÐ¾îº»¸Þ½ÃÁö¸¦ ÇØ½¬¸Ê¿¡ ÀúÀåµÈ ¸ðµç
-				//Ãâ·Â½ºÆ®¸²À¸·Î º¸³½´Ù.
+			name = in.readUTF();//clientì—ì„œ ì²˜ìŒìœ¼ë¡œë³´ë‚´ëŠ” ë©”ì‹œì§€ëŠ” clientê°€ ì‚¬ìš©í•  ì´ë¦„.
+			sendAllMsg(name + "ë‹˜ì´ ìž…ìž¥í•˜ì…¨ìŠµë‹ˆë‹¤.");
+	//í˜„ìž¬ê°ì²´ê°€ ê°€ì§€ê³  ìžˆëŠ” ì†Œìº£ì„ ì œì™¸í•˜ê³  ë‹¤ë¥¸ ì†Œì¼“ë“¤ì—ê²Œ ì ‘ì†ì„ ì•Œë¦¼.
+			hm.put(name,out);//í•´ì‰¬ë§µì— í‚¤ë¥¼  nameìœ¼ë¡œ  ì¶œë ¥ìŠ¤íŠ¸ë¦¼ ê°ì²´ë¥¼ ì €ìž¥.
+			System.out.println("í˜„ìž¬ ì ‘ì†ìž ìˆ˜ëŠ”"+hm.size()+"ëª… ìž…ë‹ˆë‹¤.");
+			while(in != null){//ìž…ë ¥ìŠ¤íŠ¸ë¦¼ì´ nullì´ ì•„ë‹ˆë©´ ë°˜ë³µ
+				sendAllMsg(in.readUTF());//í˜„ìž¬ ì†Œì¼“ì—ì„œ ì½ì–´ë³¸ë©”ì‹œì§€ë¥¼ í•´ì‰¬ë§µì— ì €ìž¥ëœ ëª¨ë“ 
+				//ì¶œë ¥ìŠ¤íŠ¸ë¦¼ìœ¼ë¡œ ë³´ë‚¸ë‹¤.
 			}
 		} catch (Exception e) {
 			System.out.println(e+"---->");
 		}finally{
-	//¿¹¿Ü°¡ ¹ß»øÇÒ ¶§ ÅðÀå, ÇØ½¬¸Ê¿¡¼­ ÇØ´ç µ¥ÀÌÅÍ Á¦°Å.
-	//º¸Åë Á¾·áÇÏ°Å³ª ³ª°¡¸é java.net.SocketException: ¿¹¿Ü¹ß»ý
+	//ì˜ˆì™¸ê°€ ë°œìƒí•  ë•Œ í‡´ìž¥, í•´ì‰¬ë§µì—ì„œ í•´ë‹¹ ë°ì´í„° ì œê±°.
+	//ë³´í†µ ì¢…ë£Œí•˜ê±°ë‚˜ ë‚˜ê°€ë©´ java.net.SocketException: ì˜ˆì™¸ë°œìƒ
 		hm.remove(name);
-		sendAllMsg(name+"´ÔÀÌ ÅðÀåÇÏ¼Ì½À´Ï´Ù.");
-		System.out.println("ÇöÀç Á¢¼ÓÀÚ ¼ö´Â"+hm.size()+"¸í ÀÔ´Ï´Ù.");
+		sendAllMsg(name+"ë‹˜ì´ í‡´ìž¥í•˜ì…¨ìŠµë‹ˆë‹¤.");
+		System.out.println("í˜„ìž¬ ì ‘ì†ìž ìˆ˜ëŠ”"+hm.size()+"ëª… ìž…ë‹ˆë‹¤.");
 		}
 	}
 	}
 }
-
-
-
-
 

@@ -7,23 +7,24 @@ import java.util.Scanner;
 
 public class MultiClient {
 	public static void main(String[] args) throws UnknownHostException, IOException{
-		System.out.println("ÀÌ¸§À» ÀÔ·ÂÇØ ÁÖ¼¼¿ä.");
+		System.out.println("ì´ë¦„ì„ ì…ë ¥í•´ ì£¼ì„¸ìš”.");
 		Scanner scan = new Scanner(System.in);
 		String sname = scan.nextLine();
 		
 		try {
 			String ServerIP = "localhost";
 			Socket socket = new Socket(ServerIP, 9999);
-			System.out.println("¼­¹ö¿Í ¿¬°áÀÌ µÇ¾ú½À´Ï´Ù.");
-		//»ç¿ëÀÚ·ÎºÎÅÍ ¾òÀº ¹®ÀÚ¿­À» ¼­¹ö·Î Àü¼ÛÇØÁÖ´Â ¿ªÇÒÀ» ÇÏ´Â thread
+			System.out.println("ì„œë²„ì™€ ì—°ê²°ì´ ë˜ì—ˆìŠµë‹ˆë‹¤.");
+		//ì‚¬ìš©ìë¡œë¶€í„° ì–»ì€ ë¬¸ìì—´ì„ ì„œë²„ë¡œ ì „ì†¡í•´ì£¼ëŠ” ì—­í• ì„ í•˜ëŠ” thread
 			Thread sender = new Sender(socket,sname);
-		//¼­¹ö¿¡¼­ º¸³»´Â ¸Ş½ÃÁö¸¦ »ç¿ëÀÚÀÇ ÄÜ¼Ö¿¡ Ãâ·ÂÇÏ´Â ½º·¹µå.//
+		//ì„œë²„ì—ì„œ ë³´ë‚´ëŠ” ë©”ì‹œì§€ë¥¼ ì‚¬ìš©ìì˜ ì½˜ì†”ì— ì¶œë ¥í•˜ëŠ” ìŠ¤ë ˆë“œ.//
 			Thread receiver = new Receiver(socket);
-			System.out.println("Ã¤ÆÃ¹æ¿¡ ÀÔÀåÇÏ¼Ì½À´Ï´Ù.");
+			System.out.println("ì±„íŒ…ë°©ì— ì…ì¥í•˜ì…¨ìŠµë‹ˆë‹¤.");
 			sender.start();
 			receiver.start();
 		} catch (Exception e) {
-			System.out.println("¿¹¿Ü[MultiClient class]:"+e);
+			System.out.println("ì˜ˆì™¸[MultiClient class]:"+e);
 		}
 	}
 }
+

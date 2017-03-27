@@ -1,3 +1,5 @@
+
+
 package kwanwoo;
 
 import java.io.DataOutputStream;
@@ -15,7 +17,7 @@ public class Sender extends Thread{
 			out = new DataOutputStream(this.socket.getOutputStream());
 			this.name = name;
 		} catch (Exception e) {
-		 System.out.println("©╧©э : "+e);
+		 System.out.println("Л≤┬Л≥╦ : "+e);
 		}
 	}
 	@Override
@@ -24,14 +26,14 @@ public class Sender extends Thread{
 		try {
 			out.writeUTF(name);
 		} catch (Exception e) {
-			System.out.println("©╧©э : "+e);
+			System.out.println("Л≤┬Л≥╦ : "+e);
 		}
 		while(out != null){
 			try {
 				out.writeUTF(name+"=>"+s.nextLine());
-			//е╟╨╦╣Е╥н╨нем ют╥б╧чю╨ ╧╝юз©╜ю╩ ╪╜╧Ж╥н ╨╦Ё©	
+			//М┌╓КЁ╢К⌠°К║°К╤─М└╟ Л·┘К═╔К╟⌡Л²─ К╛╦Л·░Л≈╢Л²└ Л└°К╡└К║° КЁ╢К┐└	
 			} catch (Exception e) {
-				System.out.println("©╧©э : "+e);
+				System.out.println("Л≤┬Л≥╦ : "+e);
 			}
 		}
 	}

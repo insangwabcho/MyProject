@@ -1,3 +1,7 @@
+
+
+
+
 package kwanwoo;
 
 import java.io.DataInputStream;
@@ -9,25 +13,27 @@ public class Receiver extends Thread{
 	Socket socket;
 	DataInputStream in;
 	
-	//SocketÀ» ¸Å°³º¯¼ö·Î ¹Ş´Â »ı¼ºÀÚ.
+	//Socketì„ ë§¤ê°œë³€ìˆ˜ë¡œ ë°›ëŠ” ìƒì„±ì.
 	public Receiver(Socket socket){
 		this.socket = socket;
 		
 		try {
 			in = new DataInputStream(this.socket.getInputStream());
 		} catch (Exception e) {
-			System.out.println("¿¹¿Ü : "+e);
+			System.out.println("ì˜ˆì™¸ : "+e);
 		}
-	}//------»ı¼ºÀÚ
+	}//------ìƒì„±ì
 	@Override
 	public void run() {
 	 while(in != null){
 		 try {
 			System.out.println(in.readUTF());
-			//¼­¹ö·ÎºÎÅÍ ÀĞ¾î¿Â µ¥ÀÌÅÍ¸¦ ÄÜ¼Ö¿¡ Ãâ·Â
+			//ì„œë²„ë¡œë¶€í„° ì½ì–´ì˜¨ ë°ì´í„°ë¥¼ ì½˜ì†”ì— ì¶œë ¥
 		} catch (IOException e) {
-			System.out.println("¿¹¿Ü : "+e);
+			System.out.println("ì˜ˆì™¸ : "+e);
 		}
 	 }		
   }
 }
+
+
