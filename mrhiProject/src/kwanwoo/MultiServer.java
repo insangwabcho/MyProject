@@ -27,6 +27,7 @@ public class MultiServer {
       System.out.println("서버가 시작되었습니다.");
       while (true) {//서버가 실행되는 동안 클라이언트들의 접속을 기다림.
         socket = serverSocket.accept();
+        System.out.println(socket.getInetAddress() + "인");
         //클라이언트의 접속을 기다리다가 접속이 되면 Socket객체를 생성		
         System.out.println(socket.getInetAddress() + ":" + socket.getPort());
         //클라이언트 정보(ip,port)출력
