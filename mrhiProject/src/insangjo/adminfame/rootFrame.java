@@ -1,8 +1,10 @@
 package insangjo.adminfame;
 
 import java.awt.BorderLayout;//d
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -16,9 +18,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import sangjin.Client.Login;
-
-import java.awt.Color;
-import java.awt.SystemColor;
+import sangjin.Client.MemberList;
 
 public class rootFrame extends JFrame {
 
@@ -49,13 +49,6 @@ public class rootFrame extends JFrame {
     });
     panel.add(btnNewButton);
 
-    JButton btnNewButton_1 = new JButton("월별매출");
-    btnNewButton_1.setOpaque(true);
-    btnNewButton_1.setBackground(SystemColor.textHighlight);
-    btnNewButton_1.setForeground(new Color(255, 255, 255));
-    btnNewButton_1.setFont(new Font("맑은 고딕", Font.BOLD, 16));
-    panel.add(btnNewButton_1);
-
     JButton btnNewButton_2 = new JButton("배송관리");
     btnNewButton_2.setOpaque(true);
     btnNewButton_2.setBackground(SystemColor.textHighlight);
@@ -67,6 +60,18 @@ public class rootFrame extends JFrame {
       }
     });
     panel.add(btnNewButton_2);
+    
+        JButton btnlist = new JButton("회원목록");
+        btnlist.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		new MemberList().setVisible(true);
+        	}
+        });
+        btnlist.setOpaque(true);
+        btnlist.setBackground(SystemColor.textHighlight);
+        btnlist.setForeground(new Color(255, 255, 255));
+        btnlist.setFont(new Font("맑은 고딕", Font.BOLD, 16));
+        panel.add(btnlist);
 
     JTextArea textArea = new JTextArea();
     textArea.setText("* 192.168.0.11님이 접속하셨습니다 *\n192.168.0.11 : 혹시 HDD없이 SSD만으로도 부팅이가능한가요?");

@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.util.Vector;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -14,33 +15,18 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import sungwon.Goods.Management;
+
 public class MemberList extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
 	private Vector col;
 	private MemberDAO dao;
+	private Management mgn;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MemberList frame = new MemberList();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
 	public MemberList() {
+		mgn = new Management();
 		dao = new MemberDAO();
 		col = new Vector();
 		col.add("ID");
@@ -60,7 +46,7 @@ public class MemberList extends JFrame {
 		};
 		
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 1221, 641);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(255, 255, 255));
@@ -73,10 +59,13 @@ public class MemberList extends JFrame {
 		contentPane.add(scrollPane);
 		
 		table = new JTable(model);
+		mgn.resizeColumnWidth(table);
 		scrollPane.setViewportView(table);
 		
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setBounds(14, 12, 270, 104);
+	    JLabel lblNewLabel = new JLabel();
+	    lblNewLabel.setBounds(14, 12, 270, 104);
+	    ImageIcon tmplogo = new insangjo.img.SetImageIcon().getScaleImg("/comnawalogo.png",lblNewLabel.getWidth(),lblNewLabel.getHeight());
+	    lblNewLabel.setIcon(tmplogo);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("회원 리스트");
@@ -85,7 +74,7 @@ public class MemberList extends JFrame {
 		lblNewLabel_1.setBackground(new Color(0, 51, 255));
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setFont(new Font("맑은 고딕", Font.BOLD, 20));
-		lblNewLabel_1.setBounds(298, 63, 609, 53);
+		lblNewLabel_1.setBounds(298, 63, 903, 53);
 		contentPane.add(lblNewLabel_1);
 	}
 }
