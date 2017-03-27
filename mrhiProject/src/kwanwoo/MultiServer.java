@@ -26,7 +26,7 @@ public class MultiServer {
 
   //생성자
   public MultiServer() {
-    hm = new HashMap();
+    hm = new HashMap();//
     Collections.synchronizedMap(hm);
     idList = new ArrayList();
   }
