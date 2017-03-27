@@ -502,7 +502,7 @@ public class MainFrame extends JFrame {
     option2Panel.setBorder(lb);
     panel.setBorder(lb);
     scrollPane_1.setBorder(lb);
-
+    //
     lblUserStat = new JLabel(username + "님 반갑습니다!!");
     lblUserStat.setBounds(582, 12, 358, 47);
     contentPane.add(lblUserStat);
