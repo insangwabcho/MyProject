@@ -95,7 +95,7 @@ public class MainFrame extends JFrame {
     setIconImage(Toolkit.getDefaultToolkit().getImage(MainFrame.class.getResource("/insangjo/img/programIcon.ico")));
     setTitle("comNawa 주문프로그램");
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    setBounds(100, 100, 1350, 768);
+    setBounds(100, 100, 1359, 939);
     setResizable(false);
 
     JMenuBar menuBar = new JMenuBar();
@@ -153,7 +153,7 @@ public class MainFrame extends JFrame {
     scrollPane_3.setViewportView(lblDetail);
     detailPanel = new JPanel();
     detailPanel.setBackground(Color.white);//
-    detailPanel.setBounds(506, 349, 838, 346);
+    detailPanel.setBounds(506, 349, 838, 517);
     contentPane.add(detailPanel);
 
     cboMenu = new JComboBox();
@@ -266,19 +266,19 @@ public class MainFrame extends JFrame {
 
     boxpanel = new JPanel();
     boxpanel.setBackground(new Color(0, 51, 255));
-    boxpanel.setBounds(6, 349, 486, 346);
+    boxpanel.setBounds(6, 349, 486, 517);
     contentPane.add(boxpanel);
     boxpanel.setLayout(null);
 
     JLabel lblNewLabel_1 = new JLabel("현재 장바구니 목록");
     lblNewLabel_1.setForeground(new Color(255, 255, 255));
-    lblNewLabel_1.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+    lblNewLabel_1.setFont(new Font("맑은 고딕", Font.PLAIN, 18));
     lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-    lblNewLabel_1.setBounds(6, 12, 474, 16);
+    lblNewLabel_1.setBounds(6, 12, 474, 38);
     boxpanel.add(lblNewLabel_1);
 
     scrollPane_1 = new JScrollPane();
-    scrollPane_1.setBounds(6, 40, 474, 256);
+    scrollPane_1.setBounds(6, 62, 474, 402);
     boxpanel.add(scrollPane_1);
 
     model = new DefaultTableModel(data, col);
@@ -313,7 +313,7 @@ public class MainFrame extends JFrame {
 
       }
     });
-    btnOk.setBounds(397, 308, 75, 29);
+    btnOk.setBounds(397, 476, 75, 29);
     boxpanel.add(btnOk);
 
     JButton button = new JButton("초기화");
@@ -331,17 +331,17 @@ public class MainFrame extends JFrame {
         lblCheckSSD.setText("");
       }
     });
-    button.setBounds(200, 308, 80, 29);
+    button.setBounds(200, 476, 80, 29);
     boxpanel.add(button);
 
     JLabel lblNewLabel_3 = new JLabel("총 금액");
     lblNewLabel_3.setForeground(new Color(255, 255, 255));
-    lblNewLabel_3.setBounds(6, 314, 75, 16);
+    lblNewLabel_3.setBounds(6, 482, 75, 16);
     boxpanel.add(lblNewLabel_3);
 
     lblTotalPirce = new JLabel("");
     lblTotalPirce.setForeground(new Color(255, 255, 255));
-    lblTotalPirce.setBounds(86, 314, 107, 16);
+    lblTotalPirce.setBounds(86, 482, 107, 16);
     boxpanel.add(lblTotalPirce);
 
     JButton button_1 = new JButton("상품삭제");
@@ -356,7 +356,7 @@ public class MainFrame extends JFrame {
         }
       }
     });
-    button_1.setBounds(283, 308, 110, 29);
+    button_1.setBounds(283, 476, 110, 29);
     boxpanel.add(button_1);
 
     optionPanel = new JPanel();
@@ -503,7 +503,7 @@ public class MainFrame extends JFrame {
     scrollPane_1.setBorder(lb);
     //
     lblUserStat = new JLabel(username + "님 반갑습니다!!");
-    lblUserStat.setBounds(582, 12, 358, 47);
+    lblUserStat.setBounds(636, 12, 304, 47);
     contentPane.add(lblUserStat);
     lblUserStat.setFont(new Font("Lucida Grande", Font.BOLD, 20));
     lblUserStat.setHorizontalAlignment(SwingConstants.CENTER);
@@ -538,8 +538,8 @@ public class MainFrame extends JFrame {
 
     contentPane.add(lblLogo);
 
-    JLabel lblAd = new JLabel(new insangjo.img.SetImageIcon().getScaleImg("/AD/AD5.PNG/", 390, 60));
-    lblAd.setBounds(180, 5, 390, 60);
+    JLabel lblAd = new JLabel(new insangjo.img.SetImageIcon().getScaleImg("/AD/AD5.PNG/", 460, 60));
+    lblAd.setBounds(180, 5, 460, 60);
     new sungwon.Ad.AD(lblAd);
 
     contentPane.add(lblAd);
