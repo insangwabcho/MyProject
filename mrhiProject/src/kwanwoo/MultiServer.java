@@ -122,7 +122,7 @@ public class MultiServer {
         out = new DataOutputStream(socket.getOutputStream());
       } catch (Exception e) {
         System.out.println("예외 : " + e);
-      }
+      } //
     }
 
     public void run() {//thread를 사용하기위해서 run메소드 재정의
