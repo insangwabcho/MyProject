@@ -1,4 +1,4 @@
-package sangjin.Client;
+package sangjin.Member;
 
 import java.awt.Color;
 import java.awt.EventQueue;

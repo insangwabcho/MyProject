@@ -23,7 +23,7 @@ import javax.swing.border.EmptyBorder;
 import kwanwoo.MultiClient;
 import kwanwoo.MultiServer;
 import sangjin.Client.Login;
-import sangjin.Client.MemberList;
+import sangjin.Member.MemberList;
 
 public class rootFrame extends JFrame implements Runnable {
 

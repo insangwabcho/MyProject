@@ -161,8 +161,7 @@ public class Join extends JFrame {
 			@Override
 			public void focusLost(FocusEvent e) {
 				String p1 = String.valueOf(tfJpassword1.getPassword()); // 비밀번호
-				String p2 = String.valueOf(tfJpassword2.getPassword()); // 비밀번호
-																		// 확인
+				String p2 = String.valueOf(tfJpassword2.getPassword()); // 비밀번호 확인
 				if (p1.trim().length() > 5) { // 비밀번호가 3글자 이상일때
 					if (p2.equals(p1)) { // 같을때
 						lblJTF.setText("V");
@@ -383,7 +382,7 @@ public class Join extends JFrame {
 			cbyear.addItem(i);
 		}
 
-		cbmonth = new JComboBox();
+		cbmonth = new JComboBox(); //월별 날짜계산
 		cbmonth.setBackground(SystemColor.control);
 		cbmonth.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {

@@ -1,4 +1,4 @@
-package sangjin.Client;
+package sangjin.Member;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,6 +9,7 @@ import java.util.Vector;
 import sungwon.DB.DB;
 
 public class MemberDAO {
+	//회원리스트 메소드
 	public Vector listMember(){
 		Vector list=new Vector();
 		Connection con=null;

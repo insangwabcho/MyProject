@@ -142,5 +142,37 @@ public class DeliveryChangeDAO {
 		}
 		return result;
 	}
+	
+	//회원 주문내역창에서 보는 배송상태
+	public Vector statusMember(String order_no){
+		Vector items=new Vector();
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			conn=DB.comCon();
+			String sql="select status from delivery where order_no=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, order_no);
+			rs=pstmt.executeQuery();
+			if(rs.next()){
+				items.add(rs.getString("status"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if( pstmt != null ) pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if( conn != null ) conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return items;
+	}
 
 }

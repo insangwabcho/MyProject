@@ -10,6 +10,61 @@ import java.util.Vector;
 import insangjo.DTO.CartDTO;
 
 public class SearchFrameDAO {
+	public int canceldeliveryOrder(String order_no) {
+	    int result = 0;
+	    Connection conn = null;
+	    PreparedStatement pstmt = null;
+	    ResultSet rs=null;
+	    try {
+	      String sql = "delete from delivery where order_no=?";
+	      conn = sungwon.DB.DB.comCon();
+	      pstmt = conn.prepareStatement(sql);
+	      pstmt.setString(1, order_no);
+	      rs=pstmt.executeQuery();
+	    } catch (Exception e) {
+	      e.printStackTrace();
+	    }  finally {
+			try {
+				if( pstmt != null ) pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if( conn != null ) conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+	
+	public int cancelcartOrder(String order_no) {
+	    int result = 0;
+	    Connection conn = null;
+	    PreparedStatement pstmt = null;
+	    ResultSet rs = null;
+	    try {
+	      String sql = "delete from cart where order_no=?";
+	      conn = sungwon.DB.DB.comCon();
+	      pstmt = conn.prepareStatement(sql);
+	      pstmt.setString(1, order_no);
+	      rs = pstmt.executeQuery();
+	    } catch (Exception e) {
+	      e.printStackTrace();
+	    }  finally {
+			try {
+				if( pstmt != null ) pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if( conn != null ) conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
 
   public int checkOrder(String userid) {
     int result = 0;

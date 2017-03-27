@@ -34,7 +34,7 @@ import sungwon.DB.DB;
 public class DeliveryChangeFrame extends JFrame {
 
   private JPanel contentPane;
-  private JTable table;
+  private JTable table;//
   private JTextField tfdvs;
   private JTextField tfid;
   private JTextField tfname;
@@ -136,23 +136,6 @@ public class DeliveryChangeFrame extends JFrame {
 
     JComboBox cbdvs = new JComboBox();
     cbdvs.setModel(new DefaultComboBoxModel(new String[] {"배송대기", "배송중", "배송완료"}));
-    cbdvs.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent arg0) {
-        String status = cbdvs.getSelectedItem().toString();
-        if (status.equals("배송대기")) {
-          tfdvs.setText("배송대기");
-          tfdvs.setForeground(Color.red);
-        }
-        else if (status.equals("배송중")) {
-          tfdvs.setText("배송중");
-          tfdvs.setForeground(Color.ORANGE);
-        }
-        else if (status.equals("배송완료")) {
-          tfdvs.setText("배송완료");
-          tfdvs.setForeground(new Color(47, 157, 39));
-        }
-      }
-    });
     cbdvs.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
     cbdvs.setBounds(636, 45, 91, 31);
     contentPane.add(cbdvs);
@@ -374,7 +357,8 @@ public class DeliveryChangeFrame extends JFrame {
     JButton btnSave = new JButton("저장");
     btnSave.addActionListener(new ActionListener() {
     	public void actionPerformed(ActionEvent e) {
-    		String status=tfdvs.getText();
+    		String status=cbdvs.getSelectedItem().toString();
+    		System.out.println(status);
     		int order_no=Integer.valueOf(model.getValueAt(table.getSelectedRow(), 0)+"");
 			int result = dcdao.updateMember(status,order_no);
 			if (result == 1) {
