@@ -18,13 +18,13 @@ public class ImgSizeUp extends JFrame {
 	public ImgSizeUp(ImageIcon originimg) {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 790, 850);
+		setBounds(100, 100, 850, 850);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		scrollPane = new JScrollPane();;
-		scrollPane.setBounds(0, 0, 784, 850);
+		scrollPane.setBounds(0, 0, 840, 850);
 		contentPane.add(scrollPane);
 		scrollPane.getVerticalScrollBar().setUnitIncrement(40);
 		
@@ -33,7 +33,7 @@ public class ImgSizeUp extends JFrame {
 		String a = (String.valueOf(sungwon.DB.DB.class.getResource("img"))).replaceAll("file:", "") ;
 		a= a.replaceAll("/bin/", "/src/");
 		Image sizesrc = originimg.getImage();
-		Image newsize = sizesrc.getScaledInstance(790, 8500, Image.SCALE_AREA_AVERAGING);
+		Image newsize = sizesrc.getScaledInstance(840, 8500, Image.SCALE_AREA_AVERAGING);
 		ImageIcon img= new ImageIcon(newsize); 
 		lblsizeupimg.setIcon(img);
 	}
