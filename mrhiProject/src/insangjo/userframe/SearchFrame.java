@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -23,6 +24,7 @@ import javax.swing.table.DefaultTableModel;
 
 import insangjo.DAO.SearchFrameDAO;
 import insangjo.DTO.CartDTO;
+import sangjin.Client.UpdateJoin;
 
 public class SearchFrame extends JFrame {
 
@@ -30,6 +32,7 @@ public class SearchFrame extends JFrame {
   private JTable table;
   private JComboBox comboBox;
   private Vector data, col;
+  private String order_no;
 
   public SearchFrame(String userid, String username) {
     setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -75,6 +78,7 @@ public class SearchFrame extends JFrame {
           String a = comboBox.getSelectedItem() + "";
           int index = Integer.parseInt(a.substring(a.length() - 1));
           data = searchframeDao.detailOrder(items.get(comboBox.getSelectedIndex() - 1), index);
+          order_no=(comboBox.getSelectedItem()+"").substring(19);
           DefaultTableModel model = new DefaultTableModel(data, col);
           table.setModel(model);
           table.getColumn("이름").setPreferredWidth(200);
@@ -102,10 +106,14 @@ public class SearchFrame extends JFrame {
     lblTotal.setHorizontalAlignment(SwingConstants.CENTER);
     panel_1.add(lblTotal);
 
-    JButton btnNewButton = new JButton("창 닫기");
+    JButton btnNewButton = new JButton("주문취소");
     btnNewButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        dispose();
+          String[] yn = { "예", "아니오" };
+          if (JOptionPane.showOptionDialog(SearchFrame.this, "주문을 취소하시겠습니까?", "경고", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null, yn, null) == 0) {
+        	  searchframeDao.cancelOrder(order_no);
+        	  dispose();
+          }
       }
     });
     panel_1.add(btnNewButton);
