@@ -1,8 +1,6 @@
 package sungwon.Goods;
 
-//22일 수정할 내용 - 이미지 저장및 삭제시 lblimg 초기화
-//				*시리얼번호 중간꺼 삭제시 추가및 삭제 불가한 현상
-//               삭제탭에서 테이블 선택시 느리게 나타나는현상
+
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.EventQueue;
@@ -514,6 +512,7 @@ public class Management extends JFrame {
 			public void valueChanged(ListSelectionEvent e) {
 				if (e.getValueIsAdjusting()) {
 					if (list.getSelectedIndex() == 0) {
+						//입력된리스트가 CPU일때
 						name = "CPU";
 						col2.clear();
 						col2.add("품번");
@@ -526,7 +525,8 @@ public class Management extends JFrame {
 						lblspec1_3.setText("세대");
 						lblspec2_3.setText("-");
 						tfspec2_3.setText("");
-					} else if (list.getSelectedIndex() == 1) {
+					}else if (list.getSelectedIndex() == 1) {
+						//입력된리스트가 HDD일때
 						name = "HDD";
 						col2.clear();
 						col2.add("품번");
@@ -540,6 +540,7 @@ public class Management extends JFrame {
 						lblspec2_3.setText("-");
 						tfspec2_3.setText("");
 					} else if (list.getSelectedIndex() == 2) {
+						//입력된리스트가 MAIN일때
 						name = "MAIN";
 						col2.clear();
 						col2.add("품번");
@@ -553,6 +554,7 @@ public class Management extends JFrame {
 						lblspec2_3.setText("-");
 						tfspec2_3.setText("");
 					} else if (list.getSelectedIndex() == 3) {
+						//입력된리스트가 RAM일때
 						name = "RAM";
 						col2.clear();
 						col2.add("품번");
@@ -566,6 +568,7 @@ public class Management extends JFrame {
 						lblspec2_3.setText("-");
 						tfspec2_3.setText("");
 					} else if (list.getSelectedIndex() == 4) {
+						//입력된리스트가 SSD일때
 						name = "SSD";
 						col2.clear();
 						col2.add("품번");
@@ -579,6 +582,7 @@ public class Management extends JFrame {
 						lblspec2_3.setText("-");
 						tfspec2_3.setText("");
 					} else if (list.getSelectedIndex() == 5) {
+						//입력된리스트가 VGA일때
 						name = "VGA";
 						col2.clear();
 						col2.add("품번");
@@ -599,7 +603,7 @@ public class Management extends JFrame {
 			}
 
 		});
-
+		
 		JButton btnadd1 = new JButton("저장");
 		btnadd1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		btnadd1.setBounds(452, 41, 116, 23);
@@ -608,6 +612,7 @@ public class Management extends JFrame {
 		btnadd1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (!(lblcost1.getText().equals("0 원"))) {
+					//원가가 0원이아니라면 저장
 					try {
 						int no = Integer.valueOf(tfea1.getText());
 						int row = table.getSelectedRow();
@@ -725,6 +730,7 @@ public class Management extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				int tmpea = Integer.valueOf(tfea3.getText());
 				int serial = Integer.valueOf(tfserial3.getText());
+				//재고가 0이 아닐경우 확인창 생성
 				if (tmpea != 0) {
 					String[] str = { "예", "아니오" };
 					if (JOptionPane.showOptionDialog(Management.this, "재고가남아있습니다.\n정말삭제하시겠습니까?", "삭제확인",
@@ -810,7 +816,8 @@ public class Management extends JFrame {
 		tfea3.setBounds(460, 65, 105, 25);
 		panel_delete.add(tfea3);
 		tfea3.setColumns(10);
-
+		
+		//로고 생성
 		String a1 = (String.valueOf(DB.class.getResource("img/comnawalogo.png"))).replaceAll("file:", "");
 		ImageIcon tmplogo = new ImageIcon(a1);
 		try {
