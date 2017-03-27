@@ -19,7 +19,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import sangjin.Client.Login;
-import sangjin.Client.MemberList;
+import sangjin.Member.MemberList;
 
 public class rootFrame extends JFrame {
 
