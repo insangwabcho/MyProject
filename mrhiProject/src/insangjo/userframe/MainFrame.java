@@ -546,6 +546,9 @@ public class MainFrame extends JFrame {
     contentPane.add(lblAd);
 
     JInternalFrame internalFrame = new JInternalFrame("실시간 상담");
+    internalFrame.setResizable(false);
+    internalFrame.setClosable(false);
+
     internalFrame.setBounds(884, 71, 460, 266);
     contentPane.add(internalFrame);
     internalFrame.setVisible(true);
