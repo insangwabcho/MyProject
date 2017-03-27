@@ -10,7 +10,8 @@ public class Sender extends Thread {
   String name;//
   private String chat = null;
 
-  public Sender(Socket socket, String name) {
+  public Sender(Socket socket, String name, String chat) {
+    this.chat = chat;
     this.socket = socket;
     try {
       out = new DataOutputStream(this.socket.getOutputStream());
@@ -39,9 +40,5 @@ public class Sender extends Thread {
         System.out.println("예외 : " + e);
       }
     }
-  }
-
-  public void sendChat(String chat) {
-    this.chat = chat;
   }
 }

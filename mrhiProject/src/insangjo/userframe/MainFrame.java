@@ -62,10 +62,7 @@ public class MainFrame extends JFrame {
   private DefaultTableModel model;
   private JLabel lblOptionTitle;
   private JComboBox cboMenu;
-  private String usname;
   private JLabel lblEa;
-  private String id;
-  private int eaNum = 1;
   private JLabel lblCheckCPU;
   private JLabel lblCheckMain;
   private JLabel lblCheckGraphic;
@@ -86,8 +83,6 @@ public class MainFrame extends JFrame {
   private JTextField textField;
 
   public MainFrame(String username, String id, String address) {
-    usname = username;
-    this.id = id;
     panelBg = new ImageIcon(MainFrame.class.getResource("/insangjo/img/panelBg.jpeg"));
     orderpageDao = new MainFrameDAO();
     col = new Vector<>();
@@ -570,9 +565,19 @@ public class MainFrame extends JFrame {
     internalFrame.getContentPane().add(textField);
     textField.setColumns(10);
 
-    JButton btnNewButton = new JButton("전송");
-    btnNewButton.setBounds(349, 188, 81, 29);
-    internalFrame.getContentPane().add(btnNewButton);
+    JButton btnSend = new JButton("전송");
+    btnSend.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        try {
+          mc.chatClient(id, textField.getText());
+          textField.setText("");
+        } catch (Exception e2) {
+          e2.printStackTrace();
+        }
+      }
+    });
+    btnSend.setBounds(349, 188, 81, 29);
+    internalFrame.getContentPane().add(btnSend);
     internalFrame.setVisible(true);
     btnLogout.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {

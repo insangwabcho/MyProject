@@ -90,12 +90,13 @@ public class Login extends JFrame {
           pstmt.setString(2, Lpassword); //두번째 물음표(비번)
           rs = pstmt.executeQuery();
           if (rs.next()) {
-        	dao = new JoinDAO();
+            dao = new JoinDAO();
             name = dao.returnName(Lid); //이름 리턴
             id = dao.returnID(Lid); //아이디 리턴
             address = dao.returnAddress(Lid); //주소 리턴
             if (Lid.equals("root")) { //관리자 아이디면
               new rootFrame().setVisible(true);
+              dao.updateLog(Lid);
               dispose();
             }
             else { //일반 사용자면
