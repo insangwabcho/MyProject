@@ -32,6 +32,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
@@ -80,6 +81,7 @@ public class MainFrame extends JFrame {
   private JPanel panel;
   private JScrollPane scrollPane_1;
   private JLabel lblDetail;
+  private JTextField textField;
 
   public MainFrame(String username, String id, String address) {
     usname = username;
@@ -551,6 +553,16 @@ public class MainFrame extends JFrame {
 
     internalFrame.setBounds(884, 71, 460, 266);
     contentPane.add(internalFrame);
+
+    JPanel panel_1 = new JPanel();
+    internalFrame.getContentPane().add(panel_1, BorderLayout.SOUTH);
+    panel_1.setLayout(null);
+    //panel_1.setSize(, height);
+
+    textField = new JTextField();
+    textField.setBounds(153, 5, 130, 26);
+    panel_1.add(textField);
+    textField.setColumns(10);
     internalFrame.setVisible(true);
     btnLogout.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
