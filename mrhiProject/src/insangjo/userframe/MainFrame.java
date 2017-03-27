@@ -45,10 +45,11 @@ import javax.swing.table.DefaultTableModel;
 import insangjo.DAO.MainFrameDAO;
 import insangjo.DAO.SearchFrameDAO;
 import kwanwoo.MultiClient;
+import kwanwoo.MultiServer;
 import sangjin.Client.Login;
 import sangjin.Client.UpdateJoin;
 
-public class MainFrame extends JFrame {
+public class MainFrame extends JFrame implements Runnable {
 
   private JLabel lblUserStat;
   private Color colMenu;
@@ -82,9 +83,11 @@ public class MainFrame extends JFrame {
   private JLabel lblDetail;
   private JTextField textField;
   private JTextArea textArea;
+  private JComboBox cbox;
 
   public MainFrame(String username, String id, String address) {
 
+    cbox = new JComboBox<>();
     panelBg = new ImageIcon(MainFrame.class.getResource("/insangjo/img/panelBg.jpeg"));
     orderpageDao = new MainFrameDAO();
     col = new Vector<>();
@@ -715,5 +718,16 @@ public class MainFrame extends JFrame {
     Image t = imgicon.getImage();
     imgicon = new ImageIcon(t.getScaledInstance(width, height, Image.SCALE_AREA_AVERAGING));
     return imgicon;
+  }
+
+  @Override
+  public void run() {
+    kwanwoo.MultiServer sv = new MultiServer();
+
+    try {
+      sv.init(cbox);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 }

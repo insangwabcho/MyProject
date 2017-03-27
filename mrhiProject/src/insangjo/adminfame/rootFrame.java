@@ -142,6 +142,7 @@ public class rootFrame extends JFrame implements Runnable {
   @Override
   public void run() {
     kwanwoo.MultiServer sv = new MultiServer();
+
     try {
       sv.init(comboBox);
     } catch (Exception e) {
