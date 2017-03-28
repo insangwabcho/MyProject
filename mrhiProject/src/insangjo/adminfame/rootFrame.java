@@ -20,7 +20,6 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import kwanwoo.MultiClient;
 import kwanwoo.PushMsg;
 import sangjin.Client.Login;
 import sangjin.Member.MemberList;
@@ -45,7 +44,6 @@ public class rootFrame extends JFrame {
     JPanel panel = new JPanel(new GridLayout(3, 0));
     contentPane.add(panel, BorderLayout.EAST);
 
-    kwanwoo.MultiClient mc = new MultiClient();
     textArea = new JTextArea();
 
     JButton btnNewButton = new JButton("재고관리 / 추가삭제");
