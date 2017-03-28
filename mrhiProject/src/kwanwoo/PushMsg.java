@@ -30,7 +30,7 @@ public class PushMsg {
     this.rf = rf;
   }
 
-  public PushMsg(String idto, String msg, String idfrom) {
+  public PushMsg(String idto, String msg, String idfrom) {//
     this.idto = idto;
     this.msg = msg;
     this.idfrom = idfrom;
