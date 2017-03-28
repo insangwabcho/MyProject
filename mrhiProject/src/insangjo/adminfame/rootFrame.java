@@ -106,33 +106,61 @@ public class rootFrame extends JFrame {
     btnlogout.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
     panel_1.add(btnlogout);
 
-    JPanel panel_2 = new JPanel(new GridLayout(0, 2));
+    JPanel panel_2 = new JPanel(new GridLayout(0, 3));
     contentPane.add(panel_2, BorderLayout.SOUTH);
 
+    JButton btnSend = new JButton("Send");
+
     textField = new JTextField();
+    textField.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        btnSend.doClick();
+      }
+    });
     panel_2.add(textField);
     textField.setColumns(10);
 
-    JButton btnSend = new JButton("Send");
     btnSend.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         String[] arr = new String[2];
+        String msg = textField.getText();
         try {
-          String msg = textField.getText();
           int index = msg.indexOf(" ");
           arr[0] = msg.substring(1, index);
           arr[1] = msg.substring(index + 1);
         } catch (ArrayIndexOutOfBoundsException e2) {
-          JOptionPane.showMessageDialog(rootFrame.this, "메세지 형식을 지켜주세요 \n /보낼아이디 메세지");
-          return;
+          int result = JOptionPane.showConfirmDialog(rootFrame.this, "전체회원에게 공지사항을 보내시겠습니까?");
+          if (result == JOptionPane.YES_OPTION) {
+            kwanwoo.PushMsg pm = new PushMsg("root", msg, "all_members");
+            textField.setText("");
+            return;
+          }
+        } catch (StringIndexOutOfBoundsException e3) {
+          int result = JOptionPane.showConfirmDialog(rootFrame.this, "전체회원에게 공지사항을 보내시겠습니까?");
+          if (result == JOptionPane.YES_OPTION) {
+            kwanwoo.PushMsg pm = new PushMsg("root", msg, "all_members");
+            textField.setText("");
+            return;
+          }
         }
         kwanwoo.PushMsg pm = new PushMsg("root", arr[1], arr[0]);
 
         textArea.append(arr[0] + " 님에게 : " + arr[1] + "\n");
-        textField.setText("");
+
       }
     });
     panel_2.add(btnSend);
+
+    JButton delGongji = new JButton("공지사항삭제");
+    delGongji.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        int result = new kwanwoo.PushMsg().delGongji();
+        if (result == 1) {
+          JOptionPane.showMessageDialog(rootFrame.this, "공지사항이 삭제되었습니다");
+        }
+      }
+    });
+    panel_2.add(delGongji);
 
     JScrollPane scrollPane = new JScrollPane();
     contentPane.add(scrollPane, BorderLayout.CENTER);

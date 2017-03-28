@@ -16,8 +16,10 @@ public class PullMsg extends Thread {
   private ResultSet rs;
   JTextArea tarea;
   String id;
+  private boolean gongji;
 
   public PullMsg(JTextArea tarea, String id) {
+    gongji = true;
     this.tarea = tarea;
     this.id = id;
     try {
@@ -60,10 +62,28 @@ public class PullMsg extends Thread {
     }
   }
 
+  private void gongjiMsg() {
+    try {
+      sql = "select * from chat where idfrom='all_members'";
+      pstmt = conn.prepareStatement(sql);
+      rs = pstmt.executeQuery();
+
+      if (rs.next()) {
+        gongji = false;
+        tarea.append("@@ [ 공지사항 ] : " + rs.getString("chat") + " @@\n");
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
   @Override
   public void run() {
     while (true) {
       try {
+        if (gongji) {
+          gongjiMsg();
+        }
         pullMsg();
         delMsg();
         Thread.sleep(1500);
