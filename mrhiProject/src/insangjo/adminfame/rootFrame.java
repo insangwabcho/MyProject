@@ -147,7 +147,7 @@ public class rootFrame extends JFrame {
         kwanwoo.PushMsg pm = new PushMsg("root", arr[1], arr[0]);
 
         textArea.append(arr[0] + " 님에게 : " + arr[1] + "\n");
-
+        textField.setText("");
       }
     });
     panel_2.add(btnSend);

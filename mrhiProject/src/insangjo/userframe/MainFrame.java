@@ -563,7 +563,14 @@ public class MainFrame extends JFrame {
     textArea.setEditable(false);
     scrollPane_4.setViewportView(textArea);
 
+    JButton btnSend = new JButton("전송");
+
     textField = new JTextField();
+    textField.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        btnSend.doClick();
+      }
+    });
     textField.setBounds(6, 188, 331, 26);
     internalFrame.getContentPane().add(textField);
     textField.setColumns(10);
@@ -571,11 +578,11 @@ public class MainFrame extends JFrame {
     Thread th = new kwanwoo.PullMsg(textArea, id);
     th.start();
 
-    JButton btnSend = new JButton("전송");
     btnSend.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         kwanwoo.PushMsg pm = new PushMsg(id, textField.getText(), "root");
         textArea.append("[ " + id + " ] : " + textField.getText() + "\n");
+        textField.setText("");
       }
     });
     btnSend.setBounds(349, 188, 81, 29);
