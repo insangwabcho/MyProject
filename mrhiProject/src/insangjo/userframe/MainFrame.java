@@ -560,6 +560,7 @@ public class MainFrame extends JFrame {
     internalFrame.getContentPane().add(scrollPane_4);
 
     textArea = new JTextArea();
+    textArea.setEditable(false);
     scrollPane_4.setViewportView(textArea);
 
     textField = new JTextField();
