@@ -10,9 +10,9 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -21,19 +21,19 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import kwanwoo.MultiClient;
-import kwanwoo.MultiServer;
+import kwanwoo.PushMsg;
 import sangjin.Client.Login;
 import sangjin.Member.MemberList;
 
-public class rootFrame extends JFrame implements Runnable {
+public class rootFrame extends JFrame {
 
   private JPanel contentPane;
-  private JTextField textField;
   private ArrayList<String> idList;
-  private JComboBox comboBox;
   private JTextArea textArea;
+  private JTextField textField;
 
   public rootFrame() {
+
     setResizable(false);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setBounds(100, 100, 704, 393);
@@ -41,7 +41,6 @@ public class rootFrame extends JFrame implements Runnable {
     contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
     contentPane.setLayout(new BorderLayout(0, 0));
     setContentPane(contentPane);
-    comboBox = new JComboBox();
 
     JPanel panel = new JPanel(new GridLayout(3, 0));
     contentPane.add(panel, BorderLayout.EAST);
@@ -86,8 +85,6 @@ public class rootFrame extends JFrame implements Runnable {
     panel.add(btnlist);
 
     idList = new ArrayList<>();
-    Thread th = new Thread(rootFrame.this);
-    th.start();
 
     JPanel panel_1 = new JPanel();
     panel_1.setBackground(new Color(0, 51, 255));
@@ -111,10 +108,8 @@ public class rootFrame extends JFrame implements Runnable {
     btnlogout.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
     panel_1.add(btnlogout);
 
-    JPanel panel_2 = new JPanel(new GridLayout(0, 3));
+    JPanel panel_2 = new JPanel(new GridLayout(0, 2));
     contentPane.add(panel_2, BorderLayout.SOUTH);
-
-    panel_2.add(comboBox);
 
     textField = new JTextField();
     panel_2.add(textField);
@@ -123,12 +118,19 @@ public class rootFrame extends JFrame implements Runnable {
     JButton btnSend = new JButton("Send");
     btnSend.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
+        String[] arr = new String[2];
         try {
-          mc.chatClient("root", textField.getText(), textArea, comboBox.getSelectedItem() + "");
-          textField.setText("");
-        } catch (Exception e2) {
-          e2.printStackTrace();
+          arr = (textField.getText()).split(":");
+          arr[0] = arr[0].trim();
+          arr[1] = arr[1].trim();
+        } catch (ArrayIndexOutOfBoundsException e2) {
+          JOptionPane.showMessageDialog(rootFrame.this, "메세지 형식을 지켜주세요 \n 보낼아이디 : 메세지");
+          return;
         }
+        kwanwoo.PushMsg pm = new PushMsg("root", arr[1], arr[0]);
+
+        textArea.append(arr[0] + " 님에게 : " + arr[1] + "\n");
+        textField.setText("");
       }
     });
     panel_2.add(btnSend);
@@ -137,16 +139,7 @@ public class rootFrame extends JFrame implements Runnable {
     contentPane.add(scrollPane, BorderLayout.CENTER);
 
     scrollPane.setViewportView(textArea);
-  }
-
-  @Override
-  public void run() {
-    kwanwoo.MultiServer sv = new MultiServer();
-
-    try {
-      sv.init(comboBox);
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+    Thread th = new kwanwoo.PullMsg(textArea, "root");
+    th.start();
   }
 }

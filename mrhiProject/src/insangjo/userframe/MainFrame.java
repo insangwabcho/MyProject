@@ -44,12 +44,11 @@ import javax.swing.table.DefaultTableModel;
 
 import insangjo.DAO.MainFrameDAO;
 import insangjo.DAO.SearchFrameDAO;
-import kwanwoo.MultiClient;
-import kwanwoo.MultiServer;
+import kwanwoo.PushMsg;
 import sangjin.Client.Login;
 import sangjin.Client.UpdateJoin;
 
-public class MainFrame extends JFrame implements Runnable {
+public class MainFrame extends JFrame {
 
   private JLabel lblUserStat;
   private Color colMenu;
@@ -549,8 +548,6 @@ public class MainFrame extends JFrame implements Runnable {
 
     contentPane.add(lblAd);
 
-    kwanwoo.MultiClient mc = new MultiClient();
-
     JInternalFrame internalFrame = new JInternalFrame("실시간 상담");
     internalFrame.setResizable(false);
     internalFrame.setClosable(false);
@@ -570,15 +567,14 @@ public class MainFrame extends JFrame implements Runnable {
     internalFrame.getContentPane().add(textField);
     textField.setColumns(10);
 
+    Thread th = new kwanwoo.PullMsg(textArea, id);
+    th.start();
+
     JButton btnSend = new JButton("전송");
     btnSend.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        try {
-          mc.chatClient(id, textField.getText(), textArea, "root");
-          textField.setText("");
-        } catch (Exception e2) {
-          e2.printStackTrace();
-        }
+        kwanwoo.PushMsg pm = new PushMsg(id, textField.getText(), "root");
+        textArea.append("[ " + id + " ] : " + textField.getText() + "\n");
       }
     });
     btnSend.setBounds(349, 188, 81, 29);
@@ -720,14 +716,13 @@ public class MainFrame extends JFrame implements Runnable {
     return imgicon;
   }
 
-  @Override
-  public void run() {
-    kwanwoo.MultiServer sv = new MultiServer();
-
-    try {
-      sv.init(cbox);
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-  }
+  //  @Override
+  //  public void run() {
+  //    kwanwoo.MultiServer sv = new MultiServer();
+  //    try {
+  //      sv.init(cbox);
+  //    } catch (Exception e) {
+  //      e.printStackTrace();
+  //    }
+  //  }
 }
