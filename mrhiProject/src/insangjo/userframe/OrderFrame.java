@@ -115,7 +115,6 @@ public class OrderFrame extends JFrame {
     tfAddress.addFocusListener(new FocusAdapter() {
       @Override
       public void focusLost(FocusEvent e) {
-        System.out.println("dd");
         address = tfAddress.getText();
       }
     });

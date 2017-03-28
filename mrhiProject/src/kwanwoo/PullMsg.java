@@ -3,6 +3,7 @@ package kwanwoo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.swing.JTextArea;
 
@@ -37,6 +38,13 @@ public class PullMsg extends Thread {
       pstmt.executeUpdate();
     } catch (Exception e) {
       e.printStackTrace();
+    } finally {
+      if (pstmt != null)
+        try {
+          pstmt.close();
+        } catch (SQLException e) {
+          e.printStackTrace();
+        }
     }
   }
 
@@ -59,6 +67,13 @@ public class PullMsg extends Thread {
       }
     } catch (Exception e) {
       e.printStackTrace();
+    } finally {
+      if (pstmt != null)
+        try {
+          pstmt.close();
+        } catch (SQLException e) {
+          e.printStackTrace();
+        }
     }
   }
 
@@ -74,6 +89,13 @@ public class PullMsg extends Thread {
       }
     } catch (Exception e) {
       e.printStackTrace();
+    } finally {
+      if (pstmt != null)
+        try {
+          pstmt.close();
+        } catch (SQLException e) {
+          e.printStackTrace();
+        }
     }
   }
 

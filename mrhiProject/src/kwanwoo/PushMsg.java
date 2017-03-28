@@ -3,6 +3,7 @@ package kwanwoo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 
@@ -37,6 +38,13 @@ public class PushMsg {
       conn = DB.comCon();
     } catch (Exception e) {
       e.printStackTrace();
+    } finally {
+      if (pstmt != null)
+        try {
+          pstmt.close();
+        } catch (SQLException e) {
+          e.printStackTrace();
+        }
     }
     checkGongji();
     if (idfrom.equals("all_members")) {
@@ -60,6 +68,13 @@ public class PushMsg {
       pstmt.executeUpdate();
     } catch (Exception e) {
       e.printStackTrace();
+    } finally {
+      if (pstmt != null)
+        try {
+          pstmt.close();
+        } catch (SQLException e) {
+          e.printStackTrace();
+        }
     }
   }
 
@@ -70,6 +85,13 @@ public class PushMsg {
       pstmt.executeUpdate();
     } catch (Exception e) {
       e.printStackTrace();
+    } finally {
+      if (pstmt != null)
+        try {
+          pstmt.close();
+        } catch (SQLException e) {
+          e.printStackTrace();
+        }
     }
   }
 
@@ -82,6 +104,13 @@ public class PushMsg {
       result = pstmt.executeUpdate();
     } catch (Exception e) {
       e.printStackTrace();
+    } finally {
+      if (pstmt != null)
+        try {
+          pstmt.close();
+        } catch (SQLException e) {
+          e.printStackTrace();
+        }
     }
     return result;
   }
@@ -98,6 +127,13 @@ public class PushMsg {
         gongji = false;
     } catch (Exception e) {
       e.printStackTrace();
+    } finally {
+      if (pstmt != null)
+        try {
+          pstmt.close();
+        } catch (SQLException e) {
+          e.printStackTrace();
+        }
     }
   }
 }
