@@ -399,6 +399,16 @@ public class MainFrame extends JFrame {
     btnSave.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
 
+        String a = list_2.getSelectedValue() + "";
+        int index = a.indexOf("재고수량 : ");
+        a = a.substring(index);
+        a = a.replaceAll("[^0-9]", "");
+
+        if (a.equals("0")) {
+          JOptionPane.showMessageDialog(MainFrame.this, "선택하신 상품은 재고가 없습니다.");
+          return;
+        }
+
         ArrayList<String> items = new ArrayList<>();
         items.add(cboMenu.getSelectedItem() + "");
         items.add(list_1.getSelectedValue() + "");
