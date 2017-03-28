@@ -45,6 +45,7 @@ public class rootFrame extends JFrame {
     contentPane.add(panel, BorderLayout.EAST);
 
     textArea = new JTextArea();
+    textArea.setEditable(false);
 
     JButton btnNewButton = new JButton("재고관리 / 추가삭제");
     btnNewButton.setOpaque(true);
