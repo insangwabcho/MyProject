@@ -579,6 +579,7 @@ public class MainFrame extends JFrame {
       }
     });
     btnSend.setBounds(349, 188, 81, 29);
+
     internalFrame.getContentPane().add(btnSend);
     internalFrame.setVisible(true);
     btnLogout.addActionListener(new ActionListener() {

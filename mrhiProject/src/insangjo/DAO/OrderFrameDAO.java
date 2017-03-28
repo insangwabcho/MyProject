@@ -74,6 +74,7 @@ public class OrderFrameDAO {
         }
     }
     int result = updateQuery(items, list, userid, totalPrice, address);
+
     return result;
   }
 
@@ -125,17 +126,9 @@ public class OrderFrameDAO {
       //String sql = "insert into cart values(?,?,?,?,?,?,?,?,?)";
       String sql = "insert into cart values (" + arr[0] + ",'" + userid + "'," + arr[1] + "," + arr[2] + "," + arr[3] + "," + arr[4] + "," + arr[5] + "," + arr[6] + "," + arr[7] + ",'" + arr8 + "','"
           + arr10 + "'," + arr[8] + ")";
+
       conn = sungwon.DB.DB.comCon();
       pstmt = conn.prepareStatement(sql);
-
-      //      pstmt.setInt(1, arr[0]);
-      //      pstmt.setString(2, userid);
-      //      int aCount = 1;
-      //      for (int i = 3; i < 9; i++) {
-      //        pstmt.setInt(i, arr[aCount]);
-      //        aCount++;
-      //      }
-      //      pstmt.setInt(9, totalPrice);
       result = pstmt.executeUpdate();
     } catch (Exception e) {
       e.printStackTrace();
@@ -153,7 +146,6 @@ public class OrderFrameDAO {
           e.printStackTrace();
         }
     }
-
     return result;
   }
 

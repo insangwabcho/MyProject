@@ -243,8 +243,6 @@ public class OrderFrame extends JFrame {
 
         } //
         int totalPrice = Integer.parseInt(totalprice.replaceAll("[^0-9]", ""));
-        System.out.println(items.toString());
-        System.out.println(list.toString());
         int result = ofDao.addOrder(sb.toString(), sb1.toString(), items.size(), list, userid, totalPrice, address);
         if (result == 1) {
           if (ofDao.addDelevery(ofDao.getOrderNum() - 1) == 1)

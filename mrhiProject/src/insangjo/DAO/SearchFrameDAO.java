@@ -11,6 +11,7 @@ import insangjo.DTO.CartDTO;
 import sungwon.DB.DB;
 
 public class SearchFrameDAO {
+
   public int canceldeliveryOrder(String order_no) {
     int result = 0;
     Connection conn = null;
@@ -37,6 +38,7 @@ public class SearchFrameDAO {
         e.printStackTrace();
       }
     }
+    numSet(order_no);
     return result;
   }
 
@@ -46,19 +48,27 @@ public class SearchFrameDAO {
     PreparedStatement pstmt = null;
     ResultSet rs = null;
     try {
-      String sql = "select order_no from cart where order_no=?";
+      String sql = "select order_no no from cart";
       conn = DB.comCon();
       pstmt = conn.prepareStatement(sql);
       rs = pstmt.executeQuery();
 
       while (rs.next()) {
-        items.add(rs.getInt("order_no"));
+        items.add(rs.getInt("no"));
       }
     } catch (Exception e) {
       e.printStackTrace();
     }
+    numSet2(order_no, items.size());
 
-    for (int i = Integer.parseInt(order_no + 1); i < items.size() + 1; i++) {
+  }
+
+  public void numSet2(String order_no, int size) {
+    int order = Integer.parseInt(order_no) + 1;
+    int sizee = size;
+    Connection conn = null;
+    PreparedStatement pstmt = null;
+    for (int i = order; i <= sizee + 1; i++) {
       try {
         String sql = "update cart set order_no=" + (i - 1) + " where order_no=" + i;
         conn = DB.comCon();
@@ -69,7 +79,7 @@ public class SearchFrameDAO {
       }
     }
 
-    for (int i = Integer.parseInt(order_no + 1); i < items.size() + 1; i++) {
+    for (int i = order; i <= sizee + 1; i++) {
       try {
         String sql = "update delivery set order_no=" + (i - 1) + " where order_no=" + i;
         conn = DB.comCon();
@@ -79,7 +89,6 @@ public class SearchFrameDAO {
         e.printStackTrace();
       }
     }
-
   }
 
   public int cancelcartOrder(String order_no) {
