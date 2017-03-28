@@ -124,7 +124,6 @@ public class rootFrame extends JFrame {
           int index = msg.indexOf(" ");
           arr[0] = msg.substring(1, index);
           arr[1] = msg.substring(index + 1);
-          System.out.println(arr[0] + "," + arr[1]);
         } catch (ArrayIndexOutOfBoundsException e2) {
           JOptionPane.showMessageDialog(rootFrame.this, "메세지 형식을 지켜주세요 \n /보낼아이디 메세지");
           return;
