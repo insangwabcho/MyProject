@@ -126,7 +126,7 @@ public class rootFrame extends JFrame {
         String[] arr = new String[2];
         String msg = textField.getText();
         try {
-          int index = msg.indexOf(" ");
+          int index = msg.indexOf(" ");//
           arr[0] = msg.substring(1, index);
           arr[1] = msg.substring(index + 1);
         } catch (ArrayIndexOutOfBoundsException e2) {
