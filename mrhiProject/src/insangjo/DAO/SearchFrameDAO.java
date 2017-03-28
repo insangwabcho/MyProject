@@ -8,63 +8,112 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 import insangjo.DTO.CartDTO;
+import sungwon.DB.DB;
 
 public class SearchFrameDAO {
-	public int canceldeliveryOrder(String order_no) {
-	    int result = 0;
-	    Connection conn = null;
-	    PreparedStatement pstmt = null;
-	    ResultSet rs=null;
-	    try {
-	      String sql = "delete from delivery where order_no=?";
-	      conn = sungwon.DB.DB.comCon();
-	      pstmt = conn.prepareStatement(sql);
-	      pstmt.setString(1, order_no);
-	      rs=pstmt.executeQuery();
-	    } catch (Exception e) {
-	      e.printStackTrace();
-	    }  finally {
-			try {
-				if( pstmt != null ) pstmt.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			try {
-				if( conn != null ) conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		return result;
-	}
-	
-	public int cancelcartOrder(String order_no) {
-	    int result = 0;
-	    Connection conn = null;
-	    PreparedStatement pstmt = null;
-	    ResultSet rs = null;
-	    try {
-	      String sql = "delete from cart where order_no=?";
-	      conn = sungwon.DB.DB.comCon();
-	      pstmt = conn.prepareStatement(sql);
-	      pstmt.setString(1, order_no);
-	      rs = pstmt.executeQuery();
-	    } catch (Exception e) {
-	      e.printStackTrace();
-	    }  finally {
-			try {
-				if( pstmt != null ) pstmt.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			try {
-				if( conn != null ) conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		return result;
-	}
+  public int canceldeliveryOrder(String order_no) {
+    int result = 0;
+    Connection conn = null;
+    PreparedStatement pstmt = null;
+    try {
+      String sql = "delete from delivery where order_no=?";
+      conn = sungwon.DB.DB.comCon();
+      pstmt = conn.prepareStatement(sql);
+      pstmt.setString(1, order_no);
+      pstmt.executeUpdate();
+    } catch (Exception e) {
+      e.printStackTrace();
+    } finally {
+      try {
+        if (pstmt != null)
+          pstmt.close();
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
+      try {
+        if (conn != null)
+          conn.close();
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
+    }
+    return result;
+  }
+
+  public void numSet(String order_no) {
+    ArrayList items = new ArrayList<>();
+    Connection conn = null;
+    PreparedStatement pstmt = null;
+    ResultSet rs = null;
+    try {
+      String sql = "select order_no from cart where order_no=?";
+      conn = DB.comCon();
+      pstmt = conn.prepareStatement(sql);
+      rs = pstmt.executeQuery();
+
+      while (rs.next()) {
+        items.add(rs.getInt("order_no"));
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
+    for (int i = Integer.parseInt(order_no + 1); i < items.size() + 1; i++) {
+      try {
+        String sql = "update cart set order_no=" + (i - 1) + " where order_no=" + i;
+        conn = DB.comCon();
+        pstmt = conn.prepareStatement(sql);
+        pstmt.executeUpdate();
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    }
+
+    for (int i = Integer.parseInt(order_no + 1); i < items.size() + 1; i++) {
+      try {
+        String sql = "update delivery set order_no=" + (i - 1) + " where order_no=" + i;
+        conn = DB.comCon();
+        pstmt = conn.prepareStatement(sql);
+        pstmt.executeUpdate();
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    }
+
+  }
+
+  public int cancelcartOrder(String order_no) {
+    int result = 0;
+    Connection conn = null;
+    PreparedStatement pstmt = null;
+    ResultSet rs = null;
+    try {
+      String sql = "delete from cart where order_no=?";
+      conn = sungwon.DB.DB.comCon();
+      pstmt = conn.prepareStatement(sql);
+      pstmt.setString(1, order_no);
+      result = pstmt.executeUpdate();
+    } catch (Exception e) {
+      e.printStackTrace();
+    } finally {
+      try {
+        if (pstmt != null)
+          pstmt.close();
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
+      try {
+        if (conn != null)
+          conn.close();
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
+    }
+
+    canceldeliveryOrder(order_no);
+    numSet(order_no);
+    return result;
+  }
 
   public int checkOrder(String userid) {
     int result = 0;
