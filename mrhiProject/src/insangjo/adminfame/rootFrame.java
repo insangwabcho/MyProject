@@ -39,7 +39,7 @@ public class rootFrame extends JFrame {
     contentPane = new JPanel();
     contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
     contentPane.setLayout(new BorderLayout(0, 0));
-    setContentPane(contentPane);
+      setContentPane(contentPane);
 
     JPanel panel = new JPanel(new GridLayout(3, 0));
     contentPane.add(panel, BorderLayout.EAST);
