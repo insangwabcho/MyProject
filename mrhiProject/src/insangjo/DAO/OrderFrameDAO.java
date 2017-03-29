@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
 
 import sungwon.DB.DB;
 
@@ -190,122 +189,127 @@ public class OrderFrameDAO {
     }
     return items.size() + 1;
   }
-  
+
   //주문한 부품의 수량파악
-  public void getEA(ArrayList<String> arr){
-	  ArrayList<String> items= arr;
-	  ArrayList<String> insang= new ArrayList<String>();
-	  ArrayList<String> name=new ArrayList<String>();
-	  int s=arr.size()/2;
-	  StringBuilder sb=new StringBuilder();
-	  StringBuilder sb2=new StringBuilder();
-	  String sangjin="";
-	  for(int i=0; i<s; i++){
-		  sangjin+=arr.get(i);
-		  if(i!=s-1) sangjin+=", ";
-	  }
-	  for(int i=0; i<s; i++){
-		  switch (arr.get(i)) {
-		  case "CPU c":
-			  sb.append("c.ea cpu");
-			  sb2.append("c.name='"+items.get(i+s)+"'");
-			  name.add(items.get(i+s));
-			  insang.add("cpu");
-			  break;
-	  	  case "MAIN m":
-			  sb.append("m.ea main");
-	  		  sb2.append("m.name='"+items.get(i+s)+"'");
-			  name.add(items.get(i+s));
-			  insang.add("main");
-	  		  break;
-	  	  case "VGA v":
-			  sb.append("v.ea vga");
-	  		  sb2.append("v.name='"+items.get(i+s)+"'");
-			  name.add(items.get(i+s));
-			  insang.add("vga");
-	  		  break;
-	  	  case "HDD h":
-			  sb.append("h.ea hdd");
-	  		  sb2.append("h.name='"+items.get(i+s)+"'");
-			  name.add(items.get(i+s));
-			  insang.add("hdd");
-	  		  break;
-	  	  case "SSD s":
-			  sb.append("s.ea ssd");
-	  		  sb2.append("s.name='"+items.get(i+s)+"'");
-			  name.add(items.get(i+s));
-			  insang.add("ssd");
-	  		  break;
-	  	  case "RAM r":
-			  sb.append("r.ea ram");
-	  		  sb2.append("r.name='"+items.get(i+s)+"'");
-			  name.add(items.get(i+s));
-			  insang.add("ram");
-	  		  break;
-	  	  case "RAM r2":
-			  sb.append("r2.ea rtwo");
-	  		  sb2.append("r2.name='"+items.get(i+s)+"'");
-			  name.add(items.get(i+s));
-			  insang.add("ram");
-	  		  break;
-		  }
-		  if(i!=s-1){
-			  sb.append(", ");
-			  sb2.append(" and ");
-		  }
-	  }
-	  Connection conn=null;
-	  PreparedStatement pstmt=null;
-	  ResultSet rs=null;
-	  ArrayList<String> hash=new ArrayList<String>();
-	  try {
-		conn=DB.comCon();
-		String sql="select "+sb.toString()+" from "+sangjin+" where "+sb2.toString();
-		pstmt=conn.prepareStatement(sql);
-		rs=pstmt.executeQuery();
-		if(rs.next()){
-			for(int i=0; i<insang.size(); i++){
-				hash.add(rs.getInt(insang.get(i))+"");
-			}
-		}
-		
-	  } catch (Exception e) {
-		e.printStackTrace();
-	  } finally {
-		  try {
-			if(pstmt!=null) pstmt.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		  try {
-			if(conn!=null) conn.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	 }
-	  DecreaseEA(hash,insang,name);
+  public void getEA(ArrayList<String> arr) {
+    ArrayList<String> items = arr;
+    ArrayList<String> insang = new ArrayList<String>();
+    ArrayList<String> name = new ArrayList<String>();
+    int s = arr.size() / 2;
+    StringBuilder sb = new StringBuilder();
+    StringBuilder sb2 = new StringBuilder();
+    String sangjin = "";
+    for (int i = 0; i < s; i++) {
+      sangjin += arr.get(i);
+      if (i != s - 1)
+        sangjin += ", ";
+    }
+    for (int i = 0; i < s; i++) {
+      switch (arr.get(i)) {
+      case "CPU c":
+        sb.append("c.ea cpu");
+        sb2.append("c.name='" + items.get(i + s) + "'");
+        name.add(items.get(i + s));
+        insang.add("cpu");
+        break;
+      case "MAIN m":
+        sb.append("m.ea main");
+        sb2.append("m.name='" + items.get(i + s) + "'");
+        name.add(items.get(i + s));
+        insang.add("main");
+        break;
+      case "VGA v":
+        sb.append("v.ea vga");
+        sb2.append("v.name='" + items.get(i + s) + "'");
+        name.add(items.get(i + s));
+        insang.add("vga");
+        break;
+      case "HDD h":
+        sb.append("h.ea hdd");
+        sb2.append("h.name='" + items.get(i + s) + "'");
+        name.add(items.get(i + s));
+        insang.add("hdd");
+        break;
+      case "SSD s":
+        sb.append("s.ea ssd");
+        sb2.append("s.name='" + items.get(i + s) + "'");
+        name.add(items.get(i + s));
+        insang.add("ssd");
+        break;
+      case "RAM r":
+        sb.append("r.ea ram");
+        sb2.append("r.name='" + items.get(i + s) + "'");
+        name.add(items.get(i + s));
+        insang.add("ram");
+        break;
+      case "RAM r2":
+        sb.append("r2.ea rtwo");
+        sb2.append("r2.name='" + items.get(i + s) + "'");
+        name.add(items.get(i + s));
+        insang.add("rtwo");
+        break;
+      }
+      if (i != s - 1) {
+        sb.append(", ");
+        sb2.append(" and ");
+      }
+    }
+    Connection conn = null;
+    PreparedStatement pstmt = null;
+    ResultSet rs = null;
+    ArrayList<String> hash = new ArrayList<String>();
+    try {
+      conn = DB.comCon();
+      String sql = "select " + sb.toString() + " from " + sangjin + " where " + sb2.toString();
+      pstmt = conn.prepareStatement(sql);
+      rs = pstmt.executeQuery();
+      if (rs.next()) {
+        for (int i = 0; i < insang.size(); i++) {
+          hash.add(rs.getInt(insang.get(i)) + "");
+        }
+      }
+
+    } catch (Exception e) {
+      e.printStackTrace();
+    } finally {
+      try {
+        if (pstmt != null)
+          pstmt.close();
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
+      try {
+        if (conn != null)
+          conn.close();
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
+    }
+    DecreaseEA(hash, insang, name);
   }
-  
+
   //주문했을때 수량을 감소시키는 메소드
-  public void DecreaseEA(ArrayList<String> hash,ArrayList<String> insang,ArrayList<String> name){
-	  Connection conn=null;
-	  PreparedStatement pstmt=null;
-	  ArrayList<String> hm=hash;
-	  ArrayList<String> names=name;
-	  ArrayList<String> item=insang;
-	  int rr=0;
-	  try {
-		conn=DB.comCon();
-		String sql="";
-		for(int i=0; i<hm.size(); i++){
-			int t=Integer.parseInt(hm.get(i));
-			sql="update "+item.get(i)+" set ea="+(t-1)+" where name='"+names.get(i)+"'";
-			pstmt=conn.prepareStatement(sql);
-			rr+=pstmt.executeUpdate();
-		}		
-		System.out.println(rr);
-	} catch (Exception e) {
-		e.printStackTrace();
-	}
+  public void DecreaseEA(ArrayList<String> hash, ArrayList<String> insang, ArrayList<String> name) {
+    Connection conn = null;
+    PreparedStatement pstmt = null;
+    ArrayList<String> hm = hash;
+    ArrayList<String> names = name;
+    ArrayList<String> item = insang;
+    int rr = 0;
+    try {
+      conn = DB.comCon();
+      String sql = "";
+      for (int i = 0; i < hm.size(); i++) {
+        int t = Integer.parseInt(hm.get(i));
+        if (item.get(i).equals("rtwo"))
+          sql = "update " + "ram" + " set ea=" + (t - 1) + " where name='" + names.get(i) + "'";
+        else
+          sql = "update " + item.get(i) + " set ea=" + (t - 1) + " where name='" + names.get(i) + "'";
+        pstmt = conn.prepareStatement(sql);
+        rr += pstmt.executeUpdate();
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 }
