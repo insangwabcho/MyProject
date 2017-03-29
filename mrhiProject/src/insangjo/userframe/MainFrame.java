@@ -228,7 +228,7 @@ public class MainFrame extends JFrame {
                         break;
                       }
                       String path = new MainFrameDAO().getImgPath(kind, serial);
-                      ImageIcon icon = new insangjo.img.SetImageIcon().getDetailImg(path, scrollPane_3.getWidth() - 60);
+                      ImageIcon icon = new insangjo.img.SetImageIcon().getDetailImg(path, scrollPane_3.getWidth() - 70);
                       lblDetail.setIcon(icon);
                       scrollPane_3.getVerticalScrollBar().setValue(0);
                     }
