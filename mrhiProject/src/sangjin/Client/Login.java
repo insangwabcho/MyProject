@@ -25,6 +25,8 @@ import javax.swing.border.EmptyBorder;
 
 import insangjo.adminfame.rootFrame;
 import insangjo.userframe.MainFrame;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Login extends JFrame {
 
@@ -190,5 +192,37 @@ public class Login extends JFrame {
     lblmain.setHorizontalAlignment(SwingConstants.CENTER);
     lblmain.setBounds(224, 12, 320, 132);
     contentPane.add(lblmain);
+    
+    JLabel lblsearchId = new JLabel("아이디 찾기");
+    lblsearchId.addMouseListener(new MouseAdapter() {
+    	@Override
+    	public void mousePressed(MouseEvent arg0) {
+            int intx =  arg0.getX();
+            int inty = arg0.getY();
+            if(arg0.getX()>=23 && arg0.getY()>=5 && arg0.getX()<=97 && arg0.getY()<=15){
+            	new SearchID().setVisible(true);
+            }
+    	}
+    });
+    lblsearchId.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+    lblsearchId.setHorizontalAlignment(SwingConstants.CENTER);
+    lblsearchId.setBounds(254, 392, 120, 18);
+    contentPane.add(lblsearchId);
+    
+    JLabel lblsearchPassword = new JLabel("비밀번호 찾기");
+    lblsearchPassword.addMouseListener(new MouseAdapter() {
+    	@Override
+    	public void mousePressed(MouseEvent e) {
+            int intx =  e.getX();
+            int inty = e.getY();
+            if(e.getX()>=15 && e.getY()>=5 && e.getX()<=106 && e.getY()<=15){
+            	new SearchPassword().setVisible(true);
+            }
+    	}
+    });
+    lblsearchPassword.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+    lblsearchPassword.setHorizontalAlignment(SwingConstants.CENTER);
+    lblsearchPassword.setBounds(403, 392, 120, 18);
+    contentPane.add(lblsearchPassword);
   }
 }

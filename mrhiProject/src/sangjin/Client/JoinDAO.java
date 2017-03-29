@@ -297,6 +297,86 @@ public class JoinDAO {
 					e.printStackTrace();
 				}
 			}
-			return items; //주소 리턴
+			return items;
+		}
+		
+		//아이디 찾기
+		public String searchId(String name,String email){
+			Vector items = new Vector();
+			String a=null;
+			Connection conn=null;
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			try {
+				conn = sungwon.DB.DB.comCon();
+				String sql="select id from member where name=? and email=?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, name);
+				pstmt.setString(2, email);
+				rs = pstmt.executeQuery();
+				if(rs.next()){
+					items.add(rs.getString("id"));
+					a=items.get(0).toString();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					if( rs != null ) rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}			
+				try {
+					if( pstmt != null ) pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				try {
+					if( conn != null ) conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			return a; //아이디 리턴
+		}
+		
+		//비밀번호 찾기
+		public String searchPassword(String id,String email){
+			Vector items = new Vector();
+			String a=null;
+			Connection conn=null;
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			try {
+				conn = sungwon.DB.DB.comCon();
+				String sql="select password from member where id=? and email=?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, id);
+				pstmt.setString(2, email);
+				rs = pstmt.executeQuery();
+				if(rs.next()){
+					items.add(rs.getString("password"));
+					a=items.get(0).toString();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					if( rs != null ) rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}			
+				try {
+					if( pstmt != null ) pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				try {
+					if( conn != null ) conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			return a; //비밀번호 리턴
 		}
 }
