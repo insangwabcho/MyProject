@@ -16,7 +16,7 @@ public class OrderFrameDAO {
   public int addDelevery(int n) {
     int result = 0;
     Connection conn = null;
-    PreparedStatement pstmt = null;
+    PreparedStatement pstmt = null;//
 
     try {
       String sql = "insert into delivery values (" + n + ",'배송대기')";
