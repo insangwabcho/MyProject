@@ -202,7 +202,7 @@ public class OrderFrameDAO {
     for (int i = 0; i < s; i++) {
       sangjin += arr.get(i);
       if (i != s - 1)
-        sangjin += ", ";
+        sangjin += ", ";//
     }
     for (int i = 0; i < s; i++) {
       switch (arr.get(i)) {
