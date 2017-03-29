@@ -22,12 +22,12 @@ public class AD extends Thread {
   public AD(JLabel lab) {
     ad_path = new ArrayList<>();
     insangjo.img.SetImageIcon sii = new insangjo.img.SetImageIcon();
-    ad_path.add(sii.getScaleImg("/AD/AD0.PNG", lab.getWidth(), lab.getHeight()));
-    ad_path.add(sii.getScaleImg("/AD/AD1.PNG", lab.getWidth(), lab.getHeight()));
-    ad_path.add(sii.getScaleImg("/AD/AD2.PNG", lab.getWidth(), lab.getHeight()));
-    ad_path.add(sii.getScaleImg("/AD/AD3.PNG", lab.getWidth(), lab.getHeight()));
-    ad_path.add(sii.getScaleImg("/AD/AD4.PNG", lab.getWidth(), lab.getHeight()));
-    ad_path.add(sii.getScaleImg("/AD/AD5.PNG", lab.getWidth(), lab.getHeight()));
+    ad_path.add(sii.getScaleImg("/AD/AD0.JPG", lab.getWidth(), lab.getHeight()));
+    ad_path.add(sii.getScaleImg("/AD/AD1.JPG", lab.getWidth(), lab.getHeight()));
+    ad_path.add(sii.getScaleImg("/AD/AD2.JPG", lab.getWidth(), lab.getHeight()));
+    ad_path.add(sii.getScaleImg("/AD/AD3.JPG", lab.getWidth(), lab.getHeight()));
+    ad_path.add(sii.getScaleImg("/AD/AD4.JPG", lab.getWidth(), lab.getHeight()));
+    ad_path.add(sii.getScaleImg("/AD/AD5.JPG", lab.getWidth(), lab.getHeight()));
 
     this.lab = lab;
     Thread th = new Thread(this);
