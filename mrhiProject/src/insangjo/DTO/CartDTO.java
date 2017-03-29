@@ -22,21 +22,22 @@ public class CartDTO {
     super();
 
   }
+
   public CartDTO(int order_no, String id, String name, int cpu, int vga, int main, int ram, int hdd, int ssd, int ram2, int total, String dvs) {
-	    super();
-	    this.order_no = order_no;
-	    this.id = id;
-	    this.name = name;
-	    this.cpu = cpu;
-	    this.vga = vga;
-	    this.main = main;
-	    this.ram = ram;
-	    this.hdd = hdd;
-	    this.ssd = ssd;
-	    this.ram2 = ram2;
-	    this.total = total;
-	    this.dvs = dvs;
-	  }
+    super();
+    this.order_no = order_no;
+    this.id = id;
+    this.name = name;
+    this.cpu = cpu;
+    this.vga = vga;
+    this.main = main;
+    this.ram = ram;
+    this.hdd = hdd;
+    this.ssd = ssd;
+    this.ram2 = ram2;
+    this.total = total;
+    this.dvs = dvs;
+  }
 
   public CartDTO(int order_no, String id, int cpu, int vga, int main, int ram, int hdd, int ssd, int ram2, int total, Date buydate, String address) {
     super();
@@ -151,18 +152,22 @@ public class CartDTO {
   }
 
   public String getName() {
-	return name;
+    return name;
   }
+
   public void setName(String name) {
-	this.name = name;
+    this.name = name;
   }
+
   public String getDvs() {
-	return dvs;
+    return dvs;
   }
+
   public void setDvs(String dvs) {
-	this.dvs = dvs;
+    this.dvs = dvs;
   }
-@Override
+
+  @Override
   public String toString() {
     return "CartDTO [order_no=" + order_no + ", id=" + id + ", cpu=" + cpu + ", vga=" + vga + ", main=" + main + ", ram=" + ram + ", hdd=" + hdd + ", ssd=" + ssd + ", ram2=" + ram2 + ", total="
         + total + ", buydate=" + buydate + ", address=" + address + "]";
