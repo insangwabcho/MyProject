@@ -151,6 +151,8 @@ public class MainFrame extends JFrame {
     selectPanel.setLayout(null);
 
     lblDetail = new JLabel();
+    lblDetail.setBackground(Color.LIGHT_GRAY);
+    lblDetail.setHorizontalAlignment(SwingConstants.CENTER);
     JScrollPane scrollPane_3 = new JScrollPane();
     scrollPane_3.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
     scrollPane_3.getVerticalScrollBar().setUnitIncrement(30);
@@ -226,7 +228,7 @@ public class MainFrame extends JFrame {
                         break;
                       }
                       String path = new MainFrameDAO().getImgPath(kind, serial);
-                      ImageIcon icon = new insangjo.img.SetImageIcon().getDetailImg(path, scrollPane_3.getWidth() - 15);
+                      ImageIcon icon = new insangjo.img.SetImageIcon().getDetailImg(path, scrollPane_3.getWidth() - 70);
                       lblDetail.setIcon(icon);
                       scrollPane_3.getVerticalScrollBar().setValue(0);
                     }
@@ -552,7 +554,7 @@ public class MainFrame extends JFrame {
 
     contentPane.add(lblLogo);
 
-    JLabel lblAd = new JLabel(new insangjo.img.SetImageIcon().getScaleImg("/AD/AD5.PNG/", 460, 60));
+    JLabel lblAd = new JLabel(new insangjo.img.SetImageIcon().getScaleImg("/AD/AD5.JPG/", 460, 60));
     lblAd.setBounds(180, 5, 460, 60);
     new sungwon.Ad.AD(lblAd);
 

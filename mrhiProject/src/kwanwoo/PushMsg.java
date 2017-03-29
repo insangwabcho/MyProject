@@ -104,7 +104,7 @@ public class PushMsg {
       result = pstmt.executeUpdate();
     } catch (Exception e) {
       e.printStackTrace();
-    } finally {
+    } finally {//
       if (pstmt != null)
         try {
           pstmt.close();

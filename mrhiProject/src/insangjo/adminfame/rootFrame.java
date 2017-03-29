@@ -39,7 +39,7 @@ public class rootFrame extends JFrame {
     contentPane = new JPanel();
     contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
     contentPane.setLayout(new BorderLayout(0, 0));
-      setContentPane(contentPane);
+    setContentPane(contentPane);
 
     JPanel panel = new JPanel(new GridLayout(3, 0));
     contentPane.add(panel, BorderLayout.EAST);
@@ -129,6 +129,15 @@ public class rootFrame extends JFrame {
           int index = msg.indexOf(" ");//
           arr[0] = msg.substring(1, index);
           arr[1] = msg.substring(index + 1);
+          for (int i = 0; i < idList.size(); i++) {
+            if (arr[0].equals(idList.get(i)))
+              ;
+            else {
+              JOptionPane.showMessageDialog(rootFrame.this, "회원목록에 존재하지 않는 회원입니다.");
+              return;
+            }
+            System.out.println(idList.get(i));
+          }
         } catch (ArrayIndexOutOfBoundsException e2) {
           int result = JOptionPane.showConfirmDialog(rootFrame.this, "전체회원에게 공지사항을 보내시겠습니까?");
           if (result == JOptionPane.YES_OPTION) {
@@ -167,7 +176,7 @@ public class rootFrame extends JFrame {
     contentPane.add(scrollPane, BorderLayout.CENTER);
 
     scrollPane.setViewportView(textArea);
-    Thread th = new kwanwoo.PullMsg(textArea, "root");
+    Thread th = new kwanwoo.PullMsg(textArea, "root", idList);
     th.start();
   }
 }
