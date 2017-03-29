@@ -552,7 +552,7 @@ public class MainFrame extends JFrame {
 
     contentPane.add(lblLogo);
 
-    JLabel lblAd = new JLabel(new insangjo.img.SetImageIcon().getScaleImg("/AD/AD5.PNG/", 460, 60));
+    JLabel lblAd = new JLabel(new insangjo.img.SetImageIcon().getScaleImg("/AD/AD5.JPG/", 460, 60));
     lblAd.setBounds(180, 5, 460, 60);
     new sungwon.Ad.AD(lblAd);
 

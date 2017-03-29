@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.swing.JTextArea;
 
@@ -18,6 +19,12 @@ public class PullMsg extends Thread {
   JTextArea tarea;
   String id;
   private boolean gongji;
+  ArrayList<String> idList;
+
+  public PullMsg(JTextArea tarea, String id, ArrayList<String> idList) {
+    this(tarea, id);
+    this.idList = idList;
+  }
 
   public PullMsg(JTextArea tarea, String id) {
     gongji = true;
@@ -99,6 +106,34 @@ public class PullMsg extends Thread {
     }
   }
 
+  private void getId(ArrayList<String> idList) {
+    try {
+      sql = "select id from member";
+      pstmt = conn.prepareStatement(sql);
+      rs = pstmt.executeQuery();
+
+      while (rs.next()) {
+        String t = rs.getString("id");
+        int size = idList.size();
+        for (int i = 0; i < size; i++) {
+          if (t.equals(idList.get(i)))
+            ;
+          else
+            idList.add(t);
+        }
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    } finally {
+      if (pstmt != null)
+        try {
+          pstmt.close();
+        } catch (SQLException e) {
+          e.printStackTrace();
+        }
+    }
+  }
+
   @Override
   public void run() {
     while (true) {
@@ -106,9 +141,10 @@ public class PullMsg extends Thread {
         if (gongji) {
           gongjiMsg();
         }
+        getId();
         pullMsg();
         delMsg();
-        Thread.sleep(1500);
+        Thread.sleep(2000);
       } catch (Exception e) {
         e.printStackTrace();
       }
