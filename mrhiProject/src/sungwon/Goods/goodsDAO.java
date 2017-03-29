@@ -285,15 +285,15 @@ public class goodsDAO {
 			int ea = tmpea + textno;
 			String sql = "update cpu set ea=? where serial=?";
 			if (name.equals("VGA")) {
-				sql = "update vga set ea=? where name=?";
+				sql = "update vga set ea=? where serial=?";
 			} else if (name.equals("RAM")) {
-				sql = "update ram set ea=? where name=?";
+				sql = "update ram set ea=? where serial=?";
 			} else if (name.equals("SSD")) {
-				sql = "update ssd set ea=? where name=?";
+				sql = "update ssd set ea=? where serial=?";
 			} else if (name.equals("HDD")) {
-				sql = "update hdd set ea=? where name=?";
+				sql = "update hdd set ea=? where serial=?";
 			} else if (name.equals("MAIN")) {
-				sql = "update main set ea=? where name=?";
+				sql = "update main set ea=? where serial=?";
 			}
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, ea);

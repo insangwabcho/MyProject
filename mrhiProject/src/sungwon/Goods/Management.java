@@ -598,6 +598,7 @@ public class Management extends JFrame {
 						lblspec2_3.setText("메모리");
 					}
 					refreshTable();
+					System.out.println(name);
 					refreshTable2();
 				}
 			}
