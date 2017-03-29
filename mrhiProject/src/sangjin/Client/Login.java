@@ -173,6 +173,9 @@ public class Login extends JFrame {
     contentPane.add(lblNewLabel_1);
 
     String a = (sungwon.DB.DB.class.getResource("img/comnawalogo.png") + "").replaceAll("file:", "");
+    if (a.indexOf("%20") != -1) {
+      a = a.replaceAll("%20", " ");
+    }
     ImageIcon tmplogo = new ImageIcon(a);
 
     try {
