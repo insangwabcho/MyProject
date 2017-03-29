@@ -146,6 +146,7 @@ public class OrderFrame extends JFrame {
         StringBuilder sb1 = new StringBuilder();
         String[] option = { "c.serial cpu ", "m.serial 메인보드 ", "v.serial 그래픽카드 ", "r.serial 메모리카드 ", "h.serial HDD ", "s.serial SSD ", "rtwo.serial 추가RAM " };
         String[] where = { " c.name=", " m.name=", " v.name=", " r.name=", " h.name=", " s.name=", " rtwo.name=" };
+        ArrayList<String> arr=new ArrayList<String>();
         //select option[] from 
         int aCount = 0;
 
@@ -161,36 +162,43 @@ public class OrderFrame extends JFrame {
           case "CPU":
             append[i] = "CPU";
             list.add("CPU");
+            arr.add("CPU c");
             aCount++;
             break;
           case "메인보드":
             append[i] = "메인보드";
             list.add("메인보드");
+            arr.add("MAIN m");
             aCount++;
             break;
           case "그래픽카드":
             append[i] = "그래픽카드";
             list.add("그래픽카드");
+            arr.add("VGA v");
             aCount++;
             break;
           case "메모리카드":
             append[i] = "메모리카드";
             list.add("메모리카드");
+            arr.add("RAM r");
             aCount++;
             break;
           case "HDD":
             append[i] = "HDD";
             list.add("HDD");
+            arr.add("HDD h");
             aCount++;
             break;
           case "SSD":
             append[i] = "SSD";
             list.add("SSD");
+            arr.add("SSD s");
             aCount++;
             break;
           case "추가 RAM":
             append[i] = "추가RAM";
             list.add("추가RAM");
+            arr.add("RAM r2");
             aCount++;
             break;
           }
@@ -203,36 +211,43 @@ public class OrderFrame extends JFrame {
           case "CPU":
             sb.append(option[0]);
             sb1.append(where[0] + "'" + items.get(i) + "'");
+            arr.add(items.get(i));
             aCount--;
             break;
           case "메인보드":
             sb.append(option[1]);
             sb1.append(where[1] + "'" + items.get(i) + "'");
+            arr.add(items.get(i));
             aCount--;
             break;
           case "그래픽카드":
             sb.append(option[2]);
             sb1.append(where[2] + "'" + items.get(i) + "'");
+            arr.add(items.get(i));
             aCount--;
             break;
           case "메모리카드":
             sb.append(option[3]);
             sb1.append(where[3] + "'" + items.get(i) + "'");
+            arr.add(items.get(i));
             aCount--;
             break;
           case "HDD":
             sb.append(option[4]);
             sb1.append(where[4] + "'" + items.get(i) + "'");
+            arr.add(items.get(i));
             aCount--;
             break;
           case "SSD":
             sb.append(option[5]);
             sb1.append(where[5] + "'" + items.get(i) + "'");
+            arr.add(items.get(i));
             aCount--;
             break;
           case "추가RAM":
             sb.append(option[6]);
             sb1.append(where[6] + "'" + items.get(i) + "'");
+            arr.add(items.get(i));
             aCount--;
             break;
           }
@@ -240,13 +255,14 @@ public class OrderFrame extends JFrame {
             sb.append(",");
             sb1.append(" and");
           }
-
         } //
         int totalPrice = Integer.parseInt(totalprice.replaceAll("[^0-9]", ""));
         int result = ofDao.addOrder(sb.toString(), sb1.toString(), items.size(), list, userid, totalPrice, address);
         if (result == 1) {
-          if (ofDao.addDelevery(ofDao.getOrderNum() - 1) == 1)
+          if (ofDao.addDelevery(ofDao.getOrderNum() - 1) == 1){
             JOptionPane.showMessageDialog(OrderFrame.this, "주문이 성공하였습니다");
+          	ofDao.getEA(arr);
+          }
           else
             JOptionPane.showMessageDialog(OrderFrame.this, "주문이 실패하였습니다");
         }

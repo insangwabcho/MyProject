@@ -39,7 +39,7 @@ public class goodsDAO {
 		return result;
 	}
 	
-	// 삭제할 물품 축력메소드
+	// 삭제할 물품 출력메소드
 	public ArrayList<String> selectDelete(String table, int num) {
 		ArrayList<String> items = new ArrayList<String>();
 		Connection conn = null;
