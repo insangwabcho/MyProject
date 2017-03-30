@@ -57,25 +57,6 @@ public class Join extends JFrame {
 	private JComboBox cbtel1;
 	private boolean b=false;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Join frame = new Join();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
 	public Join() {
 		setTitle("회원가입");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -144,18 +125,45 @@ public class Join extends JFrame {
 		contentPane.add(label_10);
 
 		tfJid = new JTextField();
+		tfJid.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				if(arg0.getKeyCode()== KeyEvent.VK_SPACE || arg0.getKeyCode()==KeyEvent.VK_SHIFT){
+					JOptionPane.showMessageDialog(Join.this, "공백 및 특수문자 입력불가");
+					tfJid.setText("");
+				}
+			}
+		});
 		tfJid.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		tfJid.setBounds(170, 99, 270, 24);
 		contentPane.add(tfJid);
 		tfJid.setColumns(10);
 
 		tfJpassword1 = new JPasswordField();
+		tfJpassword1.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode()== KeyEvent.VK_SPACE){
+					JOptionPane.showMessageDialog(Join.this, "공백 입력불가");
+					tfJpassword1.setText("");
+				}
+			}
+		});
 		tfJpassword1.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		tfJpassword1.setBounds(170, 159, 270, 24);
 		contentPane.add(tfJpassword1);
 
 		// 비밀번호 확인 입력시 판독 이벤트처리
 		tfJpassword2 = new JPasswordField();
+		tfJpassword2.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode()== KeyEvent.VK_SPACE){
+					JOptionPane.showMessageDialog(Join.this, "공백 입력불가");
+					tfJpassword2.setText("");
+				}
+			}
+		});
 		tfJpassword2.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		tfJpassword2.addFocusListener(new FocusAdapter() {
 			@Override
@@ -195,6 +203,16 @@ public class Join extends JFrame {
 		tfJemail2.setColumns(10);
 
 		tfJname = new JTextField();
+		tfJname.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if(e.getKeyCode()== KeyEvent.VK_SPACE){
+					int index= tfJname.getText().length();
+					String a= tfJname.getText().substring(0,index-1);
+					tfJname.setText(a);
+				}
+			}
+		});
 		tfJname.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		tfJname.setBounds(170, 337, 270, 24);
 		contentPane.add(tfJname);
