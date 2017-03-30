@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Vector;
 
+import javax.swing.plaf.synth.SynthSeparatorUI;
+
 public class goodsDAO {
 	//삭제후 시리얼번호 정렬 메소드
 	public int updateserial(String table,int Aserial, int Bserial){
@@ -281,6 +283,7 @@ public class goodsDAO {
 		PreparedStatement pstmt = null;
 		try {
 			conn = sungwon.DB.DB.comCon();
+			
 			// tmpea(현재 재고)+textno(추가할재고)
 			int ea = tmpea + textno;
 			String sql = "update cpu set ea=? where serial=?";
