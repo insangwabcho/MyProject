@@ -105,34 +105,40 @@ public class MainFrame extends JFrame {
     JMenuBar menuBar = new JMenuBar();
     setJMenuBar(menuBar);
 
-    JMenu mnNewMenu = new JMenu("파일");
+    JMenu mnNewMenu = new JMenu("사용기술");
+    mnNewMenu.setHorizontalAlignment(SwingConstants.CENTER);
     menuBar.add(mnNewMenu);
-
-    JMenu mnNewMenu_1 = new JMenu("테마");
-    menuBar.add(mnNewMenu_1);
-
-    JMenu mnNewMenu_3 = new JMenu("배경 테마 변경");
-    mnNewMenu_1.add(mnNewMenu_3);
-
-    JMenuItem mntmNewMenuItem_1 = new JMenuItem("단색");
-    mntmNewMenuItem_1.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent e) {
-        contentPane.setBackground(new Color(255, 255, 255));
-
-      }
+    
+    JMenuItem menuItem_1 = new JMenuItem("기술목록");
+    menuItem_1.addActionListener(new ActionListener() {
+    	public void actionPerformed(ActionEvent e) {
+            JOptionPane.showMessageDialog(MainFrame.this, "JAVA\nWindowBuilder\nOracleDB\nMultiThread\nGit협업");
+    	}
     });
-    mnNewMenu_3.add(mntmNewMenuItem_1);
+    mnNewMenu.add(menuItem_1);
 
-    JMenuItem mntmNewMenuItem_2 = new JMenuItem("노랑노랑");
-    mnNewMenu_3.add(mntmNewMenuItem_2);
+    JMenu mnNewMenu_1 = new JMenu("조원소개");
+    mnNewMenu_1.setHorizontalAlignment(SwingConstants.CENTER);
+    menuBar.add(mnNewMenu_1);
+    
+    JMenuItem menuItem = new JMenuItem("조원");
+    menuItem.addActionListener(new ActionListener() {
+    	public void actionPerformed(ActionEvent arg0) {
+            JOptionPane.showMessageDialog(MainFrame.this, "팀장 : 조인상\n팀원 : 예상진,이성원,이관우");
+    	}
+    });
+    menuItem.setHorizontalAlignment(SwingConstants.CENTER);
+    mnNewMenu_1.add(menuItem);
 
     JMenu mnNewMenu_2 = new JMenu("정보");
+    mnNewMenu_2.setHorizontalAlignment(SwingConstants.CENTER);
     menuBar.add(mnNewMenu_2);
 
     JMenuItem mntmNewMenuItem = new JMenuItem("컴나와는?");
+    mntmNewMenuItem.setHorizontalAlignment(SwingConstants.CENTER);
     mntmNewMenuItem.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        JOptionPane.showMessageDialog(MainFrame.this, "홍홍홍홍홍홍홍홍홍ㅇㅇㅇㅇㅇ");
+        JOptionPane.showMessageDialog(MainFrame.this, "저렴한 가격에 성능 좋은 컴퓨터를 제공합니다.");
       }
     });
     mnNewMenu_2.add(mntmNewMenuItem);
@@ -736,14 +742,4 @@ public class MainFrame extends JFrame {
     imgicon = new ImageIcon(t.getScaledInstance(width, height, Image.SCALE_AREA_AVERAGING));
     return imgicon;
   }
-
-  //  @Override
-  //  public void run() {
-  //    kwanwoo.MultiServer sv = new MultiServer();
-  //    try {
-  //      sv.init(cbox);
-  //    } catch (Exception e) {
-  //      e.printStackTrace();
-  //    }
-  //  }
 }
