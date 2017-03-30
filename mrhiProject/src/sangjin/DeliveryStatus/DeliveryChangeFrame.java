@@ -358,7 +358,6 @@ public class DeliveryChangeFrame extends JFrame {
     btnSave.addActionListener(new ActionListener() {
     	public void actionPerformed(ActionEvent e) {
     		String status=cbdvs.getSelectedItem().toString();
-    		System.out.println(status);
     		int order_no=Integer.valueOf(model.getValueAt(table.getSelectedRow(), 0)+"");
 			int result = dcdao.updateMember(status,order_no);
 			if (result == 1) {

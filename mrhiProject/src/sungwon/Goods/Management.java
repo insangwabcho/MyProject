@@ -1,6 +1,5 @@
 package sungwon.Goods;
 
-
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.EventQueue;
@@ -57,7 +56,7 @@ public class Management extends JFrame {
 			tfcompany3, tfspec1_3, tfspec2_3, tfcost3, tfprice3, tfea1;
 	private goodsDAO dao;
 	private String name, img_path;
-	private ImageIcon logo, img,size,icon, originimg;
+	private ImageIcon logo, img, size, icon, originimg;
 	private JTextField tfea3;
 	private int table3num;
 	private JButton btnsizeup;
@@ -119,14 +118,24 @@ public class Management extends JFrame {
 		tfea1.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
-				try {
-					int row = table.getSelectedRow();
-					Object value = table.getValueAt(row, 4);
-					int price = Integer.valueOf(value.toString());
-					int ea = Integer.valueOf(tfea1.getText());
-					lblcost1.setText(price * ea + " 원");
-				} catch (Exception e2) {
-					JOptionPane.showMessageDialog(Management.this, "상품을 선택하세요");
+				if (e.getKeyCode() != KeyEvent.VK_ENTER) {
+					try {
+						int row = table.getSelectedRow();
+						Object value = table.getValueAt(row, 4);
+						try {
+							int price = Integer.valueOf(value.toString());
+							int ea = Integer.valueOf(tfea1.getText());
+							lblcost1.setText(price * ea + " 원");
+						} catch (Exception e2) {
+							if (tfea1.getText().equals("-") || tfea1.getText().equals("")) {
+								return;
+							}
+							JOptionPane.showMessageDialog(Management.this, "숫자를 입력하세요");
+						}
+					} catch (Exception e2) {
+						JOptionPane.showMessageDialog(Management.this, "상품을 선택하세요");
+						return;
+					}
 				}
 			}
 		});
@@ -187,13 +196,22 @@ public class Management extends JFrame {
 		tfcost2.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if (!(tfcost2.getText().equals(""))) {
-					String tmpcost = tfcost2.getText();
-					int cost = Integer.valueOf(tmpcost);
-					double tmpprice = (double) ((cost * 0.2) + cost);
-					int price = (int) Math.ceil(tmpprice);
-					tfprice2.setText(String.valueOf(price));
+				if (e.getKeyCode() != KeyEvent.VK_ENTER) {
+					if (e.getKeyCode() != KeyEvent.VK_BACK_SPACE) {
+						try {
+							String tmpcost = tfcost2.getText();
+							int cost = Integer.valueOf(tmpcost);
+							double tmpprice = (double) ((cost * 0.2) + cost);
+							int price = (int) Math.ceil(tmpprice);
+							tfprice2.setText(String.valueOf(price));
+						} catch (Exception e2) {
+							tfname2.requestFocus();
+							tfcost2.setText("");
+							tfcost2.requestFocus();
+							JOptionPane.showMessageDialog(Management.this, "숫자를 입력하세요");
+						}	
 				}
+				}					
 			}
 		});
 		// 포커스 선택시 글씨 초기화
@@ -218,7 +236,7 @@ public class Management extends JFrame {
 				int result = fc.showOpenDialog(Management.this);
 				if (result == JFileChooser.APPROVE_OPTION) {
 					File file = fc.getSelectedFile();
-					//이미지 리사이즈
+					// 이미지 리사이즈
 					try {
 						BufferedImage bi = ImageIO.read(file);
 						String a = (String.valueOf(sungwon.DB.DB.class.getResource("img"))).replaceAll("file:", "");
@@ -289,13 +307,25 @@ public class Management extends JFrame {
 						spec2 = tfspec2_2.getText();
 						spec2.toUpperCase();
 					}
-					int cost = Integer.valueOf(tfcost2.getText());
-					int price = Integer.valueOf(tfprice2.getText());
-					int ea = Integer.valueOf(tfea2.getText());
-					String img = img_path;
-					dao.insertGoods(name, serial, name2, company, spec1, spec2, cost, price, ea, img);
+					try {
+						int cost = Integer.valueOf(tfcost2.getText());
+						int price = Integer.valueOf(tfprice2.getText());
+						int ea = Integer.valueOf(tfea2.getText());
+						String img = img_path;
+						if (name2 != null && company != null && cost != 0) {
+							dao.insertGoods(name, serial, name2, company, spec1, spec2, cost, price, ea, img);
+						} else {
+							JOptionPane.showMessageDialog(Management.this,
+									"추가할 정보를 모두 기입해주세요\n " + "필수정보 : 제품명,제조사,원가");
+							return;
+						}
+					} catch (Exception e2) {
+						JOptionPane.showMessageDialog(Management.this, "개수를 숫자를 입력하세요");
+						return;
+					}
 				} catch (Exception e2) {
 					JOptionPane.showMessageDialog(Management.this, "추가할 정보를 모두 기입해주세요");
+					return;
 				}
 				JOptionPane.showMessageDialog(Management.this, "저장되었습니다.");
 				tfname2.setText("");
@@ -367,7 +397,7 @@ public class Management extends JFrame {
 		scrollPane1.setViewportView(table);
 
 		table2 = new JTable();
-		table2.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		table2.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		scrollPane2.setViewportView(table2);
 
 		table3 = new JTable();
@@ -471,13 +501,13 @@ public class Management extends JFrame {
 		size = new ImageIcon(newsize);
 		btnsizeup.setIcon(size);
 		btnsizeup.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					ImgSizeUp from=new sungwon.Goods.ImgSizeUp(originimg);
+					ImgSizeUp from = new sungwon.Goods.ImgSizeUp(originimg);
 					from.setVisible(true);
-					from.setLocation(400,50);
+					from.setLocation(400, 50);
 				} catch (Exception e2) {
 					JOptionPane.showMessageDialog(Management.this, "사진을 먼저등록하세요");
 				}
@@ -516,7 +546,7 @@ public class Management extends JFrame {
 			public void valueChanged(ListSelectionEvent e) {
 				if (e.getValueIsAdjusting()) {
 					if (list.getSelectedIndex() == 0) {
-						//입력된리스트가 CPU일때
+						// 입력된리스트가 CPU일때
 						name = "CPU";
 						col2.clear();
 						col2.add("품번");
@@ -529,8 +559,8 @@ public class Management extends JFrame {
 						lblspec1_3.setText("세대");
 						lblspec2_3.setText("-");
 						tfspec2_3.setText("");
-					}else if (list.getSelectedIndex() == 1) {
-						//입력된리스트가 HDD일때
+					} else if (list.getSelectedIndex() == 1) {
+						// 입력된리스트가 HDD일때
 						name = "HDD";
 						col2.clear();
 						col2.add("품번");
@@ -544,7 +574,7 @@ public class Management extends JFrame {
 						lblspec2_3.setText("-");
 						tfspec2_3.setText("");
 					} else if (list.getSelectedIndex() == 2) {
-						//입력된리스트가 MAIN일때
+						// 입력된리스트가 MAIN일때
 						name = "MAIN";
 						col2.clear();
 						col2.add("품번");
@@ -558,7 +588,7 @@ public class Management extends JFrame {
 						lblspec2_3.setText("-");
 						tfspec2_3.setText("");
 					} else if (list.getSelectedIndex() == 3) {
-						//입력된리스트가 RAM일때
+						// 입력된리스트가 RAM일때
 						name = "RAM";
 						col2.clear();
 						col2.add("품번");
@@ -572,7 +602,7 @@ public class Management extends JFrame {
 						lblspec2_3.setText("-");
 						tfspec2_3.setText("");
 					} else if (list.getSelectedIndex() == 4) {
-						//입력된리스트가 SSD일때
+						// 입력된리스트가 SSD일때
 						name = "SSD";
 						col2.clear();
 						col2.add("품번");
@@ -586,7 +616,7 @@ public class Management extends JFrame {
 						lblspec2_3.setText("-");
 						tfspec2_3.setText("");
 					} else if (list.getSelectedIndex() == 5) {
-						//입력된리스트가 VGA일때
+						// 입력된리스트가 VGA일때
 						name = "VGA";
 						col2.clear();
 						col2.add("품번");
@@ -602,13 +632,12 @@ public class Management extends JFrame {
 						lblspec2_3.setText("메모리");
 					}
 					refreshTable();
-					System.out.println(name);
 					refreshTable2();
 				}
 			}
 
 		});
-		
+
 		JButton btnadd1 = new JButton("저장");
 		btnadd1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		btnadd1.setBounds(452, 41, 116, 23);
@@ -617,14 +646,17 @@ public class Management extends JFrame {
 		btnadd1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (!(lblcost1.getText().equals("0 원"))) {
-					//원가가 0원이아니라면 저장
+					// 원가가 0원이아니라면 저장
 					try {
+						// 추가할갯수
 						int no = Integer.valueOf(tfea1.getText());
 						int row = table.getSelectedRow();
+						// 추가할상품
 						int serial = table.getSelectedRow() + 1;
 						Object value = table.getValueAt(row, 3);
+						// 기존 재고
 						int tmpea = Integer.valueOf((value + ""));
-						if (tmpea != 0) {
+						if (!(tfea1.getText().equals("0"))) {
 							dao.updateEa(name, no, tmpea, serial);
 							JOptionPane.showMessageDialog(Management.this, "저장완료");
 							tfea1.setText("0");
@@ -632,6 +664,8 @@ public class Management extends JFrame {
 							lblname1.setText("ㅡ");
 							refreshTable();
 							refreshTable2();
+						} else {
+							JOptionPane.showMessageDialog(Management.this, "상품갯수를 입력해주세요");
 						}
 					} catch (Exception e2) {
 						JOptionPane.showMessageDialog(Management.this, "상품과 갯수를 확인해주세요");
@@ -735,7 +769,7 @@ public class Management extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				int tmpea = Integer.valueOf(tfea3.getText());
 				int serial = Integer.valueOf(tfserial3.getText());
-				//재고가 0이 아닐경우 확인창 생성
+				// 재고가 0이 아닐경우 확인창 생성
 				if (tmpea != 0) {
 					String[] str = { "예", "아니오" };
 					if (JOptionPane.showOptionDialog(Management.this, "재고가남아있습니다.\n정말삭제하시겠습니까?", "삭제확인",
@@ -821,8 +855,8 @@ public class Management extends JFrame {
 		tfea3.setBounds(460, 65, 105, 25);
 		panel_delete.add(tfea3);
 		tfea3.setColumns(10);
-		
-		//로고 생성
+
+		// 로고 생성
 		String a1 = (String.valueOf(DB.class.getResource("img/comnawalogo.png"))).replaceAll("file:", "");
 		ImageIcon tmplogo = new ImageIcon(a1);
 		try {
@@ -841,7 +875,12 @@ public class Management extends JFrame {
 
 	// table1 재출력 메소드
 	public void refreshTable() {
-		DefaultTableModel model = new DefaultTableModel(dao.jtableList(name), col);
+		DefaultTableModel model = new DefaultTableModel(dao.jtableList(name), col) {
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
 		table.setModel(model);
 		model.fireTableDataChanged();
 		resizeColumnWidth(table);
@@ -860,13 +899,16 @@ public class Management extends JFrame {
 
 	// table2,3 재출력 메소드
 	public void refreshTable2() {
-		DefaultTableModel model2 = new DefaultTableModel(dao.jtable2List(name), col2);
+		DefaultTableModel model2 = new DefaultTableModel(dao.jtable2List(name), col2) {
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
 		table2.setModel(model2);
 		resizeColumnWidth(table2);
-
-		DefaultTableModel model3 = new DefaultTableModel(dao.jtable2List(name), col2);
-		table3.setModel(model3);
-		resizeColumnWidth(table3);
+		table3.setModel(model2);
+		resizeColumnWidth(table2);
 
 		// 테이블 내용 가운데 정렬하기
 		DefaultTableCellRenderer right = new DefaultTableCellRenderer();
