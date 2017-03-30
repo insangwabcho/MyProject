@@ -27,7 +27,6 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import insangjo.adminfame.rootFrame;
-import insangjo.userframe.MainFrame;
 
 public class Login extends JFrame {
 
@@ -105,7 +104,10 @@ public class Login extends JFrame {
               dispose();
             }
             else if (!current) { //일반 사용자면
-              new MainFrame(name, id, address).setVisible(true);
+              String tname = name;
+              String tid = id;
+              String taddress = address;
+              new insangjo.userframe.MainFrame(tname, tid, taddress, tfLid).setVisible(true);
               dao.updateLog(Lid);
               dispose();
             }

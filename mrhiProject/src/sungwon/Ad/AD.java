@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 public class AD extends Thread {
   private ArrayList<ImageIcon> ad_path;
@@ -20,22 +21,28 @@ public class AD extends Thread {
     this.ad_img = ad_img;
   }
 
-  public AD(JLabel lab) {
+  public AD(JLabel lab, JTextField tfLid) {
     ad_path = new ArrayList<>();
-    insangjo.img.SetImageIcon sii = new insangjo.img.SetImageIcon();
-    URL url = sungwon.DB.DB.class.getResource("img/AD/AD0.JPG");
-    ad_path.add(sii.getScaleImg(url, lab.getWidth(), lab.getHeight()));
-    url = sungwon.DB.DB.class.getResource("img/AD/AD1.JPG");
-    ad_path.add(sii.getScaleImg(url, lab.getWidth(), lab.getHeight()));
-    url = sungwon.DB.DB.class.getResource("img/AD/AD2.JPG");
-    ad_path.add(sii.getScaleImg(url, lab.getWidth(), lab.getHeight()));
-    url = sungwon.DB.DB.class.getResource("img/AD/AD3.JPG");
-    ad_path.add(sii.getScaleImg(url, lab.getWidth(), lab.getHeight()));
-    url = sungwon.DB.DB.class.getResource("img/AD/AD4.JPG");
-    ad_path.add(sii.getScaleImg(url, lab.getWidth(), lab.getHeight()));
-    url = sungwon.DB.DB.class.getResource("img/AD/AD5.JPG");
-    ad_path.add(sii.getScaleImg(url, lab.getWidth(), lab.getHeight()));
 
+    URL a = sungwon.DB.DB.class.getResource("img/AD/AD0.jpg");
+    ImageIcon tmplogo = new insangjo.img.SetImageIcon().getScaleImg(a, 460, 60);
+    ad_path.add(tmplogo);
+    tfLid.setText("들어옴2");
+    a = sungwon.DB.DB.class.getResource("img/AD/AD1.jpg");
+    tmplogo = new insangjo.img.SetImageIcon().getScaleImg(a, 460, 60);
+    ad_path.add(tmplogo);
+    a = sungwon.DB.DB.class.getResource("img/AD/AD2.jpg");
+    tmplogo = new insangjo.img.SetImageIcon().getScaleImg(a, 460, 60);
+    ad_path.add(tmplogo);
+    a = sungwon.DB.DB.class.getResource("img/AD/AD3.jpg");
+    tmplogo = new insangjo.img.SetImageIcon().getScaleImg(a, 460, 60);
+    ad_path.add(tmplogo);
+    a = sungwon.DB.DB.class.getResource("img/AD/AD4.jpg");
+    tmplogo = new insangjo.img.SetImageIcon().getScaleImg(a, 460, 60);
+    ad_path.add(tmplogo);
+    a = sungwon.DB.DB.class.getResource("img/AD/AD5.jpg");
+    tmplogo = new insangjo.img.SetImageIcon().getScaleImg(a, 460, 60);
+    ad_path.add(tmplogo);
     this.lab = lab;
     Thread th = new Thread(this);
     th.start();
@@ -48,9 +55,9 @@ public class AD extends Thread {
         for (int i = 0; i < ad_path.size(); i++) {
           Thread.sleep(3000);
           lab.setIcon(ad_path.get(i));
-          if (i > ad_path.size()) {
-            i = 0;
-          }
+          //          if (i > ad_path.size()) {
+          //            i = 0;
+          //          }
         }
       }
     } catch (Exception e) {

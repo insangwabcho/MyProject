@@ -85,8 +85,7 @@ public class MainFrame extends JFrame {
   public MainFrame() {
   }
 
-  public MainFrame(String username, String id, String address) {
-
+  public MainFrame(String username, String id, String address, JTextField tfLid) {
     setResizable(false);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setBounds(100, 100, 1359, 939);
@@ -145,7 +144,6 @@ public class MainFrame extends JFrame {
     contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
     setContentPane(contentPane);
     contentPane.setLayout(null);
-
     selectPanel = new JPanel();
     selectPanel.setBackground(new Color(0, 51, 255));
     selectPanel.setBounds(6, 71, 168, 266);
@@ -163,7 +161,6 @@ public class MainFrame extends JFrame {
     detailPanel.setBackground(Color.white);//
     detailPanel.setBounds(506, 349, 838, 517);
     contentPane.add(detailPanel);
-
     cboMenu = new JComboBox();
     cboMenu.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
     cboMenu.addItemListener(new ItemListener() {
@@ -260,7 +257,6 @@ public class MainFrame extends JFrame {
     cboMenu.setModel(new DefaultComboBoxModel(new String[] { "[부품 선택]", "CPU", "메인보드", "그래픽카드", "메모리카드", "HDD", "SSD", "추가 RAM" }));
     cboMenu.setBounds(6, 6, 156, 32);
     selectPanel.add(cboMenu);
-
     scrollPane = new JScrollPane();
     scrollPane.setBounds(0, 49, 168, 217);
     selectPanel.add(scrollPane);
@@ -299,7 +295,6 @@ public class MainFrame extends JFrame {
     };
     table.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
     scrollPane_1.setViewportView(table);
-
     JButton btnOk = new JButton("완료");
     btnOk.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
@@ -367,7 +362,6 @@ public class MainFrame extends JFrame {
     });
     button_1.setBounds(283, 476, 110, 29);
     boxpanel.add(button_1);
-
     optionPanel = new JPanel();
     optionPanel.setBackground(new Color(0, 51, 255));
     optionPanel.setBounds(180, 71, 692, 266);
@@ -399,7 +393,6 @@ public class MainFrame extends JFrame {
     list_2 = new JList();
     list_2.setFont(new Font("맑은 고딕", Font.BOLD, 16));
     scrollPane_2.setViewportView(list_2);
-
     JButton btnSave = new JButton("장바구니에 담기");
     btnSave.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
@@ -440,23 +433,19 @@ public class MainFrame extends JFrame {
     panel.setBackground(Color.white);
     panel.setBounds(6, 165, 523, 55);
     option2Panel.add(panel);
-
     JLabel lblcpu = new JLabel("  CPU :");
     lblcpu.setFont(new Font("Dialog", Font.BOLD, 13));
     lblcpu.setHorizontalAlignment(SwingConstants.RIGHT);
     panel.add(lblcpu);
-
     lblCheckCPU = new JLabel("");
     lblCheckCPU.setFont(new Font("Dialog", Font.BOLD, 13));
     lblCheckCPU.setForeground(Color.RED);
     lblCheckCPU.setHorizontalAlignment(SwingConstants.LEFT);
     panel.add(lblCheckCPU);
-
     JLabel lblNewLabel_6 = new JLabel("메인보드 : ");
     lblNewLabel_6.setFont(new Font("Dialog", Font.BOLD, 13));
     lblNewLabel_6.setHorizontalAlignment(SwingConstants.RIGHT);
     panel.add(lblNewLabel_6);
-
     lblCheckMain = new JLabel("");
     lblCheckMain.setFont(new Font("Dialog", Font.BOLD, 13));
     lblCheckMain.setForeground(Color.RED);
@@ -506,7 +495,6 @@ public class MainFrame extends JFrame {
     lblCheckSSD.setForeground(Color.RED);
     lblCheckSSD.setHorizontalAlignment(SwingConstants.LEFT);
     panel.add(lblCheckSSD);
-
     LineBorder lb = new LineBorder(Color.black);
     lb.createBlackLineBorder();
     scrollPane_2.setBorder(lb);
@@ -520,13 +508,11 @@ public class MainFrame extends JFrame {
     option2Panel.setBorder(lb);
     panel.setBorder(lb);
     scrollPane_1.setBorder(lb);
-    //
     lblUserStat = new JLabel(username + "님 반갑습니다!!");
     lblUserStat.setBounds(636, 12, 304, 47);
     contentPane.add(lblUserStat);
     lblUserStat.setFont(new Font("Lucida Grande", Font.BOLD, 20));
     lblUserStat.setHorizontalAlignment(SwingConstants.CENTER);
-
     JButton btnUpdate = new JButton("정보수정");
     btnUpdate.setBounds(1098, 18, 117, 27);
     contentPane.add(btnUpdate);
@@ -534,7 +520,6 @@ public class MainFrame extends JFrame {
     JButton btnLogout = new JButton("로그아웃");
     btnLogout.setBounds(1227, 18, 117, 27);
     contentPane.add(btnLogout);
-
     JButton btnSearch = new JButton("주문내역조회");
     btnSearch.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
@@ -557,14 +542,15 @@ public class MainFrame extends JFrame {
     lblLogo.setIcon(new insangjo.img.SetImageIcon().getScaleImg(url, lblLogo.getWidth(), lblLogo.getHeight()));
 
     contentPane.add(lblLogo);
-
-    url = sungwon.DB.DB.class.getResource("img/AD/AD5.JPG");
-    JLabel lblAd = new JLabel(new insangjo.img.SetImageIcon().getScaleImg(url, 460, 60));
+    URL url2 = sungwon.DB.DB.class.getResource("img/AD/AD5.JPG");
+    JLabel lblAd = new JLabel();
     lblAd.setBounds(180, 5, 460, 60);
-    new sungwon.Ad.AD(lblAd);
+    URL a = sungwon.DB.DB.class.getResource("img/AD/AD5.jpg");
+    ImageIcon tmplogo = new insangjo.img.SetImageIcon().getScaleImg(a, 460, 60);
+    lblAd.setIcon(tmplogo);
+    new sungwon.Ad.AD(lblAd, tfLid);
 
     contentPane.add(lblAd);
-
     JInternalFrame internalFrame = new JInternalFrame("실시간 상담");
     internalFrame.setResizable(false);
     internalFrame.setClosable(false);
@@ -575,13 +561,11 @@ public class MainFrame extends JFrame {
     JScrollPane scrollPane_4 = new JScrollPane();
     scrollPane_4.setBounds(6, 6, 424, 178);
     internalFrame.getContentPane().add(scrollPane_4);
-
     textArea = new JTextArea();
     textArea.setEditable(false);
     scrollPane_4.setViewportView(textArea);
 
     JButton btnSend = new JButton("전송");
-
     textField = new JTextField();
     textField.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
@@ -592,8 +576,8 @@ public class MainFrame extends JFrame {
     internalFrame.getContentPane().add(textField);
     textField.setColumns(10);
 
-    Thread th = new kwanwoo.PullMsg(textArea, id);
-    th.start();
+    //Thread th = new kwanwoo.PullMsg(textArea, id);
+    //th.start();
 
     btnSend.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
@@ -619,7 +603,6 @@ public class MainFrame extends JFrame {
         f.setVisible(true); //dd
       }
     });
-
   }
 
   public void refreshTable(Vector item) {
