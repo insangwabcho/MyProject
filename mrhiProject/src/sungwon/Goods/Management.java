@@ -97,6 +97,7 @@ public class Management extends JFrame {
 		panel_delete.setLayout(null);
 
 		JScrollPane scrollPane1 = new JScrollPane();
+		scrollPane1.setEnabled(false);
 		scrollPane1.setBounds(12, 74, 573, 290);
 		panel_ea.add(scrollPane1);
 
@@ -312,10 +313,12 @@ public class Management extends JFrame {
 		});
 
 		JScrollPane scrollPane2 = new JScrollPane();
+		scrollPane2.setEnabled(false);
 		scrollPane2.setBounds(12, 190, 573, 174);
 		panel_item.add(scrollPane2);
 
 		JScrollPane scrollPane3 = new JScrollPane();
+		scrollPane3.setEnabled(false);
 		scrollPane3.setBounds(12, 162, 573, 200);
 		panel_delete.add(scrollPane3);
 
@@ -364,6 +367,7 @@ public class Management extends JFrame {
 		scrollPane1.setViewportView(table);
 
 		table2 = new JTable();
+		table2.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		scrollPane2.setViewportView(table2);
 
 		table3 = new JTable();

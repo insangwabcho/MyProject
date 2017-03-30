@@ -27,6 +27,7 @@ public class SearchPassword extends JFrame {
 	private JButton btnPSearch;
 
 	public SearchPassword() {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 459, 300);
 		contentPane = new JPanel();
@@ -36,7 +37,7 @@ public class SearchPassword extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(255, 255, 255));
-		panel.setBounds(0, 0, 441, 253);
+		panel.setBounds(0, 0, 453, 265);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -46,7 +47,7 @@ public class SearchPassword extends JFrame {
 		lblNewLabel.setForeground(new Color(255, 255, 255));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		lblNewLabel.setBounds(0, 22, 441, 27);
+		lblNewLabel.setBounds(0, 22, 453, 27);
 		panel.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("아이디 :");
