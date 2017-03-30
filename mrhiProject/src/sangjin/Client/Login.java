@@ -9,6 +9,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -25,8 +28,6 @@ import javax.swing.border.EmptyBorder;
 
 import insangjo.adminfame.rootFrame;
 import insangjo.userframe.MainFrame;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class Login extends JFrame {
 
@@ -40,7 +41,7 @@ public class Login extends JFrame {
   private JLabel lblResult;
   private JoinDAO dao;
   private JPasswordField tfLpassword;
-  public static String name, id, address;
+  public String name, id, address;
 
   public static void main(String[] args) {
     EventQueue.invokeLater(new Runnable() {
@@ -56,6 +57,7 @@ public class Login extends JFrame {
   }
 
   public Login() {
+
     setTitle("ComNawa");
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setBounds(100, 100, 675, 481);
@@ -72,7 +74,6 @@ public class Login extends JFrame {
     tfLid.setBounds(224, 156, 320, 50);
     contentPane.add(tfLid);
     tfLid.setColumns(10);
-
     //로그인
     JButton btnLogin = new JButton("로그인");
     btnLogin.setBackground(SystemColor.control);
@@ -92,18 +93,20 @@ public class Login extends JFrame {
           pstmt.setString(2, Lpassword); //두번째 물음표(비번)
           rs = pstmt.executeQuery();
           if (rs.next()) {
+            String root = "root";
             dao = new JoinDAO();
             name = dao.returnName(Lid); //이름 리턴
             id = dao.returnID(Lid); //아이디 리턴
             address = dao.returnAddress(Lid); //주소 리턴
-            if (Lid.equals("root")) { //관리자 아이디면
+            boolean current = Lid.equals(root);
+            if (current) { //관리자 아이디면
               new rootFrame().setVisible(true);
               dao.updateLog(Lid);
               dispose();
             }
-            else { //일반 사용자면
+            else if (!current) { //일반 사용자면
               dao.updateLog(Lid);
-              new MainFrame(name, id, address).setVisible(true); //메인프레임을 띄움
+              new MainFrame(name, id, address).setVisible(true);
               dispose();
             }
           }
@@ -174,10 +177,10 @@ public class Login extends JFrame {
     lblNewLabel_1.setBounds(92, 234, 135, 57);
     contentPane.add(lblNewLabel_1);
 
-    java.net.URL a = (sungwon.DB.DB.class.getResource("img/comnawalogo.png"));
 //    if (a.indexOf("%20") != -1) {
 //      a = a.replaceAll("%20", " ");
 //    }
+    URL a = sungwon.DB.DB.class.getResource("img/comnawalogo.png");
     ImageIcon tmplogo = new ImageIcon(a);
 
     try {
@@ -192,33 +195,33 @@ public class Login extends JFrame {
     lblmain.setHorizontalAlignment(SwingConstants.CENTER);
     lblmain.setBounds(224, 12, 320, 132);
     contentPane.add(lblmain);
-    
+
     JLabel lblsearchId = new JLabel("아이디 찾기");
     lblsearchId.addMouseListener(new MouseAdapter() {
-    	@Override
-    	public void mousePressed(MouseEvent arg0) {
-            int intx =  arg0.getX();
-            int inty = arg0.getY();
-            if(arg0.getX()>=23 && arg0.getY()>=5 && arg0.getX()<=97 && arg0.getY()<=15){
-            	new SearchID().setVisible(true);
-            }
-    	}
+      @Override
+      public void mousePressed(MouseEvent arg0) {
+        int intx = arg0.getX();
+        int inty = arg0.getY();
+        if (arg0.getX() >= 23 && arg0.getY() >= 5 && arg0.getX() <= 97 && arg0.getY() <= 15) {
+          new SearchID().setVisible(true);
+        }
+      }
     });
     lblsearchId.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
     lblsearchId.setHorizontalAlignment(SwingConstants.CENTER);
     lblsearchId.setBounds(254, 392, 120, 18);
     contentPane.add(lblsearchId);
-    
+
     JLabel lblsearchPassword = new JLabel("비밀번호 찾기");
     lblsearchPassword.addMouseListener(new MouseAdapter() {
-    	@Override
-    	public void mousePressed(MouseEvent e) {
-            int intx =  e.getX();
-            int inty = e.getY();
-            if(e.getX()>=15 && e.getY()>=5 && e.getX()<=106 && e.getY()<=15){
-            	new SearchPassword().setVisible(true);
-            }
-    	}
+      @Override
+      public void mousePressed(MouseEvent e) {
+        int intx = e.getX();
+        int inty = e.getY();
+        if (e.getX() >= 15 && e.getY() >= 5 && e.getX() <= 106 && e.getY() <= 15) {
+          new SearchPassword().setVisible(true);
+        }
+      }
     });
     lblsearchPassword.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
     lblsearchPassword.setHorizontalAlignment(SwingConstants.CENTER);

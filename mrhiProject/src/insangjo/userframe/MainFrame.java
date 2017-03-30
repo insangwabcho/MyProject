@@ -1,3 +1,4 @@
+
 package insangjo.userframe;
 
 import java.awt.BorderLayout;
@@ -5,13 +6,13 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Vector;
@@ -86,46 +87,44 @@ public class MainFrame extends JFrame {
 
   public MainFrame(String username, String id, String address) {
 
-    cbox = new JComboBox<>();
-    panelBg = new ImageIcon(MainFrame.class.getResource("/insangjo/img/panelBg.jpeg"));
-    orderpageDao = new MainFrameDAO();
-    col = new Vector<>();
-    col.add("종류");
-    col.add("이름");
-    col.add("수량");
-    col.add("가격");
-    data = new Vector<>();
-
-    setIconImage(Toolkit.getDefaultToolkit().getImage(MainFrame.class.getResource("/insangjo/img/programIcon.ico")));
     setTitle("comNawa 주문프로그램");
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setBounds(100, 100, 1359, 939);
     setResizable(false);
 
+    data = new Vector<>();
+    cbox = new JComboBox<>();
+    orderpageDao = new MainFrameDAO();
+    col = new Vector<>();
+
     JMenuBar menuBar = new JMenuBar();
+    col.add("종류");
+    col.add("이름");
+    col.add("수량");
+    col.add("가격");
     setJMenuBar(menuBar);
 
     JMenu mnNewMenu = new JMenu("사용기술");
     mnNewMenu.setHorizontalAlignment(SwingConstants.CENTER);
     menuBar.add(mnNewMenu);
-    
+
     JMenuItem menuItem_1 = new JMenuItem("기술목록");
     menuItem_1.addActionListener(new ActionListener() {
-    	public void actionPerformed(ActionEvent e) {
-            JOptionPane.showMessageDialog(MainFrame.this, "JAVA\nWindowBuilder\nOracleDB\nMultiThread\nGit협업");
-    	}
+      public void actionPerformed(ActionEvent e) {
+        JOptionPane.showMessageDialog(MainFrame.this, "JAVA\nWindowBuilder\nOracleDB\nMultiThread\nGit협업");
+      }
     });
     mnNewMenu.add(menuItem_1);
 
     JMenu mnNewMenu_1 = new JMenu("조원소개");
     mnNewMenu_1.setHorizontalAlignment(SwingConstants.CENTER);
     menuBar.add(mnNewMenu_1);
-    
+
     JMenuItem menuItem = new JMenuItem("조원");
     menuItem.addActionListener(new ActionListener() {
-    	public void actionPerformed(ActionEvent arg0) {
-            JOptionPane.showMessageDialog(MainFrame.this, "팀장 : 조인상\n팀원 : 예상진,이성원,이관우");
-    	}
+      public void actionPerformed(ActionEvent arg0) {
+        JOptionPane.showMessageDialog(MainFrame.this, "팀장 : 조인상\n팀원 : 예상진,이성원,이관우");
+      }
     });
     menuItem.setHorizontalAlignment(SwingConstants.CENTER);
     mnNewMenu_1.add(menuItem);
@@ -234,7 +233,8 @@ public class MainFrame extends JFrame {
                         break;
                       }
                       String path = new MainFrameDAO().getImgPath(kind, serial);
-                      ImageIcon icon = new insangjo.img.SetImageIcon().getDetailImg(path, scrollPane_3.getWidth() - 70);
+                      URL url = sungwon.DB.DB.class.getResource("img/" + path);
+                      ImageIcon icon = new insangjo.img.SetImageIcon().getDetailImg(url, scrollPane_3.getWidth() - 70);
                       lblDetail.setIcon(icon);
                       scrollPane_3.getVerticalScrollBar().setValue(0);
                     }
@@ -554,13 +554,15 @@ public class MainFrame extends JFrame {
     btnSearch.setBounds(969, 18, 117, 27);
     contentPane.add(btnSearch);
 
+    URL url = sungwon.DB.DB.class.getResource("img/comnawalogo.png");
     JLabel lblLogo = new JLabel("New label");
     lblLogo.setBounds(6, 12, 168, 47);
-    lblLogo.setIcon(getScaleImg("/comnawalogo.png", lblLogo.getWidth(), lblLogo.getHeight()));
+    lblLogo.setIcon(new insangjo.img.SetImageIcon().getScaleImg(url, lblLogo.getWidth(), lblLogo.getHeight()));
 
     contentPane.add(lblLogo);
 
-    JLabel lblAd = new JLabel(new insangjo.img.SetImageIcon().getScaleImg("/AD/AD5.JPG/", 460, 60));
+    url = sungwon.DB.DB.class.getResource("img/AD/AD5.JPG");
+    JLabel lblAd = new JLabel(new insangjo.img.SetImageIcon().getScaleImg(url, 460, 60));
     lblAd.setBounds(180, 5, 460, 60);
     new sungwon.Ad.AD(lblAd);
 
@@ -735,9 +737,8 @@ public class MainFrame extends JFrame {
     dispose();
   }
 
-  public ImageIcon getScaleImg(String url, int width, int height) {
-    String a = (String.valueOf(sungwon.DB.DB.class.getResource("img"))).replaceAll("file:", "") + url;
-    ImageIcon imgicon = new ImageIcon(a);
+  public ImageIcon getScaleImg(URL url, int width, int height) {
+    ImageIcon imgicon = new ImageIcon(url);
     Image t = imgicon.getImage();
     imgicon = new ImageIcon(t.getScaledInstance(width, height, Image.SCALE_AREA_AVERAGING));
     return imgicon;

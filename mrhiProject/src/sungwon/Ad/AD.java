@@ -1,5 +1,6 @@
 package sungwon.Ad;
 
+import java.net.URL;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -22,12 +23,18 @@ public class AD extends Thread {
   public AD(JLabel lab) {
     ad_path = new ArrayList<>();
     insangjo.img.SetImageIcon sii = new insangjo.img.SetImageIcon();
-    ad_path.add(sii.getScaleImg("/AD/AD0.JPG", lab.getWidth(), lab.getHeight()));
-    ad_path.add(sii.getScaleImg("/AD/AD1.JPG", lab.getWidth(), lab.getHeight()));
-    ad_path.add(sii.getScaleImg("/AD/AD2.JPG", lab.getWidth(), lab.getHeight()));
-    ad_path.add(sii.getScaleImg("/AD/AD3.JPG", lab.getWidth(), lab.getHeight()));
-    ad_path.add(sii.getScaleImg("/AD/AD4.JPG", lab.getWidth(), lab.getHeight()));
-    ad_path.add(sii.getScaleImg("/AD/AD5.JPG", lab.getWidth(), lab.getHeight()));
+    URL url = sungwon.DB.DB.class.getResource("img/AD/AD0.JPG");
+    ad_path.add(sii.getScaleImg(url, lab.getWidth(), lab.getHeight()));
+    url = sungwon.DB.DB.class.getResource("img/AD/AD1.JPG");
+    ad_path.add(sii.getScaleImg(url, lab.getWidth(), lab.getHeight()));
+    url = sungwon.DB.DB.class.getResource("img/AD/AD2.JPG");
+    ad_path.add(sii.getScaleImg(url, lab.getWidth(), lab.getHeight()));
+    url = sungwon.DB.DB.class.getResource("img/AD/AD3.JPG");
+    ad_path.add(sii.getScaleImg(url, lab.getWidth(), lab.getHeight()));
+    url = sungwon.DB.DB.class.getResource("img/AD/AD4.JPG");
+    ad_path.add(sii.getScaleImg(url, lab.getWidth(), lab.getHeight()));
+    url = sungwon.DB.DB.class.getResource("img/AD/AD5.JPG");
+    ad_path.add(sii.getScaleImg(url, lab.getWidth(), lab.getHeight()));
 
     this.lab = lab;
     Thread th = new Thread(this);
