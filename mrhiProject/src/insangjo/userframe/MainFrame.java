@@ -227,7 +227,8 @@ public class MainFrame extends JFrame {
                         break;
                       }
                       String path = new MainFrameDAO().getImgPath(kind, serial);
-                      URL url = sungwon.DB.DB.class.getResource("img/" + path);
+                      URL url = sungwon.DB.DB.class.getResource("img" + path);
+                      System.out.println(url.toString());
                       ImageIcon icon = new insangjo.img.SetImageIcon().getDetailImg(url, scrollPane_3.getWidth() - 70);
                       lblDetail.setIcon(icon);
                       scrollPane_3.getVerticalScrollBar().setValue(0);
@@ -576,8 +577,8 @@ public class MainFrame extends JFrame {
     internalFrame.getContentPane().add(textField);
     textField.setColumns(10);
 
-    //Thread th = new kwanwoo.PullMsg(textArea, id);
-    //th.start();
+    Thread th = new kwanwoo.PullMsg(textArea, id);
+    th.start();
 
     btnSend.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {

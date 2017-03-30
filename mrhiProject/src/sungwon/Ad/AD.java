@@ -27,7 +27,6 @@ public class AD extends Thread {
     URL a = sungwon.DB.DB.class.getResource("img/AD/AD0.jpg");
     ImageIcon tmplogo = new insangjo.img.SetImageIcon().getScaleImg(a, 460, 60);
     ad_path.add(tmplogo);
-    tfLid.setText("들어옴2");
     a = sungwon.DB.DB.class.getResource("img/AD/AD1.jpg");
     tmplogo = new insangjo.img.SetImageIcon().getScaleImg(a, 460, 60);
     ad_path.add(tmplogo);
