@@ -52,8 +52,6 @@ import sangjin.Client.UpdateJoin;
 public class MainFrame extends JFrame {
 
   private JLabel lblUserStat;
-  private Color colMenu;
-  private ImageIcon panelBg;
   private MainFrameDAO orderpageDao;
   private JList list_1;
   private JList list_2;
@@ -83,17 +81,18 @@ public class MainFrame extends JFrame {
   private JLabel lblDetail;
   private JTextField textField;
   private JTextArea textArea;
-  private JComboBox cbox;
+
+  public MainFrame() {
+  }
 
   public MainFrame(String username, String id, String address) {
 
-    setTitle("comNawa 주문프로그램");
+    setResizable(false);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setBounds(100, 100, 1359, 939);
-    setResizable(false);
+    setTitle("comNawa 주문프로그램");
 
     data = new Vector<>();
-    cbox = new JComboBox<>();
     orderpageDao = new MainFrameDAO();
     col = new Vector<>();
 
@@ -146,8 +145,6 @@ public class MainFrame extends JFrame {
     contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
     setContentPane(contentPane);
     contentPane.setLayout(null);
-
-    colMenu = new Color(240, 210, 210);
 
     selectPanel = new JPanel();
     selectPanel.setBackground(new Color(0, 51, 255));
@@ -727,7 +724,6 @@ public class MainFrame extends JFrame {
       panel.add(btn, "South");
 
       add(panel);
-      setVisible(true);
     }
 
   }

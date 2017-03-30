@@ -105,8 +105,8 @@ public class Login extends JFrame {
               dispose();
             }
             else if (!current) { //일반 사용자면
-              dao.updateLog(Lid);
               new MainFrame(name, id, address).setVisible(true);
+              dao.updateLog(Lid);
               dispose();
             }
           }
@@ -177,9 +177,9 @@ public class Login extends JFrame {
     lblNewLabel_1.setBounds(92, 234, 135, 57);
     contentPane.add(lblNewLabel_1);
 
-//    if (a.indexOf("%20") != -1) {
-//      a = a.replaceAll("%20", " ");
-//    }
+    //    if (a.indexOf("%20") != -1) {
+    //      a = a.replaceAll("%20", " ");
+    //    }
     URL a = sungwon.DB.DB.class.getResource("img/comnawalogo.png");
     ImageIcon tmplogo = new ImageIcon(a);
 
