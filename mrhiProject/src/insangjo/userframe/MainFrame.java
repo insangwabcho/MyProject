@@ -1,3 +1,4 @@
+
 package insangjo.userframe;
 
 import java.awt.BorderLayout;
@@ -5,7 +6,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -87,7 +87,6 @@ public class MainFrame extends JFrame {
   public MainFrame(String username, String id, String address) {
 
     cbox = new JComboBox<>();
-    panelBg = new ImageIcon(MainFrame.class.getResource("/insangjo/img/panelBg.jpeg"));
     orderpageDao = new MainFrameDAO();
     col = new Vector<>();
     col.add("종류");
@@ -96,7 +95,6 @@ public class MainFrame extends JFrame {
     col.add("가격");
     data = new Vector<>();
 
-    setIconImage(Toolkit.getDefaultToolkit().getImage(MainFrame.class.getResource("/insangjo/img/programIcon.ico")));
     setTitle("comNawa 주문프로그램");
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setBounds(100, 100, 1359, 939);
@@ -108,24 +106,24 @@ public class MainFrame extends JFrame {
     JMenu mnNewMenu = new JMenu("사용기술");
     mnNewMenu.setHorizontalAlignment(SwingConstants.CENTER);
     menuBar.add(mnNewMenu);
-    
+
     JMenuItem menuItem_1 = new JMenuItem("기술목록");
     menuItem_1.addActionListener(new ActionListener() {
-    	public void actionPerformed(ActionEvent e) {
-            JOptionPane.showMessageDialog(MainFrame.this, "JAVA\nWindowBuilder\nOracleDB\nMultiThread\nGit협업");
-    	}
+      public void actionPerformed(ActionEvent e) {
+        JOptionPane.showMessageDialog(MainFrame.this, "JAVA\nWindowBuilder\nOracleDB\nMultiThread\nGit협업");
+      }
     });
     mnNewMenu.add(menuItem_1);
 
     JMenu mnNewMenu_1 = new JMenu("조원소개");
     mnNewMenu_1.setHorizontalAlignment(SwingConstants.CENTER);
     menuBar.add(mnNewMenu_1);
-    
+
     JMenuItem menuItem = new JMenuItem("조원");
     menuItem.addActionListener(new ActionListener() {
-    	public void actionPerformed(ActionEvent arg0) {
-            JOptionPane.showMessageDialog(MainFrame.this, "팀장 : 조인상\n팀원 : 예상진,이성원,이관우");
-    	}
+      public void actionPerformed(ActionEvent arg0) {
+        JOptionPane.showMessageDialog(MainFrame.this, "팀장 : 조인상\n팀원 : 예상진,이성원,이관우");
+      }
     });
     menuItem.setHorizontalAlignment(SwingConstants.CENTER);
     mnNewMenu_1.add(menuItem);
