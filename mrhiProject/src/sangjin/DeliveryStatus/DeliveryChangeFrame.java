@@ -353,25 +353,7 @@ public class DeliveryChangeFrame extends JFrame {
 
     JButton btnSave = new JButton("저장");
     btnSave.addActionListener(new ActionListener() {
-      //      public void actionPerformed(ActionEvent e) {
-      //        String status = cbdvs.getSelectedItem().toString();
-      //        System.out.println(status);
-      //        int order_no = Integer.valueOf(model.getValueAt(table.getSelectedRow(), 0) + "");
-      //        int result = dcdao.updateMember(status, order_no);
-      //        if (result == 1) {
-      //          JOptionPane.showMessageDialog(DeliveryChangeFrame.this, "변경완료");
-      //          DefaultTableModel model = new DefaultTableModel(dcdao.list(status), col) {
-      //            @Override
-      //            public boolean isCellEditable(int row, int column) {
-      //              //all cells false
-      //              return false;
-      //            }
-      //          };
-      //          table.setModel(model);
-      //          tfdvs.setText("");
-      //          refreshcombo();
-      //        }
-      //      }
+
       public void actionPerformed(ActionEvent e) {
         String status = cbdvs.getSelectedItem().toString();
         int order_no = Integer.valueOf(model.getValueAt(table.getSelectedRow(), 0) + "");
