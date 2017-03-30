@@ -145,6 +145,7 @@ public class rootFrame extends JFrame {
             textField.setText("");
             return;
           }
+          return;
         } catch (StringIndexOutOfBoundsException e3) {
           int result = JOptionPane.showConfirmDialog(rootFrame.this, "전체회원에게 공지사항을 보내시겠습니까?");
           if (result == JOptionPane.YES_OPTION) {
@@ -152,6 +153,7 @@ public class rootFrame extends JFrame {
             textField.setText("");
             return;
           }
+          return;
         }
         kwanwoo.PushMsg pm = new PushMsg("root", arr[1], arr[0]);
 

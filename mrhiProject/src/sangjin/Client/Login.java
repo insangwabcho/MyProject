@@ -174,10 +174,10 @@ public class Login extends JFrame {
     lblNewLabel_1.setBounds(92, 234, 135, 57);
     contentPane.add(lblNewLabel_1);
 
-    String a = (sungwon.DB.DB.class.getResource("img/comnawalogo.png") + "").replaceAll("file:", "");
-    if (a.indexOf("%20") != -1) {
-      a = a.replaceAll("%20", " ");
-    }
+    java.net.URL a = (sungwon.DB.DB.class.getResource("img/comnawalogo.png"));
+//    if (a.indexOf("%20") != -1) {
+//      a = a.replaceAll("%20", " ");
+//    }
     ImageIcon tmplogo = new ImageIcon(a);
 
     try {
