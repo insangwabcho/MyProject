@@ -228,7 +228,6 @@ public class MainFrame extends JFrame {
                       }
                       String path = new MainFrameDAO().getImgPath(kind, serial);
                       URL url = sungwon.DB.DB.class.getResource("img" + path);
-                      System.out.println(url.toString());
                       ImageIcon icon = new insangjo.img.SetImageIcon().getDetailImg(url, scrollPane_3.getWidth() - 70);
                       lblDetail.setIcon(icon);
                       scrollPane_3.getVerticalScrollBar().setValue(0);

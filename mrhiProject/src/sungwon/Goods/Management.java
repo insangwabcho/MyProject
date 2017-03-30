@@ -14,6 +14,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -40,8 +41,6 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
-
-import sungwon.DB.DB;
 
 public class Management extends JFrame {
 
@@ -237,9 +236,10 @@ public class Management extends JFrame {
           // 이미지 리사이즈
           try {
             BufferedImage bi = ImageIO.read(file);
-            String a = (String.valueOf(sungwon.DB.DB.class.getResource("img"))).replaceAll("file:", "");
-            a = a.replaceAll("/bin/", "/src/");
-            File copyfile = new File(a + "/" + name + "/" + file.getName());
+            //String a = (String.valueOf(sungwon.DB.DB.class.getResource("img"))).replaceAll("file:", "");
+            URL a = sungwon.DB.DB.class.getResource("img");
+            //            a = a.replaceAll("/bin/", "/src/");
+            File copyfile = new File(a.getFile() + "/" + name + "/" + file.getName());
             ImageIO.write(bi, "jpg", copyfile);
             originimg = new ImageIcon(ImageIO.read(copyfile));
             Image imageSrc = originimg.getImage();
@@ -309,7 +309,7 @@ public class Management extends JFrame {
             int cost = Integer.valueOf(tfcost2.getText());
             int price = Integer.valueOf(tfprice2.getText());
             int ea = Integer.valueOf(tfea2.getText());
-            String img = img_path;
+            String img = "/" + img_path;
             if (name2 != null && company != null && cost != 0) {
               dao.insertGoods(name, serial, name2, company, spec1, spec2, cost, price, ea, img);
             }
@@ -493,8 +493,9 @@ public class Management extends JFrame {
     btnsizeup = new JButton("");
     btnsizeup.setBounds(109, 118, 25, 25);
     layeredPane.add(btnsizeup, 2, 0);
-  //여기
-    String a2 = (String.valueOf(DB.class.getResource("img/sizeup.png"))).replaceAll("file:", "");
+    //여기
+    //    String a2 = (String.valueOf(DB.class.getResource("img/sizeup.png"))).replaceAll("file:", "");
+    URL a2 = sungwon.DB.DB.class.getResource("img/sizeup.png");
     ImageIcon tmpsizeup = new ImageIcon(a2);
     Image sizeSrc = tmpsizeup.getImage();
     Image newsize = sizeSrc.getScaledInstance(25, 25, Image.SCALE_AREA_AVERAGING);
@@ -864,8 +865,9 @@ public class Management extends JFrame {
     tfea3.setColumns(10);
 
     // 로고 생성
-   //여기
-    String a1 = (String.valueOf(DB.class.getResource("img/comnawalogo.png"))).replaceAll("file:", "");
+    //여기
+    //    String a1 = (String.valueOf(DB.class.getResource("img/comnawalogo.png"))).replaceAll("file:", "");
+    URL a1 = sungwon.DB.DB.class.getResource("img/comnawalogo.png");
     ImageIcon tmplogo = new ImageIcon(a1);
     try {
       Image imageSrc = tmplogo.getImage();
