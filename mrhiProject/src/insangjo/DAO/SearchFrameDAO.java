@@ -38,7 +38,6 @@ public class SearchFrameDAO {
         e.printStackTrace();
       }
     }
-    numSet(order_no);
     return result;
   }
 
@@ -65,10 +64,10 @@ public class SearchFrameDAO {
 
   public void numSet2(String order_no, int size) {
     int order = Integer.parseInt(order_no) + 1;
-    int sizee = size;
+    int sizee = size + 1;
     Connection conn = null;
     PreparedStatement pstmt = null;
-    for (int i = order; i <= sizee + 1; i++) {
+    for (int i = order; i < sizee + 1; i++) {
       try {
         String sql = "update cart set order_no=" + (i - 1) + " where order_no=" + i;
         conn = DB.comCon();
