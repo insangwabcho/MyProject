@@ -1,7 +1,6 @@
 package sangjin.DeliveryStatus;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -10,6 +9,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -55,9 +55,8 @@ public class DeliveryChangeFrame extends JFrame {
   private StatusDAO sttdao;
   private JComboBox cbstt;
 
-  
   public DeliveryChangeFrame() {
-  	setResizable(false);
+    setResizable(false);
     setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     setBounds(100, 100, 849, 582);
     contentPane = new JPanel();
@@ -77,14 +76,13 @@ public class DeliveryChangeFrame extends JFrame {
     col.add("주문일자");
     col.add("배송상태");
     dcdao = new DeliveryChangeDAO();
-    DefaultTableModel model = new DefaultTableModel(dcdao.list("%"), col){
-    	 @Override
-    	    public boolean isCellEditable(int row, int column) {
-    	       //all cells false
-    	       return false;
-    	    }
+    DefaultTableModel model = new DefaultTableModel(dcdao.list("%"), col) {
+      @Override
+      public boolean isCellEditable(int row, int column) {
+        //all cells false
+        return false;
+      }
     };
-
 
     table = new JTable(model);
     table.addMouseListener(new MouseAdapter() {
@@ -105,17 +103,17 @@ public class DeliveryChangeFrame extends JFrame {
         tftotal.setText(String.valueOf(dto.getTotal()));
         tfdvs.setText(dto.getDvs());
         if (tfdvs.getText().equals("배송대기")) {
-            tfdvs.setText("배송대기");
-            tfdvs.setForeground(Color.red);
-          }
-          else if (tfdvs.getText().equals("배송중")) {
-            tfdvs.setText("배송중");
-            tfdvs.setForeground(Color.ORANGE);
-          }
-          else if (tfdvs.getText().equals("배송완료")) {
-            tfdvs.setText("배송완료");
-            tfdvs.setForeground(new Color(47, 157, 39));
-          }
+          tfdvs.setText("배송대기");
+          tfdvs.setForeground(Color.red);
+        }
+        else if (tfdvs.getText().equals("배송중")) {
+          tfdvs.setText("배송중");
+          tfdvs.setForeground(Color.ORANGE);
+        }
+        else if (tfdvs.getText().equals("배송완료")) {
+          tfdvs.setText("배송완료");
+          tfdvs.setForeground(new Color(47, 157, 39));
+        }
       }
     });
     scrollPane.setViewportView(table);
@@ -135,12 +133,12 @@ public class DeliveryChangeFrame extends JFrame {
     tfdvs.setColumns(10);
 
     JComboBox cbdvs = new JComboBox();
-    cbdvs.setModel(new DefaultComboBoxModel(new String[] {"배송대기", "배송중", "배송완료"}));
+    cbdvs.setModel(new DefaultComboBoxModel(new String[] { "배송대기", "배송중", "배송완료" }));
     cbdvs.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
     cbdvs.setBounds(636, 45, 91, 31);
     contentPane.add(cbdvs);
 
-    String a = (String.valueOf(DB.class.getResource("img/comnawalogo.png"))).replaceAll("file:", "");
+    URL a = DB.class.getResource("img/comnawalogo.png");
     ImageIcon tmplogo = new ImageIcon(a);
 
     try {
@@ -332,72 +330,70 @@ public class DeliveryChangeFrame extends JFrame {
     label_1.setBounds(399, 98, 2, 373);
     contentPane.add(label_1);
 
-    
     cbstt = new JComboBox();
-	cbstt.addItemListener(new ItemListener() {
-		public void itemStateChanged(ItemEvent e) {
-			if( e.getStateChange() == ItemEvent.SELECTED ){
-				String status=(String)cbstt.getSelectedItem();
-				DefaultTableModel model=new DefaultTableModel(dcdao.list(status), col){
-					 @Override
-					    public boolean isCellEditable(int row, int column) {
-					       //all cells false
-					       return false;
-					    }
-				};
-				table.setModel(model);
-			}
-		}
-	});
-    DefaultListCellRenderer dlcr=new DefaultListCellRenderer();
+    cbstt.addItemListener(new ItemListener() {
+      public void itemStateChanged(ItemEvent e) {
+        if (e.getStateChange() == ItemEvent.SELECTED) {
+          String status = (String) cbstt.getSelectedItem();
+          DefaultTableModel model = new DefaultTableModel(dcdao.list(status), col) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+              //all cells false
+              return false;
+            }
+          };
+          table.setModel(model);
+        }
+      }
+    });
+    DefaultListCellRenderer dlcr = new DefaultListCellRenderer();
     dlcr.setHorizontalAlignment(DefaultListCellRenderer.CENTER);
     cbstt.setRenderer(dlcr);
     cbstt.setFont(new Font("맑은 고딕", Font.BOLD, 17));
-    
+
     JButton btnSave = new JButton("저장");
     btnSave.addActionListener(new ActionListener() {
-    	public void actionPerformed(ActionEvent e) {
-    		String status=cbdvs.getSelectedItem().toString();
-    		System.out.println(status);
-    		int order_no=Integer.valueOf(model.getValueAt(table.getSelectedRow(), 0)+"");
-			int result = dcdao.updateMember(status,order_no);
-			if (result == 1) {
-				JOptionPane.showMessageDialog(DeliveryChangeFrame.this, "변경완료");
-				DefaultTableModel model = new DefaultTableModel(dcdao.list(status), col){
-					 @Override
-					    public boolean isCellEditable(int row, int column) {
-					       //all cells false
-					       return false;
-					    }
-				};
-				table.setModel(model);
-				tfdvs.setText("");
-				refreshcombo();
-			}
-    	}
+      public void actionPerformed(ActionEvent e) {
+        String status = cbdvs.getSelectedItem().toString();
+        System.out.println(status);
+        int order_no = Integer.valueOf(model.getValueAt(table.getSelectedRow(), 0) + "");
+        int result = dcdao.updateMember(status, order_no);
+        if (result == 1) {
+          JOptionPane.showMessageDialog(DeliveryChangeFrame.this, "변경완료");
+          DefaultTableModel model = new DefaultTableModel(dcdao.list(status), col) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+              //all cells false
+              return false;
+            }
+          };
+          table.setModel(model);
+          tfdvs.setText("");
+          refreshcombo();
+        }
+      }
     });
     btnSave.setBounds(741, 47, 79, 27);
     contentPane.add(btnSave);
-    
-    
 
     cbstt.setOpaque(true);
     cbstt.setBackground(Color.BLUE);
     cbstt.setForeground(Color.WHITE);
     cbstt.setBounds(425, 98, 397, 24);
     contentPane.add(cbstt);//
-	
+
     //콤보박스에 바인딩
-	sttdao=new StatusDAO();
-	refreshcombo();
-	
+    sttdao = new StatusDAO();
+    refreshcombo();
+
   }
-  void refreshcombo(){
-		ArrayList<StatusDTO> list=sttdao.list();
-		cbstt.removeAllItems();
-		cbstt.addItem("전체배송현황");
-		for(StatusDTO dto : list) {
-			cbstt.addItem(dto.getStatus());
-		}
+
+  void refreshcombo() {
+    ArrayList<StatusDTO> list = sttdao.list();
+    cbstt.removeAllItems();
+    cbstt.addItem("전체배송현황");
+    for (StatusDTO dto : list) {
+      cbstt.addItem(dto.getStatus());
+    }
   }
 }

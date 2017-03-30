@@ -11,6 +11,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -40,7 +41,7 @@ public class Login extends JFrame {
   private JLabel lblResult;
   private JoinDAO dao;
   private JPasswordField tfLpassword;
-  public static String name, id, address;
+  public String name, id, address;
 
   public static void main(String[] args) {
     EventQueue.invokeLater(new Runnable() {
@@ -56,6 +57,7 @@ public class Login extends JFrame {
   }
 
   public Login() {
+
     setTitle("ComNawa");
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setBounds(100, 100, 675, 481);
@@ -72,7 +74,6 @@ public class Login extends JFrame {
     tfLid.setBounds(224, 156, 320, 50);
     contentPane.add(tfLid);
     tfLid.setColumns(10);
-
     //로그인
     JButton btnLogin = new JButton("로그인");
     btnLogin.setBackground(SystemColor.control);
@@ -92,18 +93,20 @@ public class Login extends JFrame {
           pstmt.setString(2, Lpassword); //두번째 물음표(비번)
           rs = pstmt.executeQuery();
           if (rs.next()) {
+            String root = "root";
             dao = new JoinDAO();
             name = dao.returnName(Lid); //이름 리턴
             id = dao.returnID(Lid); //아이디 리턴
             address = dao.returnAddress(Lid); //주소 리턴
-            if (Lid.equals("root")) { //관리자 아이디면
+            boolean current = Lid.equals(root);
+            if (current) { //관리자 아이디면
               new rootFrame().setVisible(true);
               dao.updateLog(Lid);
               dispose();
             }
-            else { //일반 사용자면
+            else if (!current) { //일반 사용자면
               dao.updateLog(Lid);
-              new MainFrame(name, id, address).setVisible(true); //메인프레임을 띄움
+              new MainFrame(name, id, address).setVisible(true);
               dispose();
             }
           }
@@ -174,10 +177,7 @@ public class Login extends JFrame {
     lblNewLabel_1.setBounds(92, 234, 135, 57);
     contentPane.add(lblNewLabel_1);
 
-    String a = (sungwon.DB.DB.class.getResource("img/comnawalogo.png") + "").replaceAll("file:", "");
-    if (a.indexOf("%20") != -1) {
-      a = a.replaceAll("%20", " ");
-    }
+    URL a = sungwon.DB.DB.class.getResource("img/comnawalogo.png");
     ImageIcon tmplogo = new ImageIcon(a);
 
     try {
