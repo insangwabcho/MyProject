@@ -227,6 +227,7 @@ public class Management extends JFrame {
     btnimage.setBounds(22, 161, 125, 23);
     panel_item.add(btnimage);
     // 이미지 저장 이벤트
+    //여기
     btnimage.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         JFileChooser fc = new JFileChooser();
@@ -492,6 +493,7 @@ public class Management extends JFrame {
     btnsizeup = new JButton("");
     btnsizeup.setBounds(109, 118, 25, 25);
     layeredPane.add(btnsizeup, 2, 0);
+  //여기
     String a2 = (String.valueOf(DB.class.getResource("img/sizeup.png"))).replaceAll("file:", "");
     ImageIcon tmpsizeup = new ImageIcon(a2);
     Image sizeSrc = tmpsizeup.getImage();
@@ -862,6 +864,7 @@ public class Management extends JFrame {
     tfea3.setColumns(10);
 
     // 로고 생성
+   //여기
     String a1 = (String.valueOf(DB.class.getResource("img/comnawalogo.png"))).replaceAll("file:", "");
     ImageIcon tmplogo = new ImageIcon(a1);
     try {
