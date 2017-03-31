@@ -45,6 +45,7 @@ public class SearchFrame extends JFrame {
     contentPane = new JPanel();
     contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
     setContentPane(contentPane);
+    setResizable(false);
     SearchFrameDAO searchframeDao = new SearchFrameDAO();
     ArrayList<CartDTO> items = searchframeDao.dateOrder(userid);
 
