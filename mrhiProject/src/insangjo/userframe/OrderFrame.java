@@ -146,7 +146,7 @@ public class OrderFrame extends JFrame {
         StringBuilder sb1 = new StringBuilder();
         String[] option = { "c.serial cpu ", "m.serial 메인보드 ", "v.serial 그래픽카드 ", "r.serial 메모리카드 ", "h.serial HDD ", "s.serial SSD ", "rtwo.serial 추가RAM " };
         String[] where = { " c.name=", " m.name=", " v.name=", " r.name=", " h.name=", " s.name=", " rtwo.name=" };
-        ArrayList<String> arr=new ArrayList<String>();
+        ArrayList<String> arr = new ArrayList<String>();
         //select option[] from 
         int aCount = 0;
 
@@ -259,9 +259,9 @@ public class OrderFrame extends JFrame {
         int totalPrice = Integer.parseInt(totalprice.replaceAll("[^0-9]", ""));
         int result = ofDao.addOrder(sb.toString(), sb1.toString(), items.size(), list, userid, totalPrice, address);
         if (result == 1) {
-          if (ofDao.addDelevery(ofDao.getOrderNum() - 1) == 1){
+          if (ofDao.addDelevery(ofDao.getOrderNum() - 1) == 1) {
             JOptionPane.showMessageDialog(OrderFrame.this, "주문이 성공하였습니다");
-          	ofDao.getEA(arr);
+            ofDao.getEA(arr);
           }
           else
             JOptionPane.showMessageDialog(OrderFrame.this, "주문이 실패하였습니다");

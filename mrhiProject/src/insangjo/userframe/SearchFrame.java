@@ -24,6 +24,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import insangjo.DAO.OrderFrameDAO;
 import insangjo.DAO.SearchFrameDAO;
 import insangjo.DTO.CartDTO;
 import sangjin.DeliveryStatus.DeliveryChangeDAO;
@@ -162,6 +163,15 @@ public class SearchFrame extends JFrame {
         }
         String[] yn = { "예", "아니오" };
         if (JOptionPane.showOptionDialog(SearchFrame.this, "주문을 취소하시겠습니까?", "경고", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null, yn, null) == 0) {
+
+          OrderFrameDAO ofdao = new OrderFrameDAO();
+          String t = comboBox.getSelectedItem() + "";
+          int index = t.indexOf("주문번호 : ");
+          t = t.substring(index);
+          t = t.replaceAll("[^0-9]", "");
+          t = t.trim();
+
+          ofdao.getEA(t);
           searchframeDao.cancelcartOrder(order_no);
           JOptionPane.showMessageDialog(SearchFrame.this, "주문이 취소되었습니다");
           dispose();

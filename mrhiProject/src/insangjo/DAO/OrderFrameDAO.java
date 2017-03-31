@@ -190,6 +190,168 @@ public class OrderFrameDAO {
     return items.size() + 1;
   }
 
+  public void getEA(String order_no) {
+    ArrayList<String> serials = new ArrayList<>();
+    Connection conn = null;
+    PreparedStatement pstmt = null;
+    ResultSet rs = null;
+    try {
+      conn = DB.comCon();
+      String sql = "select * from cart where order_no=" + order_no;
+      pstmt = conn.prepareStatement(sql);
+      rs = pstmt.executeQuery();
+      if (rs.next()) {
+        serials.add("cpu," + rs.getInt("cpu_serial"));
+        serials.add("vga," + rs.getInt("vga_serial"));
+        serials.add("ram," + rs.getInt("ram_serial"));
+        serials.add("hdd," + rs.getInt("hdd_serial"));
+        serials.add("ssd," + rs.getInt("ssd_serial"));
+        serials.add("main," + rs.getInt("main_serial"));
+        serials.add("ram2," + rs.getInt("ram2_serial"));
+      }
+
+    } catch (Exception e) {
+      e.printStackTrace();
+    } finally {
+      if (rs != null)
+        try {
+          rs.close();
+        } catch (SQLException e2) {
+          e2.printStackTrace();
+        }
+      if (pstmt != null)
+        try {
+          pstmt.close();
+        } catch (SQLException e1) {
+          e1.printStackTrace();
+        }
+      if (conn != null)
+        try {
+          conn.close();
+        } catch (SQLException e) {
+          e.printStackTrace();
+        }
+    }
+
+    getsEA(serials);
+
+  }
+
+  public void getsEA(ArrayList<String> serials) {
+    Connection conn = null;
+    PreparedStatement pstmt = null;
+    ResultSet rs = null;
+    ArrayList<String> serial = serials;
+    ArrayList<String> ea = new ArrayList<>();
+
+    try {
+      conn = DB.comCon();
+      for (int i = 0; i < serial.size(); i++) {
+        String[] arr = serial.get(i).split(",");
+        if (arr[1].equals("0"))
+          continue;
+
+        StringBuilder query = new StringBuilder("select ea from ");
+
+        switch (arr[0]) {
+        case "cpu":
+          query.append("cpu where serial=" + arr[1]);
+          break;
+        case "vga":
+          query.append("vga where serial=" + arr[1]);
+          break;
+        case "main":
+          query.append("main where serial=" + arr[1]);
+          break;
+        case "ssd":
+          query.append("ssd where serial=" + arr[1]);
+          break;
+        case "hdd":
+          query.append("hdd where serial=" + arr[1]);
+          break;
+        case "ram":
+          query.append("ram where serial=" + arr[1]);
+          break;
+        case "ram2":
+          query.append("ram where serial=" + arr[1]);
+          break;
+        }
+
+        String sql = query.toString();
+        pstmt = conn.prepareStatement(sql);
+        rs = pstmt.executeQuery();
+
+        if (rs.next()) {
+          ea.add(rs.getInt("ea") + "");
+        }
+
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    } finally {
+      if (rs != null)
+        try {
+          rs.close();
+        } catch (SQLException e2) {
+          e2.printStackTrace();
+        }
+      if (pstmt != null)
+        try {
+          pstmt.close();
+        } catch (SQLException e1) {
+          e1.printStackTrace();
+        }
+      if (conn != null)
+        try {
+          conn.close();
+        } catch (SQLException e) {
+          e.printStackTrace();
+        }
+    }
+    IncreaseEA(serial, ea);
+  }
+
+  public void IncreaseEA(ArrayList<String> serials, ArrayList<String> eas) {
+    ArrayList<String> serial = serials;
+    ArrayList<String> ea = eas;
+
+    Connection conn = null;
+    PreparedStatement pstmt = null;
+    ResultSet rs = null;
+    int aCount = 0;
+    try {
+      conn = DB.comCon();
+
+      for (int i = 0; i < serial.size(); i++) { //arr[0] 종류 arr[1] 시리얼 ea 수량
+        String[] arr = serial.get(i).split(",");
+        String sql = "";
+        StringBuilder query = new StringBuilder("update ");
+        if (arr[1].equals("0"))
+          continue;
+
+        if (arr[0].equals("ram2"))
+          query.append("ram set ea=");
+        else
+          query.append(arr[0] + " set ea=");
+
+        int a = Integer.parseInt(ea.get(aCount));
+        a++;
+
+        query.append(a);
+        aCount++;
+
+        query.append(" where serial=" + arr[1]);
+
+        sql = query.toString();
+
+        pstmt = conn.prepareStatement(sql);
+        pstmt.executeUpdate();
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
   //주문한 부품의 수량파악
   public void getEA(ArrayList<String> arr) {
     ArrayList<String> items = arr;
