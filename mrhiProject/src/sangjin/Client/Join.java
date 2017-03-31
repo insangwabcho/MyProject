@@ -54,6 +54,7 @@ public class Join extends JFrame {
   private JTextField tfJaddress2;
   private JComboBox cbtel1;
   private boolean b = false;
+  private boolean current = false;
 
   public Join() {
     setTitle("회원가입");
@@ -127,6 +128,7 @@ public class Join extends JFrame {
     tfJid.addKeyListener(new KeyAdapter() {
       @Override
       public void keyPressed(KeyEvent arg0) {
+        current = false;
         if (arg0.getKeyCode() == KeyEvent.VK_SPACE || arg0.getKeyCode() == KeyEvent.VK_SHIFT) {
           JOptionPane.showMessageDialog(Join.this, "공백 및 특수문자 입력불가");
           tfJid.setText("");
@@ -254,6 +256,7 @@ public class Join extends JFrame {
     btnTest.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         b = true;
+        current = true;
         // 사용자가 입력한 아이디
         String Jid = tfJid.getText();
 
@@ -308,7 +311,7 @@ public class Join extends JFrame {
     JButton btnSave = new JButton("확인");
     btnSave.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        if (!b) {
+        if (!b || !current) {
           JOptionPane.showMessageDialog(Join.this, "아이디 중복확인을 해주세요.");
           return;
         }
