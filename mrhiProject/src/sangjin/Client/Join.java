@@ -315,6 +315,14 @@ public class Join extends JFrame {
           JOptionPane.showMessageDialog(Join.this, "아이디 중복확인을 해주세요.");
           return;
         }
+        String as = String.valueOf(tfJpassword1.getPassword());
+        String ad = String.valueOf(tfJpassword2.getPassword());
+        boolean cu = as.equals(ad);
+        if (!cu) {
+          JOptionPane.showMessageDialog(Join.this, "입력하신 패스워드 두곳이 다릅니다");
+          return;
+        }
+
         // 사용자가 입력한 값
         String id = tfJid.getText();
         String password = String.valueOf(tfJpassword2.getPassword());
