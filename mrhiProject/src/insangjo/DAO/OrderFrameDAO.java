@@ -43,7 +43,7 @@ public class OrderFrameDAO {
     return result;
   }
 
-  public int addOrder(String query1, String query2, int ea, ArrayList<String> list, String userid, int totalPrice, String address) {
+  public int addOrder(String query1, String query2, int ea, ArrayList<String> list, String userid, int totalPrice, String address, String request) {
     ArrayList<Integer> items = new ArrayList<>();
     Connection conn = null;
     PreparedStatement pstmt = null;
@@ -75,12 +75,12 @@ public class OrderFrameDAO {
           e.printStackTrace();
         }
     }
-    int result = updateQuery(items, list, userid, totalPrice, address);
+    int result = updateQuery(items, list, userid, totalPrice, address, request);
 
     return result;
   }
 
-  public int updateQuery(ArrayList<Integer> itemss, ArrayList<String> list, String userid, int totalPrice, String address) {
+  public int updateQuery(ArrayList<Integer> itemss, ArrayList<String> list, String userid, int totalPrice, String address, String request) {
     ArrayList<Integer> items = itemss;
     for (int i = 0; i < items.size(); i++) {
     }
@@ -127,7 +127,7 @@ public class OrderFrameDAO {
     try {
       //String sql = "insert into cart values(?,?,?,?,?,?,?,?,?)";
       String sql = "insert into cart values (" + arr[0] + ",'" + userid + "'," + arr[1] + "," + arr[2] + "," + arr[3] + "," + arr[4] + "," + arr[5] + "," + arr[6] + "," + arr[7] + ",'" + arr8 + "','"
-          + arr10 + "'," + arr[8] + ")";
+          + arr10 + "'," + arr[8] + ",'" + request + "'" + ")";
 
       conn = sungwon.DB.DB.comCon();
       pstmt = conn.prepareStatement(sql);

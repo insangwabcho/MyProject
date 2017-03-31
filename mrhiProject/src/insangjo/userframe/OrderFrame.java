@@ -84,6 +84,7 @@ public class OrderFrame extends JFrame {
     contentPane.add(lblName);
 
     JRadioButton rbtnDefaultaddress = new JRadioButton("기존 배송지");
+    rbtnDefaultaddress.setBackground(Color.WHITE);
     rbtnDefaultaddress.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         if (rbtnDefaultaddress.isSelected()) {
@@ -95,10 +96,11 @@ public class OrderFrame extends JFrame {
     });
     rbtnDefaultaddress.setSelected(true);
     buttonGroup.add(rbtnDefaultaddress);
-    rbtnDefaultaddress.setBounds(250, 196, 91, 23);
+    rbtnDefaultaddress.setBounds(236, 196, 105, 23);
     contentPane.add(rbtnDefaultaddress);
 
     JRadioButton rbtnNewaddress = new JRadioButton("신규 배송지");
+    rbtnNewaddress.setBackground(Color.WHITE);
     rbtnNewaddress.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         if (rbtnNewaddress.isSelected()) {
@@ -108,7 +110,7 @@ public class OrderFrame extends JFrame {
       }
     });
     buttonGroup.add(rbtnNewaddress);
-    rbtnNewaddress.setBounds(353, 196, 91, 23);
+    rbtnNewaddress.setBounds(339, 196, 105, 23);
     contentPane.add(rbtnNewaddress);
 
     tfAddress = new JTextField();
@@ -257,7 +259,7 @@ public class OrderFrame extends JFrame {
           }
         } //
         int totalPrice = Integer.parseInt(totalprice.replaceAll("[^0-9]", ""));
-        int result = ofDao.addOrder(sb.toString(), sb1.toString(), items.size(), list, userid, totalPrice, address);
+        int result = ofDao.addOrder(sb.toString(), sb1.toString(), items.size(), list, userid, totalPrice, address, (textArea.getText().replaceAll("\n", "")).replaceAll("\r", ""));
         if (result == 1) {
           if (ofDao.addDelevery(ofDao.getOrderNum() - 1) == 1) {
             JOptionPane.showMessageDialog(OrderFrame.this, "주문이 성공하였습니다");
@@ -288,7 +290,7 @@ public class OrderFrame extends JFrame {
 
     lblTotalPrice = new JLabel(totalprice);
     lblTotalPrice.setFont(new Font("굴림", Font.PLAIN, 15));
-    lblTotalPrice.setBounds(94, 195, 74, 23);
+    lblTotalPrice.setBounds(94, 195, 91, 23);
     contentPane.add(lblTotalPrice);
 
     tfAddress.setVisible(false);
