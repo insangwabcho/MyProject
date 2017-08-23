@@ -15,7 +15,7 @@
 *<li>이성원 [GitHub][ghsungwon]</li>*
 *<li>이관우 ..</li>*
 
-### 핵심화면
+### <li>핵심화면</li>
 
 ![1](readme/1.png)
 ![2](readme/2.png)
