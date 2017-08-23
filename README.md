@@ -8,7 +8,8 @@
 
 ![Comnawa image](readme/comnawa.jpg)
 
-### 조인상 [GitHub][ghinsang]
+### 팀원정보
+#### 조인상 ![GitHub](https://github.com/fluidicon.png)[ghinsang]
 <li>예상진 [GitHub][gh.insang]</li>
 <li>이성원 [GitHub][gh.insang]</li>
 <li>이관우 ..</li>
