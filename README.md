@@ -9,11 +9,11 @@
 ![Comnawa image](readme/comnawa.jpg)
 
 ### 팀원정보
-####<li>조인상 [GitHub][ghinsang]</li>
-####<li>예상진 [GitHub][ghsangjin]</li>
-####<li>이성원 [GitHub][ghsungwon]</li>
-####<li>이관우 ..</li>
-There is a mirror of the repository at https://github.com/golang/go.
+<li>조인상 [GitHub][ghinsang] , [StackOverFlow][sfinsang]</li>
+<li>예상진 [GitHub][ghsangjin]</li>
+<li>이성원 [GitHub][ghsungwon]</li>
+<li>이관우 ..</li>
+
 
 Unless otherwise noted, the Go source files are distributed under the
 BSD-style license found in the LICENSE file.
