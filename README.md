@@ -17,10 +17,14 @@
 
 ### <li>핵심화면</li>
 
-![1](readme/1.png){:width="60px"}
-<img src="readme/1.png" width="120px">
-![2](readme/2.png =120x)
-![3](readme/3.png =120x)
+<table>
+ <tr>
+  <td><img src="readme/1.png" width="200px"></td>
+  <td><img src="readme/1.png" width="200px"></td>
+  <td><img src="readme/1.png" width="200px"></td>
+ </tr>
+ </table>
+ 
 
 [ghsangjin]: https://github.com/sangjin0309
 [ghsungwon]: https://github.com/tjddnjs625
