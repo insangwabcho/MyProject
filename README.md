@@ -8,7 +8,10 @@
 
 ![Comnawa image](readme/comnawa.jpg)
 
-Our canonical Git repository is located at https://go.googlesource.com/go.
+<li>조인상 [GitHub][gh.insang]</li>
+<li>예상진 [GitHub][gh.insang]</li>
+<li>이성원 [GitHub][gh.insang]</li>
+<li>이관우 ..</li>
 There is a mirror of the repository at https://github.com/golang/go.
 
 Unless otherwise noted, the Go source files are distributed under the
@@ -43,5 +46,7 @@ we use the issue tracker for bug reports and proposals only. See
 https://golang.org/wiki/Questions for a list of places to ask
 questions about the Go language.
 
-[rf]: https://reneefrench.blogspot.com/
-[cc3-by]: https://creativecommons.org/licenses/by/3.0/
+[gh.sangjin]: https://github.com/sangjin0309
+[gh.sungwon]: https://github.com/tjddnjs625
+[gh.insang]: https://github.com/insangwabcho
+[stackoverflow.insang]: https://stackoverflow.com/users/8349800/%EC%A1%B0%EC%9D%B8%EC%83%81
