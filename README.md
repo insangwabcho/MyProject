@@ -8,7 +8,7 @@
 
 ![Comnawa image](readme/comnawa.jpg)
 
-<li></li>조인상 [Renee French][ghinsang]
+<li>*조인상 [Renee French][ghinsang]</li>
 <li>예상진 [GitHub][gh.insang]</li>
 <li>이성원 [GitHub][gh.insang]</li>
 <li>이관우 ..</li>
