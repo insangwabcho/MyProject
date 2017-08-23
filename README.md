@@ -2,8 +2,9 @@
 
 <ul># Comnawa 프로젝트</ul>
  <li>진행기간 : 17.03.16 ~ 17.03.29</li>
- <li></li>
-
+ <li>진행인원 : 4명</li>
+ <li>개발환경 : Windows10, Mac OS Sierra</li>
+ <br>
 
 ![Comnawa image](readme/comnawa.jpg)
 
