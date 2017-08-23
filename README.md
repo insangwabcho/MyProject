@@ -1,6 +1,7 @@
 # Comnawa 조립컴퓨터 주문 앱
 
-Comnawa 프로젝트는 총4명으로 진행했고 기간은 17.03.16부터 17.03.29일까지 진행한 프로젝트
+## Comnawa 프로젝트
+ <li>는 17.03.16부터 17.03.29일까지 진행한 프로젝트</li>
 
 ![Comnawa image](readme/comnawa.jpg)
 
