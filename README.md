@@ -9,10 +9,10 @@
 ![Comnawa image](readme/comnawa.jpg)
 
 ### 팀원정보
-#### 조인상 [!(https://github.com/fluidicon.png)][ghinsang]
-<li>예상진 [GitHub][gh.insang]</li>
-<li>이성원 [GitHub][gh.insang]</li>
-<li>이관우 ..</li>
+####<li>조인상 [GitHub][ghinsang]</li>
+####<li>예상진 [GitHub][ghsangjin]</li>
+####<li>이성원 [GitHub][ghsungwon]</li>
+####<li>이관우 ..</li>
 There is a mirror of the repository at https://github.com/golang/go.
 
 Unless otherwise noted, the Go source files are distributed under the
@@ -47,7 +47,7 @@ we use the issue tracker for bug reports and proposals only. See
 https://golang.org/wiki/Questions for a list of places to ask
 questions about the Go language.
 
-[gh.sangjin]: https://github.com/sangjin0309
-[gh.sungwon]: https://github.com/tjddnjs625
+[ghsangjin]: https://github.com/sangjin0309
+[ghsungwon]: https://github.com/tjddnjs625
 [ghinsang]: https://github.com/insangwabcho
-[stackoverflow.insang]: https://stackoverflow.com/users/8349800/%EC%A1%B0%EC%9D%B8%EC%83%81
+[sfinsang]: https://stackoverflow.com/users/8349800/%EC%A1%B0%EC%9D%B8%EC%83%81
