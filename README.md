@@ -19,9 +19,9 @@
 
 <table>
  <tr>
-  <td><img src="readme/1.png" width="200px"></td>
-  <td><img src="readme/1.png" width="200px"></td>
-  <td><img src="readme/1.png" width="200px"></td>
+  <td><img src="readme/1.png" width="300px"></td>
+  <td><img src="readme/2.png" width="300px"></td>
+  <td><img src="readme/3.png" width="300px"></td>
  </tr>
  </table>
  
