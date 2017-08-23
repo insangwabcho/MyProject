@@ -17,9 +17,9 @@
 
 ### <li>핵심화면</li>
 
-![1](readme/1.png)
-![2](readme/2.png)
-![3](readme/3.png)
+![1](readme/1.png =120px)
+![2](readme/2.png =120px)
+![3](readme/3.png =120px)
 
 [ghsangjin]: https://github.com/sangjin0309
 [ghsungwon]: https://github.com/tjddnjs625
