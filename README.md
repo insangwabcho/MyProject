@@ -8,7 +8,7 @@
 
 ![Comnawa image](readme/comnawa.jpg)
 
-<li>조인상 [GitHub][gh.insang]</li>
+<li>조인상 [Renee French][ghinsang]</li>
 <li>예상진 [GitHub][gh.insang]</li>
 <li>이성원 [GitHub][gh.insang]</li>
 <li>이관우 ..</li>
@@ -48,5 +48,5 @@ questions about the Go language.
 
 [gh.sangjin]: https://github.com/sangjin0309
 [gh.sungwon]: https://github.com/tjddnjs625
-[gh.insang]: https://github.com/insangwabcho
+[ghinsang]: https://github.com/insangwabcho
 [stackoverflow.insang]: https://stackoverflow.com/users/8349800/%EC%A1%B0%EC%9D%B8%EC%83%81
